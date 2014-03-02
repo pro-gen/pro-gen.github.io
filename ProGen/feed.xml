@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ <id>urn:iweb:730E5283-6A89-4815-AB07-A90DE05F93DE</id>
+ <title>Page list Atom feed</title>
+ <updated>2010-11-03T19:41:01+01:00</updated>
+ <link rel="self" href="feed.xml"/>
+ <generator>iWeb</generator>
+ <author>
+  <name>iWeb</name>
+ </author>
+ <entry>
+  <id>urn:iweb:5C53A6F4-40FE-4F85-8892-C23930D0BEB2</id>
+  <title>Bienvenida</title>
+  <title xmlns="urn:iweb:">Bienvenida</title>
+  <in-navbar xmlns="urn:iweb:">5C53A6F4-40FE-4F85-8892-C23930D0BEB2</in-navbar>
+  <link rel="alternate" href="Bienvenida.html"/>
+  <updated>2010-11-03T19:41:01.001+01:00</updated>
+  <content>Bienvenida</content>
+ </entry>
+ <entry>
+  <id>urn:iweb:E26563C5-F118-4280-AEE6-6E29A32BCD3D</id>
+  <title>Descarga</title>
+  <title xmlns="urn:iweb:">Descarga</title>
+  <in-navbar xmlns="urn:iweb:">E26563C5-F118-4280-AEE6-6E29A32BCD3D</in-navbar>
+  <link rel="alternate" href="Descarga.html"/>
+  <updated>2010-11-03T19:41:01.002+01:00</updated>
+  <content>Descarga</content>
+ </entry>
+ <entry>
+  <id>urn:iweb:F86100FA-9AB5-4FEB-A784-D26F16BD46F0</id>
+  <title>Puesta en marcha</title>
+  <title xmlns="urn:iweb:">Puesta en marcha</title>
+  <in-navbar xmlns="urn:iweb:">F86100FA-9AB5-4FEB-A784-D26F16BD46F0</in-navbar>
+  <link rel="alternate" href="Puesta_en_marcha.html"/>
+  <updated>2010-11-03T19:41:01.003+01:00</updated>
+  <content>Puesta en marcha</content>
+ </entry>
+ <entry>
+  <id>urn:iweb:C14FC6CF-D9CA-4340-9112-461DECD52300</id>
+  <title>Soporte</title>
+  <title xmlns="urn:iweb:">Soporte</title>
+  <in-navbar xmlns="urn:iweb:">C14FC6CF-D9CA-4340-9112-461DECD52300</in-navbar>
+  <link rel="alternate" href="Soporte.html"/>
+  <updated>2010-11-03T19:41:01.004+01:00</updated>
+  <content>Soporte</content>
+ </entry>
+</feed>
