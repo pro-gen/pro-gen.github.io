@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Variance.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output.plugins</a> &gt; <span class="el_source">Variance.java</span></div><h1>Variance.java</h1><pre class="source lang-java linenums">package progen.output.plugins;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Plugin que calcula la varianza de todos los elementos introducidos.
+ * 
+ * @author jirsis
+ * @since 2.0
+ * 
+ */
+public class Variance implements Plugin {
+  /** Referencia al plugin que calcula la media de la colección de elementos. */
+  private Mean mean;
+  /** Colección de elementos de los que se calculará la varianza. */
+  private List&lt;Double&gt; elements;
+
+  /**
+   * Constructor genérico del plugin que recibe un plugin especializado en
+   * calcular la media de los elementos. De esta forma, se evita tener que
+   * calcular múltiples veces la media.
+   */
+<span class="fc" id="L24">  public Variance() {</span>
+<span class="fc" id="L25">    this.mean = new Mean();</span>
+<span class="fc" id="L26">    elements = new ArrayList&lt;Double&gt;();</span>
+<span class="fc" id="L27">  }</span>
+
+  @SuppressWarnings(&quot;rawtypes&quot;)
+  public void addValue(Comparable value) {
+<span class="fc" id="L31">    elements.add(new Double(value.toString()));</span>
+
+<span class="fc" id="L33">  }</span>
+
+  public Object getValue() {
+<span class="fc" id="L36">    double variance = 0;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">    for (Double element : elements) {</span>
+<span class="fc" id="L38">      variance += Math.pow(element - ((Double) mean.getValue()).doubleValue(), 2);</span>
+<span class="fc" id="L39">    }</span>
+<span class="fc" id="L40">    return variance / elements.size();</span>
+  }
+
+  public void initialValue() {
+<span class="nc" id="L44">    elements = new ArrayList&lt;Double&gt;();</span>
+<span class="nc" id="L45">  }</span>
+
+  public String getName() {
+<span class="nc" id="L48">    return &quot;variance&quot;;</span>
+  }
+
+  public int getPriority() {
+<span class="nc" id="L52">    return 1;</span>
+  }
+
+  public void initPlugin(String propertyFamily) {
+    // do nothing
+<span class="nc" id="L57">  }</span>
+
+  public Plugin getPlugin(String name) {
+    Plugin plugin;
+<span class="nc bnc" id="L61" title="All 2 branches missed.">    if (getName().compareTo(name) == 0) {</span>
+<span class="nc" id="L62">      plugin = this;</span>
+    } else {
+<span class="nc" id="L64">      plugin = new NullPlugin();</span>
+    }
+<span class="nc" id="L66">    return plugin;</span>
+  }
+
+  public void checkDependeces(List&lt;Plugin&gt; pluginsCollection) {
+<span class="fc" id="L70">    Plugin alreadyDefined = null;</span>
+    // check mean is defined
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">    for (Plugin plugin : pluginsCollection) {</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">      if (plugin.getName().compareTo(mean.getName()) == 0) {</span>
+<span class="nc" id="L74">        alreadyDefined = plugin;</span>
+      }
+<span class="nc" id="L76">    }</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">    if (alreadyDefined == null) {</span>
+<span class="fc" id="L78">      pluginsCollection.add(mean);</span>
+    } else {
+<span class="nc" id="L80">      mean = (Mean) alreadyDefined;</span>
+    }
+<span class="fc" id="L82">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

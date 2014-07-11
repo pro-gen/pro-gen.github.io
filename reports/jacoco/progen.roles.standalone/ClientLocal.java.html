@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientLocal.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.roles.standalone</a> &gt; <span class="el_source">ClientLocal.java</span></div><h1>ClientLocal.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package progen.roles.standalone;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import progen.context.ProGenContext;
+import progen.experimenter.Experimenter;
+import progen.experimenter.ExperimenterFactory;
+import progen.kernel.error.Info;
+import progen.kernel.evolution.Elitism;
+import progen.kernel.evolution.GenneticFactory;
+import progen.kernel.evolution.GenneticOperator;
+import progen.kernel.population.Individual;
+import progen.kernel.population.Population;
+import progen.output.HistoricalData;
+import progen.roles.Client;
+import progen.roles.Dispatcher;
+import progen.roles.ProGenFactory;
+import progen.roles.Task;
+import progen.userprogram.UserProgram;
+
+/**
+ * Implementación de un cliente que se conecta con un Dispatcher alojado en la
+ * misma máquina virtual.
+ * 
+ * @author jirsis
+ * 
+ */
+public class ClientLocal implements Client {
+
+  /** Factoría de roles. */
+  private ProGenFactory factory;
+
+  /** Población del problema */
+  private Population population;
+
+  /** Factoría de operadores genéticos. */
+  private GenneticFactory genneticFactory;
+
+  /** Almacén de datos históricos. */
+  private HistoricalData historical;
+
+  /**
+   * Constructor genérico de la clase.
+   */
+<span class="nc" id="L51">  public ClientLocal() {</span>
+<span class="nc" id="L52">    ProGenContext.loadExtraConfiguration();</span>
+<span class="nc" id="L53">    factory = ProGenFactory.makeInstance();</span>
+<span class="nc" id="L54">    genneticFactory = new GenneticFactory();</span>
+<span class="nc" id="L55">    historical = HistoricalData.makeInstance();</span>
+<span class="nc" id="L56">  }</span>
+
+  @Override
+  public Dispatcher initDispatcher() {
+<span class="nc" id="L60">    return factory.makeDispatcher();</span>
+  }
+
+  @Override
+  public void start() {
+<span class="nc" id="L65">    Experimenter experimenter = ExperimenterFactory.makeInstance();</span>
+<span class="nc" id="L66">    Dispatcher dispatcher = this.initDispatcher();</span>
+<span class="nc" id="L67">    UserProgram userProgram = UserProgram.getUserProgram();</span>
+<span class="nc" id="L68">    int maxGenerations = ProGenContext.getOptionalProperty(&quot;progen.max-generation&quot;, Integer.MAX_VALUE);</span>
+
+<span class="nc" id="L70">    userProgram.initialize();</span>
+
+<span class="nc bnc" id="L72" title="All 2 branches missed.">    while (!experimenter.isDone()) {</span>
+<span class="nc" id="L73">      experimenter.defineValues();</span>
+
+<span class="nc" id="L75">      executeExperimenter(experimenter, dispatcher, userProgram, maxGenerations);</span>
+
+<span class="nc" id="L77">      experimenter.updateValues();</span>
+<span class="nc" id="L78">      historical.newExperiment();</span>
+<span class="nc" id="L79">      historical.newGeneration();</span>
+<span class="nc" id="L80">      System.out.println(experimenter.finishMessage());</span>
+    }
+
+<span class="nc" id="L83">    Individual best = population.getBestIndividual();</span>
+<span class="nc" id="L84">    String printable = userProgram.postProcess(best);</span>
+<span class="nc" id="L85">    best.setPrintableIndividual(printable);</span>
+<span class="nc" id="L86">    System.out.println(printable);</span>
+
+<span class="nc" id="L88">  }</span>
+
+  private void executeExperimenter(Experimenter experimenter, Dispatcher dispatcher, UserProgram userProgram, int maxGenerations) {
+    List&lt;Individual&gt; newPopulation;
+    // TODO: barra de progreso para la creacion de poblaciones?
+<span class="nc" id="L93">    Info.show(1);</span>
+<span class="nc" id="L94">    population = new Population();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">    for (int currentGeneration = 0; currentGeneration &lt; maxGenerations; currentGeneration++) {</span>
+
+<span class="nc" id="L97">      dispatcher.asignTask(convertIndividualsToTasks(), userProgram);</span>
+<span class="nc" id="L98">      updateHistoricalData(dispatcher);</span>
+
+<span class="nc" id="L100">      newPopulation = updateNewPopulation();</span>
+
+<span class="nc" id="L102">      experimenter.generateOutputs();</span>
+<span class="nc" id="L103">      population.setPopulation(newPopulation);</span>
+<span class="nc" id="L104">      historical.newGeneration();</span>
+    }
+<span class="nc" id="L106">  }</span>
+
+  private List&lt;Individual&gt; updateNewPopulation() {
+    List&lt;Individual&gt; newPopulation;
+    GenneticOperator operator;
+<span class="nc" id="L111">    newPopulation = new ArrayList&lt;Individual&gt;();</span>
+    Calendar before;
+    Calendar after;
+
+<span class="nc" id="L115">    newPopulation = applyElitism();</span>
+
+<span class="nc bnc" id="L117" title="All 2 branches missed.">    while (newPopulation.size() &lt;= population.getIndividuals().size()) {</span>
+<span class="nc" id="L118">      operator = genneticFactory.getOperator();</span>
+<span class="nc" id="L119">      before = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L120">      newPopulation.addAll(operator.evolve(population));</span>
+<span class="nc" id="L121">      after = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L122">      historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;breeding&quot;, after.getTimeInMillis() - before.getTimeInMillis());</span>
+    }
+
+<span class="nc" id="L125">    eraseExcedentIndividuals(newPopulation);</span>
+<span class="nc" id="L126">    return newPopulation;</span>
+  }
+
+  private List&lt;Individual&gt; applyElitism() {
+    List&lt;Individual&gt; newPopulation;
+<span class="nc" id="L131">    Elitism elitism = new Elitism(population);</span>
+<span class="nc" id="L132">    newPopulation = elitism.propagate();</span>
+<span class="nc" id="L133">    return newPopulation;</span>
+  }
+
+  private void eraseExcedentIndividuals(List&lt;Individual&gt; newPopulation) {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">    if (newPopulation.size() &gt; population.getIndividuals().size()) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">      while (newPopulation.size() != population.getIndividuals().size()) {</span>
+<span class="nc" id="L139">        newPopulation.remove(newPopulation.size() - 1);</span>
+      }
+    }
+<span class="nc" id="L142">  }</span>
+
+  private List&lt;Task&gt; convertIndividualsToTasks() {
+<span class="nc" id="L145">    List&lt;Task&gt; individuals = new ArrayList&lt;Task&gt;();</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">    for (Individual ind : population.getIndividuals()) {</span>
+<span class="nc" id="L147">      individuals.add((Task) ind);</span>
+<span class="nc" id="L148">    }</span>
+<span class="nc" id="L149">    return individuals;</span>
+  }
+
+  private void updateHistoricalData(Dispatcher dispatcher) {
+<span class="nc bnc" id="L153" title="All 2 branches missed.">    for (Task task : dispatcher.getResults()) {</span>
+<span class="nc" id="L154">      Individual individual = (Individual) task;</span>
+<span class="nc" id="L155">      historical.getDataCollectorExperiment(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
+<span class="nc" id="L156">      historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
+<span class="nc" id="L157">      historical.getCurrentDataCollector(&quot;PopulationData&quot;).addValue(&quot;individualMean&quot;, individual);</span>
+<span class="nc" id="L158">    }</span>
+<span class="nc" id="L159">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
