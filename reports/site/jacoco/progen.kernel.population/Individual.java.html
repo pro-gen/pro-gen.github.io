@@ -171,24 +171,24 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
      */
     @Override
     public String toString() {
-<span class="fc" id="L174">	StringBuilder stb = new StringBuilder();</span>
+<span class="nc" id="L174">	StringBuilder stb = new StringBuilder();</span>
 
-<span class="pc bpc" id="L176" title="3 of 4 branches missed.">	if (this.printabeIndividual != null</span>
+<span class="nc bnc" id="L176" title="All 4 branches missed.">	if (this.printabeIndividual != null</span>
 		&amp;&amp; this.printabeIndividual.length() &gt; 0) {
 <span class="nc" id="L178">	    stb.append(printabeIndividual);</span>
 	} else {
-<span class="fc" id="L180">	    int RPB = 0;</span>
-<span class="fc" id="L181">	    int adf = 0;</span>
-<span class="fc bfc" id="L182" title="All 2 branches covered.">	    while (trees.get(&quot;RPB&quot; + RPB) != null) {</span>
-<span class="fc" id="L183">		stb.append(&quot;\nRPB&quot; + RPB + &quot;: &quot; + trees.get(&quot;RPB&quot; + RPB));</span>
-<span class="fc" id="L184">		RPB++;</span>
+<span class="nc" id="L180">	    int RPB = 0;</span>
+<span class="nc" id="L181">	    int adf = 0;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">	    while (trees.get(&quot;RPB&quot; + RPB) != null) {</span>
+<span class="nc" id="L183">		stb.append(&quot;\nRPB&quot; + RPB + &quot;: &quot; + trees.get(&quot;RPB&quot; + RPB));</span>
+<span class="nc" id="L184">		RPB++;</span>
 	    }
-<span class="pc bpc" id="L186" title="1 of 2 branches missed.">	    while (trees.get(&quot;ADF&quot; + adf) != null) {</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">	    while (trees.get(&quot;ADF&quot; + adf) != null) {</span>
 <span class="nc" id="L187">		stb.append(&quot;\nADF&quot; + adf + &quot;: &quot; + trees.get(&quot;ADF&quot; + adf));</span>
 <span class="nc" id="L188">		adf++;</span>
 	    }
 	}
-<span class="fc" id="L191">	return stb.toString();</span>
+<span class="nc" id="L191">	return stb.toString();</span>
     }
 
     /**
