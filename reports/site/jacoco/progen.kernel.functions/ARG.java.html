@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ARG.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.functions</a> &gt; <span class="el_source">ARG.java</span></div><h1>ARG.java</h1><pre class="source lang-java linenums">package progen.kernel.functions;
+
+import java.util.HashMap;
+import java.util.List;
+
+import progen.kernel.tree.Node;
+import progen.userprogram.UserProgram;
+
+/**
+ * Representación de los distintos argumentos que puede recibir un ADF.
+ * @author jirsis
+ * @since 2.0
+ */
+public class ARG extends Terminal{
+
+	/** Identificador el ADF del que es argumento. */
+	private String idADF;
+	
+	/**
+	 * Constructor por defecto que recibe el nombre del ADF del que es argumento,
+	 * el identidicador dentro del conjunto de argumentos totales y el tipo
+	 * de valor que puede almacenar.
+	 * @param idADF Identifiador del ADF del que es argumento.
+	 * @param signature Signatura o tipo de valor que almacena.
+	 * @param id Identificador de la posición que representa dentro del conjunto de argumentos del ADF.
+	 */
+	public ARG(String idADF, String signature, int id){
+<span class="nc" id="L28">		super(signature, &quot;ARG&quot;+id);</span>
+<span class="nc" id="L29">		this.idADF=idADF;</span>
+<span class="nc" id="L30">	}</span>
+	/*
+	 * (non-Javadoc)
+	 * @see progen.kernel.functions.Function#evaluate(java.util.HashMap, java.util.List, progen.userprogram.UserProgram)
+	 */
+	@Override
+	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String,Object&gt; returnAddr) {
+<span class="nc" id="L37">		return ((Node)returnAddr.get(idADF+&quot;-&quot;+super.getSymbol())).evaluate(userProgram, returnAddr);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

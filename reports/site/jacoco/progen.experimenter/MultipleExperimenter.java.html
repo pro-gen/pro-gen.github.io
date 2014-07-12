@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MultipleExperimenter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.experimenter</a> &gt; <span class="el_source">MultipleExperimenter.java</span></div><h1>MultipleExperimenter.java</h1><pre class="source lang-java linenums">package progen.experimenter;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import progen.ProGenException;
+import progen.context.ProGenContext;
+import progen.experimenter.property.Property;
+import progen.experimenter.property.PropertyFactory;
+import progen.kernel.error.Info;
+
+/**
+ * Clase que implementa el comportamiento de los experimentos múltiples. Este
+ * comportamiento es tal que recupera el conjunto marcado con el nombre
+ * &lt;code&gt;progen.experimenter.*&lt;/code&gt; e irá generando la propiedad, eliminando
+ * del nombre el literal &lt;code&gt;experimenter&lt;/code&gt; para que vaya cambiando el
+ * contexto de ejecución de ProGen.
+ * 
+ * @author jirsis
+ * @since 2.0
+ */
+public class MultipleExperimenter extends Experimenter {
+
+    /** Conjunto de propiedades que definen el experimento múltiple */
+    private List&lt;Property&gt; properties;
+
+    /** Indica el número de veces que se ejecutará el experimento */
+    private int totalRepetitions;
+
+    /** Indica qué repetición está ejecutando en un momento dado */
+    private int currentRepetition;
+
+    /**
+     * Indica si se ha terminado de ejecutar una repetición y falta por ejecutar
+     * más
+     */
+    private boolean nextRepetition;
+
+    /** Indica que experimenter concreto se está ejecutando */
+    private int currentExperimenter;
+    
+    /** Instancia de SimpleExperimenter que calculará los resultados de un 
+     * experimento determinado.
+     */
+    private SimpleExperimenter experimenter;
+    
+    private boolean defined;
+
+    /**
+     * Constructor genérico de la clase. Recupera todas las propiedades
+     * definidas con el nombre &lt;code&gt;progen.experimenter.*&lt;/code&gt; y las irá
+     * incluyendo en ProGenContext con un valor nuevo cada vez que se llame al
+     * método de actualización.
+     */
+    public MultipleExperimenter() {
+<span class="nc" id="L61">	super();</span>
+<span class="nc" id="L62">	currentRepetition = 0;</span>
+<span class="nc" id="L63">	currentExperimenter = 0;</span>
+<span class="nc" id="L64">	nextRepetition = false;</span>
+<span class="nc" id="L65">	totalRepetitions = ProGenContext.getOptionalProperty(</span>
+		&quot;progen.repetitions.experimenter&quot;, 1);
+<span class="nc" id="L67">	properties = new ArrayList&lt;Property&gt;();</span>
+<span class="nc" id="L68">	List&lt;String&gt; propertiesLabels = ProGenContext</span>
+		.getFamilyOptions(&quot;progen.experimenter.&quot;);
+<span class="nc bnc" id="L70" title="All 2 branches missed.">	for (String label : propertiesLabels) {</span>
+<span class="nc" id="L71">	    properties.add(PropertyFactory.makeInstance(label));</span>
+<span class="nc" id="L72">	}</span>
+<span class="nc" id="L73">	experimenter=new SimpleExperimenter();</span>
+<span class="nc" id="L74">	defined=false;</span>
+<span class="nc" id="L75">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see progen.experimenter.Experimenter#defineValue()
+     */
+    @Override
+    public void updateValues() {
+<span class="nc" id="L84">	boolean actualizado = false;</span>
+	Property nextProp;
+<span class="nc bnc" id="L86" title="All 2 branches missed.">	if (!isDone()) {</span>
+<span class="nc" id="L87">	    defined=false;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">	    if (nextRepetition) {</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		for (Property property : properties) {</span>
+<span class="nc" id="L90">		    property.reset();</span>
+<span class="nc" id="L91">		}</span>
+<span class="nc" id="L92">		nextRepetition = false;</span>
+<span class="nc" id="L93">		currentExperimenter = 0;</span>
+	    } else {
+		// incremento de las propiedades
+<span class="nc" id="L96">		int i = 0;</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">		while (i &lt; properties.size() &amp;&amp; !actualizado) {</span>
+<span class="nc" id="L98">		    nextProp = properties.get(i);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">		    if (nextProp.hasNext()) {</span>
+<span class="nc" id="L100">			nextProp.nextValue();</span>
+<span class="nc" id="L101">			actualizado = true;</span>
+<span class="nc" id="L102">			currentExperimenter++;</span>
+		    } else {
+<span class="nc" id="L104">			i++;</span>
+		    }
+		}
+
+		// si se actualizo algo, se resetean todas las propiedades
+		// anteriores
+<span class="nc bnc" id="L110" title="All 2 branches missed.">		if (actualizado) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">		    while (--i &gt;= 0) {</span>
+<span class="nc" id="L112">			properties.get(i).reset();</span>
+		    }
+		}
+	    }
+	}
+<span class="nc" id="L117">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see progen.experimenter.Experimenter#isDone()
+     */
+    @Override
+    public boolean isDone() {
+<span class="nc" id="L126">	boolean done = true;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">	if (nextRepetition) {</span>
+<span class="nc" id="L128">	    currentRepetition++;</span>
+<span class="nc" id="L129">	    done = false;</span>
+	} else {
+<span class="nc bnc" id="L131" title="All 2 branches missed.">	    for (Property property : properties) {</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		done &amp;= !property.hasNext();</span>
+<span class="nc" id="L133">	    }</span>
+
+<span class="nc bnc" id="L135" title="All 4 branches missed.">	    if (done &amp;&amp; (currentRepetition + 1) &lt; totalRepetitions) {</span>
+<span class="nc" id="L136">		done = false;</span>
+<span class="nc" id="L137">		nextRepetition = true;</span>
+	    }
+	}
+<span class="nc bnc" id="L140" title="All 4 branches missed.">	return done &amp;&amp; defined;</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see progen.experimenter.Experimenter#updateValues()
+     */
+    @Override
+    public void defineValues() {
+<span class="nc" id="L150">	defined=true;</span>
+	// actualizacion de las variables
+<span class="nc bnc" id="L152" title="All 2 branches missed.">	for (Property property : properties) {</span>
+<span class="nc" id="L153">	    ProGenContext.setProperty(property.getLabel(), property.getValue());</span>
+<span class="nc" id="L154">	}</span>
+<span class="nc" id="L155">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see progen.experimenter.Experimenter#generateResults()
+     */
+    @Override
+    public void generateResults() {
+<span class="nc" id="L164">	dumpResults();</span>
+<span class="nc" id="L165">    }</span>
+
+    /**
+     * Genera la carpeta de volcado de un experimento y copia en ella, tanto el
+     * contexto actual de dicho experimento como los resultados asociados.
+     * 
+     */
+    private void dumpResults() {
+	PrintWriter context;
+	// se recupera el path de la carpeta de resultados del experimento
+<span class="nc" id="L175">	File experimentDir = new File(</span>
+		ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;)+
+		ProGenContext.getMandatoryProperty(&quot;progen.output.experiment&quot;));
+	try {
+	    // creamos el fichero del contexto actual
+<span class="nc" id="L180">	    context = new PrintWriter(new BufferedWriter(new FileWriter(</span>
+		    experimentDir.getAbsolutePath() + File.separator
+			    + &quot;current context.txt&quot;)));
+<span class="nc bnc" id="L183" title="All 2 branches missed.">	    for (Property property : properties) {</span>
+<span class="nc" id="L184">		context.print(property.getLabel());</span>
+<span class="nc" id="L185">		context.print(&quot;=&quot;);</span>
+<span class="nc" id="L186">		context.println(property.getValue());</span>
+<span class="nc" id="L187">	    }</span>
+<span class="nc" id="L188">	    context.close();</span>
+<span class="nc" id="L189">	    experimenter.generateResults();</span>
+<span class="nc" id="L190">	} catch (IOException e) {</span>
+<span class="nc" id="L191">	    throw new ProGenException(e.getLocalizedMessage());</span>
+<span class="nc" id="L192">	}</span>
+<span class="nc" id="L193">    }</span>
+
+    /**
+     * Devuelve la repetición actual.
+     * 
+     * @return la repetición actual.
+     */
+    public int getCurrentRepetition() {
+<span class="nc" id="L201">	int repetition = currentRepetition;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">	if (nextRepetition) {</span>
+<span class="nc" id="L203">	    repetition = currentRepetition - 1;</span>
+	}
+<span class="nc" id="L205">	return repetition;</span>
+    }
+
+    /**
+     * Devuelve el experimenter actual.
+     * 
+     * @return el experimenter actual.
+     */
+    public int getCurrentExperimenter() {
+<span class="nc" id="L214">	return currentExperimenter;</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see progen.experimenter.Experimenter#defineExperimentDir()
+     */
+    @Override
+    public String defineExperimentDir() {
+<span class="nc" id="L223">	StringBuilder experimenterDir = new StringBuilder(20);</span>
+<span class="nc" id="L224">	experimenterDir.append(&quot;exp-&quot;);</span>
+<span class="nc" id="L225">	experimenterDir.append(currentRepetition);</span>
+<span class="nc" id="L226">	experimenterDir.append(&quot;-&quot;);</span>
+<span class="nc" id="L227">	experimenterDir.append(currentExperimenter);</span>
+<span class="nc" id="L228">	return experimenterDir.toString();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see progen.experimenter.Experimenter#finishMessage()
+     */
+    @Override
+    public String finishMessage() {
+<span class="nc" id="L237">	StringBuilder stb=new StringBuilder(20);</span>
+<span class="nc" id="L238">	stb.append(&quot;---- &quot;);</span>
+<span class="nc" id="L239">	stb.append(Info.get(2));</span>
+<span class="nc" id="L240">	stb.append(&quot; &quot;);</span>
+<span class="nc" id="L241">	stb.append(currentExperimenter);</span>
+<span class="nc" id="L242">	stb.append(&quot; -----&quot;);</span>
+<span class="nc" id="L243">	return stb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
