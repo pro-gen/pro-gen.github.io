@@ -61,8 +61,8 @@ import progen.roles.Worker;
 
 <span class="fc" id="L62">      role = Class.forName(roleName).newInstance();</span>
 
-<span class="nc" id="L64">    } catch (Exception e) {</span>
-<span class="nc" id="L65">      throw new UnknownRoleImplementationException(roleName);</span>
+<span class="fc" id="L64">    } catch (Exception e) {</span>
+<span class="fc" id="L65">      throw new UnknownRoleImplementationException(roleName);</span>
 <span class="fc" id="L66">    }</span>
 <span class="fc" id="L67">    return role;</span>
   }
