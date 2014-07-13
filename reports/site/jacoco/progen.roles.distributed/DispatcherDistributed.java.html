@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DispatcherDistributed.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.roles.distributed</a> &gt; <span class="el_source">DispatcherDistributed.java</span></div><h1>DispatcherDistributed.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package progen.roles.distributed;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import progen.roles.Dispatcher;
+import progen.roles.Task;
+import progen.roles.Worker;
+import progen.userprogram.UserProgram;
+
+/**
+ * @author jirsis
+ *
+ */
+public class DispatcherDistributed implements Dispatcher {
+
+    public static final String DISPATCHER_NAME=&quot;ProGen/dispatcher&quot;;
+    
+    private DispatcherRemote remote;
+    
+<span class="fc" id="L24">    public DispatcherDistributed() throws RemoteException{</span>
+<span class="fc" id="L25">	remote = new DispatcherServer();</span>
+<span class="fc" id="L26">    }</span>
+    
+<span class="nc" id="L28">    public DispatcherDistributed(DispatcherRemote remote){</span>
+<span class="nc" id="L29">	this.remote=remote;</span>
+<span class="nc" id="L30">    }</span>
+ 
+    @Override
+    public void start(){
+	try {
+<span class="nc" id="L35">	    remote.start();</span>
+<span class="nc" id="L36">	} catch (RemoteException e) {</span>
+<span class="nc" id="L37">	    throw new ProGenDistributedException();</span>
+<span class="nc" id="L38">	}</span>
+<span class="nc" id="L39">    }</span>
+
+    public void addWorker(Worker worker) {
+<span class="nc" id="L42">	System.err.println(&quot;addWorker NOT IMPLEMENTED YET&quot;);</span>
+<span class="nc" id="L43">    }</span>
+
+    public void asignTask(List&lt;Task&gt; tasks, UserProgram userProgram) {
+<span class="nc" id="L46">	System.err.println(&quot;assignTask NOT IMPLEMENTED YET&quot;);</span>
+
+<span class="nc" id="L48">    }</span>
+
+    public List&lt;Task&gt; getResults() {
+<span class="nc" id="L51">	System.err.println(&quot;getResults NOT IMPLEMENTED YET&quot;);</span>
+<span class="nc" id="L52">	return null;</span>
+    }
+
+    public void stopTask() {
+<span class="nc" id="L56">	System.err.println(&quot;stopTask NOT IMPLEMENTED YET&quot;);</span>
+<span class="nc" id="L57">    }</span>
+
+    public int totalTasksDone() {
+	try {
+<span class="nc" id="L61">	    return remote.totalTasksDone();</span>
+<span class="nc" id="L62">	} catch (RemoteException e) {</span>
+<span class="nc" id="L63">	    throw new ProGenDistributedException(remote.toString());</span>
+	}
+    }    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

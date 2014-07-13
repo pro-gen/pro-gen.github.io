@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Function.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.functions</a> &gt; <span class="el_source">Function.java</span></div><h1>Function.java</h1><pre class="source lang-java linenums">package progen.kernel.functions;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+
+import progen.context.ProGenContext;
+import progen.kernel.grammar.FunctionNotFoundException;
+import progen.kernel.grammar.UndefinedFunctionSetException;
+import progen.kernel.tree.Node;
+import progen.userprogram.UserProgram;
+
+/**
+ * Clase abstracta que define los métodos necesarios para acceder a las
+ * distintas funciones que se definan en ProGen.
+ * 
+ * @author jirsis
+ * @since 2.0
+ */
+public abstract class Function implements Comparable&lt;Function&gt;, Serializable {
+  private static final long serialVersionUID = -7920842332819035400L;
+  
+  /** Indica la aridad de la función. */
+  private int arity;
+  /** Símbolo que identificará a la función. */
+  private String symbol;
+  /** Tipo de retorno que devolverá la función. */
+  private Object returnType;
+  /** Tipos que admite como parámetros la función. */
+  private Object argsType[];
+
+  /**
+   * Constructor por defecto de una función. Recibe la signatura de la misma y
+   * el símbolo que la identifica.
+   * 
+   * El formato esperado en la signatura es
+   * &lt;code&gt;valorDeRetorno$$arg1$$arg2$$...$$argN&lt;/code&gt;
+   * 
+   * @param signature
+   *          Signatura de la función.
+   * @param symbol
+   *          Símbolo que identificará la función.
+   */
+<span class="fc" id="L44">  public Function(String signature, String symbol) {</span>
+    String args[];
+<span class="fc" id="L46">    this.symbol = symbol;</span>
+
+<span class="fc" id="L48">    args = signature.split(&quot;\\$\\$&quot;);</span>
+<span class="fc" id="L49">    returnType = args[0];</span>
+
+<span class="fc" id="L51">    arity = args.length - 1;</span>
+<span class="fc" id="L52">    argsType = new Object[arity];</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">    for (int i = 0; i &lt; arity; i++) {</span>
+<span class="fc" id="L54">      argsType[i] = args[i + 1];</span>
+    }
+<span class="fc" id="L56">  }</span>
+
+  /**
+   * Devuelve la signatura de la función
+   * 
+   * @return la signatura completa de la función.
+   */
+  public final String getSignature() {
+<span class="fc" id="L64">    StringBuffer stb = new StringBuffer();</span>
+<span class="fc" id="L65">    stb.append(returnType);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">    for (int i = 0; i &lt; argsType.length; i++) {</span>
+<span class="fc" id="L67">      stb.append(&quot;$$&quot; + argsType[i]);</span>
+    }
+<span class="fc" id="L69">    return stb.toString();</span>
+  }
+
+  /**
+   * Devuelve la aridad de la función.
+   * 
+   * @return la aridad de la función.
+   */
+  public final int getArity() {
+<span class="fc" id="L78">    return arity;</span>
+  }
+
+  /**
+   * Devuelve el símbolo de la función.
+   * 
+   * @return el símbolo de la función.
+   */
+  public final String getSymbol() {
+<span class="fc" id="L87">    return symbol;</span>
+  }
+
+  /**
+   * Establece el símbolo que identificará la función.
+   * 
+   * @param symbol
+   *          El nuevo identificador de la función.
+   */
+  public final void setSymbol(String symbol) {
+<span class="fc" id="L97">    this.symbol = symbol;</span>
+<span class="fc" id="L98">  }</span>
+
+  /**
+   * Devuelve el tipo de retorno de la función.
+   * 
+   * @return el tipo de retorno de la función.
+   */
+  public final Object getReturnType() {
+<span class="fc" id="L106">    return returnType;</span>
+  }
+
+  public String toString() {
+<span class="fc" id="L110">    return symbol;</span>
+  }
+
+  /**
+   * Devuelve el tipo de los argumentos de la función.
+   * 
+   * @return el tipo de los argumentos de la función.
+   */
+  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value=&quot;EI_EXPOSE_REP&quot;, justification=&quot;Its is a getter method&quot;)
+  public Object[] getArgsType() {
+<span class="fc" id="L120">    return argsType;</span>
+  }
+
+  public boolean equals(Object o) {
+<span class="fc" id="L124">    boolean equals = false;</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">    if (o instanceof Function) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">      equals = this.compareTo((Function) o) == 0;</span>
+    }
+<span class="fc" id="L128">    return equals;</span>
+  }
+
+  public int hashCode() {
+<span class="fc" id="L132">    return symbol.hashCode();</span>
+  }
+
+  public int compareTo(Function f) {
+<span class="fc" id="L136">    return symbol.compareTo(f.getSymbol());</span>
+  }
+
+  /**
+   * Devuelve una instancia concreta a partir del nombre de la función que se
+   * desea instanciar.
+   * 
+   * @param functionName
+   *          el nombre de la función.
+   * @return una instancia de la función solicitada.
+   * @throws FunctionNotFoundException
+   *           En caso de que no se encuentre la función en el paquete del
+   *           usuario o en el paquete de funciones de la aplicación, en ese
+   *           orden.
+   * @throws UndefinedFunctionSetException
+   *           En el caso de instanciar un ADF que no esté definido en el
+   *           function-set correspondiente.
+   */
+  public static final Function load(String functionName) throws FunctionNotFoundException, UndefinedFunctionSetException {
+    Function function;
+
+<span class="fc" id="L157">    String classPathProGen = &quot;progen.kernel.functions.&quot;;</span>
+<span class="fc" id="L158">    String classPathUser = ProGenContext.getOptionalProperty(&quot;progen.user.home&quot;, classPathProGen);</span>
+
+<span class="fc bfc" id="L160" title="All 2 branches covered.">    if (!functionName.startsWith(&quot;ADF&quot;)) {</span>
+<span class="fc" id="L161">      function = loadReagularFunction(functionName, classPathProGen, classPathUser);</span>
+    } else {
+<span class="fc" id="L163">      function = loadFunctionADF(functionName);</span>
+    }
+<span class="fc" id="L165">    return function;</span>
+  }
+
+  private static Function loadFunctionADF(String functionName) {
+<span class="fc" id="L169">    return new ADF(functionName);</span>
+  }
+  
+  private static Function loadReagularFunction(String functionName, String classPathProGen, String classPathUser) {
+    Function function;
+    try {
+<span class="fc" id="L175">      function = (Function) Class.forName(classPathUser + functionName).newInstance();</span>
+<span class="fc" id="L176">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
+      try {
+<span class="nc" id="L178">        function = (Function) Class.forName(classPathProGen + functionName).newInstance();</span>
+<span class="fc" id="L179">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {</span>
+<span class="fc" id="L180">        throw new FunctionNotFoundException(functionName);</span>
+<span class="nc" id="L181">      }</span>
+<span class="fc" id="L182">    }</span>
+<span class="fc" id="L183">    return function;</span>
+  }
+
+  /**
+   * Comprueba si una función es compatible con otra, es decir, si recibe los
+   * mismos argumentos y tiene el mismo valor de retorno.
+   * 
+   * @param function
+   *          La función para comprobar la compatibilidad.
+   * @return &lt;code&gt;true&lt;/code&gt; si es compatible y &lt;code&gt;false&lt;/code&gt; si no lo
+   *         es.
+   */
+  public boolean isCompatibleWith(Function function) {
+<span class="fc" id="L196">    boolean isCompatible = true;</span>
+    // si las aridades son distintas, no pueden ser compatibles
+<span class="fc bfc" id="L198" title="All 2 branches covered.">    if (this.arity != function.arity) {</span>
+<span class="fc" id="L199">      isCompatible = false;</span>
+    } else {
+<span class="fc bfc" id="L201" title="All 2 branches covered.">      for (int i = 0; i &lt; arity; i++) {</span>
+<span class="fc" id="L202">        isCompatible &amp;= (argsType[i].equals(function.argsType[i]));</span>
+      }
+    }
+
+    // comprobacion del valor de retorno
+<span class="fc" id="L207">    isCompatible &amp;= returnType.equals(function.returnType);</span>
+
+<span class="fc" id="L209">    return isCompatible;</span>
+  }
+
+  /**
+   * Forma de calcular el valor concreto de la ejecución de una función.
+   * 
+   * @param arguments
+   *          conjunto de argumentos que se definieron a la hora de crear la
+   *          función.
+   * @param userProgram
+   *          referencia al dominio creado por el usuario por si necesitara
+   *          utilizar algún método declarado él.
+   * @param returnAddr
+   *          Valor de retorno de las llamadas a ADFs
+   * @return El valor de evaluar una función concreta
+   */
+  public abstract Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr);
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
