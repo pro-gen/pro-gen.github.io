@@ -28,7 +28,7 @@ public class Variance implements Plugin {
 
   @SuppressWarnings(&quot;rawtypes&quot;)
   public void addValue(Comparable value) {
-<span class="fc" id="L31">    elements.add(new Double(value.toString()));</span>
+<span class="fc" id="L31">    elements.add(Double.valueOf(value.toString()));</span>
 
 <span class="fc" id="L33">  }</span>
 

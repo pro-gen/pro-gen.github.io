@@ -8,28 +8,27 @@ import progen.userprogram.UserProgram;
 
 /**
  * Clase que implementa el operador de suma de dos números enteros.
+ * 
  * @author jirsis
  * @since 2.0
  */
 public class IntPlus extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public IntPlus() {
-<span class="fc" id="L20">		super(&quot;int$$int$$int&quot;, &quot;+&quot;);</span>
-<span class="fc" id="L21">	}</span>
+  private static final long serialVersionUID = -5220745637971553171L;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L29">		Integer sumando1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L30">		Integer sumando2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L31">		return sumando1 + sumando2;</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public IntPlus() {
+<span class="fc" id="L23">    super(&quot;int$$int$$int&quot;, &quot;+&quot;);</span>
+<span class="fc" id="L24">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L28">    Integer sumando1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L29">    Integer sumando2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    return sumando1 + sumando2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

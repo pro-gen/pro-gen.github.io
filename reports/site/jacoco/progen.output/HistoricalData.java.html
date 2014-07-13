@@ -48,7 +48,7 @@ public class HistoricalData {
    * 
    * @return Instancia de la clase.
    */
-  public static HistoricalData makeInstance() {
+  public synchronized static HistoricalData makeInstance() {
 <span class="pc bpc" id="L52" title="1 of 2 branches missed.">    if (historical == null) {</span>
 <span class="fc" id="L53">      historical = new HistoricalData();</span>
     }

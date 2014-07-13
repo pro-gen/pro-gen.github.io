@@ -6,23 +6,24 @@ import java.util.List;
 import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
-public class BitXor extends NonTerminal{
+public class BitXor extends NonTerminal {
 
-	/**
-	 * Default constructor.
-	 */
-	public BitXor(){
-<span class="fc" id="L15">		super(&quot;int$$int$$int&quot;, &quot;^&quot;);</span>
-<span class="fc" id="L16">	}</span>
-	
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String,Object&gt; returnAddr){
-<span class="fc" id="L20">		Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr); </span>
-<span class="fc" id="L21">		Integer child_2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
- 
-<span class="fc" id="L23">		return (Integer) (child_1 ^ child_2);</span>
-	}
+  private static final long serialVersionUID = -1388739101239005254L;
 
+  /**
+   * Default constructor.
+   */
+  public BitXor() {
+<span class="fc" id="L17">    super(&quot;int$$int$$int&quot;, &quot;^&quot;);</span>
+<span class="fc" id="L18">  }</span>
 
-}	
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L22">    Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L23">    Integer child_2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+
+<span class="fc" id="L25">    return (Integer) (child_1 ^ child_2);</span>
+  }
+
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -18,54 +18,48 @@ import progen.userprogram.UserProgram;
  */
 public abstract class Terminal extends Function {
 
-    /** Valor concreto del terminal del árbol. */
-    private Object value;
+  private static final long serialVersionUID = 69970053838836085L;
+  /** Valor concreto del terminal del árbol. */
+  private Object value;
 
-    /**
-     * Constructor por defecto que recibe dos parámetros y llama al constructor
-     * de la clase padre
-     * 
-     * @see Function
-     * @param signature
-     *            valor de retorno del terminal.
-     * @param symbol
-     *            con el que se representará el terminal.
-     */
-    public Terminal(String signature, String symbol) {
-<span class="fc" id="L35">	super(signature, symbol);</span>
-<span class="fc" id="L36">	value = null;</span>
-<span class="fc" id="L37">    }</span>
+  /**
+   * Constructor por defecto que recibe dos parámetros y llama al constructor de
+   * la clase padre
+   * 
+   * @see Function
+   * @param signature
+   *          valor de retorno del terminal.
+   * @param symbol
+   *          con el que se representará el terminal.
+   */
+  public Terminal(String signature, String symbol) {
+<span class="fc" id="L36">    super(signature, symbol);</span>
+<span class="fc" id="L37">    value = null;</span>
+<span class="fc" id="L38">  }</span>
 
-    /**
-     * Define el valor que tendrá dicho terminal.
-     * 
-     * @param value
-     *            el valor del terminal.
-     */
-    public void setValue(Object value) {
-<span class="fc" id="L46">	this.value = value;</span>
-<span class="fc" id="L47">    }</span>
+  /**
+   * Define el valor que tendrá dicho terminal.
+   * 
+   * @param value
+   *          el valor del terminal.
+   */
+  public void setValue(Object value) {
+<span class="fc" id="L47">    this.value = value;</span>
+<span class="fc" id="L48">  }</span>
 
-    /**
-     * Devuelve el valor concreto del terminal.
-     * 
-     * @return el valor concreto del terminal.
-     */
-    public Object getValue() {
-<span class="fc" id="L55">	return value;</span>
-    }
+  /**
+   * Devuelve el valor concreto del terminal.
+   * 
+   * @return el valor concreto del terminal.
+   */
+  public Object getValue() {
+<span class="fc" id="L56">    return value;</span>
+  }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see progen.kernel.functions.Terminal#evaluate(java.util.List,
-     * progen.userprogram.UserProgram, java.util.HashMap)
-     */
-    @Override
-    public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram,
-	    HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L67">	return getValue();</span>
-    }
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L61">    return getValue();</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

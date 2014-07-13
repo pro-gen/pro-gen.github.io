@@ -19,49 +19,54 @@ import progen.kernel.grammar.Production;
  */
 public class HGPGrammar extends Grammar {
 
-	/**
-	 * Constructor por defecto en el que se especifica el identificador del árbol, para 
-	 * cargar la gramática correspondiente.
-	 * @param idTree
-	 */
-	public HGPGrammar(String idTree){	
-<span class="nc" id="L28">		super(idTree);</span>
-<span class="nc" id="L29">		transformGrammar();</span>
-<span class="nc" id="L30">	}</span>
-	
-	/**
-	 * Convierte una gramática normal, en una en la que todos los operadores están agrupados
-	 * para generar formas de árbol, en función de su signatura.
-	 */
-	private void transformGrammar(){
-		Production productionHGP;
-		Function wildCard;
-<span class="nc" id="L39">		int totalProductions=super.getProductions().size();</span>
-<span class="nc" id="L40">		List&lt;Production&gt; productions=new ArrayList&lt;Production&gt;((ArrayList&lt;Production&gt;)super.getProductions());</span>
-		
-<span class="nc bnc" id="L42" title="All 2 branches missed.">		for(int i=0;i&lt;totalProductions;i++){</span>
-<span class="nc" id="L43">			Production p=super.getProductions().get(0);</span>
-<span class="nc" id="L44">			wildCard = getWildCard(p, productions);</span>
-<span class="nc" id="L45">			productionHGP=new Production(p.getLeft(), new GrammarTerminalSymbol(wildCard), p.getArgs());</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">			if(!super.getProductions().contains(productionHGP)){</span>
-<span class="nc" id="L47">				super.getProductions().add(productionHGP);</span>
-			}
-<span class="nc" id="L49">			super.getProductions().remove(0);</span>
-		}
-<span class="nc" id="L51">	}</span>
-	
-	private Function getWildCard(Production production, List&lt;Production&gt; productions){
-<span class="nc" id="L54">		WildCard wildCard=new WildCard(production.getFunction().getFunction());</span>
-		
-<span class="nc bnc" id="L56" title="All 2 branches missed.">		for(Production pAux : productions){</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">			if(!pAux.equals(production)){ 							// si no son la misma produccion, se comparan todos los elementos</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">				if(wildCard.getSignature().equals(pAux.getFunction().getFunction().getSignature())){</span>
-<span class="nc" id="L59">					wildCard.addFunction(pAux.getFunction().getFunction());</span>
-				}
-			}
-<span class="nc" id="L62">		}</span>
-<span class="nc" id="L63">		return wildCard;</span>
-	}
+  private static final long serialVersionUID = 8359953232850164115L;
+
+  /**
+   * Constructor por defecto en el que se especifica el identificador del árbol,
+   * para cargar la gramática correspondiente.
+   * 
+   * @param idTree
+   */
+  public HGPGrammar(String idTree) {
+<span class="nc" id="L31">    super(idTree);</span>
+<span class="nc" id="L32">    transformGrammar();</span>
+<span class="nc" id="L33">  }</span>
+
+  /**
+   * Convierte una gramática normal, en una en la que todos los operadores están
+   * agrupados para generar formas de árbol, en función de su signatura.
+   */
+  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value=&quot;BC_UNCONFIRMED_CAST_OF_RETURN_VALUE&quot;, justification=&quot;Inherit code&quot;)
+  private void transformGrammar() {
+    Production productionHGP;
+    Function wildCard;
+<span class="nc" id="L43">    int totalProductions = super.getProductions().size();</span>
+<span class="nc" id="L44">    List&lt;Production&gt; productions = new ArrayList&lt;Production&gt;((ArrayList&lt;Production&gt;) super.getProductions());</span>
+
+<span class="nc bnc" id="L46" title="All 2 branches missed.">    for (int i = 0; i &lt; totalProductions; i++) {</span>
+<span class="nc" id="L47">      Production p = super.getProductions().get(0);</span>
+<span class="nc" id="L48">      wildCard = getWildCard(p, productions);</span>
+<span class="nc" id="L49">      productionHGP = new Production(p.getLeft(), new GrammarTerminalSymbol(wildCard), p.getArgs());</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">      if (!super.getProductions().contains(productionHGP)) {</span>
+<span class="nc" id="L51">        super.getProductions().add(productionHGP);</span>
+      }
+<span class="nc" id="L53">      super.getProductions().remove(0);</span>
+    }
+<span class="nc" id="L55">  }</span>
+
+  private Function getWildCard(Production production, List&lt;Production&gt; productions) {
+<span class="nc" id="L58">    WildCard wildCard = new WildCard(production.getFunction().getFunction());</span>
+
+<span class="nc bnc" id="L60" title="All 2 branches missed.">    for (Production pAux : productions) {</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">      if (!pAux.equals(production)) { // si no son la misma produccion, se</span>
+                                      // comparan todos los elementos
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (wildCard.getSignature().equals(pAux.getFunction().getFunction().getSignature())) {</span>
+<span class="nc" id="L64">          wildCard.addFunction(pAux.getFunction().getFunction());</span>
+        }
+      }
+<span class="nc" id="L67">    }</span>
+<span class="nc" id="L68">    return wildCard;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

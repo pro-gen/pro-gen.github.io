@@ -15,23 +15,21 @@ import progen.userprogram.UserProgram;
  */
 public class XOr extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public XOr() {
-<span class="fc" id="L22">		super(&quot;boolean$$boolean$$boolean&quot;, &quot;^&quot;);</span>
-<span class="fc" id="L23">	}</span>
+  private static final long serialVersionUID = -8744255479896714450L;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L31">		Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L32">		Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L33">		return operador1 ^ operador2;</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public XOr() {
+<span class="fc" id="L24">    super(&quot;boolean$$boolean$$boolean&quot;, &quot;^&quot;);</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L29">    Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L31">    return operador1 ^ operador2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -5,10 +5,10 @@ import progen.context.ProGenContext;
 import progen.kernel.grammar.Grammar;
 
 /**
- * Clase que implementa la forma más común de inicialización de los árboles en programación
- * genética, que es una mezcla de inicialización Full y Grow, de forma que se elegirá un 
- * método u otro en función de la probabilidad especificada en la propiedad 
- * 'progen.population.init-mode'
+ * Clase que implementa la forma más común de inicialización de los árboles en
+ * programación genética, que es una mezcla de inicialización Full y Grow, de
+ * forma que se elegirá un método u otro en función de la probabilidad
+ * especificada en la propiedad 'progen.population.init-mode'
  * 
  * @author jirsis
  * 
@@ -17,69 +17,76 @@ import progen.kernel.grammar.Grammar;
  * 
  * @since 2.0
  */
-public class HalfAndHalf implements InitializeTreeMethod{
-	/** Inicializador tipo Full */
-	private InitializeTreeMethod full;
-	/** Inicializador tipo Grow */
-	private InitializeTreeMethod grow;
-	/** Probabilidad de usar el inicializador Full */
-	private double percentFull;
-	/** Probabilidad de usar el inicializador Grow */
-	private double percentGrow;
-	
-	/**
-	 * Constructor genérico de la clase, en la que se inicializan las probabilidades de uso
-	 * de los inicializadores y se comprueba que sumen 100%
-	 * En caso de no haber definido las probabilidades particulares de alguno de los 
-	 * inicializadores, se asumirá que la probabilidad de los dos es del 50%.
-	 */
-<span class="fc" id="L36">	public HalfAndHalf(){</span>
-<span class="fc" id="L37">		full=new Full();</span>
-<span class="fc" id="L38">		grow=new Grow();</span>
-<span class="fc" id="L39">		percentFull=ProGenContext.getSuboptionPercent(&quot;progen.population.init-mode&quot;, &quot;full&quot;, 0.5);</span>
-<span class="fc" id="L40">		percentGrow=ProGenContext.getSuboptionPercent(&quot;progen.population.init-mode&quot;, &quot;grow&quot;, 0.5);</span>
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">		if(percentFull+percentGrow!=1){</span>
-<span class="nc" id="L42">			throw new MalformedPercentSuboptionException(&quot;progen.population.init-mode&quot;);</span>
-		}
-<span class="fc" id="L44">	}</span>
-	
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.tree.InitializeTreeMethod#generate(progen.kernel.grammar.Grammar, progen.kernel.tree.Node)
-	 */
-	public void generate(Grammar grammar, Node root){
-<span class="fc bfc" id="L51" title="All 2 branches covered.">		if(Math.random()&gt;=percentFull){</span>
-<span class="fc" id="L52">			full.generate(grammar, root);</span>
-		}else{
-<span class="fc" id="L54">			grow.generate(grammar, root);</span>
-		}
-<span class="fc" id="L56">	}</span>
+public class HalfAndHalf implements InitializeTreeMethod {
+  private static final long serialVersionUID = 1140024727404110598L;
+  /** Inicializador tipo Full */
+  private InitializeTreeMethod full;
+  /** Inicializador tipo Grow */
+  private InitializeTreeMethod grow;
+  /** Probabilidad de usar el inicializador Full */
+  private double percentFull;
+  /** Probabilidad de usar el inicializador Grow */
+  private double percentGrow;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.tree.InitializeTreeMethod#updateMaximunDepth()
-	 */
-	public void updateMaximunDepth() {
-<span class="nc" id="L63">		full.updateMaximunDepth();</span>
-<span class="nc" id="L64">		grow.updateMaximunDepth();</span>
-<span class="nc" id="L65">	}</span>
+  /**
+   * Constructor genérico de la clase, en la que se inicializan las
+   * probabilidades de uso de los inicializadores y se comprueba que sumen 100%
+   * En caso de no haber definido las probabilidades particulares de alguno de
+   * los inicializadores, se asumirá que la probabilidad de los dos es del 50%.
+   */
+<span class="fc" id="L37">  public HalfAndHalf() {</span>
+<span class="fc" id="L38">    full = new Full();</span>
+<span class="fc" id="L39">    grow = new Grow();</span>
+<span class="fc" id="L40">    percentFull = ProGenContext.getSuboptionPercent(&quot;progen.population.init-mode&quot;, &quot;full&quot;, 0.5);</span>
+<span class="fc" id="L41">    percentGrow = ProGenContext.getSuboptionPercent(&quot;progen.population.init-mode&quot;, &quot;grow&quot;, 0.5);</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (percentFull + percentGrow != 1) {</span>
+<span class="nc" id="L43">      throw new MalformedPercentSuboptionException(&quot;progen.population.init-mode&quot;);</span>
+    }
+<span class="fc" id="L45">  }</span>
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.tree.InitializeTreeMethod#updateMaximunNodes()
-	 */
-	public void updateMaximunNodes() {
-<span class="nc" id="L72">		full.updateMaximunNodes();</span>
-<span class="nc" id="L73">		grow.updateMaximunNodes();</span>
-<span class="nc" id="L74">	}</span>
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * progen.kernel.tree.InitializeTreeMethod#generate(progen.kernel.grammar.
+   * Grammar, progen.kernel.tree.Node)
+   */
+  public void generate(Grammar grammar, Node root) {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">    if (Math.random() &gt;= percentFull) {</span>
+<span class="fc" id="L56">      full.generate(grammar, root);</span>
+    } else {
+<span class="fc" id="L58">      grow.generate(grammar, root);</span>
+    }
+<span class="fc" id="L60">  }</span>
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.tree.InitializeTreeMethod#updateMinimunDepth()
-	 */
-	public void updateMinimunDepth() {
-<span class="nc" id="L81">		full.updateMinimunDepth();</span>
-<span class="nc" id="L82">		full.updateMinimunDepth();</span>
-<span class="nc" id="L83">	}</span>
+  /*
+   * (non-Javadoc)
+   * 
+   * @see progen.kernel.tree.InitializeTreeMethod#updateMaximunDepth()
+   */
+  public void updateMaximunDepth() {
+<span class="nc" id="L68">    full.updateMaximunDepth();</span>
+<span class="nc" id="L69">    grow.updateMaximunDepth();</span>
+<span class="nc" id="L70">  }</span>
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see progen.kernel.tree.InitializeTreeMethod#updateMaximunNodes()
+   */
+  public void updateMaximunNodes() {
+<span class="nc" id="L78">    full.updateMaximunNodes();</span>
+<span class="nc" id="L79">    grow.updateMaximunNodes();</span>
+<span class="nc" id="L80">  }</span>
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see progen.kernel.tree.InitializeTreeMethod#updateMinimunDepth()
+   */
+  public void updateMinimunDepth() {
+<span class="nc" id="L88">    full.updateMinimunDepth();</span>
+<span class="nc" id="L89">    full.updateMinimunDepth();</span>
+<span class="nc" id="L90">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

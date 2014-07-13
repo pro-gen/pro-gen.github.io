@@ -16,52 +16,46 @@ import progen.userprogram.UserProgram;
  */
 public class CalculateThread implements Runnable {
 
-	private List&lt;Task&gt; tasks;
+  private List&lt;Task&gt; tasks;
 
-	private Worker worker;
+  private Worker worker;
 
-	private int currentTask;
+  private int currentTask;
 
-	private UserProgram userProgram;
+  private UserProgram userProgram;
 
-	/** Almacén de todos los datos históricos del experimento. */
-	private HistoricalData historical;
-	
-	public CalculateThread(List&lt;Task&gt; tasks, Worker worker,
-<span class="nc" id="L31">			UserProgram userProgram) {</span>
-<span class="nc" id="L32">		this.tasks = tasks;</span>
-<span class="nc" id="L33">		this.worker = worker;</span>
-<span class="nc" id="L34">		this.userProgram = userProgram;</span>
-<span class="nc" id="L35">		this.currentTask = 0;</span>
-<span class="nc" id="L36">		this.historical=HistoricalData.makeInstance();</span>
-<span class="nc" id="L37">	}</span>
+  /** Almacén de todos los datos históricos del experimento. */
+  private HistoricalData historical;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
-	 */
-	public void run() {
-<span class="nc" id="L45">		synchronized (tasks) {</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">			for (currentTask = 0; currentTask &lt; tasks.size(); currentTask++) {</span>
-<span class="nc" id="L47">				Calendar before=GregorianCalendar.getInstance();</span>
-<span class="nc" id="L48">				worker.calculate(tasks.get(currentTask), userProgram);</span>
-<span class="nc" id="L49">				tasks.notify();</span>
-<span class="nc" id="L50">				Calendar after=GregorianCalendar.getInstance();</span>
-<span class="nc" id="L51">				historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;evaluation&quot;, after.getTimeInMillis()-before.getTimeInMillis());</span>
-				
-			}
-<span class="nc" id="L54">		}</span>
+<span class="nc" id="L30">  public CalculateThread(List&lt;Task&gt; tasks, Worker worker, UserProgram userProgram) {</span>
+<span class="nc" id="L31">    this.tasks = tasks;</span>
+<span class="nc" id="L32">    this.worker = worker;</span>
+<span class="nc" id="L33">    this.userProgram = userProgram;</span>
+<span class="nc" id="L34">    this.currentTask = 0;</span>
+<span class="nc" id="L35">    this.historical = HistoricalData.makeInstance();</span>
+<span class="nc" id="L36">  }</span>
 
-<span class="nc" id="L56">	}</span>
+  public void run() {
+<span class="nc" id="L39">    synchronized (tasks) {</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">      for (currentTask = 0; currentTask &lt; tasks.size(); currentTask++) {</span>
+<span class="nc" id="L41">        Calendar before = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L42">        worker.calculate(tasks.get(currentTask), userProgram);</span>
+<span class="nc" id="L43">        tasks.notifyAll();</span>
+<span class="nc" id="L44">        Calendar after = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L45">        historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;evaluation&quot;, after.getTimeInMillis() - before.getTimeInMillis());</span>
 
-	public synchronized int getCompletedTasks() {
-<span class="nc" id="L59">		return currentTask;</span>
-	}
+      }
+<span class="nc" id="L48">    }</span>
 
-	public List&lt;Task&gt; getTasks() {
-<span class="nc" id="L63">		return tasks;</span>
-	}
+<span class="nc" id="L50">  }</span>
+
+  public synchronized int getCompletedTasks() {
+<span class="nc" id="L53">    return currentTask;</span>
+  }
+
+  public List&lt;Task&gt; getTasks() {
+<span class="nc" id="L57">    return tasks;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

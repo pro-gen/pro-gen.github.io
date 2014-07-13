@@ -58,35 +58,51 @@ public abstract class Experimenter {
    *          Path de destino de la copia.
    */
   protected void copyFile(String original, String copyPath) {
-<span class="nc" id="L61">    InputStream inputStream = null;</span>
-<span class="nc" id="L62">    OutputStream outputStream = null;</span>
-    try {
-<span class="nc" id="L64">        File originalFile = new File(original);</span>
-<span class="nc" id="L65">        File destinationFile = new File(copyPath + File.separator + originalFile.getName());</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!originalFile.exists()){</span>
-<span class="nc" id="L67">            throw new ProGenException(Error.get(31) + &quot; [&quot; + original + &quot;]&quot;);</span>
-        }
-<span class="nc" id="L69">        inputStream = new FileInputStream(originalFile);</span>
-<span class="nc" id="L70">        outputStream = new FileOutputStream(destinationFile);</span>
-<span class="nc" id="L71">        byte[] buffer = new byte[1024];</span>
-        int length;
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        while ((length = inputStream.read(buffer)) &gt; 0) {</span>
-<span class="nc" id="L74">            outputStream.write(buffer, 0, length);</span>
-        }
-<span class="nc" id="L76">    } catch (FileNotFoundException e) {</span>
-<span class="nc" id="L77">      throw new ProGenException(Error.get(31) + &quot; [&quot; + original + &quot;]&quot;);</span>
-<span class="nc" id="L78">    } catch (IOException e) {</span>
-<span class="nc" id="L79">      throw new ProGenException(e.getLocalizedMessage());</span>
-    }finally {
-<span class="nc" id="L81">        try {</span>
-<span class="nc" id="L82">          inputStream.close();</span>
-<span class="nc" id="L83">          outputStream.close();</span>
-<span class="nc" id="L84">        } catch (IOException e) {</span>
-<span class="nc" id="L85">          throw new ProGenException(e.getLocalizedMessage());</span>
-<span class="nc" id="L86">        }</span>
-        
+<span class="nc bnc" id="L61" title="All 4 branches missed.">    if (original == null || copyPath == null) {</span>
+<span class="nc" id="L62">      throw new IllegalArgumentException(Error.get(31));</span>
+    } else {
+<span class="nc" id="L64">      copyFileSecure(original, copyPath);</span>
     }
-<span class="nc" id="L89">  }</span>
+<span class="nc" id="L66">  }</span>
+
+  private void copyFileSecure(String original, String copyPath) {
+<span class="nc" id="L69">    File originalFile = new File(original);</span>
+<span class="nc" id="L70">    File destinationFile = new File(copyPath + File.separator + originalFile.getName());</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">    if (!originalFile.exists()) {</span>
+<span class="nc" id="L72">      throw new ProGenException(Error.get(31) + &quot; [&quot; + original + &quot;]&quot;);</span>
+    }
+<span class="nc" id="L74">    InputStream inputStream = null;</span>
+<span class="nc" id="L75">    OutputStream outputStream = null;</span>
+    try {
+<span class="nc" id="L77">      inputStream = new FileInputStream(originalFile);</span>
+<span class="nc" id="L78">      outputStream = new FileOutputStream(destinationFile);</span>
+<span class="nc" id="L79">      copyFile(inputStream, outputStream);</span>
+<span class="nc" id="L80">    } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L81">      throw new ProGenException(Error.get(31) + &quot; [&quot; + original + &quot;]&quot;);</span>
+<span class="nc" id="L82">    } catch (IOException e) {</span>
+<span class="nc" id="L83">      throw new ProGenException(e.getLocalizedMessage());</span>
+    } finally {
+<span class="nc" id="L85">      try {</span>
+<span class="nc bnc" id="L86" title="All 4 branches missed.">        if(inputStream != null){</span>
+<span class="nc" id="L87">          inputStream.close();</span>
+        }
+<span class="nc bnc" id="L89" title="All 4 branches missed.">        if (outputStream != null){</span>
+<span class="nc" id="L90">          outputStream.close();</span>
+        }
+<span class="nc" id="L92">      } catch (IOException e) {</span>
+<span class="nc" id="L93">        throw new ProGenException(e.getLocalizedMessage());</span>
+<span class="nc" id="L94">      }</span>
+
+    }
+<span class="nc" id="L97">  }</span>
+
+  private void copyFile(InputStream inputStream, OutputStream outputStream) throws IOException {
+<span class="nc" id="L100">    byte[] buffer = new byte[1024];</span>
+    int length;
+<span class="nc bnc" id="L102" title="All 2 branches missed.">    while ((length = inputStream.read(buffer)) &gt; 0) {</span>
+<span class="nc" id="L103">      outputStream.write(buffer, 0, length);</span>
+    }
+<span class="nc" id="L105">  }</span>
 
   /**
    * Función recursiva que elimina todo el contenido de un directorio para poder
@@ -98,20 +114,20 @@ public abstract class Experimenter {
    *         &lt;code&gt;false&lt;/code&gt; en caso contrario.
    */
   public boolean deleteDirectory(File path) {
-<span class="nc" id="L101">    boolean deleted = true;</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">    if (!path.exists()) {</span>
-<span class="nc" id="L103">      deleted = false;</span>
+<span class="nc" id="L117">    boolean deleted = true;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">    if (!path.exists()) {</span>
+<span class="nc" id="L119">      deleted = false;</span>
     } else {
-<span class="nc bnc" id="L105" title="All 2 branches missed.">      for (File file : path.listFiles()) {</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (file.isDirectory()) {</span>
-<span class="nc" id="L107">          deleteDirectory(file);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">      for (File file : path.listFiles()) {</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        if (file.isDirectory()) {</span>
+<span class="nc" id="L123">          deleteDirectory(file);</span>
         } else {
-<span class="nc" id="L109">          deleted = file.delete();</span>
+<span class="nc" id="L125">          deleted = file.delete();</span>
         }
       }
-<span class="nc bnc" id="L112" title="All 4 branches missed.">      deleted = path.delete() &amp;&amp; deleted;</span>
+<span class="nc bnc" id="L128" title="All 4 branches missed.">      deleted = path.delete() &amp;&amp; deleted;</span>
     }
-<span class="nc" id="L114">    return deleted;</span>
+<span class="nc" id="L130">    return deleted;</span>
   }
 
   /**
@@ -123,25 +139,25 @@ public abstract class Experimenter {
    *         necesarias y &lt;code&gt;false&lt;/code&gt; en caso contrario.
    */
   protected boolean generateOutputDir() {
-<span class="nc" id="L126">    boolean createDir = false;</span>
-<span class="nc" id="L127">    StringBuilder defaultPath = new StringBuilder(100);</span>
+<span class="nc" id="L142">    boolean createDir = false;</span>
+<span class="nc" id="L143">    StringBuilder defaultPath = new StringBuilder(100);</span>
 
-<span class="nc" id="L129">    defaultPath.append(&quot;outputs&quot;);</span>
-<span class="nc" id="L130">    defaultPath.append(File.separator);</span>
-<span class="nc" id="L131">    defaultPath.append(ProGenContext.getMandatoryProperty(&quot;progen.experiment.name&quot;));</span>
+<span class="nc" id="L145">    defaultPath.append(&quot;outputs&quot;);</span>
+<span class="nc" id="L146">    defaultPath.append(File.separator);</span>
+<span class="nc" id="L147">    defaultPath.append(ProGenContext.getMandatoryProperty(&quot;progen.experiment.name&quot;));</span>
 
-<span class="nc" id="L133">    String outputDir = ProGenContext.getOptionalProperty(&quot;progen.output.dir&quot;, defaultPath.toString());</span>
+<span class="nc" id="L149">    String outputDir = ProGenContext.getOptionalProperty(&quot;progen.output.dir&quot;, defaultPath.toString());</span>
 
-<span class="nc" id="L135">    File dir = new File(outputDir);</span>
-<span class="nc" id="L136">    ProGenContext.setProperty(&quot;progen.output.dir&quot;, dir.getAbsolutePath() + File.separator);</span>
+<span class="nc" id="L151">    File dir = new File(outputDir);</span>
+<span class="nc" id="L152">    ProGenContext.setProperty(&quot;progen.output.dir&quot;, dir.getAbsolutePath() + File.separator);</span>
 
-<span class="nc bnc" id="L138" title="All 2 branches missed.">    if (dir.exists()) {</span>
-<span class="nc" id="L139">      deleteDirectory(dir);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">    if (dir.exists()) {</span>
+<span class="nc" id="L155">      deleteDirectory(dir);</span>
     }
     // creacion de la carpeta &quot;home&quot; de todos los ficheros de salida
-<span class="nc" id="L142">    createDir = dir.mkdirs();</span>
+<span class="nc" id="L158">    createDir = dir.mkdirs();</span>
 
-<span class="nc" id="L144">    return createDir;</span>
+<span class="nc" id="L160">    return createDir;</span>
   }
 
   /**
@@ -150,19 +166,20 @@ public abstract class Experimenter {
    * - crea la carpeta &lt;br&gt;
    * - generateResults()
    */
+  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value=&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;, justification=&quot;I don't really care makeDirs result&quot;)
   public final void generateOutputs() {
-<span class="nc" id="L154">    String experimentDir = defineExperimentDir();</span>
+<span class="nc" id="L171">    String experimentDir = defineExperimentDir();</span>
 
-<span class="nc bnc" id="L156" title="All 2 branches missed.">    if (!experimentDir.endsWith(File.separator)) {</span>
-<span class="nc" id="L157">      experimentDir += File.separator;</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">    if (!experimentDir.endsWith(File.separator)) {</span>
+<span class="nc" id="L174">      experimentDir += File.separator;</span>
     }
 
-<span class="nc" id="L160">    ProGenContext.setProperty(&quot;progen.output.experiment&quot;, experimentDir);</span>
-<span class="nc" id="L161">    File dir = new File(ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;) + experimentDir);</span>
-<span class="nc" id="L162">    dir.mkdir();</span>
-<span class="nc" id="L163">    generateResults();</span>
+<span class="nc" id="L177">    ProGenContext.setProperty(&quot;progen.output.experiment&quot;, experimentDir);</span>
+<span class="nc" id="L178">    File dir = new File(ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;) + experimentDir);</span>
+<span class="nc" id="L179">    dir.mkdir();</span>
+<span class="nc" id="L180">    generateResults();</span>
 
-<span class="nc" id="L165">  }</span>
+<span class="nc" id="L182">  }</span>
 
   /**
    * Comprueba si se dan las condiciones para dar por acabado el experimento.

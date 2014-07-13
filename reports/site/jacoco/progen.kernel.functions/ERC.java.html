@@ -14,60 +14,51 @@ import progen.userprogram.UserProgram;
  */
 public abstract class ERC extends Terminal implements Cloneable {
 
-    /**
-     * Constructor que recibe el tipo de valor que almacena el ERC y
-     * 
-     * @param signature
-     */
-    public ERC(String signature) {
-<span class="fc" id="L23">	super(signature, &quot;&quot;);</span>
-<span class="fc" id="L24">	super.setValue(defineERC());</span>
-<span class="fc" id="L25">	super.setSymbol(this.printERC());</span>
-<span class="fc" id="L26">    }</span>
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see progen.kernel.functions.Terminal#evaluate(java.util.List,
-     * progen.userprogram.UserProgram, java.util.HashMap)
-     */
-    @Override
-    public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram,
-	    HashMap&lt;String, Object&gt; returnAddr) {
-<span class="nc" id="L37">	return getValue();</span>
-    }
+  private static final long serialVersionUID = 481135992381751762L;
 
-    /**
-     * En el caso de los ERC, por definición no se puede volver a redefinir el
-     * valor del mismo. Esto se consigue marcando el método como
-     * &lt;code&gt;final&lt;/code&gt; y así todos los ERC que se definan en el futuro, no
-     * podrán sobreescribir dicho método, cumpliendo con el requerimiento de
-     * impedir la redefinición del valor.
-     */
-    @Override
-    public final void setValue(Object value) {
-	// do nothing
-<span class="fc" id="L50">    }</span>
+  /**
+   * Constructor que recibe el tipo de valor que almacena el ERC y
+   * 
+   * @param signature
+   */
+  public ERC(String signature) {
+<span class="fc" id="L25">    super(signature, &quot;&quot;);</span>
+<span class="fc" id="L26">    super.setValue(defineERC());</span>
+<span class="fc" id="L27">    super.setSymbol(this.printERC());</span>
+<span class="fc" id="L28">  }</span>
 
-    /**
-     * Define el valor concreto que tendrá dicho ERC.
-     * 
-     * @return El valor concreto del ERC
-     */
-    protected abstract Object defineERC();
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="nc" id="L32">    return getValue();</span>
+  }
 
-    /**
-     * Devuelve una forma legible del valor del ERC.
-     * 
-     * @return Una forma legible dle valor del ERC.
-     */
-    protected abstract String printERC();
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    public abstract ERC clone();
+  /**
+   * En el caso de los ERC, por definición no se puede volver a redefinir el
+   * valor del mismo. Esto se consigue marcando el método como
+   * &lt;code&gt;final&lt;/code&gt; y así todos los ERC que se definan en el futuro, no
+   * podrán sobreescribir dicho método, cumpliendo con el requerimiento de
+   * impedir la redefinición del valor.
+   */
+  @Override
+  public final void setValue(Object value) {
+    // do nothing
+<span class="fc" id="L45">  }</span>
+
+  /**
+   * Define el valor concreto que tendrá dicho ERC.
+   * 
+   * @return El valor concreto del ERC
+   */
+  protected abstract Object defineERC();
+
+  /**
+   * Devuelve una forma legible del valor del ERC.
+   * 
+   * @return Una forma legible dle valor del ERC.
+   */
+  protected abstract String printERC();
+
+  public abstract ERC clone();
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

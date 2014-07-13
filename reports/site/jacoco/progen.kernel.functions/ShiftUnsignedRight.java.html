@@ -7,31 +7,29 @@ import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
 /**
- * Clase que implementa el operador de desplazamiento de n bits a la derecha, 
+ * Clase que implementa el operador de desplazamiento de n bits a la derecha,
  * manteniendo el signo.
  * 
  * @author jirsis
  * @since 2.0
  */
-public class ShiftUnsignedRight extends NonTerminal{
+public class ShiftUnsignedRight extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public ShiftUnsignedRight() {
-<span class="fc" id="L22">		super(&quot;int$$int$$int&quot;, &quot;&gt;&gt;&gt;&quot;);</span>
-<span class="fc" id="L23">	}</span>
+  private static final long serialVersionUID = -2523894986080663790L;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L31">		Integer operador1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L32">		Integer operador2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L33">		return operador1 &gt;&gt;&gt; operador2;</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public ShiftUnsignedRight() {
+<span class="fc" id="L24">    super(&quot;int$$int$$int&quot;, &quot;&gt;&gt;&gt;&quot;);</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L29">    Integer operador1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    Integer operador2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L31">    return operador1 &gt;&gt;&gt; operador2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

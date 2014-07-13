@@ -2,26 +2,37 @@
 
 /**
  * @author jirsis
- *
+ * 
  */
 public abstract class NonTerminal extends Function {
 
-	/**
-	 * @param signature
-	 * @param symbol
-	 */
-	public NonTerminal(String signature, String symbol) {
-<span class="fc" id="L14">		super(signature, symbol);</span>
-<span class="fc" id="L15">	}</span>
-	
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#hashCode()
-	 */
-	@Override
-	public int hashCode(){
-<span class="nc" id="L23">		return super.hashCode();</span>
-	}
+  private static final long serialVersionUID = 5173228444409252772L;
+
+  /**
+   * @param signature
+   * @param symbol
+   */
+  public NonTerminal(String signature, String symbol) {
+<span class="fc" id="L16">    super(signature, symbol);</span>
+<span class="fc" id="L17">  }</span>
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L21">    return super.hashCode();</span>
+  }
+  
+  @Override
+  public boolean equals(Object other){
+<span class="nc" id="L26">    boolean equals = true;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">    if(other == null ){</span>
+<span class="nc" id="L28">      equals = false;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">    } else if (! (other instanceof NonTerminal)){</span>
+<span class="nc" id="L30">      equals = false;</span>
+    }else {
+<span class="nc bnc" id="L32" title="All 2 branches missed.">      equals = this.hashCode() == other.hashCode();</span>
+    }
+<span class="nc" id="L34">    return equals;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

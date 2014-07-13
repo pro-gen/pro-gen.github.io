@@ -9,28 +9,27 @@ import progen.userprogram.UserProgram;
 
 /**
  * Clase que implementa el operador de desigualdad de dos números enteros.
+ * 
  * @author jirsis
  * @since 2.0
  */
 public class IntNotEquals extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public IntNotEquals() {
-<span class="fc" id="L21">		super(&quot;boolean$$int$$int&quot;, &quot;!=&quot;);</span>
-<span class="fc" id="L22">	}</span>
+  private static final long serialVersionUID = 5107500932103001490L;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L30">		Integer operador1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L31">		Integer operador2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">		return operador1.intValue() != operador2.intValue();</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public IntNotEquals() {
+<span class="fc" id="L24">    super(&quot;boolean$$int$$int&quot;, &quot;!=&quot;);</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L29">    Integer operador1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    Integer operador2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">    return operador1.intValue() != operador2.intValue();</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

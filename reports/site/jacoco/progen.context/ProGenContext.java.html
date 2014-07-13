@@ -94,7 +94,7 @@ public class ProGenContext {
    * 
    * @return La referencia a la única instancia de propiedades de ProGen
    */
-  public static ProGenContext makeInstance() {
+  public synchronized static ProGenContext makeInstance() {
 <span class="fc bfc" id="L98" title="All 2 branches covered.">    if (proGenProps == null) {</span>
 <span class="fc" id="L99">      proGenProps = new ProGenContext();</span>
     }
@@ -386,7 +386,7 @@ public class ProGenContext {
 <span class="fc" id="L386">          parameterValue = parameter.split(&quot;=&quot;)[1].trim();</span>
 <span class="fc" id="L387">          parameters.put(parameterKey, parameterValue);</span>
         }
-<span class="fc" id="L389">      } catch (Exception e) {</span>
+<span class="fc" id="L389">      } catch (ArrayIndexOutOfBoundsException e) {</span>
 <span class="fc" id="L390">        throw new MalformedParameterException(option + &quot;,&quot; + parameterKey);</span>
 <span class="fc" id="L391">      }</span>
     }
@@ -484,36 +484,56 @@ public class ProGenContext {
    * @throws IOException
    *           Si ocurre un error de E/S.
    */
-  @SuppressWarnings(&quot;static-access&quot;)
   private void loadOtherProperties(String propertyFile) throws FileNotFoundException, IOException {
     Properties otherProperties;
-<span class="fc" id="L490">    String otherFile = proGenProps.properties.getProperty(propertyFile);</span>
-    int lastDot;
-    String path, ext;
+<span class="fc" id="L489">    String otherFile = proGenProps.properties.getProperty(propertyFile);</span>
 
-<span class="pc bpc" id="L494" title="1 of 2 branches missed.">    if (otherFile != null) {</span>
-<span class="fc" id="L495">      lastDot = otherFile.lastIndexOf(&quot;.&quot;);</span>
-<span class="fc" id="L496">      path = otherFile.substring(0, lastDot);</span>
-<span class="fc" id="L497">      ext = otherFile.substring(lastDot);</span>
-<span class="fc" id="L498">      otherFile = path.replace('.', File.separatorChar) + ext;</span>
-
-<span class="fc" id="L500">      otherProperties = new Properties();</span>
-      // look for in absolute path
+<span class="pc bpc" id="L491" title="1 of 2 branches missed.">    if (otherFile != null) {</span>
+<span class="fc" id="L492">      otherFile = convertClasspath2Path(otherFile);</span>
+<span class="fc" id="L493">      otherProperties = new Properties();</span>
       try {
-<span class="fc" id="L503">        InputStream fis = getResource(otherFile);</span>
-<span class="fc" id="L504">        otherProperties.load(fis);</span>
-<span class="fc" id="L505">        fis.close();</span>
-<span class="nc" id="L506">      } catch (FileNotFoundException fnfe) {</span>
-        // look for in user project
-<span class="nc" id="L508">        otherFile = proGenProps.getProperty(&quot;progen.user.home&quot;).replace('.', File.separatorChar) + proGenProps.properties.getProperty(propertyFile);</span>
-<span class="nc" id="L509">        FileInputStream fis = new FileInputStream(otherFile);</span>
-<span class="nc" id="L510">        otherProperties.load(fis);</span>
-<span class="nc" id="L511">        fis.close();</span>
-<span class="fc" id="L512">      }</span>
-<span class="fc" id="L513">      chekProperties(otherProperties);</span>
+<span class="fc" id="L495">        lookForInAbsolutePath(otherProperties, otherFile);        </span>
+<span class="nc" id="L496">      } catch (FileNotFoundException fnfe) {</span>
+<span class="nc" id="L497">        lookForInUserProject(propertyFile, otherProperties);</span>
+<span class="fc" id="L498">      }</span>
+<span class="fc" id="L499">      chekProperties(otherProperties);</span>
     }
-<span class="fc" id="L515">  }</span>
+<span class="fc" id="L501">  }</span>
+  
+  private void lookForInAbsolutePath(Properties otherProperties, String otherFile) throws IOException {
+    InputStream inputStream;
+<span class="fc" id="L505">    inputStream = getResource(otherFile);</span>
+    try {
+<span class="fc" id="L507">      otherProperties.load(inputStream );</span>
+    } finally{
+<span class="pc bpc" id="L509" title="3 of 4 branches missed.">      if(inputStream != null){</span>
+<span class="pc" id="L510">        inputStream.close();</span>
+      }
+    }
+<span class="fc" id="L513">  }</span>
+  
+  private FileInputStream lookForInUserProject(String propertyFile, Properties otherProperties) throws IOException {
+<span class="nc" id="L516">    FileInputStream fileInputStream = null;</span>
+<span class="nc" id="L517">    String otherFile = proGenProps.getProperty(&quot;progen.user.home&quot;).replace('.', File.separatorChar) + proGenProps.properties.getProperty(propertyFile);</span>
+    try {
+<span class="nc" id="L519">      fileInputStream = new FileInputStream(otherFile);</span>
+<span class="nc" id="L520">      otherProperties.load(fileInputStream);</span>
+    } finally{
+<span class="nc bnc" id="L522" title="All 4 branches missed.">      if(fileInputStream != null){</span>
+<span class="nc" id="L523">        fileInputStream.close();</span>
+      }
+    }
+    
+<span class="nc" id="L527">    return fileInputStream;</span>
+  }
 
+  private String convertClasspath2Path(String otherFile) {
+<span class="fc" id="L531">    int lastDot = otherFile.lastIndexOf(&quot;.&quot;);</span>
+<span class="fc" id="L532">    String path = otherFile.substring(0, lastDot);</span>
+<span class="fc" id="L533">    String ext = otherFile.substring(lastDot);</span>
+<span class="fc" id="L534">    return path.replace('.', File.separatorChar) + ext;</span>
+  }
+  
   /**
    * Método que define algunas propiedades a partir de otras ya existentes.
    * &lt;p/&gt;
@@ -526,25 +546,25 @@ public class ProGenContext {
    */
   @SuppressWarnings(&quot;static-access&quot;)
   private void calculateProperties() {
-<span class="fc" id="L529">    String userHome = proGenProps.getProperty(&quot;progen.experiment.file&quot;);</span>
-<span class="fc bfc" id="L530" title="All 2 branches covered.">    if (userHome != null) {</span>
-<span class="fc" id="L531">      setUserHome(userHome);</span>
+<span class="fc" id="L549">    String userHome = proGenProps.getProperty(&quot;progen.experiment.file&quot;);</span>
+<span class="fc bfc" id="L550" title="All 2 branches covered.">    if (userHome != null) {</span>
+<span class="fc" id="L551">      setUserHome(userHome);</span>
     }
-<span class="fc" id="L533">  }</span>
+<span class="fc" id="L553">  }</span>
 
   private void setUserHome(String userHome) {
-<span class="fc" id="L536">    userHome = userHome.substring(0, userHome.lastIndexOf(&quot;.&quot;));</span>
-<span class="fc" id="L537">    setExperimentName(userHome);</span>
-<span class="fc" id="L538">    userHome = userHome.substring(0, userHome.lastIndexOf(&quot;.&quot;) + 1);</span>
+<span class="fc" id="L556">    userHome = userHome.substring(0, userHome.lastIndexOf(&quot;.&quot;));</span>
+<span class="fc" id="L557">    setExperimentName(userHome);</span>
+<span class="fc" id="L558">    userHome = userHome.substring(0, userHome.lastIndexOf(&quot;.&quot;) + 1);</span>
 
-<span class="fc" id="L540">    proGenProps.properties.setProperty(&quot;progen.user.home&quot;, userHome);</span>
-<span class="fc" id="L541">  }</span>
+<span class="fc" id="L560">    proGenProps.properties.setProperty(&quot;progen.user.home&quot;, userHome);</span>
+<span class="fc" id="L561">  }</span>
 
   private void setExperimentName(String userHome) {
     String experimentName;
-<span class="fc" id="L545">    experimentName = userHome.substring(userHome.lastIndexOf(&quot;.&quot;) + 1, userHome.length());</span>
-<span class="fc" id="L546">    proGenProps.properties.setProperty(&quot;progen.experiment.name&quot;, experimentName);</span>
-<span class="fc" id="L547">  }</span>
+<span class="fc" id="L565">    experimentName = userHome.substring(userHome.lastIndexOf(&quot;.&quot;) + 1, userHome.length());</span>
+<span class="fc" id="L566">    proGenProps.properties.setProperty(&quot;progen.experiment.name&quot;, experimentName);</span>
+<span class="fc" id="L567">  }</span>
 
   /**
    * Carga las propiedades definidas en el fichero que tiene por nombre el del
@@ -559,33 +579,42 @@ public class ProGenContext {
     Enumeration&lt;Object&gt; keys;
     String key;
     String value;
-<span class="fc" id="L562">    StringBuilder optionalFilesLoaded = new StringBuilder();</span>
+<span class="fc" id="L582">    StringBuilder optionalFilesLoaded = new StringBuilder();</span>
 
-<span class="fc" id="L564">    String optionalFile = ProGenContext.getMandatoryProperty(&quot;progen.experiment.file&quot;);</span>
-<span class="fc" id="L565">    optionalFile = optionalFile.replaceAll(&quot;\\.txt$&quot;, sufixFile).replace('.', File.separatorChar) + &quot;.txt&quot;;</span>
-<span class="fc" id="L566">    optionalFilesLoaded.append(ProGenContext.getOptionalProperty(&quot;progen.optional.files&quot;, &quot;&quot;));</span>
-
+<span class="fc" id="L584">    String optionalFile = ProGenContext.getMandatoryProperty(&quot;progen.experiment.file&quot;);</span>
+<span class="fc" id="L585">    optionalFile = optionalFile.replaceAll(&quot;\\.txt$&quot;, sufixFile).replace('.', File.separatorChar) + &quot;.txt&quot;;</span>
+<span class="fc" id="L586">    optionalFilesLoaded.append(ProGenContext.getOptionalProperty(&quot;progen.optional.files&quot;, &quot;&quot;));</span>
+<span class="fc" id="L587">    FileInputStream fis = null;</span>
+    
     try {
-<span class="nc" id="L569">      FileInputStream fis = new FileInputStream(optionalFile);</span>
-<span class="nc" id="L570">      otherProperties = new Properties();</span>
-<span class="nc" id="L571">      otherProperties.load(fis);</span>
-<span class="nc" id="L572">      keys = otherProperties.keys();</span>
-<span class="nc bnc" id="L573" title="All 2 branches missed.">      while (keys.hasMoreElements()) {</span>
-<span class="nc" id="L574">        key = (String) keys.nextElement();</span>
-<span class="nc" id="L575">        value = otherProperties.getProperty(key);</span>
-<span class="nc" id="L576">        proGenProps.properties.put(key, value);</span>
+<span class="nc" id="L590">      fis = new FileInputStream(optionalFile);</span>
+<span class="nc" id="L591">      otherProperties = new Properties();</span>
+<span class="nc" id="L592">      otherProperties.load(fis);</span>
+<span class="nc" id="L593">      keys = otherProperties.keys();</span>
+<span class="nc bnc" id="L594" title="All 2 branches missed.">      while (keys.hasMoreElements()) {</span>
+<span class="nc" id="L595">        key = (String) keys.nextElement();</span>
+<span class="nc" id="L596">        value = otherProperties.getProperty(key);</span>
+<span class="nc" id="L597">        proGenProps.properties.put(key, value);</span>
       }
-<span class="nc" id="L578">      fis.close();</span>
-<span class="nc" id="L579">      optionalFilesLoaded.append(optionalFile);</span>
-<span class="nc" id="L580">      optionalFilesLoaded.append(&quot;, &quot;);</span>
-<span class="nc" id="L581">      ProGenContext.setProperty(&quot;progen.optional.files&quot;, optionalFilesLoaded.toString());</span>
-<span class="fc" id="L582">    } catch (FileNotFoundException e) {</span>
+      
+<span class="nc" id="L600">      optionalFilesLoaded.append(optionalFile);</span>
+<span class="nc" id="L601">      optionalFilesLoaded.append(&quot;, &quot;);</span>
+<span class="nc" id="L602">      ProGenContext.setProperty(&quot;progen.optional.files&quot;, optionalFilesLoaded.toString());</span>
+<span class="fc" id="L603">    } catch (FileNotFoundException e) {</span>
       // do nothing, ignore
-<span class="nc" id="L584">    } catch (IOException e) {</span>
+<span class="nc" id="L605">    } catch (IOException e) {</span>
       // do nothing, ignore
-<span class="pc" id="L586">    }</span>
+    } finally{
+<span class="nc" id="L608">      try {</span>
+<span class="pc bpc" id="L609" title="7 of 8 branches missed.">        if(fis != null){</span>
+<span class="nc" id="L610">          fis.close();</span>
+        }
+<span class="nc" id="L612">      } catch (IOException e) {</span>
+        // do nothing, ignore
+<span class="pc" id="L614">      }</span>
+<span class="nc" id="L615">    }</span>
 
-<span class="fc" id="L588">  }</span>
+<span class="fc" id="L617">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -7,27 +7,29 @@ import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
 /**
- * Clase que implementa el operador de Y lógico de dos variable booleanas de tal 
+ * Clase que implementa el operador de Y lógico de dos variable booleanas de tal
  * forma que se evalúan los dos parámetros.
  * 
  * @author jirsis
  * @since 2.0
  */
-public class AndInconditional extends NonTerminal{
+public class AndInconditional extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public AndInconditional() {
-<span class="fc" id="L22">		super(&quot;boolean$$boolean$$boolean&quot;, &quot;&amp;&quot;);</span>
-<span class="fc" id="L23">	}</span>
+  private static final long serialVersionUID = -8044437756015035765L;
 
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L27">		Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L28">		Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L29">		return operador1 &amp; operador2;</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public AndInconditional() {
+<span class="fc" id="L24">    super(&quot;boolean$$boolean$$boolean&quot;, &quot;&amp;&quot;);</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L29">    Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L31">    return operador1 &amp; operador2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

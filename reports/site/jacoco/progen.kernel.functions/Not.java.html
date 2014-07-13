@@ -7,27 +7,25 @@ import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
 /**
- * Implementación de un operador de negación. 
+ * Implementación de un operador de negación.
+ * 
  * @author jirsis
  * @since 2.0
  */
-public class Not extends NonTerminal{
-	
-    /**
-	 * Constructor por defecto.
-	 */
-	public Not(){
-<span class="fc" id="L20">		super(&quot;boolean$$boolean&quot;, &quot;NOT&quot;);</span>
-<span class="fc" id="L21">	}</span>
+public class Not extends NonTerminal {
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc bfc" id="L29" title="All 2 branches covered.">		return !((Boolean)arguments.get(0).evaluate(userProgram, returnAddr));</span>
-	}
+  private static final long serialVersionUID = 1609608449917410151L;
+
+  /**
+   * Constructor por defecto.
+   */
+  public Not() {
+<span class="fc" id="L23">    super(&quot;boolean$$boolean&quot;, &quot;NOT&quot;);</span>
+<span class="fc" id="L24">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    return !((Boolean) arguments.get(0).evaluate(userProgram, returnAddr));</span>
+  }
 }
-		
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

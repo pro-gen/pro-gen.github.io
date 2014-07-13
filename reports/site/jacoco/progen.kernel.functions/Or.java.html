@@ -8,32 +8,30 @@ import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
 /**
- * Clase que implementa el operador de O lógico de dos variable booleanas, en forma
- * de cortocircuito. De esta forma, en cuanto una de los parámetros sea verdadero, no 
- * se continua evaluando el otro parámetro.
+ * Clase que implementa el operador de O lógico de dos variable booleanas, en
+ * forma de cortocircuito. De esta forma, en cuanto una de los parámetros sea
+ * verdadero, no se continua evaluando el otro parámetro.
  * 
  * @author jirsis
  * @since 2.0
  */
 public class Or extends NonTerminal {
 
-	/**
-	 * Constructor por defecto.
-	 */
-	public Or() {
-<span class="fc" id="L24">		super(&quot;boolean$$boolean$$boolean&quot;, &quot;||&quot;);</span>
-<span class="fc" id="L25">	}</span>
+  private static final long serialVersionUID = 1392654173883119488L;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram, java.util.HashMap)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L33">		Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L34">		Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc bfc" id="L35" title="All 4 branches covered.">		return operador1 || operador2;</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public Or() {
+<span class="fc" id="L26">    super(&quot;boolean$$boolean$$boolean&quot;, &quot;||&quot;);</span>
+<span class="fc" id="L27">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L31">    Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L32">    Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc bfc" id="L33" title="All 4 branches covered.">    return operador1 || operador2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

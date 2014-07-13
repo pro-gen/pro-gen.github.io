@@ -8,22 +8,19 @@
  */
 public class False extends Terminal {
 
-    /**
-     * Constructor por defecto.
-     */
-    public False() {
-<span class="fc" id="L15">	super(&quot;boolean&quot;, &quot;FALSE&quot;);</span>
-<span class="fc" id="L16">	super.setValue(Boolean.FALSE);</span>
-<span class="fc" id="L17">    }</span>
+  private static final long serialVersionUID = -5583977807814709823L;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see progen.kernel.functions.Terminal#setValue(java.lang.Object)
-     */
-    public void setValue(Object value) {
-	//do nothing
-<span class="fc" id="L26">    }</span>
+  /**
+   * Constructor por defecto.
+   */
+  public False() {
+<span class="fc" id="L17">    super(&quot;boolean&quot;, &quot;FALSE&quot;);</span>
+<span class="fc" id="L18">    super.setValue(Boolean.FALSE);</span>
+<span class="fc" id="L19">  }</span>
+
+  public void setValue(Object value) {
+    // do nothing
+<span class="fc" id="L23">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

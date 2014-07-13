@@ -7,25 +7,27 @@ import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
 /**
- * Clase que implementa el operador de Y lógico de dos variable booleanas, en forma
- * de cortocircuito. De esta forma, en cuanto una de los parámetros sea falso, no 
- * se continua evaluando el otro parámetro.
+ * Clase que implementa el operador de Y lógico de dos variable booleanas, en
+ * forma de cortocircuito. De esta forma, en cuanto una de los parámetros sea
+ * falso, no se continua evaluando el otro parámetro.
  * 
  * @author jirsis
  * @since 2.0
  */
-public class And extends NonTerminal{
+public class And extends NonTerminal {
 
-	public And() {
-<span class="fc" id="L20">		super(&quot;boolean$$boolean$$boolean&quot;, &quot;&amp;&amp;&quot;);</span>
-<span class="fc" id="L21">	}</span>
+  private static final long serialVersionUID = -8098580378293850922L;
 
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L25">		Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L26">		Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc bfc" id="L27" title="All 4 branches covered.">		return operador1 &amp;&amp; operador2;</span>
-	}
+  public And() {
+<span class="fc" id="L22">    super(&quot;boolean$$boolean$$boolean&quot;, &quot;&amp;&amp;&quot;);</span>
+<span class="fc" id="L23">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L27">    Boolean operador1 = (Boolean) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L28">    Boolean operador2 = (Boolean) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc bfc" id="L29" title="All 4 branches covered.">    return operador1 &amp;&amp; operador2;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

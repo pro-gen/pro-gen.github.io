@@ -6,18 +6,20 @@ import java.util.List;
 import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
 
-public class BitVrotd extends NonTerminal{
+public class BitVrotd extends NonTerminal {
 
-	public BitVrotd(){
-<span class="fc" id="L12">		super(&quot;int$$int&quot;, &quot;vrotd&quot;);</span>
-<span class="fc" id="L13">	}</span>
+  private static final long serialVersionUID = 6785455860346276489L;
 
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String,Object&gt; returnAddr){
-<span class="fc" id="L17">		Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
- 
-<span class="fc" id="L19">		return (Integer) (Integer.rotateRight(child_1, 1));</span>
-	}
+  public BitVrotd() {
+<span class="fc" id="L14">    super(&quot;int$$int&quot;, &quot;vrotd&quot;);</span>
+<span class="fc" id="L15">  }</span>
 
-}	
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L19">    Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+
+<span class="fc" id="L21">    return (Integer) (Integer.rotateRight(child_1, 1));</span>
+  }
+
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

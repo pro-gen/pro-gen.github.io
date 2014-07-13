@@ -10,45 +10,48 @@ import progen.userprogram.UserProgram;
 
 /**
  * @author jirsis
- *
+ * 
  */
 public class ADF extends NonTerminal {
 
-	/**
-	 * Árbol que define el ADF concreto de esta instancia.
-	 */
-	private Tree adf;
-	
-	/**
-	 * @param symbol
-	 * @throws NumberFormatException 
-	 */
-	public ADF(String symbol) {
-<span class="fc" id="L27">		super(ProGenContext.getMandatoryProperty(&quot;progen.&quot;+symbol+&quot;.interface&quot;), symbol);</span>
-<span class="fc" id="L28">	}</span>
+  private static final long serialVersionUID = -1338537410471402589L;
+  
+  /**
+   * Árbol que define el ADF concreto de esta instancia.
+   */
+  private Tree adf;
 
-	/*
-	 * (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.HashMap, java.util.List, progen.userprogram.UserProgram)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String,Object&gt; returnAddr) {
-<span class="nc bnc" id="L36" title="All 2 branches missed.">		for(int i=0;i&lt;arguments.size();i++){</span>
-<span class="nc" id="L37">			returnAddr.put(super.getSymbol()+&quot;-&quot;+&quot;ARG&quot;+i, arguments.get(i));</span>
-		}
-		
-<span class="nc" id="L40">		return adf.evaluate(userProgram, returnAddr);</span>
-	}
+  /**
+   * @param symbol
+   * @throws NumberFormatException
+   */
+  public ADF(String symbol) {
+<span class="fc" id="L29">    super(ProGenContext.getMandatoryProperty(&quot;progen.&quot; + symbol + &quot;.interface&quot;), symbol);</span>
+<span class="fc" id="L30">  }</span>
 
-	/**
-	 * Establece que árbolo concreto será almacenado en un ADF.
-	 * @param tree
-	 */
-	public void setADFTree(Tree tree) {
-<span class="nc" id="L48">		this.adf=tree;</span>
-<span class="nc" id="L49">	}</span>
-	
+  /*
+   * (non-Javadoc)
+   * 
+   * @see progen.kernel.functions.Function#evaluate(java.util.HashMap,
+   * java.util.List, progen.userprogram.UserProgram)
+   */
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    for (int i = 0; i &lt; arguments.size(); i++) {</span>
+<span class="nc" id="L41">      returnAddr.put(super.getSymbol() + &quot;-&quot; + &quot;ARG&quot; + i, arguments.get(i));</span>
+    }
+
+<span class="nc" id="L44">    return adf.evaluate(userProgram, returnAddr);</span>
+  }
+
+  /**
+   * Establece que árbolo concreto será almacenado en un ADF.
+   * 
+   * @param tree
+   */
+  public void setADFTree(Tree tree) {
+<span class="nc" id="L53">    this.adf = tree;</span>
+<span class="nc" id="L54">  }</span>
 
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

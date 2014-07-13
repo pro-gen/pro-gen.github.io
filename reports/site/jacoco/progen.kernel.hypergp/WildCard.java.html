@@ -15,27 +15,28 @@ import progen.userprogram.UserProgram;
  * 
  * 
  * @author jirsis
- *
+ * 
  */
-public class WildCard extends Function{
-	
-	private List&lt;Function&gt; functions;
+public class WildCard extends Function {
 
-	public WildCard(Function function) {
-<span class="nc" id="L25">		super(function.getSignature(), &quot;=&quot;);</span>
-<span class="nc" id="L26">		functions=new ArrayList&lt;Function&gt;();</span>
-<span class="nc" id="L27">		addFunction(function);</span>
-<span class="nc" id="L28">	}</span>
-	
-	public void addFunction(Function function){
-<span class="nc" id="L31">		functions.add(function);</span>
-<span class="nc" id="L32">	}</span>
+  private static final long serialVersionUID = -7893266618897015503L;
+  private List&lt;Function&gt; functions;
 
-	@Override
-	public Object evaluate(List&lt;Node&gt; argumets, UserProgram userProgram, HashMap&lt;String,Object&gt; returnAddr) {
-<span class="nc" id="L36">		System.err.println(&quot;WildCard.evaluate NOT YET IMPLEMENTED&quot;);</span>
-<span class="nc" id="L37">		return null;</span>
-	}
+  public WildCard(Function function) {
+<span class="nc" id="L26">    super(function.getSignature(), &quot;=&quot;);</span>
+<span class="nc" id="L27">    functions = new ArrayList&lt;Function&gt;();</span>
+<span class="nc" id="L28">    addFunction(function);</span>
+<span class="nc" id="L29">  }</span>
+
+  public void addFunction(Function function) {
+<span class="nc" id="L32">    functions.add(function);</span>
+<span class="nc" id="L33">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; argumets, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="nc" id="L37">    System.err.println(&quot;WildCard.evaluate NOT YET IMPLEMENTED&quot;);</span>
+<span class="nc" id="L38">    return null;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

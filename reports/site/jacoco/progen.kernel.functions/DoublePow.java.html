@@ -9,28 +9,27 @@ import progen.userprogram.UserProgram;
 /**
  * Clase que implementa el operador de exponenciación de dos números reales.
  * Tiene las misma propiedades que java.lang.Math.pow(a, b)
+ * 
  * @author jirsis
  * @since 2.0
  */
 public class DoublePow extends NonTerminal {
 
-	
-	/**
-	 * Constructor por defecto.
-	 */
-	public DoublePow() {
-<span class="fc" id="L22">		super(&quot;double$$double$$double&quot;, &quot;^&quot;);</span>
-<span class="fc" id="L23">	}</span>
+  private static final long serialVersionUID = 7012785606965973266L;
 
-	/* (non-Javadoc)
-	 * @see progen.kernel.functions.Function#evaluate(java.util.List, progen.userprogram.UserProgram)
-	 */
-	@Override
-	public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L30">		Double base=(Double)arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L31">		Double exponent=(Double)arguments.get(1).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L32">		return Math.pow(base, exponent);</span>
-	}
+  /**
+   * Constructor por defecto.
+   */
+  public DoublePow() {
+<span class="fc" id="L24">    super(&quot;double$$double$$double&quot;, &quot;^&quot;);</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L29">    Double base = (Double) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L30">    Double exponent = (Double) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L31">    return Math.pow(base, exponent);</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

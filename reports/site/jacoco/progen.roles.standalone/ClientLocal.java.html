@@ -108,55 +108,54 @@ public class ClientLocal implements Client {
   private List&lt;Individual&gt; updateNewPopulation() {
     List&lt;Individual&gt; newPopulation;
     GenneticOperator operator;
-<span class="nc" id="L111">    newPopulation = new ArrayList&lt;Individual&gt;();</span>
     Calendar before;
     Calendar after;
 
-<span class="nc" id="L115">    newPopulation = applyElitism();</span>
+<span class="nc" id="L114">    newPopulation = applyElitism();</span>
 
-<span class="nc bnc" id="L117" title="All 2 branches missed.">    while (newPopulation.size() &lt;= population.getIndividuals().size()) {</span>
-<span class="nc" id="L118">      operator = genneticFactory.getOperator();</span>
-<span class="nc" id="L119">      before = GregorianCalendar.getInstance();</span>
-<span class="nc" id="L120">      newPopulation.addAll(operator.evolve(population));</span>
-<span class="nc" id="L121">      after = GregorianCalendar.getInstance();</span>
-<span class="nc" id="L122">      historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;breeding&quot;, after.getTimeInMillis() - before.getTimeInMillis());</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    while (newPopulation.size() &lt;= population.getIndividuals().size()) {</span>
+<span class="nc" id="L117">      operator = genneticFactory.getOperator();</span>
+<span class="nc" id="L118">      before = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L119">      newPopulation.addAll(operator.evolve(population));</span>
+<span class="nc" id="L120">      after = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L121">      historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;breeding&quot;, after.getTimeInMillis() - before.getTimeInMillis());</span>
     }
 
-<span class="nc" id="L125">    eraseExcedentIndividuals(newPopulation);</span>
-<span class="nc" id="L126">    return newPopulation;</span>
+<span class="nc" id="L124">    eraseExcedentIndividuals(newPopulation);</span>
+<span class="nc" id="L125">    return newPopulation;</span>
   }
 
   private List&lt;Individual&gt; applyElitism() {
     List&lt;Individual&gt; newPopulation;
-<span class="nc" id="L131">    Elitism elitism = new Elitism(population);</span>
-<span class="nc" id="L132">    newPopulation = elitism.propagate();</span>
-<span class="nc" id="L133">    return newPopulation;</span>
+<span class="nc" id="L130">    Elitism elitism = new Elitism(population);</span>
+<span class="nc" id="L131">    newPopulation = elitism.propagate();</span>
+<span class="nc" id="L132">    return newPopulation;</span>
   }
 
   private void eraseExcedentIndividuals(List&lt;Individual&gt; newPopulation) {
-<span class="nc bnc" id="L137" title="All 2 branches missed.">    if (newPopulation.size() &gt; population.getIndividuals().size()) {</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">      while (newPopulation.size() != population.getIndividuals().size()) {</span>
-<span class="nc" id="L139">        newPopulation.remove(newPopulation.size() - 1);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    if (newPopulation.size() &gt; population.getIndividuals().size()) {</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">      while (newPopulation.size() != population.getIndividuals().size()) {</span>
+<span class="nc" id="L138">        newPopulation.remove(newPopulation.size() - 1);</span>
       }
     }
-<span class="nc" id="L142">  }</span>
+<span class="nc" id="L141">  }</span>
 
   private List&lt;Task&gt; convertIndividualsToTasks() {
-<span class="nc" id="L145">    List&lt;Task&gt; individuals = new ArrayList&lt;Task&gt;();</span>
-<span class="nc bnc" id="L146" title="All 2 branches missed.">    for (Individual ind : population.getIndividuals()) {</span>
-<span class="nc" id="L147">      individuals.add((Task) ind);</span>
-<span class="nc" id="L148">    }</span>
-<span class="nc" id="L149">    return individuals;</span>
+<span class="nc" id="L144">    List&lt;Task&gt; individuals = new ArrayList&lt;Task&gt;();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">    for (Individual ind : population.getIndividuals()) {</span>
+<span class="nc" id="L146">      individuals.add((Task) ind);</span>
+<span class="nc" id="L147">    }</span>
+<span class="nc" id="L148">    return individuals;</span>
   }
 
   private void updateHistoricalData(Dispatcher dispatcher) {
-<span class="nc bnc" id="L153" title="All 2 branches missed.">    for (Task task : dispatcher.getResults()) {</span>
-<span class="nc" id="L154">      Individual individual = (Individual) task;</span>
-<span class="nc" id="L155">      historical.getDataCollectorExperiment(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
-<span class="nc" id="L156">      historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
-<span class="nc" id="L157">      historical.getCurrentDataCollector(&quot;PopulationData&quot;).addValue(&quot;individualMean&quot;, individual);</span>
-<span class="nc" id="L158">    }</span>
-<span class="nc" id="L159">  }</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    for (Task task : dispatcher.getResults()) {</span>
+<span class="nc" id="L153">      Individual individual = (Individual) task;</span>
+<span class="nc" id="L154">      historical.getDataCollectorExperiment(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
+<span class="nc" id="L155">      historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;).addValue(&quot;statistical&quot;, individual);</span>
+<span class="nc" id="L156">      historical.getCurrentDataCollector(&quot;PopulationData&quot;).addValue(&quot;individualMean&quot;, individual);</span>
+<span class="nc" id="L157">    }</span>
+<span class="nc" id="L158">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
