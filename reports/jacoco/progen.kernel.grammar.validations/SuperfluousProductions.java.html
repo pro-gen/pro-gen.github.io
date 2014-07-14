@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SuperfluousProductions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.grammar.validations</a> &gt; <span class="el_source">SuperfluousProductions.java</span></div><h1>SuperfluousProductions.java</h1><pre class="source lang-java linenums">package progen.kernel.grammar.validations;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import progen.kernel.grammar.GrammarNonTerminalSymbol;
+import progen.kernel.grammar.Grammar;
+import progen.kernel.grammar.GrammarNotValidException;
+import progen.kernel.grammar.Production;
+
+/**
+ * @author jirsis
+ * 
+ */
+<span class="fc" id="L15">public class SuperfluousProductions implements Validation {</span>
+
+  public void validate(Grammar gram) {
+<span class="fc" id="L18">    boolean grammarOK = false;</span>
+<span class="fc" id="L19">    List&lt;GrammarNonTerminalSymbol&gt; symbolsChecked = new ArrayList&lt;GrammarNonTerminalSymbol&gt;();</span>
+<span class="fc" id="L20">    List&lt;GrammarNonTerminalSymbol&gt; symbolsToCheck = new ArrayList&lt;GrammarNonTerminalSymbol&gt;(gram.getGrammarNonTerminalSymbols());</span>
+    GrammarNonTerminalSymbol symbol;
+<span class="fc" id="L22">    int symbolsToCheckBefore = symbolsToCheck.size();</span>
+<span class="fc" id="L23">    int symbolsToCheckAfter = 0;</span>
+    int index;
+
+<span class="fc bfc" id="L26" title="All 2 branches covered.">    while (symbolsToCheckBefore != symbolsToCheckAfter) {</span>
+<span class="fc" id="L27">      symbolsToCheckBefore = symbolsToCheck.size();</span>
+<span class="fc" id="L28">      index = 0;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">      for (int i = 0; i &lt; symbolsToCheckBefore; i++) {</span>
+<span class="fc" id="L30">        symbol = symbolsToCheck.get(index);</span>
+
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (checkSymbol(symbol, symbolsChecked, gram.getProductions(symbol))) {</span>
+<span class="fc" id="L33">          symbolsChecked.add(symbol);</span>
+<span class="fc" id="L34">          symbolsToCheck.remove(symbol);</span>
+        } else {
+<span class="nc" id="L36">          index++;</span>
+        }
+      }
+<span class="fc" id="L39">      symbolsToCheckAfter = symbolsToCheck.size();</span>
+    }
+
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (symbolsToCheck.size() == 0) {</span>
+<span class="fc" id="L43">      grammarOK = true;</span>
+    }
+
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    if (!grammarOK) {</span>
+<span class="nc" id="L47">      throw new GrammarNotValidException(35);</span>
+    }
+<span class="fc" id="L49">  }</span>
+
+  private boolean checkSymbol(GrammarNonTerminalSymbol symbol, List&lt;GrammarNonTerminalSymbol&gt; symbolsChecked, List&lt;Production&gt; productions) {
+<span class="fc" id="L52">    boolean isOK = true;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">    for (Production p : productions) {</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">      if (p.getArgs().length == 0) {</span>
+<span class="fc" id="L55">        isOK = true;</span>
+      } else {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (GrammarNonTerminalSymbol arg : p.getArgs()) {</span>
+<span class="pc bpc" id="L58" title="1 of 4 branches missed.">          isOK = isOK &amp;&amp; symbolsChecked.contains(arg);</span>
+        }
+      }
+<span class="fc" id="L61">    }</span>
+<span class="fc" id="L62">    return isOK;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
