@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProGenContext.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.context</a> &gt; <span class="el_source">ProGenContext.java</span></div><h1>ProGenContext.java</h1><pre class="source lang-java linenums">package progen.context;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+/**
+ * Clase que unifica la recuperación de las distintas propiedades definidas en
+ * los ficheros de configuración.
+ * &lt;p/&gt;
+ * Provee de métodos para recuperar propiedades obligatorias, optativas,
+ * porcentajes, etc.
+ * 
+ * @author jirsis
+ */
+public final class ProGenContext {
+  private static final String PROGEN_OPTIONAL_FILES_PROPERTY = &quot;progen.optional.files&quot;;
+  private static final String DOT_SYMBOL = &quot;.&quot;;
+  private static final String PROGEN_USER_HOME_PROPERTY = &quot;progen.user.home&quot;;
+  private static final String PROGEN_EXPERIMENT_FILE_PROPERTY = &quot;progen.experiment.file&quot;;
+  private static final String EQUAL_SYMBOL = &quot;=&quot;;
+  private static final String COMA_SYMBOL = &quot;,&quot;;
+  /**
+   * Cadena que se utiliza para subopciones en distintos parámetros.
+   */
+  private static final String parametersDelim = &quot;\\(&quot;;
+  /**
+   * Almacénd de propiedades que es implementado por un Singleton de tal forma
+   * que únicamente exista una instancia en toda la ejecución.
+   */
+  private static ProGenContext proGenProps;
+  /**
+   * Estructura de datos que almacenta todas las propiedades disponibles en el
+   * dominio del problema
+   */
+  private Properties properties;
+
+  /**
+   * Constructor privado del Singleton
+   */
+<span class="fc" id="L50">  private ProGenContext() {</span>
+<span class="fc" id="L51">    properties = new Properties();</span>
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * Define la única forma que existe de instanciar e inicializar este
+   * componente, a partir del fichero &lt;i&gt;master&lt;/i&gt; del dominio de la
+   * aplicación.
+   * 
+   * @param file
+   *          Fichero maestro de donde se cargarán los distintos valores de
+   *          configuración.
+   * @return La instancia desde la que se podrán recuperar las opciones
+   *         definidas.
+   * @throws MissingContextFileException
+   *           En caso de que no se encuentre el fichero maestro de
+   *           configuración. múltiples veces.
+   * @throws IOException
+   */
+  public static ProGenContext makeInstance(String file) {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    if (file == null) {</span>
+<span class="fc" id="L71">      throw new MissingContextFileException();</span>
+    } else {
+      try {
+<span class="fc" id="L74">        final InputStream fis = getResource(file);</span>
+
+<span class="fc" id="L76">        proGenProps = new ProGenContext();</span>
+<span class="fc" id="L77">        proGenProps.loadOtherPropertiesFile(&quot;ProGen.conf&quot;);</span>
+
+<span class="fc" id="L79">        proGenProps.properties.load(fis);</span>
+<span class="fc" id="L80">        ProGenContext.setProperty(&quot;progen.masterfile&quot;, new File(file).getAbsolutePath());</span>
+<span class="fc" id="L81">        fis.close();</span>
+<span class="fc" id="L82">      } catch (NullPointerException e) {</span>
+<span class="fc" id="L83">        throw new MissingContextFileException(e.getMessage());</span>
+<span class="nc" id="L84">      } catch (IOException e) {</span>
+<span class="nc" id="L85">        throw new MissingContextFileException(e.getMessage());</span>
+<span class="fc" id="L86">      }</span>
+    }
+<span class="fc" id="L88">    return proGenProps;</span>
+  }
+
+  private static InputStream getResource(String file) {
+<span class="fc" id="L92">    return ProGenContext.class.getClassLoader().getResourceAsStream(file);</span>
+  }
+
+  /**
+   * Devuelve la única instancia que existe de las propiedades. En caso de no
+   * existir, crea las propiedades vacías y lo devuelve tal cual.
+   * 
+   * @return La referencia a la única instancia de propiedades de ProGen
+   */
+  public static synchronized ProGenContext makeInstance() {
+<span class="fc bfc" id="L102" title="All 2 branches covered.">    if (proGenProps == null) {</span>
+<span class="fc" id="L103">      proGenProps = new ProGenContext();</span>
+    }
+<span class="fc" id="L105">    return proGenProps;</span>
+  }
+
+  /**
+   * Forma de obtener el valor de la propiedad identificada por parámetro. Al
+   * tener caracter opcional, en caso de no estar definida, se devolverá el
+   * valor pasado como segundo parámetro.
+   * 
+   * @param property
+   *          identificador de la propiedad.
+   * @param defaultValue
+   *          valor por defecto
+   * @return valor de la propiedad solicitada recuperada desde los ficheros de
+   *         configuración o valor por defecto en caso de no estar definida.
+   */
+  public static int getOptionalProperty(String property, int defaultValue) {
+    int value;
+<span class="fc bfc" id="L122" title="All 2 branches covered.">    if (ProGenContext.getProperty(property) == null) {</span>
+<span class="fc" id="L123">      value = defaultValue;</span>
+    } else {
+<span class="fc" id="L125">      value = Integer.parseInt(ProGenContext.getProperty(property).split(parametersDelim)[0]);</span>
+    }
+<span class="fc" id="L127">    return value;</span>
+  }
+
+  /**
+   * Forma de obtener el valor de la propiedad identificada por parámetro. Al
+   * tener caracter opcional, en caso de no estar definida, se devolverá el
+   * valor pasado como segundo parámetro.
+   * 
+   * @param property
+   *          identificador de la propiedad.
+   * @param defaultValue
+   *          valor por defecto
+   * @return valor de la propiedad solicitada recuperada desde los ficheros de
+   *         configuración o valor por defecto en caso de no estar definida.
+   */
+  public static String getOptionalProperty(String property, String defaultValue) {
+    String value;
+<span class="fc bfc" id="L144" title="All 2 branches covered.">    if (ProGenContext.getProperty(property) == null) {</span>
+<span class="fc" id="L145">      value = defaultValue;</span>
+    } else {
+<span class="fc" id="L147">      value = ProGenContext.getProperty(property).split(parametersDelim)[0];</span>
+    }
+<span class="fc" id="L149">    return value;</span>
+  }
+
+  /**
+   * Forma de obtener el valor de la propiedad identificada por parámetro. Al
+   * tener caracter opcional, en caso de no estar definida, se devolverá el
+   * valor pasado como segundo parámetro.
+   * 
+   * @param property
+   *          identificador de la propiedad.
+   * @param defaultValue
+   *          valor por defecto
+   * @return valor de la propiedad solicitada recuperada desde los ficheros de
+   *         configuración o valor por defecto en caso de no estar definida.
+   */
+  public static double getOptionalProperty(String property, double defaultValue) {
+    double value;
+<span class="fc bfc" id="L166" title="All 2 branches covered.">    if (ProGenContext.getProperty(property) == null) {</span>
+<span class="fc" id="L167">      value = defaultValue;</span>
+    } else {
+<span class="fc" id="L169">      value = Double.parseDouble(ProGenContext.getProperty(property).split(parametersDelim)[0]);</span>
+    }
+<span class="fc" id="L171">    return value;</span>
+  }
+
+  /**
+   * Forma de obtener el valor de la propiedad identificada por parámetro. Al
+   * tener caracter opcional, en caso de no estar definida, se devolverá el
+   * valor pasado como segundo parámetro.
+   * 
+   * @param property
+   *          identificador de la propiedad.
+   * @param defaultValue
+   *          valor por defecto
+   * @return valor de la propiedad solicitada recuperada desde los ficheros de
+   *         configuración o valor por defecto en caso de no estar definida.
+   */
+  public static boolean getOptionalProperty(String property, boolean defaultValue) {
+    boolean value;
+<span class="fc bfc" id="L188" title="All 2 branches covered.">    if (ProGenContext.getProperty(property) == null) {</span>
+<span class="fc" id="L189">      value = defaultValue;</span>
+    } else {
+<span class="fc" id="L191">      value = Boolean.parseBoolean(ProGenContext.getProperty(property).split(parametersDelim)[0]);</span>
+    }
+<span class="fc" id="L193">    return value;</span>
+  }
+
+  /**
+   * Forma de obtener el valor de una propiedad definida en los ficheros de
+   * configuración, identificada por el parámetro definido. Será responsabilidad
+   * de la parte que realiza esta llamada, comprobar si el contenido de esta
+   * propiedad es correcto y acorde a lo que se espera.
+   * 
+   * @param key
+   *          Identificador de la propiedad a recuperar
+   * @return &lt;code&gt;String&lt;/code&gt; con el valor de la propiedad tal y como aparece
+   *         en el fichero de configuración.
+   */
+  public static String getMandatoryProperty(String key) {
+<span class="fc" id="L208">    final String property = getProperty(key);</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">    if (property == null)</span>
+<span class="fc" id="L210">      throw new UndefinedMandatoryPropertyException(key);</span>
+<span class="fc" id="L211">    return property.split(parametersDelim)[0];</span>
+  }
+
+  /**
+   * Metodo de acceso para recuperar cualquier propiedad definida, identificada
+   * por el parámetro
+   * 
+   * @param key
+   *          Identificador de la propiedad a recuperar
+   * @return valor de la propiedad recuperada
+   * @see #makeInstance(String)
+   */
+  private static String getProperty(String key) {
+<span class="fc bfc" id="L224" title="All 2 branches covered.">    if (proGenProps == null) {</span>
+<span class="fc" id="L225">      throw new UninitializedContextException();</span>
+    }
+<span class="fc" id="L227">    return proGenProps.properties.getProperty(key);</span>
+  }
+
+  /**
+   * Devuelve el valor del porcentaje de uso de una subopción definida en el
+   * contexto del dominio. Para ello, es necesario definir la subopción
+   * separándola de la opción con dos puntos (:) y el porcentaje definido como
+   * tanto por ciento o como un valor entre 0 y 1. A su vez, las distintas
+   * subopciones, tienen que ir separadas por comas (,).
+   * 
+   * @param key
+   *          La opción a recuperar.
+   * @param subOption
+   *          La subopción a recuperar dentro de la opción.
+   * @param defaultPercent
+   *          El porcentaje por defecto, en caso de que no exista esta
+   *          subopción.
+   * @return Devuelve un valor entre 0 y 1, que representa dicho porcentaje.
+   */
+  public static double getSuboptionPercent(String key, String subOption, double defaultPercent) {
+<span class="fc" id="L247">    double value = defaultPercent;</span>
+<span class="fc" id="L248">    final String suboption = getParameter(key, subOption);</span>
+<span class="fc bfc" id="L249" title="All 2 branches covered.">    if (suboption != null) {</span>
+<span class="fc" id="L250">      value = getPercent(suboption);</span>
+    }
+<span class="fc" id="L252">    return value;</span>
+  }
+
+  /**
+   * Recupera un porcentaje definido en una opción, de tal forma que esta opción
+   * no es obligatoria que se defina.
+   * 
+   * @param key
+   *          La propiedad a recuperar.
+   * @param defaultPercent
+   *          El valor por defecto en caso de no haberse definido la propiedad.
+   * @return Un valor entre 0 y 1, que representa dicho porcentaje.
+   */
+  public static double getOptionalPercent(String key, String defaultPercent) {
+<span class="fc" id="L266">    final String percent = getOptionalProperty(key, defaultPercent);</span>
+<span class="fc" id="L267">    return getPercent(percent);</span>
+  }
+
+  /**
+   * Recupera un porcentaje definido en una opción de forma obligatoria.
+   * 
+   * @param key
+   *          La propiedad a recuperar.
+   * @return Un valor entre 0 y 1, que representa dicho porcentaje.
+   */
+  public static double getMandatoryPercent(String key) {
+<span class="fc" id="L278">    final String property = getProperty(key);</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">    if (property == null)</span>
+<span class="fc" id="L280">      throw new UndefinedMandatoryPropertyException(key);</span>
+<span class="fc" id="L281">    return getPercent(property);</span>
+  }
+
+  /**
+   * Recupera una colección con todas las opciones que coinciden comparten una
+   * parte del nombre, definido en el parámetro.
+   * 
+   * @param family
+   *          La parte común del nombre de la propiedad.
+   * @return Una colección con todas las propiedades que cumplen con el
+   *         criterio.
+   */
+  public static List&lt;String&gt; getFamilyOptions(String family) {
+<span class="fc" id="L294">    final List&lt;String&gt; options = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L295">    final Iterator&lt;Object&gt; propertyKey = proGenProps.properties.keySet().iterator();</span>
+    String option;
+<span class="fc bfc" id="L297" title="All 2 branches covered.">    while (propertyKey.hasNext()) {</span>
+<span class="fc" id="L298">      option = (String) propertyKey.next();</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">      if (option.indexOf(family) == 0) {</span>
+<span class="fc" id="L300">        options.add(option);</span>
+      }
+    }
+<span class="fc" id="L303">    return options;</span>
+  }
+
+  /**
+   * Recupera el valor numérico de un tanto por ciento, representado en una
+   * cadena como valor entre 0 y 1 o con un valor entre 0 y 100 y acabado con el
+   * símbolo por ciento (%).
+   * 
+   * @param percent
+   *          La cadena a convertir en valor numérico.
+   * @return Un número comprendido entre 0 y 1.
+   */
+  private static double getPercent(String percent) {
+<span class="fc" id="L316">    double value = 0.0;</span>
+<span class="fc" id="L317">    final String percentNormalized = percent.replaceAll(&quot; &quot;, &quot;&quot;);</span>
+<span class="fc bfc" id="L318" title="All 2 branches covered.">    if (percentNormalized.endsWith(&quot;%&quot;)) {</span>
+<span class="fc" id="L319">      value = Double.parseDouble(percentNormalized.substring(0, percentNormalized.length() - 1)) / 100;</span>
+    } else {
+<span class="fc" id="L321">      value = Double.parseDouble(percentNormalized);</span>
+    }
+<span class="fc" id="L323">    return value;</span>
+  }
+
+  /**
+   * Añade una propiedad al conjunto de propiedades definidas en ProGen.
+   * 
+   * @param key
+   *          Identificador de la propiedad.
+   * @param value
+   *          Valor concreto que tomará la propiedad.
+   */
+  public static void setProperty(String key, String value) {
+<span class="fc" id="L335">    proGenProps.properties.setProperty(key, value);</span>
+<span class="fc" id="L336">    proGenProps.calculateProperties();</span>
+<span class="fc" id="L337">  }</span>
+
+  /**
+   * Elimina todas las propiedades que estuvieran definidas en el contexto.
+   */
+  public static void clearContext() {
+<span class="fc" id="L343">    proGenProps = null;</span>
+<span class="fc" id="L344">  }</span>
+
+  /**
+   * Devuelve el valor concreto de un parámetro de configuración de una opción.
+   * En caso de que no exista la opción o la subopción de la que se quiere
+   * obtener el valor, se devolverá el valor null; y en caso de que haya algún
+   * parámetro no definido según la forma indicada a continuación, se lanzará
+   * una {@link MalformedParameterException} indicando la pareja
+   * opción-subopción que se no cumple con el formato. El formato específico
+   * para definir los parámetros es: &lt;code&gt;
+   * progen.opcion=valor(subopcion1=valor1, subopcion2=valor2, ...)&lt;br/&gt;
+   * &lt;/code&gt;
+   * 
+   * @param option
+   *          Opción de la que se obtendrá un parámetro.
+   * @param parameter
+   *          Parámetro de la que se quiere obtener un valor concreto.
+   * @return El valor del parámetro o null en caso de no encontrarse.
+   */
+  public static String getParameter(String option, String parameter) {
+<span class="fc" id="L364">    String value = null;</span>
+<span class="fc" id="L365">    value = getParameters(option).get(parameter);</span>
+<span class="fc" id="L366">    return value;</span>
+  }
+
+  /**
+   * Devuelve todos los parámetros asociados a una opción determinada. En caso
+   * de no estar definida la opción o que no tenga parámetros extra, se
+   * devolverá un Map vacío, es decir, de tamaño 0.
+   * 
+   * @param option
+   *          La opción para recuperar los parámetros.
+   * @return La colección de parámetros asociados a dicha opción.
+   */
+  public static Map&lt;String, String&gt; getParameters(String option) {
+<span class="fc" id="L379">    final Map&lt;String, String&gt; parameters = new HashMap&lt;String, String&gt;();</span>
+    String parametersContext;
+<span class="fc" id="L381">    parametersContext = getProperty(option);</span>
+
+    // Se controla que exista la opción y tenga al menos un parámetro.
+<span class="fc bfc" id="L384" title="All 4 branches covered.">    if (parametersContext != null &amp;&amp; parametersContext.split(parametersDelim).length &gt; 1) {</span>
+<span class="fc" id="L385">      parametersContext = parametersContext.split(parametersDelim)[1];</span>
+      // se recupera el valor y se elimina el el posible ) del final
+<span class="fc" id="L387">      parametersContext = parametersContext.replace(&quot;)&quot;, &quot;&quot;);</span>
+<span class="fc" id="L388">      String parameterKey = null, parameterValue = null;</span>
+      try {
+        // se separan todos los parámetros
+<span class="fc" id="L391">        final String[] parametersValues = parametersContext.split(COMA_SYMBOL);</span>
+<span class="fc bfc" id="L392" title="All 2 branches covered.">        for (String parameter : parametersValues) {</span>
+<span class="fc" id="L393">          parameterKey = parameter.split(EQUAL_SYMBOL)[0].trim();</span>
+<span class="fc" id="L394">          parameterValue = parameter.split(EQUAL_SYMBOL)[1].trim();</span>
+<span class="fc" id="L395">          parameters.put(parameterKey, parameterValue);</span>
+        }
+<span class="fc" id="L397">      } catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="fc" id="L398">        throw new MalformedParameterException(option + COMA_SYMBOL + parameterKey);</span>
+<span class="fc" id="L399">      }</span>
+    }
+<span class="fc" id="L401">    return parameters;</span>
+  }
+
+  public static void loadExtraConfiguration() {
+    try {
+<span class="fc" id="L406">      proGenProps.calculateProperties();</span>
+<span class="fc" id="L407">      proGenProps.loadOtherProperties();</span>
+<span class="nc" id="L408">    } catch (FileNotFoundException fnfe) {</span>
+<span class="nc" id="L409">      throw new MissingContextFileException(fnfe.getMessage());</span>
+<span class="nc" id="L410">    } catch (IOException ioe) {</span>
+<span class="nc" id="L411">      throw new MissingContextFileException(ioe.getMessage());</span>
+<span class="fc" id="L412">    }</span>
+
+<span class="fc" id="L414">  }</span>
+
+  /**
+   * Carga las opciones definidas en otros ficheros a parte del fichero maestro.
+   * Carga también las definidas en el fichero especificado en la propiedad
+   * &lt;code&gt;progen.experiment-file&lt;/code&gt; en el fichero maestro y las que están
+   * definidas en los ficheros del dominio de especificación de experimentos (
+   * &lt;code&gt;-experiment&lt;/code&gt;) y hypergp (&lt;code&gt;-hypergp&lt;/code&gt; ).
+   * 
+   * @throws FileNotFoundException
+   *           Si el fichero del dominio no existe.
+   * @throws IOException
+   *           Si ocurre un error de E/S.
+   */
+  private void loadOtherProperties() throws IOException {
+<span class="fc" id="L429">    loadOtherProperties(PROGEN_EXPERIMENT_FILE_PROPERTY);</span>
+<span class="fc" id="L430">    loadOptionalFile(&quot;-experimenter&quot;);</span>
+<span class="fc" id="L431">    loadOptionalFile(&quot;-hypergp&quot;);</span>
+<span class="fc" id="L432">  }</span>
+
+  /**
+   * Carga directamente un fichero de propiedades al conjunto de las que ya
+   * estén definidas en ProGen. Primero buscará en el directorio raíz del
+   * proyecto y en caso de no encontrarlo, buscará en el directorio
+   * &lt;code&gt;home&lt;/code&gt; del experimento.
+   * 
+   * @param propertyFile
+   *          El nombre del fichero de propiedades.
+   * @throws IOException
+   */
+  private void loadOtherPropertiesFile(String propertyFile) throws IOException {
+    Properties otherProperties;
+<span class="pc bpc" id="L446" title="1 of 2 branches missed.">    if (propertyFile != null) {</span>
+<span class="fc" id="L447">      otherProperties = new Properties();</span>
+      try {
+<span class="fc" id="L449">        findPropertiesAbsolutePath(propertyFile, otherProperties);</span>
+<span class="nc" id="L450">      } catch (FileNotFoundException fnfe) {</span>
+<span class="nc" id="L451">        findPropertiesUserProjectPath(propertyFile, otherProperties);</span>
+<span class="fc" id="L452">      }</span>
+<span class="fc" id="L453">      chekProperties(otherProperties);</span>
+    }
+<span class="fc" id="L455">  }</span>
+
+  private void chekProperties(Properties otherProperties) {
+    Enumeration&lt;Object&gt; keys;
+    String key;
+    String value;
+<span class="fc" id="L461">    keys = otherProperties.keys();</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">    while (keys.hasMoreElements()) {</span>
+<span class="fc" id="L463">      key = (String) keys.nextElement();</span>
+<span class="pc bpc" id="L464" title="1 of 2 branches missed.">      if (proGenProps.properties.containsKey(key)) {</span>
+<span class="nc" id="L465">        throw new DuplicatedPropertyException(key);</span>
+      } else {
+<span class="fc" id="L467">        value = otherProperties.getProperty(key);</span>
+<span class="fc" id="L468">        proGenProps.properties.put(key, value);</span>
+      }
+    }
+<span class="fc" id="L471">  }</span>
+
+  private void findPropertiesUserProjectPath(String propertyFile, Properties otherProperties) throws IOException {
+<span class="nc" id="L474">    final String propertyFileNormalized = proGenProps.properties.getProperty(PROGEN_USER_HOME_PROPERTY).replace('.', File.separatorChar) + propertyFile;</span>
+<span class="nc" id="L475">    findPropertiesAbsolutePath(propertyFileNormalized, otherProperties);</span>
+<span class="nc" id="L476">  }</span>
+
+  private void findPropertiesAbsolutePath(String propertyFile, Properties otherProperties) throws IOException {
+<span class="fc" id="L479">    final InputStream fis = getResource(propertyFile);</span>
+<span class="fc" id="L480">    otherProperties.load(fis);</span>
+<span class="fc" id="L481">    fis.close();</span>
+<span class="fc" id="L482">  }</span>
+
+  /**
+   * Carga algún fichero de configuración especéfica del dominio del problema.
+   * 
+   * @param propertyFile
+   *          el fichero a cargar.
+   * @throws FileNotFoundException
+   *           Si no existe el fichero.
+   * @throws IOException
+   *           Si ocurre un error de E/S.
+   */
+  private void loadOtherProperties(String propertyFile) throws IOException {
+    Properties otherProperties;
+<span class="fc" id="L496">    String otherFile = proGenProps.properties.getProperty(propertyFile);</span>
+
+<span class="pc bpc" id="L498" title="1 of 2 branches missed.">    if (otherFile != null) {</span>
+<span class="fc" id="L499">      otherFile = convertClasspath2Path(otherFile);</span>
+<span class="fc" id="L500">      otherProperties = new Properties();</span>
+      try {
+<span class="fc" id="L502">        lookForInAbsolutePath(otherProperties, otherFile);</span>
+<span class="nc" id="L503">      } catch (FileNotFoundException fnfe) {</span>
+<span class="nc" id="L504">        lookForInUserProject(propertyFile, otherProperties);</span>
+<span class="fc" id="L505">      }</span>
+<span class="fc" id="L506">      chekProperties(otherProperties);</span>
+    }
+<span class="fc" id="L508">  }</span>
+
+  private void lookForInAbsolutePath(Properties otherProperties, String otherFile) throws IOException {
+    InputStream inputStream;
+<span class="fc" id="L512">    inputStream = getResource(otherFile);</span>
+    try {
+<span class="fc" id="L514">      otherProperties.load(inputStream);</span>
+    } finally {
+<span class="pc bpc" id="L516" title="3 of 4 branches missed.">      if (inputStream != null) {</span>
+<span class="pc" id="L517">        inputStream.close();</span>
+      }
+    }
+<span class="fc" id="L520">  }</span>
+
+  private FileInputStream lookForInUserProject(String propertyFile, Properties otherProperties) throws IOException {
+<span class="nc" id="L523">    FileInputStream fileInputStream = null;</span>
+<span class="nc" id="L524">    final String otherFile = ProGenContext.getProperty(PROGEN_USER_HOME_PROPERTY).replace('.', File.separatorChar) + proGenProps.properties.getProperty(propertyFile);</span>
+    try {
+<span class="nc" id="L526">      fileInputStream = new FileInputStream(otherFile);</span>
+<span class="nc" id="L527">      otherProperties.load(fileInputStream);</span>
+    } finally {
+<span class="nc bnc" id="L529" title="All 4 branches missed.">      if (fileInputStream != null) {</span>
+<span class="nc" id="L530">        fileInputStream.close();</span>
+      }
+    }
+
+<span class="nc" id="L534">    return fileInputStream;</span>
+  }
+
+  private String convertClasspath2Path(String otherFile) {
+<span class="fc" id="L538">    final int lastDot = otherFile.lastIndexOf(DOT_SYMBOL);</span>
+<span class="fc" id="L539">    final String path = otherFile.substring(0, lastDot);</span>
+<span class="fc" id="L540">    final String ext = otherFile.substring(lastDot);</span>
+<span class="fc" id="L541">    return path.replace('.', File.separatorChar) + ext;</span>
+  }
+
+  /**
+   * Método que define algunas propiedades a partir de otras ya existentes.
+   * &lt;p/&gt;
+   * Por ahora se definen:
+   * &lt;ul&gt;
+   * &lt;li&gt;
+   * &lt;code&gt;progen.user.home&lt;/code&gt;: ruta donde se encuentran los elementos que
+   * definen el dominio concreto sobre el que se está trabajando.&lt;/li&gt;
+   * &lt;/ul&gt;
+   */
+  private void calculateProperties() {
+<span class="fc" id="L555">    final String userHome = ProGenContext.getProperty(PROGEN_EXPERIMENT_FILE_PROPERTY);</span>
+<span class="fc bfc" id="L556" title="All 2 branches covered.">    if (userHome != null) {</span>
+<span class="fc" id="L557">      setUserHome(userHome);</span>
+    }
+<span class="fc" id="L559">  }</span>
+
+  private void setUserHome(String userHome) {
+<span class="fc" id="L562">    String userHomeNormalized = userHome.substring(0, userHome.lastIndexOf(DOT_SYMBOL));</span>
+<span class="fc" id="L563">    setExperimentName(userHomeNormalized);</span>
+<span class="fc" id="L564">    userHomeNormalized = userHomeNormalized.substring(0, userHomeNormalized.lastIndexOf(DOT_SYMBOL) + 1);</span>
+
+<span class="fc" id="L566">    proGenProps.properties.setProperty(PROGEN_USER_HOME_PROPERTY, userHomeNormalized);</span>
+<span class="fc" id="L567">  }</span>
+
+  private void setExperimentName(String userHome) {
+    String experimentName;
+<span class="fc" id="L571">    experimentName = userHome.substring(userHome.lastIndexOf(DOT_SYMBOL) + 1, userHome.length());</span>
+<span class="fc" id="L572">    proGenProps.properties.setProperty(&quot;progen.experiment.name&quot;, experimentName);</span>
+<span class="fc" id="L573">  }</span>
+
+  /**
+   * Carga las propiedades definidas en el fichero que tiene por nombre el del
+   * dominio del problema más un sufijo.
+   * 
+   * @param sufixFile
+   *          El sufijo que se le añade al nombre del dominio para formar el
+   *          fichero de propiedades.
+   */
+  private void loadOptionalFile(String sufixFile) {
+    Properties otherProperties;
+    Enumeration&lt;Object&gt; keys;
+    String key;
+    String value;
+<span class="fc" id="L588">    final StringBuilder optionalFilesLoaded = new StringBuilder();</span>
+
+<span class="fc" id="L590">    String optionalFile = ProGenContext.getMandatoryProperty(PROGEN_EXPERIMENT_FILE_PROPERTY);</span>
+<span class="fc" id="L591">    optionalFile = optionalFile.replaceAll(&quot;\\.txt$&quot;, sufixFile).replace('.', File.separatorChar) + &quot;.txt&quot;;</span>
+<span class="fc" id="L592">    optionalFilesLoaded.append(ProGenContext.getOptionalProperty(PROGEN_OPTIONAL_FILES_PROPERTY, &quot;&quot;));</span>
+<span class="fc" id="L593">    FileInputStream fis = null;</span>
+
+    try {
+<span class="nc" id="L596">      fis = new FileInputStream(optionalFile);</span>
+<span class="nc" id="L597">      otherProperties = new Properties();</span>
+<span class="nc" id="L598">      otherProperties.load(fis);</span>
+<span class="nc" id="L599">      keys = otherProperties.keys();</span>
+<span class="nc bnc" id="L600" title="All 2 branches missed.">      while (keys.hasMoreElements()) {</span>
+<span class="nc" id="L601">        key = (String) keys.nextElement();</span>
+<span class="nc" id="L602">        value = otherProperties.getProperty(key);</span>
+<span class="nc" id="L603">        proGenProps.properties.put(key, value);</span>
+      }
+
+<span class="nc" id="L606">      optionalFilesLoaded.append(optionalFile);</span>
+<span class="nc" id="L607">      optionalFilesLoaded.append(&quot;, &quot;);</span>
+<span class="nc" id="L608">      ProGenContext.setProperty(PROGEN_OPTIONAL_FILES_PROPERTY, optionalFilesLoaded.toString());</span>
+<span class="fc" id="L609">    } catch (FileNotFoundException e) {</span>
+      // do nothing, ignore
+<span class="nc" id="L611">    } catch (IOException e) {</span>
+      // do nothing, ignore
+    } finally {
+<span class="nc" id="L614">      try {</span>
+<span class="pc bpc" id="L615" title="7 of 8 branches missed.">        if (fis != null) {</span>
+<span class="nc" id="L616">          fis.close();</span>
+        }
+<span class="nc" id="L618">      } catch (IOException e) {</span>
+        // do nothing, ignore
+<span class="pc" id="L620">      }</span>
+<span class="nc" id="L621">    }</span>
+
+<span class="fc" id="L623">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
