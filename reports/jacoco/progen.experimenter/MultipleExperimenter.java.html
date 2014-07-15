@@ -156,7 +156,7 @@ public class MultipleExperimenter extends Experimenter {
 <span class="nc" id="L156">    final File experimentDir = new File(ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;) + ProGenContext.getMandatoryProperty(&quot;progen.output.experiment&quot;));</span>
     try {
       // creamos el fichero del contexto actual
-<span class="nc" id="L159">      File file = new File(experimentDir.getAbsolutePath() + File.separator + &quot;current context.txt&quot;);</span>
+<span class="nc" id="L159">      final File file = new File(experimentDir.getAbsolutePath() + File.separator + &quot;current context.txt&quot;);</span>
 <span class="nc" id="L160">      context = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), &quot;UTF-8&quot;));</span>
 <span class="nc bnc" id="L161" title="All 2 branches missed.">      for (Property property : properties) {</span>
 <span class="nc" id="L162">        context.print(property.getLabel());</span>
@@ -194,7 +194,7 @@ public class MultipleExperimenter extends Experimenter {
 
   @Override
   public String defineExperimentDir() {
-<span class="nc" id="L197">    StringBuilder experimenterDir = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
+<span class="nc" id="L197">    final StringBuilder experimenterDir = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
 <span class="nc" id="L198">    experimenterDir.append(&quot;exp-&quot;);</span>
 <span class="nc" id="L199">    experimenterDir.append(currentRepetition);</span>
 <span class="nc" id="L200">    experimenterDir.append(&quot;-&quot;);</span>
