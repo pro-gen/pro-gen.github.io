@@ -4,11 +4,12 @@ import progen.kernel.error.Error;
 
 public class UnknownRoleImplementationException extends RuntimeException {
 
+  private static final int ID_ERROR = 38;
   private static final long serialVersionUID = 1842918295160613392L;
 
   public UnknownRoleImplementationException(String msg) {
-<span class="fc" id="L10">    super(Error.get(38) + &quot;[&quot; + msg + &quot;]&quot;);</span>
-<span class="fc" id="L11">  }</span>
+<span class="fc" id="L11">    super(Error.get(ID_ERROR) + &quot;[&quot; + msg + &quot;]&quot;);</span>
+<span class="fc" id="L12">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

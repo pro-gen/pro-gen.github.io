@@ -13,6 +13,7 @@ import progen.kernel.error.Error;
  */
 public class FactoryNotFoundException extends RuntimeException {
 
+  private static final int ID_ERROR = 20;
   /** Para serialización */
   private static final long serialVersionUID = 4495563008103796113L;
 
@@ -25,8 +26,8 @@ public class FactoryNotFoundException extends RuntimeException {
    *          concreta.
    */
   public FactoryNotFoundException(String msg) {
-<span class="fc" id="L28">    super(Error.get(20) + &quot; [&quot; + msg + &quot;]&quot;);</span>
-<span class="fc" id="L29">  }</span>
+<span class="fc" id="L29">    super(Error.get(ID_ERROR) + &quot; [&quot; + msg + &quot;]&quot;);</span>
+<span class="fc" id="L30">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -180,23 +180,23 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    */
   @Override
   public String toString() {
-<span class="nc" id="L183">    final StringBuilder individual = new StringBuilder();</span>
+<span class="fc" id="L183">    final StringBuilder individual = new StringBuilder();</span>
 
-<span class="nc bnc" id="L185" title="All 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
+<span class="pc bpc" id="L185" title="3 of 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
 <span class="nc" id="L186">      individual.append(printabeIndividual);</span>
     } else {
-<span class="nc" id="L188">      int RPB = 0;</span>
-<span class="nc" id="L189">      int adf = 0;</span>
-<span class="nc bnc" id="L190" title="All 2 branches missed.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
-<span class="nc" id="L191">        individual.append(RETURN_SYMBOL+ RPB_PROPERTY + RPB + COLON_SPACE_SYMBOL + trees.get(RPB_PROPERTY + RPB));</span>
-<span class="nc" id="L192">        RPB++;</span>
+<span class="fc" id="L188">      int RPB = 0;</span>
+<span class="fc" id="L189">      int adf = 0;</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
+<span class="fc" id="L191">        individual.append(RETURN_SYMBOL+ RPB_PROPERTY + RPB + COLON_SPACE_SYMBOL + trees.get(RPB_PROPERTY + RPB));</span>
+<span class="fc" id="L192">        RPB++;</span>
       }
-<span class="nc bnc" id="L194" title="All 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
 <span class="nc" id="L195">        individual.append(RETURN_SYMBOL+ADF_PROPERTY + adf + COLON_SPACE_SYMBOL + trees.get(ADF_PROPERTY + adf));</span>
 <span class="nc" id="L196">        adf++;</span>
       }
     }
-<span class="nc" id="L199">    return individual.toString();</span>
+<span class="fc" id="L199">    return individual.toString();</span>
   }
 
   /**

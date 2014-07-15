@@ -20,62 +20,60 @@ import progen.roles.Worker;
 
   @Override
   public Client makeClient() {
-<span class="nc" id="L23">    String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.client.class&quot;, &quot;ClientDistributed&quot;);</span>
-
-<span class="nc" id="L25">    return (Client) loadRole(roleClass);</span>
+<span class="nc" id="L23">    final String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.client.class&quot;, &quot;ClientDistributed&quot;);</span>
+<span class="nc" id="L24">    return (Client) loadRole(roleClass);</span>
   }
 
   @Override
   public Dispatcher makeDispatcher() {
-<span class="fc" id="L30">    String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.dispatcher.class&quot;, &quot;DispatcherDistributed&quot;);</span>
-<span class="fc" id="L31">    Dispatcher dispatcher = (Dispatcher) loadRole(roleClass);</span>
-
-<span class="fc" id="L33">    return dispatcher;</span>
+<span class="fc" id="L29">    final String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.dispatcher.class&quot;, &quot;DispatcherDistributed&quot;);</span>
+<span class="fc" id="L30">    return (Dispatcher) loadRole(roleClass);</span>
   }
 
   @Override
   public Worker makeWorker() {
-<span class="fc" id="L38">    String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.worker.class&quot;, &quot;WorkerDistributed&quot;);</span>
-
-<span class="fc" id="L40">    return (Worker) loadRole(roleClass);</span>
+<span class="fc" id="L35">    final String roleClass = ProGenContext.getOptionalProperty(&quot;progen.role.worker.class&quot;, &quot;WorkerDistributed&quot;);</span>
+<span class="fc" id="L36">    return (Worker) loadRole(roleClass);</span>
   }
 
   @Override
   public ExecutionRole makeExecutionRole() {
-<span class="fc" id="L45">    ExecutionRole exec = null;</span>
-<span class="fc" id="L46">    String name = ProGenContext.getMandatoryProperty(&quot;progen.role&quot;);</span>
+<span class="fc" id="L41">    ExecutionRole exec = null;</span>
+<span class="fc" id="L42">    final String name = ProGenContext.getMandatoryProperty(&quot;progen.role&quot;);</span>
     try {
-<span class="fc" id="L48">      Role executionRole = Role.valueOf(name.toUpperCase(Locale.getDefault()));</span>
-<span class="pc bpc" id="L49" title="2 of 4 branches missed.">      switch (executionRole) {</span>
+<span class="fc" id="L44">      final Role executionRole = Role.valueOf(name.toUpperCase(Locale.getDefault()));</span>
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">      switch (executionRole) {</span>
       case CLIENT:
-<span class="nc" id="L51">        exec = this.makeClient();</span>
-<span class="nc" id="L52">        break;</span>
+<span class="nc" id="L47">        exec = this.makeClient();</span>
+<span class="nc" id="L48">        break;</span>
       case DISPATCHER:
-<span class="fc" id="L54">        exec = this.makeDispatcher();</span>
-<span class="fc" id="L55">        break;</span>
+<span class="fc" id="L50">        exec = this.makeDispatcher();</span>
+<span class="fc" id="L51">        break;</span>
       case WORKER:
-<span class="fc" id="L57">        exec = this.makeWorker();</span>
-<span class="fc" id="L58">        break;</span>
+<span class="fc" id="L53">        exec = this.makeWorker();</span>
+<span class="fc" id="L54">        break;</span>
+      default:
+<span class="pc" id="L56">        throw new UnknownRoleException(executionRole.name());</span>
       }
-<span class="fc" id="L60">    } catch (IllegalArgumentException e) {</span>
-<span class="fc" id="L61">      throw new UnknownRoleException(name);</span>
-<span class="fc" id="L62">    }</span>
-<span class="fc" id="L63">    return exec;</span>
+<span class="fc" id="L58">    } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L59">      throw new UnknownRoleException(name);</span>
+<span class="fc" id="L60">    }</span>
+<span class="fc" id="L61">    return exec;</span>
   }
 
   private Object loadRole(String clazz) {
-<span class="fc" id="L67">    Object role = null;</span>
-<span class="fc" id="L68">    String roleName = &quot;progen.roles.distributed.&quot; + clazz;</span>
+<span class="fc" id="L65">    Object role = null;</span>
+<span class="fc" id="L66">    final String roleName = &quot;progen.roles.distributed.&quot; + clazz;</span>
     try {
-<span class="fc" id="L70">      role = Class.forName(roleName).newInstance();</span>
-<span class="fc" id="L71">    } catch (ClassNotFoundException e) {</span>
-<span class="fc" id="L72">      throw new UnknownRoleImplementationException(roleName);</span>
-<span class="nc" id="L73">    } catch (InstantiationException e) {</span>
+<span class="fc" id="L68">      role = Class.forName(roleName).newInstance();</span>
+<span class="fc" id="L69">    } catch (ClassNotFoundException e) {</span>
+<span class="fc" id="L70">      throw new UnknownRoleImplementationException(roleName);</span>
+<span class="nc" id="L71">    } catch (InstantiationException e) {</span>
+<span class="nc" id="L72">      throw new UnknownRoleImplementationException(roleName);</span>
+<span class="nc" id="L73">    } catch (IllegalAccessException e) {</span>
 <span class="nc" id="L74">      throw new UnknownRoleImplementationException(roleName);</span>
-<span class="nc" id="L75">    } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L76">      throw new UnknownRoleImplementationException(roleName);</span>
-<span class="fc" id="L77">    }</span>
-<span class="fc" id="L78">    return role;</span>
+<span class="fc" id="L75">    }</span>
+<span class="fc" id="L76">    return role;</span>
   }
 
 }

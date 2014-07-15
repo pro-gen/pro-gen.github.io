@@ -16,40 +16,42 @@ import progen.roles.standalone.ClientLocal;
  */
 public class ClientDistributed extends ClientLocal {
 
+  private static final int DISPATCHER_ADDRESS_DEFAULT_SIZE = 32;
+
   public ClientDistributed() {
-<span class="nc" id="L20">    super();</span>
-<span class="nc" id="L21">  }</span>
+<span class="nc" id="L22">    super();</span>
+<span class="nc" id="L23">  }</span>
 
   @Override
   public void start() {
-<span class="nc" id="L25">    super.start();</span>
-<span class="nc" id="L26">  }</span>
+<span class="nc" id="L27">    super.start();</span>
+<span class="nc" id="L28">  }</span>
 
   @Override
   public Dispatcher initDispatcher() {
-<span class="nc" id="L30">    DispatcherDistributed dispatcher = null;</span>
+<span class="nc" id="L32">    DispatcherDistributed dispatcher = null;</span>
     try {
-<span class="nc" id="L32">      DispatcherRemote remote = (DispatcherRemote) Naming.lookup(getDispatcherAddress());</span>
-<span class="nc" id="L33">      dispatcher = new DispatcherDistributed(remote);</span>
-<span class="nc" id="L34">    } catch (MalformedURLException e) {</span>
-<span class="nc" id="L35">      throw new ProGenDistributedException(getDispatcherAddress());</span>
-<span class="nc" id="L36">    } catch (RemoteException e) {</span>
+<span class="nc" id="L34">      final DispatcherRemote remote = (DispatcherRemote) Naming.lookup(getDispatcherAddress());</span>
+<span class="nc" id="L35">      dispatcher = new DispatcherDistributed(remote);</span>
+<span class="nc" id="L36">    } catch (MalformedURLException e) {</span>
 <span class="nc" id="L37">      throw new ProGenDistributedException(getDispatcherAddress());</span>
-<span class="nc" id="L38">    } catch (NotBoundException e) {</span>
+<span class="nc" id="L38">    } catch (RemoteException e) {</span>
 <span class="nc" id="L39">      throw new ProGenDistributedException(getDispatcherAddress());</span>
-<span class="nc" id="L40">    }</span>
-<span class="nc" id="L41">    return dispatcher;</span>
+<span class="nc" id="L40">    } catch (NotBoundException e) {</span>
+<span class="nc" id="L41">      throw new ProGenDistributedException(getDispatcherAddress());</span>
+<span class="nc" id="L42">    }</span>
+<span class="nc" id="L43">    return dispatcher;</span>
   }
 
   private String getDispatcherAddress() {
-<span class="nc" id="L45">    StringBuilder dispatcherAddress = new StringBuilder(32);</span>
-<span class="nc" id="L46">    dispatcherAddress.append(&quot;rmi://&quot;);</span>
-<span class="nc" id="L47">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.bindAddress&quot;, &quot;127.0.0.1&quot;));</span>
-<span class="nc" id="L48">    dispatcherAddress.append(&quot;:&quot;);</span>
-<span class="nc" id="L49">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.port&quot;, Registry.REGISTRY_PORT));</span>
-<span class="nc" id="L50">    dispatcherAddress.append(&quot;/&quot;);</span>
-<span class="nc" id="L51">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.name&quot;, DispatcherDistributed.DISPATCHER_NAME));</span>
-<span class="nc" id="L52">    return dispatcherAddress.toString();</span>
+<span class="nc" id="L47">    final StringBuilder dispatcherAddress = new StringBuilder(DISPATCHER_ADDRESS_DEFAULT_SIZE);</span>
+<span class="nc" id="L48">    dispatcherAddress.append(&quot;rmi://&quot;);</span>
+<span class="nc" id="L49">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.bindAddress&quot;, &quot;127.0.0.1&quot;));</span>
+<span class="nc" id="L50">    dispatcherAddress.append(&quot;:&quot;);</span>
+<span class="nc" id="L51">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.port&quot;, Registry.REGISTRY_PORT));</span>
+<span class="nc" id="L52">    dispatcherAddress.append(&quot;/&quot;);</span>
+<span class="nc" id="L53">    dispatcherAddress.append(ProGenContext.getOptionalProperty(&quot;progen.role.client.dispatcher.name&quot;, DispatcherDistributed.DISPATCHER_NAME));</span>
+<span class="nc" id="L54">    return dispatcherAddress.toString();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

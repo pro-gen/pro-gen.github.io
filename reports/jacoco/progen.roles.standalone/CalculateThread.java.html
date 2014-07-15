@@ -38,23 +38,21 @@ public class CalculateThread implements Runnable {
   public void run() {
 <span class="nc" id="L39">    synchronized (tasks) {</span>
 <span class="nc bnc" id="L40" title="All 2 branches missed.">      for (currentTask = 0; currentTask &lt; tasks.size(); currentTask++) {</span>
-<span class="nc" id="L41">        Calendar before = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L41">        final Calendar before = GregorianCalendar.getInstance();</span>
 <span class="nc" id="L42">        worker.calculate(tasks.get(currentTask), userProgram);</span>
 <span class="nc" id="L43">        tasks.notifyAll();</span>
-<span class="nc" id="L44">        Calendar after = GregorianCalendar.getInstance();</span>
+<span class="nc" id="L44">        final Calendar after = GregorianCalendar.getInstance();</span>
 <span class="nc" id="L45">        historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).addValue(&quot;evaluation&quot;, after.getTimeInMillis() - before.getTimeInMillis());</span>
-
       }
-<span class="nc" id="L48">    }</span>
-
-<span class="nc" id="L50">  }</span>
+<span class="nc" id="L47">    }</span>
+<span class="nc" id="L48">  }</span>
 
   public synchronized int getCompletedTasks() {
-<span class="nc" id="L53">    return currentTask;</span>
+<span class="nc" id="L51">    return currentTask;</span>
   }
 
   public List&lt;Task&gt; getTasks() {
-<span class="nc" id="L57">    return tasks;</span>
+<span class="nc" id="L55">    return tasks;</span>
   }
 
 }
