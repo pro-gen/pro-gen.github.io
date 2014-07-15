@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Info.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.error</a> &gt; <span class="el_source">Info.java</span></div><h1>Info.java</h1><pre class="source lang-java linenums">package progen.kernel.error;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+/**
+ * Clase que imprime por pantalla información de distinto tipo.
+ * 
+ * @author jirsis
+ */
+public class Info {
+  
+  private static final String INFO_LITERAL = &quot;Info&quot;;
+  private static final String PROGEN_KERNEL_ERROR_STRINGS_BUNDLE = &quot;progen.kernel.error.strings&quot;;
+
+  private static ResourceBundle literals ;
+  
+  static{
+<span class="nc" id="L19">    literals = ResourceBundle.getBundle(PROGEN_KERNEL_ERROR_STRINGS_BUNDLE, Locale.getDefault());</span>
+<span class="nc" id="L20">  }</span>
+  
+<span class="nc" id="L22">  private Info(){</span>
+    
+<span class="nc" id="L24">  }</span>
+  
+  /**
+   * Muetra por pantalla un aviso, al que es necesario proporcionarle el código
+   * de información y el mensaje personalizado.
+   * 
+   * @param id
+   *          Identificador de la información
+   * @param msg
+   *          Mensaje personalizado
+   */
+  public static void show(int id, String msg) {
+<span class="nc" id="L36">    System.out.println(get(id) + &quot; [&quot; + msg + &quot;]&quot;);</span>
+<span class="nc" id="L37">  }</span>
+
+  /**
+   * Muetra por pantalla un aviso, al que es necesario proporcionarle el código
+   * de información.
+   * 
+   * @param id
+   *          Identificador de la información.
+   */
+  public static void show(int id) {
+<span class="nc" id="L47">    System.out.println(get(id));</span>
+<span class="nc" id="L48">  }</span>
+
+  public static String get(int id) {
+<span class="nc" id="L51">    return literals.getString(INFO_LITERAL + id);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

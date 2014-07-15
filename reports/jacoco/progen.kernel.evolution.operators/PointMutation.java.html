@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PointMutation.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.evolution.operators</a> &gt; <span class="el_source">PointMutation.java</span></div><h1>PointMutation.java</h1><pre class="source lang-java linenums">package progen.kernel.evolution.operators;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import progen.kernel.error.Warning;
+import progen.kernel.evolution.GenneticOperator;
+import progen.kernel.grammar.Grammar;
+import progen.kernel.grammar.Production;
+import progen.kernel.population.Individual;
+import progen.kernel.population.Population;
+import progen.kernel.tree.Node;
+import progen.kernel.tree.Tree;
+
+/**
+ * Clase que implementa el operador genético de mutación de punto.
+ * 
+ * Este operador selecciona un individuo en función del selector que tenga
+ * configurado y selecciona de forma aleatoria un árbol de todos los que definen
+ * al individuo.
+ * 
+ * Una vez se tiene un árbol concreto, se selecciona un nodo de entre todos los
+ * posibles y se busca colocar una función que sea compatible con la que esté en
+ * ese nodo de entre todas las posibles que se puedan generar a partir de la
+ * gramática original.
+ * 
+ * Cuando una función es compatible con otra, se entiende una función tal que
+ * tenga la misma signatura (número de argumentos necesarios) y mismo valor de
+ * retorno.
+ * 
+ * @author jirsis
+ * @since 1.0
+ */
+<span class="nc" id="L35">public class PointMutation extends GenneticOperator {</span>
+
+  @Override
+  public List&lt;Individual&gt; evolve(Population population) {
+<span class="nc" id="L39">    final List&lt;Individual&gt; individuals = getSelector().select(population, 1);</span>
+<span class="nc" id="L40">    final List&lt;Individual&gt; individualsMutate = new ArrayList&lt;Individual&gt;();</span>
+
+<span class="nc" id="L42">    final Individual individualMutate = individuals.get(0);</span>
+
+<span class="nc" id="L44">    final Object[] treesSet = individualMutate.getTrees().keySet().toArray();</span>
+<span class="nc" id="L45">    final String idTree = (String) (treesSet[(int) (Math.random() * treesSet.length)]);</span>
+<span class="nc" id="L46">    mutate(individualMutate.getTrees().get(idTree), individualMutate.getGrammars().get(idTree));</span>
+
+<span class="nc" id="L48">    individualsMutate.add(individualMutate);</span>
+<span class="nc" id="L49">    return individualsMutate;</span>
+  }
+
+  /**
+   * Selecciona un nodo cualquiera del árbol pasado por parámetro y cambia la
+   * función que está en ese nodo por otra función compatible, en función de las
+   * disponibles en la gramática que generó ese árbol.
+   * 
+   * @param tree
+   *          El árbol a mutar.
+   * @param grammar
+   *          La gramática para obtener la nueva función.
+   */
+  private void mutate(Tree tree, Grammar grammar) {
+<span class="nc" id="L63">    boolean mutate = false;</span>
+<span class="nc" id="L64">    final List&lt;Integer&gt; nodes = new ArrayList&lt;Integer&gt;();</span>
+    // se genera una lista aleatoria con los nodos a intentar mutar
+<span class="nc bnc" id="L66" title="All 2 branches missed.">    for (int i = 0; i &lt; tree.getRoot().getTotalNodes(); i++)</span>
+<span class="nc" id="L67">      nodes.add(i);</span>
+<span class="nc" id="L68">    Collections.shuffle(nodes);</span>
+
+    // mientras no se haya mutado ya el arbol y queden nodos candidatos
+<span class="nc bnc" id="L71" title="All 4 branches missed.">    while (!mutate &amp;&amp; nodes.size() &gt; 0) {</span>
+<span class="nc" id="L72">      final int nodeMutate = nodes.remove(0);</span>
+
+<span class="nc" id="L74">      final Node node = tree.getNode(nodeMutate);</span>
+<span class="nc" id="L75">      final List&lt;Production&gt; productions = grammar.getProductionsCompatibleWithFunction(node.getSymbol(), node.getFunction());</span>
+<span class="nc" id="L76">      Production production = productions.remove((int) (Math.random() * productions.size()));</span>
+      /*
+       * se busca una producción que tenga la misma aridad en la función y que
+       * sea distinta a la que se uso para generar este nodo, mientras queden
+       * producciones disponibles
+       */
+<span class="nc bnc" id="L82" title="All 6 branches missed.">      while ((production.getFunction().compareTo(node.getFunction()) == 0 || production.getArgs().length != node.getFunction().getFunction().getArity()) &amp;&amp; productions.size() &gt; 0) {</span>
+
+<span class="nc" id="L84">        production = productions.remove((int) (Math.random() * productions.size()));</span>
+      }
+
+      // si no se han eliminado todas las producciones disponibles, se muta el
+      // nodo
+<span class="nc bnc" id="L89" title="All 2 branches missed.">      if (productions.size() &gt; 0) {</span>
+<span class="nc" id="L90">        node.setFunction(production.getFunction());</span>
+<span class="nc" id="L91">        mutate = true;</span>
+      }
+<span class="nc" id="L93">    }</span>
+    // no se ha podido mutar ningún nodo del árbol.
+<span class="nc bnc" id="L95" title="All 2 branches missed.">    if (mutate == false) {</span>
+<span class="nc" id="L96">      Warning.show(1);</span>
+    }
+<span class="nc" id="L98">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

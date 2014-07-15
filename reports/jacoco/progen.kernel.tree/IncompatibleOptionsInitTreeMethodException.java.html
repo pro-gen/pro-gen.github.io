@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IncompatibleOptionsInitTreeMethodException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.tree</a> &gt; <span class="el_source">IncompatibleOptionsInitTreeMethodException.java</span></div><h1>IncompatibleOptionsInitTreeMethodException.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package progen.kernel.tree;
+
+import progen.kernel.error.Error;
+
+/**
+ * Excepción que se lanzará si los parámetros que definen el método de
+ * inicialización no permiten generar un árbol compatible.
+ * 
+ * @author jirsis
+ * @since 2.0
+ */
+public class IncompatibleOptionsInitTreeMethodException extends RuntimeException {
+
+  private static final int ID_ERROR = 27;
+  /** Para serialización */
+  private static final long serialVersionUID = 8232941914904559013L;
+
+  /**
+   * Constructor que recibe los parámetros que definen el método de
+   * inicialización.
+   * 
+   * @param maxNodes
+   *          Número máximo de nodos.
+   * @param minDepth
+   *          Profundidad mínima del árbol.
+   * @param maxDepth
+   *          Profundidad máxima del árbol.
+   */
+  public IncompatibleOptionsInitTreeMethodException(int maxNodes, int minDepth, int maxDepth) {
+<span class="fc" id="L33">    super(Error.get(ID_ERROR) + &quot;[maxNodes: &quot; + maxNodes + &quot;, depth-interval: &quot; + minDepth + &quot;, &quot; + maxDepth + &quot;]&quot;);</span>
+<span class="fc" id="L34">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

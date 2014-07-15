@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tree.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.tree</a> &gt; <span class="el_source">Tree.java</span></div><h1>Tree.java</h1><pre class="source lang-java linenums">package progen.kernel.tree;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+import progen.context.ProGenContext;
+import progen.context.UnknownPropertyException;
+import progen.kernel.grammar.Grammar;
+import progen.userprogram.UserProgram;
+
+/**
+ * Clase que representa un árbol y los distintos métodos de acceso a él.
+ * 
+ * @author jirsis
+ * 
+ */
+public class Tree implements Cloneable, Serializable {
+  private static final String HALF_HALF_LITERAL = &quot;half&amp;half&quot;;
+
+  private static final long serialVersionUID = 5043645528729444176L;
+
+  /** Nodo raíz del árbol. */
+  private Node root;
+
+  /** Método de inicialización del árbol. */
+  private InitializeTreeMethod initMethod;
+
+  /**
+   * Constructor de copia que recibe por parámetro otro árbol del que copiar los
+   * datos.
+   * 
+   * @param tree
+   *          El árbol a copiar.
+   */
+<span class="fc" id="L35">  public Tree(Tree tree) {</span>
+<span class="fc" id="L36">    this.initMethod = tree.initMethod;</span>
+<span class="fc" id="L37">    this.root = tree.root.clone();</span>
+<span class="fc" id="L38">  }</span>
+
+  /**
+   * Constructor de la clase. Se configura el método de inicialización
+   * definiendo en el fichero de configuración del usuario la propiedad
+   * &lt;code&gt;progen.population.init-mode&lt;/code&gt;, admitiendo como valores válidos:
+   * &lt;ul&gt;
+   * &lt;li&gt;full&lt;/li&gt;
+   * &lt;li&gt;grow&lt;/li&gt;
+   * &lt;li&gt;half&amp;half&lt;/li&gt;
+   * &lt;/ul&gt;
+   * 
+   */
+<span class="fc" id="L51">  public Tree() {</span>
+<span class="fc" id="L52">    final String init = ProGenContext.getOptionalProperty(&quot;progen.population.init-mode&quot;, HALF_HALF_LITERAL);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">    if (&quot;full&quot;.equals(init)) {</span>
+<span class="nc" id="L54">      initMethod = new Full();</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">    } else if (&quot;grow&quot;.equals(init)) {</span>
+<span class="nc" id="L56">      initMethod = new Grow();</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">    } else if (HALF_HALF_LITERAL.equals(init)) {</span>
+<span class="fc" id="L58">      initMethod = new HalfAndHalf();</span>
+    } else {
+<span class="nc" id="L60">      throw new UnknownPropertyException(init + &quot;? progen.population.init-method=grow|full|half&amp;half&quot;);</span>
+    }
+<span class="fc" id="L62">    root = null;</span>
+<span class="fc" id="L63">  }</span>
+
+  /**
+   * Forma de generar un árbol a partir de una gramática pasada por parámetro.
+   * 
+   * @param grammar
+   *          de la que se usarán las producciones para generar el árbol.
+   */
+  public void generate(Grammar grammar) {
+<span class="fc" id="L72">    root = new Node(grammar.getAxiom());</span>
+<span class="fc" id="L73">    initMethod.generate(grammar, root);</span>
+<span class="fc" id="L74">  }</span>
+
+  /**
+   * Devuelve el nodo raíz del árbol.
+   * 
+   * @return &lt;code&gt;Node&lt;/code&gt; raíz del árbol.
+   */
+  public Node getRoot() {
+<span class="fc" id="L82">    return getNode(0);</span>
+  }
+
+  /**
+   * Representación del árbol como si fuera un programa de Lisp
+   * 
+   * @return &lt;code&gt;String&lt;/code&gt; con la representación del árbol con formato de
+   *         Lisp
+   */
+  public String toString() {
+<span class="fc" id="L92">    return root.toString();</span>
+  }
+
+  /**
+   * Evalúa el árbol de tal forma que se devuelve el valor después de ejecutar
+   * todo el programa almacenado en este árbol.
+   * 
+   * @param userProgram
+   *          Definición concreta del dominio del problema que necesitará el
+   *          árbol para ser evaluado.
+   * @param returnAddr
+   *          Dirección de retorno de las llamadas a ADFs.
+   * @return &lt;code&gt;Object&lt;/code&gt; con el valor de la ejecución del programa.
+   */
+  public Object evaluate(UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+<span class="nc" id="L107">    return root.evaluate(userProgram, returnAddr);</span>
+  }
+
+  /**
+   * Devuelve el nodo que está en la posición en preorden indicada como
+   * parámetro.
+   * 
+   * @param position
+   *          La posición dentro del árbol.
+   * @return El nodo que está en la posición solicitada o &lt;code&gt;null&lt;/code&gt; la
+   *         posición está fuera de los rangos válidos.
+   */
+  public Node getNode(int position) {
+<span class="fc" id="L120">    Node node = null;</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">    if (root != null) {</span>
+<span class="fc" id="L122">      node = root.getNode(position);</span>
+    }
+<span class="fc" id="L124">    return node;</span>
+  }
+
+  @Override
+  public Tree clone() {
+    try {
+<span class="nc" id="L130">      super.clone();</span>
+<span class="nc" id="L131">    } catch (CloneNotSupportedException e) {</span>
+      // ignore this exception
+<span class="nc" id="L133">    }</span>
+<span class="nc" id="L134">    return new Tree(this);</span>
+  }
+
+  /**
+   * Devuelve el método que se utilizó para generar este árbol.
+   * 
+   * @return El método de inicialización del árbol.
+   */
+  public InitializeTreeMethod getInitializeTreeMethod() {
+<span class="nc" id="L143">    return initMethod;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
