@@ -43,10 +43,10 @@ import progen.kernel.tree.Tree;
 <span class="fc" id="L43">    comunA.remove(treeA.getRoot());</span>
 <span class="fc" id="L44">    comunB.remove(treeB.getRoot());</span>
 
-<span class="pc bpc" id="L46" title="1 of 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
-<span class="fc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
-<span class="fc" id="L48">      nodes.add(comunA.get(randomNode));</span>
-<span class="fc" id="L49">      nodes.add(comunB.get(randomNode));</span>
+<span class="pc bpc" id="L46" title="3 of 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
+<span class="nc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
+<span class="nc" id="L48">      nodes.add(comunA.get(randomNode));</span>
+<span class="nc" id="L49">      nodes.add(comunB.get(randomNode));</span>
     }
 <span class="fc" id="L51">    return nodes;</span>
   }
@@ -72,18 +72,18 @@ import progen.kernel.tree.Tree;
    *          Conjunto de nodos que forman la parte común al árbol B.
    */
   private void selectComun(Node nodeA, Node nodeB, List&lt;Node&gt; stackA, List&lt;Node&gt; stackB, List&lt;Node&gt; comunA, List&lt;Node&gt; comunB) {
-<span class="pc bpc" id="L75" title="1 of 4 branches missed.">    if (nodeA.getFunction().getFunction().getReturnType().equals(nodeB.getFunction().getFunction().getReturnType()) &amp;&amp; nodeA.getFunction().getFunction().getSymbol().equals(nodeB.getFunction().getFunction().getSymbol())) {</span>
-<span class="fc" id="L76">      stackA.addAll(nodeA.getBranches());</span>
-<span class="fc" id="L77">      stackB.addAll(nodeB.getBranches());</span>
-<span class="fc" id="L78">      comunA.add(nodeA);</span>
-<span class="fc" id="L79">      comunB.add(nodeB);</span>
+<span class="pc bpc" id="L75" title="2 of 4 branches missed.">    if (nodeA.getFunction().getFunction().getReturnType().equals(nodeB.getFunction().getFunction().getReturnType()) &amp;&amp; nodeA.getFunction().getFunction().getSymbol().equals(nodeB.getFunction().getFunction().getSymbol())) {</span>
+<span class="nc" id="L76">      stackA.addAll(nodeA.getBranches());</span>
+<span class="nc" id="L77">      stackB.addAll(nodeB.getBranches());</span>
+<span class="nc" id="L78">      comunA.add(nodeA);</span>
+<span class="nc" id="L79">      comunB.add(nodeB);</span>
     } else {
 <span class="fc" id="L81">      stackA.removeAll(nodeA.getBranches());</span>
 <span class="fc" id="L82">      stackB.removeAll(nodeB.getBranches());</span>
     }
 
-<span class="pc bpc" id="L85" title="1 of 4 branches missed.">    if (stackA.size() &gt; 0 &amp;&amp; stackB.size() &gt; 0) {</span>
-<span class="fc" id="L86">      selectComun(stackA.remove(0), stackB.remove(0), stackA, stackB, comunA, comunB);</span>
+<span class="pc bpc" id="L85" title="3 of 4 branches missed.">    if (stackA.size() &gt; 0 &amp;&amp; stackB.size() &gt; 0) {</span>
+<span class="nc" id="L86">      selectComun(stackA.remove(0), stackB.remove(0), stackA, stackB, comunA, comunB);</span>
     }
 <span class="fc" id="L88">  }</span>
 }

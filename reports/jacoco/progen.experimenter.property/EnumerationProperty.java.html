@@ -68,12 +68,12 @@ public class EnumerationProperty implements Property {
 
   @Override
   public String toString() {
-<span class="nc" id="L71">    StringBuilder string = new StringBuilder();</span>
+<span class="nc" id="L71">    final StringBuilder enumerationProperty = new StringBuilder();</span>
 <span class="nc bnc" id="L72" title="All 2 branches missed.">    for (String value : values) {</span>
-<span class="nc" id="L73">      string.append(value + &quot;;&quot;);</span>
+<span class="nc" id="L73">      enumerationProperty.append(value + &quot;;&quot;);</span>
     }
-<span class="nc" id="L75">    string.append(&quot;[&quot; + values[index] + &quot;],&quot;);</span>
-<span class="nc" id="L76">    return string.toString();</span>
+<span class="nc" id="L75">    enumerationProperty.append(&quot;[&quot; + values[index] + &quot;],&quot;);</span>
+<span class="nc" id="L76">    return enumerationProperty.toString();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

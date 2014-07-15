@@ -284,7 +284,7 @@ public class Node implements Cloneable, Serializable {
 
   @Override
   public String toString() {
-<span class="fc" id="L287">    StringBuilder node = new StringBuilder();</span>
+<span class="fc" id="L287">    final StringBuilder node = new StringBuilder();</span>
 <span class="fc bfc" id="L288" title="All 2 branches covered.">    if (isLeaf()) {</span>
 <span class="fc" id="L289">      node.append(function);</span>
     } else {
@@ -338,15 +338,16 @@ public class Node implements Cloneable, Serializable {
    */
   private Node findNode(int position) {
 <span class="fc" id="L340">    Node node = null;</span>
-<span class="fc bfc" id="L341" title="All 2 branches covered.">    if (position == 0) {</span>
-<span class="fc" id="L342">      node = this;</span>
+<span class="fc" id="L341">    int currentPosition = position;</span>
+<span class="fc bfc" id="L342" title="All 2 branches covered.">    if (currentPosition == 0) {</span>
+<span class="fc" id="L343">      node = this;</span>
     } else {
-<span class="fc bfc" id="L344" title="All 4 branches covered.">      for (int i = 0; node == null &amp;&amp; i &lt; branches.size(); i++) {</span>
-<span class="fc" id="L345">        node = branches.get(i).findNode(position - 1);</span>
-<span class="fc" id="L346">        position -= branches.get(i).getTotalNodes();</span>
+<span class="fc bfc" id="L345" title="All 4 branches covered.">      for (int i = 0; node == null &amp;&amp; i &lt; branches.size(); i++) {</span>
+<span class="fc" id="L346">        node = branches.get(i).findNode(currentPosition - 1);</span>
+<span class="fc" id="L347">        currentPosition -= branches.get(i).getTotalNodes();</span>
       }
     }
-<span class="fc" id="L349">    return node;</span>
+<span class="fc" id="L350">    return node;</span>
   }
 
   /**
@@ -356,15 +357,15 @@ public class Node implements Cloneable, Serializable {
    * @return La profundidad a la que se encuentra el nodo que está más profundo.
    */
   public int getMaximunDepth() {
-<span class="fc" id="L359">    int maxDepth = 0;</span>
-<span class="fc bfc" id="L360" title="All 2 branches covered.">    if (this.isLeaf()) {</span>
-<span class="fc" id="L361">      maxDepth = depth;</span>
+<span class="fc" id="L360">    int maxDepth = 0;</span>
+<span class="fc bfc" id="L361" title="All 2 branches covered.">    if (this.isLeaf()) {</span>
+<span class="fc" id="L362">      maxDepth = depth;</span>
     } else {
-<span class="fc bfc" id="L363" title="All 2 branches covered.">      for (Node branch : branches) {</span>
-<span class="fc" id="L364">        maxDepth = Math.max(maxDepth, branch.getMaximunDepth());</span>
-<span class="fc" id="L365">      }</span>
+<span class="fc bfc" id="L364" title="All 2 branches covered.">      for (Node branch : branches) {</span>
+<span class="fc" id="L365">        maxDepth = Math.max(maxDepth, branch.getMaximunDepth());</span>
+<span class="fc" id="L366">      }</span>
     }
-<span class="fc" id="L367">    return maxDepth;</span>
+<span class="fc" id="L368">    return maxDepth;</span>
   }
   
   /**
@@ -376,12 +377,12 @@ public class Node implements Cloneable, Serializable {
    */
   public Node clone() {
     try {
-<span class="fc" id="L379">      super.clone();</span>
-<span class="nc" id="L380">    } catch (CloneNotSupportedException e) {</span>
+<span class="fc" id="L380">      super.clone();</span>
+<span class="nc" id="L381">    } catch (CloneNotSupportedException e) {</span>
       // ignore this exception
-<span class="fc" id="L382">    }</span>
+<span class="fc" id="L383">    }</span>
     
-<span class="fc" id="L384">    return new Node(this, this.parent);</span>
+<span class="fc" id="L385">    return new Node(this, this.parent);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

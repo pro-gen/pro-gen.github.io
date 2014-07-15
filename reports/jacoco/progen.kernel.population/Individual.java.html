@@ -20,6 +20,10 @@ import progen.userprogram.UserProgram;
  * 
  */
 public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable {
+  private static final String COLON_SPACE_SYMBOL = &quot;: &quot;;
+
+  private static final String RETURN_SYMBOL = &quot;\n&quot;;
+
   private static final String ADF_PROPERTY = &quot;ADF&quot;;
 
   private static final String RPB_PROPERTY = &quot;RPB&quot;;
@@ -93,37 +97,37 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    *          Gramáticas que generarán todos los árboles, tanto RPBs como ADFs
    *          que conforman un individuo concreto.
    */
-<span class="fc" id="L96">  public Individual(HashMap&lt;String, Grammar&gt; grammars) {</span>
+<span class="fc" id="L100">  public Individual(HashMap&lt;String, Grammar&gt; grammars) {</span>
     Tree tree;
-<span class="fc" id="L98">    trees = new HashMap&lt;String, Tree&gt;();</span>
-<span class="fc" id="L99">    results = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L102">    trees = new HashMap&lt;String, Tree&gt;();</span>
+<span class="fc" id="L103">    results = new HashMap&lt;String, Object&gt;();</span>
 
-<span class="fc" id="L101">    totalRPB = ProGenContext.getOptionalProperty(PROGEN_TOTAL_RPB_PROPERTY, 1);</span>
-<span class="fc" id="L102">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, totalRPB + &quot;&quot;);</span>
-<span class="fc" id="L103">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
+<span class="fc" id="L105">    totalRPB = ProGenContext.getOptionalProperty(PROGEN_TOTAL_RPB_PROPERTY, 1);</span>
+<span class="fc" id="L106">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, totalRPB + &quot;&quot;);</span>
+<span class="fc" id="L107">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
 
-<span class="fc bfc" id="L105" title="All 2 branches covered.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="fc" id="L106">      tree = new Tree();</span>
-<span class="fc" id="L107">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
-<span class="fc" id="L108">      trees.put(RPB_PROPERTY + i, tree);</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="fc" id="L110">      tree = new Tree();</span>
+<span class="fc" id="L111">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
+<span class="fc" id="L112">      trees.put(RPB_PROPERTY + i, tree);</span>
     }
 
-<span class="pc bpc" id="L111" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L112">      tree = new Tree();</span>
-<span class="nc" id="L113">      tree.generate(grammars.get(ADF_PROPERTY + i));</span>
-<span class="nc" id="L114">      trees.put(ADF_PROPERTY + i, tree);</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L116">      tree = new Tree();</span>
+<span class="nc" id="L117">      tree.generate(grammars.get(ADF_PROPERTY + i));</span>
+<span class="nc" id="L118">      trees.put(ADF_PROPERTY + i, tree);</span>
     }
 
-<span class="fc" id="L117">    this.grammars = grammars;</span>
+<span class="fc" id="L121">    this.grammars = grammars;</span>
 
-<span class="fc" id="L119">    this.rawFitness = Double.MAX_VALUE;</span>
+<span class="fc" id="L123">    this.rawFitness = Double.MAX_VALUE;</span>
 
-<span class="fc" id="L121">    this.updated = true;</span>
+<span class="fc" id="L125">    this.updated = true;</span>
 
-<span class="fc" id="L123">    this.variables = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L127">    this.variables = new HashMap&lt;String, Object&gt;();</span>
 
-<span class="fc" id="L125">    this.printabeIndividual = null;</span>
-<span class="fc" id="L126">  }</span>
+<span class="fc" id="L129">    this.printabeIndividual = null;</span>
+<span class="fc" id="L130">  }</span>
 
   /**
    * Constructor de copia que crea un nuevo individuo a partir de otro
@@ -132,23 +136,23 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @param individual
    *          El individuo a copiar.
    */
-<span class="fc" id="L135">  public Individual(Individual individual) {</span>
-<span class="fc" id="L136">    this.rawFitness = individual.rawFitness;</span>
-<span class="fc" id="L137">    this.results = new HashMap&lt;String, Object&gt;();</span>
-<span class="fc" id="L138">    this.totalRPB = individual.totalRPB;</span>
-<span class="fc" id="L139">    this.totalADF = individual.totalADF;</span>
-<span class="fc" id="L140">    this.grammars = individual.grammars;</span>
-<span class="fc" id="L141">    this.updated = individual.updated;</span>
-<span class="fc" id="L142">    this.trees = new HashMap&lt;String, Tree&gt;();</span>
-<span class="fc bfc" id="L143" title="All 2 branches covered.">    for (String key : individual.trees.keySet()) {</span>
-<span class="fc" id="L144">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
-<span class="fc" id="L145">    }</span>
-<span class="fc" id="L146">    this.variables = new HashMap&lt;String, Object&gt;();</span>
-<span class="pc bpc" id="L147" title="1 of 2 branches missed.">    for (String key : individual.variables.keySet()) {</span>
-<span class="nc" id="L148">      this.variables.put(key, individual.variables.get(key));</span>
-<span class="nc" id="L149">    }</span>
+<span class="fc" id="L139">  public Individual(Individual individual) {</span>
+<span class="fc" id="L140">    this.rawFitness = individual.rawFitness;</span>
+<span class="fc" id="L141">    this.results = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L142">    this.totalRPB = individual.totalRPB;</span>
+<span class="fc" id="L143">    this.totalADF = individual.totalADF;</span>
+<span class="fc" id="L144">    this.grammars = individual.grammars;</span>
+<span class="fc" id="L145">    this.updated = individual.updated;</span>
+<span class="fc" id="L146">    this.trees = new HashMap&lt;String, Tree&gt;();</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">    for (String key : individual.trees.keySet()) {</span>
+<span class="fc" id="L148">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
+<span class="fc" id="L149">    }</span>
+<span class="fc" id="L150">    this.variables = new HashMap&lt;String, Object&gt;();</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">    for (String key : individual.variables.keySet()) {</span>
+<span class="nc" id="L152">      this.variables.put(key, individual.variables.get(key));</span>
+<span class="nc" id="L153">    }</span>
 
-<span class="fc" id="L151">  }</span>
+<span class="fc" id="L155">  }</span>
 
   /**
    * Devuelve los árboles que contiene el individuo.
@@ -156,7 +160,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return Los árboles que contiene el individuo.
    */
   public HashMap&lt;String, Tree&gt; getTrees() {
-<span class="fc" id="L159">    return trees;</span>
+<span class="fc" id="L163">    return trees;</span>
   }
 
   /**
@@ -165,7 +169,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return Las gramáticas utilizadas para generar los distintos árboles.
    */
   public HashMap&lt;String, Grammar&gt; getGrammars() {
-<span class="nc" id="L168">    return grammars;</span>
+<span class="nc" id="L172">    return grammars;</span>
   }
 
   /**
@@ -176,23 +180,23 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    */
   @Override
   public String toString() {
-<span class="fc" id="L179">    StringBuilder individual = new StringBuilder();</span>
+<span class="nc" id="L183">    final StringBuilder individual = new StringBuilder();</span>
 
-<span class="pc bpc" id="L181" title="3 of 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
-<span class="nc" id="L182">      individual.append(printabeIndividual);</span>
+<span class="nc bnc" id="L185" title="All 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
+<span class="nc" id="L186">      individual.append(printabeIndividual);</span>
     } else {
-<span class="fc" id="L184">      int RPB = 0;</span>
-<span class="fc" id="L185">      int adf = 0;</span>
-<span class="fc bfc" id="L186" title="All 2 branches covered.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
-<span class="fc" id="L187">        individual.append(&quot;\n&quot;+ RPB_PROPERTY + RPB + &quot;: &quot; + trees.get(RPB_PROPERTY + RPB));</span>
-<span class="fc" id="L188">        RPB++;</span>
+<span class="nc" id="L188">      int RPB = 0;</span>
+<span class="nc" id="L189">      int adf = 0;</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
+<span class="nc" id="L191">        individual.append(RETURN_SYMBOL+ RPB_PROPERTY + RPB + COLON_SPACE_SYMBOL + trees.get(RPB_PROPERTY + RPB));</span>
+<span class="nc" id="L192">        RPB++;</span>
       }
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
-<span class="nc" id="L191">        individual.append(&quot;\n&quot;+ADF_PROPERTY + adf + &quot;: &quot; + trees.get(ADF_PROPERTY + adf));</span>
-<span class="nc" id="L192">        adf++;</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
+<span class="nc" id="L195">        individual.append(RETURN_SYMBOL+ADF_PROPERTY + adf + COLON_SPACE_SYMBOL + trees.get(ADF_PROPERTY + adf));</span>
+<span class="nc" id="L196">        adf++;</span>
       }
     }
-<span class="fc" id="L195">    return individual.toString();</span>
+<span class="nc" id="L199">    return individual.toString();</span>
   }
 
   /**
@@ -205,16 +209,16 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    *          Valor concreto que tendrá la variable.
    */
   public void setVariable(String variable, Object value) {
-<span class="nc" id="L208">    this.updated = true;</span>
-<span class="nc bnc" id="L209" title="All 2 branches missed.">    for (String idGrammar : grammars.keySet()) {</span>
-<span class="nc" id="L210">      final Grammar grammar = grammars.get(idGrammar);</span>
-<span class="nc bnc" id="L211" title="All 2 branches missed.">      for (GrammarTerminalSymbol function : grammar.getGrammarTerminalSymbols()) {</span>
-<span class="nc bnc" id="L212" title="All 2 branches missed.">        if (function.getSymbol().equals(variable)) {</span>
-<span class="nc" id="L213">          ((Terminal) function.getFunction()).setValue(value);</span>
+<span class="nc" id="L212">    this.updated = true;</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">    for (String idGrammar : grammars.keySet()) {</span>
+<span class="nc" id="L214">      final Grammar grammar = grammars.get(idGrammar);</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">      for (GrammarTerminalSymbol function : grammar.getGrammarTerminalSymbols()) {</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">        if (function.getSymbol().equals(variable)) {</span>
+<span class="nc" id="L217">          ((Terminal) function.getFunction()).setValue(value);</span>
         }
-<span class="nc" id="L215">      }</span>
-<span class="nc" id="L216">    }</span>
-<span class="nc" id="L217">  }</span>
+<span class="nc" id="L219">      }</span>
+<span class="nc" id="L220">    }</span>
+<span class="nc" id="L221">  }</span>
 
   /**
    * Función que evalúa y obtiene un resultado de la ejecución de todos los
@@ -230,20 +234,20 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
   private void evaluateTree(HashMap&lt;String, Object&gt; variables, UserProgram userprogram) {
     // se actualizan los ADF correspondientes para que utilicen el arbol de
     // este individuo
-<span class="nc bnc" id="L233" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc bnc" id="L234" title="All 2 branches missed.">      for (int j = 0; j &lt; totalRPB; j++) {</span>
-<span class="nc bnc" id="L235" title="All 2 branches missed.">        for (GrammarTerminalSymbol adf : grammars.get(RPB_PROPERTY + j).getGrammarTerminalSymbols()) {</span>
-<span class="nc bnc" id="L236" title="All 2 branches missed.">          if (adf.getSymbol().compareTo(ADF_PROPERTY + i) == 0) {</span>
-<span class="nc" id="L237">            ((ADF) adf.getFunction()).setADFTree(trees.get(ADF_PROPERTY + i));</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">      for (int j = 0; j &lt; totalRPB; j++) {</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        for (GrammarTerminalSymbol adf : grammars.get(RPB_PROPERTY + j).getGrammarTerminalSymbols()) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">          if (adf.getSymbol().compareTo(ADF_PROPERTY + i) == 0) {</span>
+<span class="nc" id="L241">            ((ADF) adf.getFunction()).setADFTree(trees.get(ADF_PROPERTY + i));</span>
           }
-<span class="nc" id="L239">        }</span>
+<span class="nc" id="L243">        }</span>
       }
     }
-<span class="nc bnc" id="L242" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L243">      results.put(RPB_PROPERTY + i, trees.get(RPB_PROPERTY + i).evaluate(userprogram, variables));</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L247">      results.put(RPB_PROPERTY + i, trees.get(RPB_PROPERTY + i).evaluate(userprogram, variables));</span>
     }
-<span class="nc" id="L245">    this.updated = false;</span>
-<span class="nc" id="L246">  }</span>
+<span class="nc" id="L249">    this.updated = false;</span>
+<span class="nc" id="L250">  }</span>
 
   /**
    * Devuelve el resultado de ejecutar el árbol solicitado como parámetro.
@@ -261,10 +265,10 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
   public Object evaluate(String idTree, UserProgram userProgram) {
     // TODO: comprobar que se está solicianto de un RPB, en caso contrario dar
     // un fallo.
-<span class="nc bnc" id="L264" title="All 2 branches missed.">    if (updated) {</span>
-<span class="nc" id="L265">      this.evaluateTree(variables, userProgram);</span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">    if (updated) {</span>
+<span class="nc" id="L269">      this.evaluateTree(variables, userProgram);</span>
     }
-<span class="nc" id="L267">    return results.get(idTree);</span>
+<span class="nc" id="L271">    return results.get(idTree);</span>
   }
 
   /**
@@ -278,7 +282,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    *         gramática que se utilizá para definir ese árbol.
    */
   public Object evaluate(UserProgram userProgram) {
-<span class="nc" id="L281">    return this.evaluate(&quot;RPB0&quot;, userProgram);</span>
+<span class="nc" id="L285">    return this.evaluate(&quot;RPB0&quot;, userProgram);</span>
   }
 
   /**
@@ -291,8 +295,8 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    *          el valor del &lt;i&gt;rawFitness&lt;/i&gt;.
    */
   public void setRawFitness(double fitness) {
-<span class="nc" id="L294">    this.rawFitness = fitness;</span>
-<span class="nc" id="L295">  }</span>
+<span class="nc" id="L298">    this.rawFitness = fitness;</span>
+<span class="nc" id="L299">  }</span>
 
   /**
    * Devuelve el valor del &lt;i&gt;rawFitness&lt;/i&gt; de este individuo.
@@ -300,7 +304,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return fitness el valor del &lt;i&gt;rawFitness&lt;/i&gt; de este individuo.
    */
   public double getRawFitness() {
-<span class="nc" id="L303">    return rawFitness;</span>
+<span class="nc" id="L307">    return rawFitness;</span>
   }
 
   /**
@@ -310,17 +314,17 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return el valor del &lt;i&gt;adjustedFitness&lt;/i&gt;
    */
   public double getAdjustedFitness() {
-<span class="fc" id="L313">    return 1 / (1 + rawFitness);</span>
+<span class="fc" id="L317">    return 1 / (1 + rawFitness);</span>
   }
 
   @Override
   public void calculate(UserProgram userProgram) {
-<span class="nc" id="L318">    this.rawFitness = userProgram.fitness(this);</span>
-<span class="nc" id="L319">  }</span>
+<span class="nc" id="L322">    this.rawFitness = userProgram.fitness(this);</span>
+<span class="nc" id="L323">  }</span>
 
   @Override
   public boolean isDone() {
-<span class="nc bnc" id="L323" title="All 2 branches missed.">    return !updated;</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">    return !updated;</span>
   }
 
   /**
@@ -333,23 +337,23 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    */
   @Override
   public int compareTo(Individual other) {
-<span class="fc" id="L336">    return Double.compare(this.rawFitness, other.rawFitness);</span>
+<span class="fc" id="L340">    return Double.compare(this.rawFitness, other.rawFitness);</span>
   }
 
   @Override
   public boolean equals(Object other) {
-<span class="fc" id="L341">    boolean equals = false;</span>
-<span class="pc bpc" id="L342" title="1 of 2 branches missed.">    if (other instanceof Individual) {</span>
-<span class="fc" id="L343">      equals = this.equals((Individual) other);</span>
+<span class="fc" id="L345">    boolean equals = false;</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">    if (other instanceof Individual) {</span>
+<span class="fc" id="L347">      equals = this.equals((Individual) other);</span>
     } else {
-<span class="nc" id="L345">      equals = false;</span>
+<span class="nc" id="L349">      equals = false;</span>
     }
-<span class="fc" id="L347">    return equals;</span>
+<span class="fc" id="L351">    return equals;</span>
   }
 
   @Override
   public int hashCode() {
-<span class="nc" id="L352">    return toString().hashCode();</span>
+<span class="nc" id="L356">    return toString().hashCode();</span>
   }
 
   /**
@@ -361,33 +365,33 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return &lt;code&gt;true&lt;/code&gt; si los dos individuos son iguales.
    */
   public boolean equals(Individual other) {
-<span class="fc" id="L364">    boolean equals = true;</span>
-<span class="pc bpc" id="L365" title="1 of 2 branches missed.">    if (other == null) {</span>
-<span class="nc" id="L366">      equals = false;</span>
+<span class="fc" id="L368">    boolean equals = true;</span>
+<span class="pc bpc" id="L369" title="1 of 2 branches missed.">    if (other == null) {</span>
+<span class="nc" id="L370">      equals = false;</span>
     } else {
-<span class="pc bpc" id="L368" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc bnc" id="L369" title="All 4 branches missed.">        equals = equals &amp;&amp; trees.get(RPB_PROPERTY + i).toString().compareTo(other.getTrees().get(RPB_PROPERTY + i).toString()) == 0;</span>
+<span class="pc bpc" id="L372" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc bnc" id="L373" title="All 4 branches missed.">        equals = equals &amp;&amp; trees.get(RPB_PROPERTY + i).toString().compareTo(other.getTrees().get(RPB_PROPERTY + i).toString()) == 0;</span>
       }
-<span class="pc bpc" id="L371" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc bnc" id="L372" title="All 4 branches missed.">        equals = equals &amp;&amp; trees.get(ADF_PROPERTY + i).toString().compareTo(other.getTrees().get(ADF_PROPERTY + i).toString()) == 0;</span>
+<span class="pc bpc" id="L375" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc bnc" id="L376" title="All 4 branches missed.">        equals = equals &amp;&amp; trees.get(ADF_PROPERTY + i).toString().compareTo(other.getTrees().get(ADF_PROPERTY + i).toString()) == 0;</span>
       }
     }
-<span class="fc" id="L375">    return equals;</span>
+<span class="fc" id="L379">    return equals;</span>
   }
 
   @Override
   public Object getCalculateResult() {
-<span class="nc" id="L380">    return this;</span>
+<span class="nc" id="L384">    return this;</span>
   }
 
   @Override
   public Individual clone() {
     try {
-<span class="fc" id="L386">      super.clone();</span>
-<span class="nc" id="L387">    } catch (CloneNotSupportedException e) {</span>
+<span class="fc" id="L390">      super.clone();</span>
+<span class="nc" id="L391">    } catch (CloneNotSupportedException e) {</span>
       // ignore this
-<span class="fc" id="L389">    }</span>
-<span class="fc" id="L390">    return new Individual(this);</span>
+<span class="fc" id="L393">    }</span>
+<span class="fc" id="L394">    return new Individual(this);</span>
   }
 
   /**
@@ -396,7 +400,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return el número total de RPB.
    */
   public int getTotalRPB() {
-<span class="nc" id="L399">    return totalRPB;</span>
+<span class="nc" id="L403">    return totalRPB;</span>
   }
 
   /**
@@ -405,15 +409,15 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return el número total de ADF.
    */
   public int getTotalADF() {
-<span class="nc" id="L408">    return totalADF;</span>
+<span class="nc" id="L412">    return totalADF;</span>
   }
 
   /**
    * @param printable
    */
   public void setPrintableIndividual(String printable) {
-<span class="nc" id="L415">    this.printabeIndividual = printable;</span>
-<span class="nc" id="L416">  }</span>
+<span class="nc" id="L419">    this.printabeIndividual = printable;</span>
+<span class="nc" id="L420">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

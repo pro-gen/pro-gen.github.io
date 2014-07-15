@@ -131,7 +131,7 @@ public class Population {
    * representación de todos los individuos que conforman cada población.
    */
   public String toString() {
-<span class="nc" id="L134">    StringBuilder population = new StringBuilder();</span>
+<span class="nc" id="L134">    final StringBuilder population = new StringBuilder();</span>
 <span class="nc bnc" id="L135" title="All 2 branches missed.">    for (int i = 0; i &lt; individuals.size(); i++) {</span>
 <span class="nc" id="L136">      population.append(individuals.get(i) + &quot;\n&quot;);</span>
     }

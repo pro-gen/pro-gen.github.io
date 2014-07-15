@@ -16,9 +16,9 @@ public class BitVrotd extends NonTerminal {
 
   @Override
   public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L19">    final Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L19">    final Integer child = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
 
-<span class="fc" id="L21">    return (Integer) (Integer.rotateRight(child_1, 1));</span>
+<span class="fc" id="L21">    return (Integer) (Integer.rotateRight(child, 1));</span>
   }
 
 }

@@ -3,65 +3,63 @@
 import java.util.List;
 
 /**
- * Plugin que se encargará de comprobar cual de todos los valores que se vayan añadiendo es el mejor
- * y quedándose una referencia de éste.
+ * Plugin que se encargará de comprobar cual de todos los valores que se vayan
+ * añadiendo es el mejor y quedándose una referencia de éste.
  * 
  * @author jirsis
  * @since 2.0
- *
+ * 
  */
 <span class="fc" id="L13">public class Best implements Plugin {</span>
-	
-	/** El mejor objeto**/
-	@SuppressWarnings(&quot;rawtypes&quot;)
-	private Comparable theBest;
-	
-	
 
-	@SuppressWarnings({ &quot;rawtypes&quot;, &quot;unchecked&quot; })
-	public void addValue(Comparable value) {
-<span class="fc bfc" id="L23" title="All 2 branches covered.">		if(theBest==null){</span>
-<span class="fc" id="L24">			theBest=value;</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">		}else if(value.compareTo(theBest)&lt;0){</span>
-<span class="fc" id="L26">			theBest=value;</span>
-		}
-<span class="fc" id="L28">	}</span>
+  /** El mejor objeto **/
+  @SuppressWarnings(&quot;rawtypes&quot;)
+  private Comparable theBest;
 
-	public Object getValue() {
-<span class="fc" id="L31">		return theBest;</span>
-	}
+  @SuppressWarnings({ &quot;rawtypes&quot;, &quot;unchecked&quot; })
+  public void addValue(Comparable value) {
+<span class="fc bfc" id="L21" title="All 2 branches covered.">    if (theBest == null) {</span>
+<span class="fc" id="L22">      theBest = value;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">    } else if (value.compareTo(theBest) &lt; 0) {</span>
+<span class="fc" id="L24">      theBest = value;</span>
+    }
+<span class="fc" id="L26">  }</span>
 
-	public void initialValue() {
-		//do nothing
-		
-<span class="nc" id="L37">	}</span>
+  public Object getValue() {
+<span class="fc" id="L29">    return theBest;</span>
+  }
 
-	public String getName() {
-<span class="fc" id="L40">		return &quot;best&quot;;</span>
-	}
+  public void initialValue() {
+    // do nothing
 
-	public int getPriority() {
-<span class="nc" id="L44">		return 0;</span>
-	}
+<span class="nc" id="L35">  }</span>
 
-	public void initPlugin(String propertyFamily) {
-		//do nothing
-		
-<span class="nc" id="L50">	}</span>
+  public String getName() {
+<span class="fc" id="L38">    return &quot;best&quot;;</span>
+  }
 
-	public Plugin getPlugin(String name) {
-		Plugin plugin;
-<span class="nc bnc" id="L54" title="All 2 branches missed.">		if(name.compareTo(getName())==0){</span>
-<span class="nc" id="L55">			plugin=this;</span>
-		}else{
-<span class="nc" id="L57">			plugin = new NullPlugin();</span>
-		}
-<span class="nc" id="L59">		return plugin;</span>
-	}
+  public int getPriority() {
+<span class="nc" id="L42">    return 0;</span>
+  }
 
-	public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
-		// do nothing
-<span class="nc" id="L64">	}</span>
+  public void initPlugin(String propertyFamily) {
+    // do nothing
+
+<span class="nc" id="L48">  }</span>
+
+  public Plugin getPlugin(String name) {
+    Plugin plugin;
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    if (name.compareTo(getName()) == 0) {</span>
+<span class="nc" id="L53">      plugin = this;</span>
+    } else {
+<span class="nc" id="L55">      plugin = new NullPlugin();</span>
+    }
+<span class="nc" id="L57">    return plugin;</span>
+  }
+
+  public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
+    // do nothing
+<span class="nc" id="L62">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

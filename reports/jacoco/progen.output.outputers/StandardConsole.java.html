@@ -22,12 +22,36 @@ import progen.output.plugins.Plugin;
  */
 public class StandardConsole extends ConsoleOutput {
 
+  private static final String WORST_RUN_LITERAL = &quot;worstRun&quot;;
+  private static final String BEST_RUN_LITERAL = &quot;bestRun&quot;;
+  private static final String GENERATION_MEAN_LITERAL = &quot;generationMean&quot;;
+  private static final String INDIVIDUAL_MEAN_LITERAL = &quot;individualMean&quot;;
+  private static final String POPULATION_DATA_LITERAL = &quot;PopulationData&quot;;
+  private static final String BREEDING_LITERAL = &quot;breeding&quot;;
+  private static final String TOTAL_LITERAL = &quot;total&quot;;
+  private static final String MEAN_LITERAL = &quot;mean&quot;;
+  private static final String EVALUATION_LITERAL = &quot;evaluation&quot;;
+  private static final String POPULATION_TIME_DATA_LITERAL = &quot;PopulationTimeData&quot;;
+  private static final String RPB_LITERAL = &quot;RPB&quot;;
+  private static final String INDIVIDUAL_LITERAL = &quot;individual&quot;;
+  private static final String ADF_LITERAL = &quot;ADF&quot;;
+  private static final String RPB_LITEARL = RPB_LITERAL;
+  private static final String DEPTH_LITERAL = &quot;depth&quot;;
+  private static final String NODES_LITERAL = &quot;nodes&quot;;
+  private static final String FITNESS_LITERAL = &quot;fitness&quot;;
+  private static final String ADJUSTED_LITERAL = &quot;adjusted&quot;;
+  private static final String RAW_LITERAL = &quot;raw&quot;;
+  private static final String BEST_LITERAL = &quot;best&quot;;
+  private static final String STRING_FORMAT = &quot;%s&quot;;
+  private static final String STRING_NEW_LINE_FORMAT = &quot;%s%n&quot;;
+  private static final String SPACE_SYMBOL = &quot; &quot;;
+  private static final String EXPERIMENT_INDIVIDUAL_DATA_LITERAL = &quot;ExperimentIndividualData&quot;;
   /** Separador central de la tabla que imprime por pantalla. */
   private static final String CENTER_SEP = &quot; | &quot;;
   /** Separador izquierdo de la tabla que imprime por pantalla. */
-<span class="nc" id="L28">  private static final String LEFT_SEP = CENTER_SEP.substring(1, 3);</span>
+<span class="nc" id="L52">  private static final String LEFT_SEP = CENTER_SEP.substring(1, 3);</span>
   /** Separador derecho de la tabla que imprime por pantalla. */
-<span class="nc" id="L30">  private static final String RIGHT_SEP = CENTER_SEP.substring(1);</span>
+<span class="nc" id="L54">  private static final String RIGHT_SEP = CENTER_SEP.substring(1);</span>
   /** Ancho de cada columna de la tabla. */
   private static final int WIDTH_COLUMN = 10;
 
@@ -52,102 +76,96 @@ public class StandardConsole extends ConsoleOutput {
    * Constructor por defecto.
    */
   public StandardConsole() {
-<span class="nc" id="L55">    super();</span>
-<span class="nc" id="L56">    historical = HistoricalData.makeInstance();</span>
-<span class="nc" id="L57">    experimentData = historical.getDataCollectorExperiment(&quot;ExperimentIndividualData&quot;);</span>
-<span class="nc" id="L58">    int maxLineLength = getMaxLine().length();</span>
-<span class="nc" id="L59">    StringBuilder stb = new StringBuilder(&quot; &quot;);</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">    for (int i = 2; i &lt; maxLineLength - 1; i++) {</span>
-<span class="nc" id="L61">      stb.append(&quot;-&quot;);</span>
+<span class="nc" id="L79">    super();</span>
+<span class="nc" id="L80">    historical = HistoricalData.makeInstance();</span>
+<span class="nc" id="L81">    experimentData = historical.getDataCollectorExperiment(EXPERIMENT_INDIVIDUAL_DATA_LITERAL);</span>
+<span class="nc" id="L82">    final int maxLineLength = getMaxLine().length();</span>
+<span class="nc" id="L83">    final StringBuilder lineOfDashes = new StringBuilder(SPACE_SYMBOL);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">    for (int i = 2; i &lt; maxLineLength - 1; i++) {</span>
+<span class="nc" id="L85">      lineOfDashes.append(&quot;-&quot;);</span>
     }
 
-<span class="nc" id="L64">    hline = String.format(&quot;%s%n&quot;, stb.toString());</span>
-<span class="nc" id="L65">    totalRPB = Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.total.RPB&quot;));</span>
-<span class="nc" id="L66">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
-<span class="nc" id="L67">  }</span>
+<span class="nc" id="L88">    hline = String.format(STRING_NEW_LINE_FORMAT, lineOfDashes.toString());</span>
+<span class="nc" id="L89">    totalRPB = Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.total.RPB&quot;));</span>
+<span class="nc" id="L90">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
+<span class="nc" id="L91">  }</span>
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see progen.output.outputers.Outputer#print()
-   */
+  @Override
   public void print() {
-<span class="nc" id="L75">    int currentGeneration = historical.getCurrentGeneration();</span>
-<span class="nc" id="L76">    int maxGenerations = ProGenContext.getOptionalProperty(&quot;progen.max-generation&quot;, Integer.MAX_VALUE);</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">    if (currentGeneration &lt; maxGenerations) {</span>
-<span class="nc" id="L78">      printHeader(maxGenerations);</span>
-<span class="nc" id="L79">      printBody();</span>
-<span class="nc" id="L80">      printTail();</span>
+<span class="nc" id="L95">    final int currentGeneration = historical.getCurrentGeneration();</span>
+<span class="nc" id="L96">    final int maxGenerations = ProGenContext.getOptionalProperty(&quot;progen.max-generation&quot;, Integer.MAX_VALUE);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">    if (currentGeneration &lt; maxGenerations) {</span>
+<span class="nc" id="L98">      printHeader(maxGenerations);</span>
+<span class="nc" id="L99">      printBody();</span>
+<span class="nc" id="L100">      printTail();</span>
     }
-<span class="nc" id="L82">  }</span>
+<span class="nc" id="L102">  }</span>
 
   /**
    * Imprime la cabecera de la tabla de resultados.
    */
   private void printHeader(int maxGenerations) {
-    // int maxGenerations =
-    // ProGenContext.getMandatoryProperty(&quot;progen.max-generation&quot;).length();
-<span class="nc" id="L90">    String generation = getLiterals().getString(&quot;generation&quot;) + Formatter.right(historical.getCurrentGeneration() + &quot;&quot;, maxGenerations);</span>
-<span class="nc" id="L91">    System.out.printf(&quot;%n%n%s&quot;, hline);</span>
-<span class="nc" id="L92">    System.out.printf(&quot;%s%s%s%n&quot;, LEFT_SEP, Formatter.center(generation, getMaxLine().length() - LEFT_SEP.length() - RIGHT_SEP.length()), RIGHT_SEP);</span>
+<span class="nc" id="L108">    final String generation = getLiterals().getString(&quot;generation&quot;) + Formatter.right(historical.getCurrentGeneration() + &quot;&quot;, maxGenerations);</span>
+<span class="nc" id="L109">    System.out.printf(&quot;%n%n%s&quot;, hline);</span>
+<span class="nc" id="L110">    System.out.printf(&quot;%s%s%s%n&quot;, LEFT_SEP, Formatter.center(generation, getMaxLine().length() - LEFT_SEP.length() - RIGHT_SEP.length()), RIGHT_SEP);</span>
 
-<span class="nc" id="L94">    System.out.printf(&quot;%s&quot;, hline);</span>
-<span class="nc" id="L95">  }</span>
+<span class="nc" id="L112">    System.out.printf(STRING_FORMAT, hline);</span>
+<span class="nc" id="L113">  }</span>
 
   /**
    * Imprime el grueso de la tabla.
    */
   private void printBody() {
-<span class="nc" id="L101">    Individual bestTotal = (Individual) (historical.getDataCollectorExperiment(&quot;ExperimentIndividualData&quot;).getPlugin(&quot;best&quot;).getValue());</span>
-<span class="nc" id="L102">    Individual bestGeneration = (Individual) (historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;).getPlugin(&quot;best&quot;).getValue());</span>
+<span class="nc" id="L119">    final Individual bestTotal = (Individual) (historical.getDataCollectorExperiment(EXPERIMENT_INDIVIDUAL_DATA_LITERAL).getPlugin(BEST_LITERAL).getValue());</span>
+<span class="nc" id="L120">    final Individual bestGeneration = (Individual) (historical.getCurrentDataCollector(EXPERIMENT_INDIVIDUAL_DATA_LITERAL).getPlugin(BEST_LITERAL).getValue());</span>
 
-<span class="nc" id="L104">    printIndividual();</span>
-<span class="nc" id="L105">    printTime();</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">    if (bestTotal.equals(bestGeneration)) {</span>
-<span class="nc" id="L107">      printBest();</span>
+<span class="nc" id="L122">    printIndividual();</span>
+<span class="nc" id="L123">    printTime();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">    if (bestTotal.equals(bestGeneration)) {</span>
+<span class="nc" id="L125">      printBest();</span>
     }
-<span class="nc" id="L109">  }</span>
+<span class="nc" id="L127">  }</span>
 
   /**
    * Imprime la tabla del mejor individuo.
    */
   private void printBest() {
-<span class="nc" id="L115">    printBestHeaderTable();</span>
-<span class="nc" id="L116">    printBestSubHeaderTable();</span>
-<span class="nc" id="L117">    printBestData();</span>
-<span class="nc" id="L118">    printBestTail();</span>
-<span class="nc" id="L119">  }</span>
+<span class="nc" id="L133">    printBestHeaderTable();</span>
+<span class="nc" id="L134">    printBestSubHeaderTable();</span>
+<span class="nc" id="L135">    printBestData();</span>
+<span class="nc" id="L136">    printBestTail();</span>
+<span class="nc" id="L137">  }</span>
 
   /**
    * Imprime la cabecera de la tabla del mejor individuo.
    */
   private void printBestHeaderTable() {
-<span class="nc" id="L125">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L143">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
     int padding;
 
-<span class="nc" id="L128">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L146">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L130">    padding = Formatter.center(getLiterals().getString(&quot;raw&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L131">    padding += Formatter.center(getLiterals().getString(&quot;adjusted&quot;), WIDTH_COLUMN).length() + 3;</span>
-<span class="nc" id="L132">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;fitness&quot;), padding), CENTER_SEP));</span>
+<span class="nc" id="L148">    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L149">    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;</span>
+<span class="nc" id="L150">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));</span>
 
-<span class="nc" id="L134">    padding = Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L135">    padding += Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN).length() + 3;</span>
-<span class="nc bnc" id="L136" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L137">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;RBP&quot; + i, padding), CENTER_SEP));</span>
+<span class="nc" id="L152">    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L153">    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L155">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L139" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L140">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;ADF&quot; + i, padding), CENTER_SEP));</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L158">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(ADF_LITERAL + i, padding), CENTER_SEP));</span>
     }
-<span class="nc" id="L142">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
-<span class="nc" id="L143">  }</span>
+<span class="nc" id="L160">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L161">  }</span>
 
   /**
    * Imprime la cabecera de la tabla de mejor individuo.
    */
   private void printBestSubHeaderTable() {
-<span class="nc" id="L149">    printIndividualSubHeaderTable();</span>
-<span class="nc" id="L150">  }</span>
+<span class="nc" id="L167">    printIndividualSubHeaderTable();</span>
+<span class="nc" id="L168">  }</span>
 
   /**
    * Imprime los datos del mejor individuo.
@@ -155,140 +173,140 @@ public class StandardConsole extends ConsoleOutput {
   private void printBestData() {
     StringBuilder line;
     String ceilData;
-<span class="nc" id="L158">    Individual best = (Individual) (experimentData.getPlugin(&quot;best&quot;).getValue());</span>
+<span class="nc" id="L176">    final Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());</span>
 
-<span class="nc" id="L160">    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L161">    line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L162">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, padding + CENTER_SEP.length())));</span>
-<span class="nc" id="L163">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;individual&quot;), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L178">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L179">    line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L180">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));</span>
+<span class="nc" id="L181">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L165">    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());</span>
-<span class="nc" id="L166">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L167">    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());</span>
-<span class="nc" id="L168">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L183">    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());</span>
+<span class="nc" id="L184">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L185">    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());</span>
+<span class="nc" id="L186">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
-<span class="nc bnc" id="L170" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L171">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L172">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L189">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L190">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L174" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L175">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L176">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L193">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L194">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L178">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
-<span class="nc" id="L179">  }</span>
+<span class="nc" id="L196">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L197">  }</span>
 
   /**
    * Imprime los datos resumen del mejor individuo.
    */
   private void printBestTail() {
-<span class="nc" id="L185">    StringBuilder stb = new StringBuilder();</span>
-<span class="nc" id="L186">    Individual best = (Individual) (experimentData.getPlugin(&quot;best&quot;).getValue());</span>
-<span class="nc bnc" id="L187" title="All 2 branches missed.">    for (int i = 0; i &lt; best.getTotalRPB(); i++) {</span>
-<span class="nc" id="L188">      stb.append(String.format(&quot;RPB%d:%n&quot;, i));</span>
-<span class="nc" id="L189">      stb.append(Formatter.tree(best.getTrees().get(&quot;RPB&quot; + i)));</span>
-<span class="nc" id="L190">      stb.append(String.format(&quot;%n&quot;));</span>
+<span class="nc" id="L203">    final StringBuilder bestTail = new StringBuilder();</span>
+<span class="nc" id="L204">    Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">    for (int i = 0; i &lt; best.getTotalRPB(); i++) {</span>
+<span class="nc" id="L206">      bestTail.append(String.format(&quot;%s%d:%n&quot;, RPB_LITERAL, i));</span>
+<span class="nc" id="L207">      bestTail.append(Formatter.tree(best.getTrees().get(RPB_LITERAL + i)));</span>
+<span class="nc" id="L208">      bestTail.append(String.format(&quot;%n&quot;));</span>
     }
 
-<span class="nc bnc" id="L193" title="All 2 branches missed.">    for (int i = 0; i &lt; best.getTotalADF(); i++) {</span>
-<span class="nc" id="L194">      stb.append(String.format(&quot;ADF%d:%n&quot;, i));</span>
-<span class="nc" id="L195">      stb.append(Formatter.tree(best.getTrees().get(&quot;ADF&quot; + i)));</span>
-<span class="nc" id="L196">      stb.append(String.format(&quot;%n&quot;));</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">    for (int i = 0; i &lt; best.getTotalADF(); i++) {</span>
+<span class="nc" id="L212">      bestTail.append(String.format(&quot;%s%d:%n&quot;, ADF_LITERAL, i));</span>
+<span class="nc" id="L213">      bestTail.append(Formatter.tree(best.getTrees().get(ADF_LITERAL + i)));</span>
+<span class="nc" id="L214">      bestTail.append(String.format(&quot;%n&quot;));</span>
     }
 
-<span class="nc" id="L199">    System.out.println(stb.toString());</span>
-<span class="nc" id="L200">  }</span>
+<span class="nc" id="L217">    System.out.println(bestTail.toString());</span>
+<span class="nc" id="L218">  }</span>
 
   /**
    * Imprime la tabla de tiempos.
    */
   private void printTime() {
-<span class="nc" id="L206">    printTimeHeaderTable();</span>
-<span class="nc" id="L207">    printTimeData();</span>
+<span class="nc" id="L224">    printTimeHeaderTable();</span>
+<span class="nc" id="L225">    printTimeData();</span>
 
-<span class="nc" id="L209">  }</span>
+<span class="nc" id="L227">  }</span>
 
   /**
    * Imprime los datos de la tabla de tiempos.
    */
   private void printTimeData() {
-<span class="nc" id="L215">    printTimeBreeding();</span>
-<span class="nc" id="L216">    printTimeEvaluation();</span>
-<span class="nc" id="L217">  }</span>
+<span class="nc" id="L233">    printTimeBreeding();</span>
+<span class="nc" id="L234">    printTimeEvaluation();</span>
+<span class="nc" id="L235">  }</span>
 
   /**
    * Imprime los tiempos de evaluación de individuos.
    */
   private void printTimeEvaluation() {
-<span class="nc" id="L223">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L224">    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
-<span class="nc" id="L225">    padding = padding / 2;</span>
-<span class="nc" id="L226">    Plugin evaluation = historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).getPlugin(&quot;evaluation&quot;);</span>
+<span class="nc" id="L241">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L242">    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
+<span class="nc" id="L243">    padding = padding / 2;</span>
+<span class="nc" id="L244">    Plugin evaluation = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(EVALUATION_LITERAL);</span>
     String ceilData;
 
-<span class="nc" id="L229">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, firstColumnWidth)));</span>
-<span class="nc" id="L230">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;evaluation&quot;), secondColumnWidth), CENTER_SEP));</span>
-<span class="nc" id="L231">    ceilData = String.format(&quot;%s&quot;, evaluation.getPlugin(&quot;mean&quot;).getValue().toString());</span>
-<span class="nc" id="L232">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
-<span class="nc" id="L233">    ceilData = String.format(&quot;%s&quot;, evaluation.getPlugin(&quot;total&quot;).getValue().toString());</span>
-<span class="nc" id="L234">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
-<span class="nc" id="L235">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
-<span class="nc" id="L236">  }</span>
+<span class="nc" id="L247">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, firstColumnWidth)));</span>
+<span class="nc" id="L248">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(EVALUATION_LITERAL), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L249">    ceilData = String.format(STRING_FORMAT, evaluation.getPlugin(MEAN_LITERAL).getValue().toString());</span>
+<span class="nc" id="L250">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
+<span class="nc" id="L251">    ceilData = String.format(STRING_FORMAT, evaluation.getPlugin(TOTAL_LITERAL).getValue().toString());</span>
+<span class="nc" id="L252">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
+<span class="nc" id="L253">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L254">  }</span>
 
   /**
    * Imprime los tiempos de ejecución de individuos.
    */
   private void printTimeBreeding() {
-<span class="nc" id="L242">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L243">    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
-<span class="nc" id="L244">    padding = padding / 2;</span>
-<span class="nc" id="L245">    Plugin breeding = historical.getCurrentDataCollector(&quot;PopulationTimeData&quot;).getPlugin(&quot;breeding&quot;);</span>
+<span class="nc" id="L260">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L261">    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
+<span class="nc" id="L262">    padding = padding / 2;</span>
+<span class="nc" id="L263">    final Plugin breeding = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(BREEDING_LITERAL);</span>
     String ceilData;
 
-<span class="nc" id="L248">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, firstColumnWidth)));</span>
-<span class="nc" id="L249">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;breeding&quot;), secondColumnWidth), CENTER_SEP));</span>
-<span class="nc" id="L250">    ceilData = String.format(&quot;%s&quot;, breeding.getPlugin(&quot;mean&quot;).getValue().toString());</span>
-<span class="nc" id="L251">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
-<span class="nc" id="L252">    ceilData = String.format(&quot;%s&quot;, breeding.getPlugin(&quot;total&quot;).getValue().toString());</span>
-<span class="nc" id="L253">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
-<span class="nc" id="L254">    System.out.printf(&quot;%s%n&quot;, line.toString());</span>
-<span class="nc" id="L255">  }</span>
+<span class="nc" id="L266">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, firstColumnWidth)));</span>
+<span class="nc" id="L267">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(BREEDING_LITERAL), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L268">    ceilData = String.format(STRING_FORMAT, breeding.getPlugin(MEAN_LITERAL).getValue().toString());</span>
+<span class="nc" id="L269">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
+<span class="nc" id="L270">    ceilData = String.format(STRING_FORMAT, breeding.getPlugin(TOTAL_LITERAL).getValue().toString());</span>
+<span class="nc" id="L271">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(ceilData, padding), CENTER_SEP));</span>
+<span class="nc" id="L272">    System.out.printf(STRING_NEW_LINE_FORMAT, line.toString());</span>
+<span class="nc" id="L273">  }</span>
 
   /**
    * Imprime la cabecera de la tabla de tiempos.
    */
   private void printTimeHeaderTable() {
-<span class="nc" id="L261">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L279">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
     int padding;
 
-<span class="nc" id="L264">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;time&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L282">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;time&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L266">    padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
-<span class="nc" id="L267">    padding = padding / 2;</span>
+<span class="nc" id="L284">    padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
+<span class="nc" id="L285">    padding = padding / 2;</span>
 
-<span class="nc" id="L269">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;populationMean&quot;), padding), CENTER_SEP));</span>
-<span class="nc" id="L270">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;totalPopulation&quot;), padding), CENTER_SEP));</span>
+<span class="nc" id="L287">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;populationMean&quot;), padding), CENTER_SEP));</span>
+<span class="nc" id="L288">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;totalPopulation&quot;), padding), CENTER_SEP));</span>
 
-<span class="nc" id="L272">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
-<span class="nc" id="L273">  }</span>
+<span class="nc" id="L290">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L291">  }</span>
 
   /**
    * Imprime un individuo.
    */
   private void printIndividual() {
-<span class="nc" id="L279">    printIndividualHeaderTable();</span>
-<span class="nc" id="L280">    printIndividualSubHeaderTable();</span>
-<span class="nc" id="L281">    printIndividualData();</span>
-<span class="nc" id="L282">  }</span>
+<span class="nc" id="L297">    printIndividualHeaderTable();</span>
+<span class="nc" id="L298">    printIndividualSubHeaderTable();</span>
+<span class="nc" id="L299">    printIndividualData();</span>
+<span class="nc" id="L300">  }</span>
 
   /**
    * Imprime los datos de un individuo.
    */
   private void printIndividualData() {
-<span class="nc" id="L288">    printIndividualBestRunData();</span>
-<span class="nc" id="L289">    printIndividualGenerationMeanData();</span>
-<span class="nc" id="L290">    printIndividualWorstData();</span>
-<span class="nc" id="L291">  }</span>
+<span class="nc" id="L306">    printIndividualBestRunData();</span>
+<span class="nc" id="L307">    printIndividualGenerationMeanData();</span>
+<span class="nc" id="L308">    printIndividualWorstData();</span>
+<span class="nc" id="L309">  }</span>
 
   /**
    * Imprime los datos de la generación media.
@@ -297,29 +315,29 @@ public class StandardConsole extends ConsoleOutput {
   private void printIndividualGenerationMeanData() {
     StringBuilder line;
     String ceilData;
-<span class="nc" id="L300">    DataCollector populationData = historical.getCurrentDataCollector(&quot;PopulationData&quot;);</span>
-<span class="nc" id="L301">    Map&lt;String, Mean&gt; mean = (Map&lt;String, Mean&gt;) (populationData.getPlugin(&quot;individualMean&quot;).getValue());</span>
+<span class="nc" id="L318">    final DataCollector populationData = historical.getCurrentDataCollector(POPULATION_DATA_LITERAL);</span>
+<span class="nc" id="L319">    final Map&lt;String, Mean&gt; mean = (Map&lt;String, Mean&gt;) (populationData.getPlugin(INDIVIDUAL_MEAN_LITERAL).getValue());</span>
 
-<span class="nc" id="L303">    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L304">    line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L305">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, padding + CENTER_SEP.length())));</span>
-<span class="nc" id="L306">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;generationMean&quot;), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L321">    int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L322">    line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L323">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));</span>
+<span class="nc" id="L324">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(GENERATION_MEAN_LITERAL), secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L308">    ceilData = String.format(&quot;%.3G&quot;, mean.get(&quot;raw&quot;).getValue());</span>
-<span class="nc" id="L309">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L310">    ceilData = String.format(&quot;%.5f&quot;, mean.get(&quot;adjusted&quot;).getValue());</span>
-<span class="nc" id="L311">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L326">    ceilData = String.format(&quot;%.3G&quot;, mean.get(RAW_LITERAL).getValue());</span>
+<span class="nc" id="L327">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L328">    ceilData = String.format(&quot;%.5f&quot;, mean.get(ADJUSTED_LITERAL).getValue());</span>
+<span class="nc" id="L329">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
-<span class="nc bnc" id="L313" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L314">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(&quot;RPB&quot; + i + &quot;-nodes&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L315">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(&quot;RPB&quot; + i + &quot;-depth&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L332">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(RPB_LITERAL + i + &quot;-nodes&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L333">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(RPB_LITERAL + i + &quot;-depth&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L317" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L318">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(&quot;ADF&quot; + i + &quot;-nodes&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L319">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(&quot;ADF&quot; + i + &quot;-depth&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L336">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(ADF_LITERAL + i + &quot;-nodes&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L337">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(ADF_LITERAL + i + &quot;-depth&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L321">    System.out.println(line.toString());</span>
-<span class="nc" id="L322">  }</span>
+<span class="nc" id="L339">    System.out.println(line.toString());</span>
+<span class="nc" id="L340">  }</span>
 
   /**
    * Imprime los datos de la mejor ejecución de un individuo.
@@ -327,29 +345,29 @@ public class StandardConsole extends ConsoleOutput {
   private void printIndividualBestRunData() {
     StringBuilder line;
     String ceilData;
-<span class="nc" id="L330">    Individual best = (Individual) (experimentData.getPlugin(&quot;best&quot;).getValue());</span>
+<span class="nc" id="L348">    final Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());</span>
 
-<span class="nc" id="L332">    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L333">    line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L334">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, padding + CENTER_SEP.length())));</span>
-<span class="nc" id="L335">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;bestRun&quot;), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L350">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L351">    line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L352">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));</span>
+<span class="nc" id="L353">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(BEST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L337">    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());</span>
-<span class="nc" id="L338">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L339">    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());</span>
-<span class="nc" id="L340">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L355">    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());</span>
+<span class="nc" id="L356">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L357">    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());</span>
+<span class="nc" id="L358">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
-<span class="nc bnc" id="L342" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L343">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L344">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L361">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L362">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L346" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L347">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L348">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L364" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L365">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L366">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L350">    System.out.println(line.toString());</span>
+<span class="nc" id="L368">    System.out.println(line.toString());</span>
 
-<span class="nc" id="L352">  }</span>
+<span class="nc" id="L370">  }</span>
 
   /**
    * Imprime los datos del peor individuo.
@@ -357,89 +375,89 @@ public class StandardConsole extends ConsoleOutput {
   private void printIndividualWorstData() {
     StringBuilder line;
     String ceilData;
-<span class="nc" id="L360">    Individual worst = (Individual) (historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;).getPlugin(&quot;worst&quot;).getValue());</span>
+<span class="nc" id="L378">    final Individual worst = (Individual) (historical.getCurrentDataCollector(EXPERIMENT_INDIVIDUAL_DATA_LITERAL).getPlugin(&quot;worst&quot;).getValue());</span>
 
-<span class="nc" id="L362">    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L363">    line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L364">    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, padding + CENTER_SEP.length())));</span>
-<span class="nc" id="L365">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;worstRun&quot;), secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L380">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L381">    line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L382">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));</span>
+<span class="nc" id="L383">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(WORST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L367">    ceilData = String.format(&quot;%.3G&quot;, worst.getRawFitness());</span>
-<span class="nc" id="L368">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L369">    ceilData = String.format(&quot;%.5f&quot;, worst.getAdjustedFitness());</span>
-<span class="nc" id="L370">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L385">    ceilData = String.format(&quot;%.3G&quot;, worst.getRawFitness());</span>
+<span class="nc" id="L386">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L387">    ceilData = String.format(&quot;%.5f&quot;, worst.getAdjustedFitness());</span>
+<span class="nc" id="L388">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
-<span class="nc bnc" id="L372" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L373">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(&quot;RPB&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L374">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(&quot;RPB&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L391">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L392">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L376" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L377">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(&quot;ADF&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L378">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(&quot;ADF&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L395">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L396">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L380">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L398">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
 
-<span class="nc" id="L382">  }</span>
+<span class="nc" id="L400">  }</span>
 
   /**
    * Imprime la cabecera de la subtabla de individuos.
    */
   private void printIndividualSubHeaderTable() {
     // Print sub-head table
-<span class="nc" id="L389">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L407">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
 
-<span class="nc" id="L391">    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L392">    line.append(String.format(&quot;%s   %s&quot;, Formatter.center(&quot; &quot;, padding + secondColumnWidth), CENTER_SEP));</span>
-<span class="nc" id="L393">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;raw&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L394">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;adjusted&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc bnc" id="L395" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L396">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L397">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L409">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L410">    line.append(String.format(&quot;%s   %s&quot;, Formatter.center(SPACE_SYMBOL, padding + secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L411">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L412">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L413" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L414">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L415">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L399" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L400">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L401">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L417" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L418">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L419">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L403">    System.out.printf(&quot;%s%n&quot;, line.toString());</span>
+<span class="nc" id="L421">    System.out.printf(STRING_NEW_LINE_FORMAT, line.toString());</span>
 
-<span class="nc" id="L405">  }</span>
+<span class="nc" id="L423">  }</span>
 
   /**
    * Imprime la cabecera de la tabla de individuos.
    */
   private void printIndividualHeaderTable() {
     // Print head table
-<span class="nc" id="L412">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L430">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
     int padding;
-<span class="nc" id="L414">    firstColumnWidth = WIDTH_COLUMN + CENTER_SEP.length();</span>
+<span class="nc" id="L432">    firstColumnWidth = WIDTH_COLUMN + CENTER_SEP.length();</span>
 
-<span class="nc" id="L416">    secondColumnWidth = Math.max(WIDTH_COLUMN, getLiterals().getString(&quot;generationMean&quot;).length());</span>
-<span class="nc" id="L417">    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(&quot;bestRun&quot;).length());</span>
-<span class="nc" id="L418">    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(&quot;worstRun&quot;).length());</span>
+<span class="nc" id="L434">    secondColumnWidth = Math.max(WIDTH_COLUMN, getLiterals().getString(GENERATION_MEAN_LITERAL).length());</span>
+<span class="nc" id="L435">    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(BEST_RUN_LITERAL).length());</span>
+<span class="nc" id="L436">    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(WORST_RUN_LITERAL).length());</span>
 
-<span class="nc" id="L420">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;individual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
+<span class="nc" id="L438">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
 
-<span class="nc" id="L422">    padding = Formatter.center(getLiterals().getString(&quot;raw&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L423">    padding += Formatter.center(getLiterals().getString(&quot;adjusted&quot;), WIDTH_COLUMN).length() + 3;</span>
-<span class="nc" id="L424">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;fitness&quot;), padding), CENTER_SEP));</span>
+<span class="nc" id="L440">    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L441">    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;</span>
+<span class="nc" id="L442">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));</span>
 
-<span class="nc" id="L426">    padding = Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN).length();</span>
-<span class="nc" id="L427">    padding += Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN).length() + 3;</span>
-<span class="nc bnc" id="L428" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L429">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;RBP&quot; + i, padding), CENTER_SEP));</span>
+<span class="nc" id="L444">    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L445">    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L447">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</span>
     }
-<span class="nc bnc" id="L431" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L432">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;ADF&quot; + i, padding), CENTER_SEP));</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
+<span class="nc" id="L450">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(ADF_LITERAL + i, padding), CENTER_SEP));</span>
     }
-<span class="nc" id="L434">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
-<span class="nc" id="L435">  }</span>
+<span class="nc" id="L452">    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
+<span class="nc" id="L453">  }</span>
 
   /**
    * Imprime los resumenes de las tablas.
    */
   private void printTail() {
     // do nothing
-<span class="nc" id="L442">  }</span>
+<span class="nc" id="L460">  }</span>
 
   /**
    * Devuelve la línea más larga que contendrá una tabla.
@@ -447,21 +465,21 @@ public class StandardConsole extends ConsoleOutput {
    * @return La línea más larga.
    */
   private String getMaxLine() {
-<span class="nc" id="L450">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
-<span class="nc" id="L451">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L452">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;generationMean&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L453">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;raw&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L454">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;adjusted&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L468">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L469">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L470">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(GENERATION_MEAN_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L471">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L472">    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
 
-<span class="nc" id="L456">    int totalTrees = 0;</span>
-<span class="nc" id="L457">    totalTrees += totalRPB;</span>
-<span class="nc" id="L458">    totalTrees += totalADF;</span>
+<span class="nc" id="L474">    int totalTrees = 0;</span>
+<span class="nc" id="L475">    totalTrees += totalRPB;</span>
+<span class="nc" id="L476">    totalTrees += totalADF;</span>
 
-<span class="nc bnc" id="L460" title="All 2 branches missed.">    for (int i = 0; i &lt; totalTrees; i++) {</span>
-<span class="nc" id="L461">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L462">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc bnc" id="L478" title="All 2 branches missed.">    for (int i = 0; i &lt; totalTrees; i++) {</span>
+<span class="nc" id="L479">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L480">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));</span>
     }
-<span class="nc" id="L464">    return line.toString();</span>
+<span class="nc" id="L482">    return line.toString();</span>
 
   }
 }

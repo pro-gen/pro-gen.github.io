@@ -25,9 +25,9 @@ import progen.kernel.population.UnknownUserProgramException;
    */
   public static UserProgram getUserProgram() {
 <span class="nc" id="L27">    UserProgram userProgram = null;</span>
-<span class="nc" id="L28">    String userPackage = ProGenContext.getMandatoryProperty(&quot;progen.user.home&quot;);</span>
+<span class="nc" id="L28">    final String userPackage = ProGenContext.getMandatoryProperty(&quot;progen.user.home&quot;);</span>
     String userProgramClass;
-<span class="nc" id="L30">    String path[] = userPackage.split(&quot;\\.&quot;);</span>
+<span class="nc" id="L30">    final String [] path = userPackage.split(&quot;\\.&quot;);</span>
 
 <span class="nc" id="L32">    userProgramClass = path[path.length - 1].substring(0, 1).toUpperCase(Locale.getDefault());</span>
 <span class="nc" id="L33">    userProgramClass += path[path.length - 1].substring(1);</span>

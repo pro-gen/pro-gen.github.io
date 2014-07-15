@@ -34,7 +34,7 @@ public final class Error {
   /**
    * Lenguaje por defecto de la que se cargarán los distintos literales.
    */
-  private final static String DEFAULT_LANGUAGE = &quot;en_US&quot;;
+  private static final String DEFAULT_LANGUAGE = &quot;en_US&quot;;
 
   /**
    * Constructor privado de la clase, en la que por defecto se cargan los
@@ -43,7 +43,7 @@ public final class Error {
    * propiedad &lt;code&gt;progen.language&lt;/code&gt;
    */
 <span class="fc" id="L45">  private Error() {</span>
-<span class="fc" id="L46">    Locale locale = new Locale(DEFAULT_LANGUAGE);</span>
+<span class="fc" id="L46">    final Locale locale = new Locale(DEFAULT_LANGUAGE);</span>
 <span class="fc" id="L47">    Locale.setDefault(locale);</span>
 <span class="fc" id="L48">    literals = ResourceBundle.getBundle(PROGEN_KERNEL_ERROR_STRINGS_BUNDLE);</span>
 <span class="fc" id="L49">  }</span>

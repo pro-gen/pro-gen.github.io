@@ -73,7 +73,7 @@ public class Production implements Serializable {
    * representación es de la forma &lt;code&gt; A -&gt; b C &lt;/code&gt;
    */
   public String toString() {
-<span class="nc" id="L76">    StringBuffer production = new StringBuffer();</span>
+<span class="nc" id="L76">    final StringBuffer production = new StringBuffer();</span>
 <span class="nc" id="L77">    production.append(left.toString());</span>
 <span class="nc" id="L78">    production.append(&quot; -&gt; &quot;);</span>
 <span class="nc" id="L79">    production.append(function.toString());</span>

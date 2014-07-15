@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OutputStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output.outputers</a> &gt; <span class="el_source">OutputStore.java</span></div><h1>OutputStore.java</h1><pre class="source lang-java linenums">/**
- * 
- */
-package progen.output.outputers;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OutputStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output.outputers</a> &gt; <span class="el_source">OutputStore.java</span></div><h1>OutputStore.java</h1><pre class="source lang-java linenums">package progen.output.outputers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,7 @@ import progen.context.ProGenContext;
  * @since 2.0
  * 
  */
-public class OutputStore {
+public final class OutputStore {
 
   /** Conjunto de salidas disponibles. */
   private List&lt;Outputer&gt; outputers;
@@ -32,9 +29,9 @@ public class OutputStore {
    * Constructor privado de la clase. Únicamente se ejecutará desde el método de
    * crearción si no existe una instancia previa.
    */
-<span class="nc" id="L35">  private OutputStore() {</span>
-<span class="nc" id="L36">    outputers = new ArrayList&lt;Outputer&gt;();</span>
-<span class="nc" id="L37">  }</span>
+<span class="nc" id="L32">  private OutputStore() {</span>
+<span class="nc" id="L33">    outputers = new ArrayList&lt;Outputer&gt;();</span>
+<span class="nc" id="L34">  }</span>
 
   /**
    * Método de creación de la instancia única. En caso de existir una
@@ -42,12 +39,12 @@ public class OutputStore {
    * 
    * @return La instancia única del almaacen de salidas.
    */
-  public synchronized static OutputStore makeInstance() {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">    if (store == null) {</span>
-<span class="nc" id="L47">      store = new OutputStore();</span>
-<span class="nc" id="L48">      store.init();</span>
+  public static synchronized OutputStore makeInstance() {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">    if (store == null) {</span>
+<span class="nc" id="L44">      store = new OutputStore();</span>
+<span class="nc" id="L45">      store.init();</span>
     }
-<span class="nc" id="L50">    return store;</span>
+<span class="nc" id="L47">    return store;</span>
   }
 
   /**
@@ -58,40 +55,40 @@ public class OutputStore {
    * &lt;code&gt; progen.outputers &lt;/code&gt; y serparadas por comas (,).
    */
   public void init() {
-<span class="nc" id="L61">    String outputersName[] = ProGenContext.getOptionalProperty(&quot;progen.outputers&quot;, &quot;NullOutputer&quot;).split(&quot;,[ ]*&quot;);</span>
+<span class="nc" id="L58">    final String[] outputersName = ProGenContext.getOptionalProperty(&quot;progen.outputers&quot;, &quot;NullOutputer&quot;).split(&quot;,[ ]*&quot;);</span>
     try {
-<span class="nc bnc" id="L63" title="All 2 branches missed.">      for (String outputClass : outputersName) {</span>
-<span class="nc" id="L64">        Outputer output = (Outputer) Class.forName(&quot;progen.output.outputers.&quot; + outputClass).newInstance();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">      for (String outputClass : outputersName) {</span>
+<span class="nc" id="L61">        final Outputer output = (Outputer) Class.forName(&quot;progen.output.outputers.&quot; + outputClass).newInstance();</span>
 
-<span class="nc" id="L66">        outputers.add(output);</span>
+<span class="nc" id="L63">        outputers.add(output);</span>
       }
-<span class="nc" id="L68">    } catch (InstantiationException e) {</span>
-<span class="nc" id="L69">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L70">    } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L71">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L72">    } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L73">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L65">    } catch (InstantiationException e) {</span>
+<span class="nc" id="L66">      throw new UnknowOutputerException(e.getMessage());</span>
+<span class="nc" id="L67">    } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L68">      throw new UnknowOutputerException(e.getMessage());</span>
+<span class="nc" id="L69">    } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L70">      throw new UnknowOutputerException(e.getMessage());</span>
+<span class="nc" id="L71">    }</span>
 
-<span class="nc" id="L76">  }</span>
+<span class="nc" id="L73">  }</span>
 
   /**
    * Ejecuta el método correspondiente de todas las salidas disponibles.
    */
   public void print() {
-<span class="nc bnc" id="L82" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
-<span class="nc" id="L83">      out.print();</span>
-<span class="nc" id="L84">    }</span>
-<span class="nc" id="L85">  }</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
+<span class="nc" id="L80">      out.print();</span>
+<span class="nc" id="L81">    }</span>
+<span class="nc" id="L82">  }</span>
 
   /**
    * Ejecuta el método correspondiente de cierre en todas las salidas
    * disponibles.
    */
   public void close() {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
-<span class="nc" id="L93">      out.close();</span>
-<span class="nc" id="L94">    }</span>
-<span class="nc" id="L95">  }</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
+<span class="nc" id="L90">      out.close();</span>
+<span class="nc" id="L91">    }</span>
+<span class="nc" id="L92">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

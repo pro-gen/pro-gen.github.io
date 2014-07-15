@@ -38,13 +38,13 @@ public class IndividualMeanPlugin implements Plugin {
 <span class="nc" id="L38">      trees.put(&quot;ADF&quot; + i + &quot;-depth&quot;, new Mean());</span>
     }
 <span class="nc" id="L40">  }</span>
-  
+
   @Override
   public void addValue(Comparable&lt;?&gt; value) {
-<span class="nc bnc" id="L44" title="All 2 branches missed.">    if(!(value instanceof Individual)){</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">    if (!(value instanceof Individual)) {</span>
 <span class="nc" id="L45">      throw new ClassCastException(value.toString());</span>
     }
-    
+
 <span class="nc" id="L48">    Individual individual = (Individual) value;</span>
 <span class="nc" id="L49">    raw.addValue(individual.getRawFitness());</span>
 <span class="nc" id="L50">    adjusted.addValue(individual.getAdjustedFitness());</span>

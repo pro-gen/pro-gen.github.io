@@ -19,10 +19,10 @@ public class BitXor extends NonTerminal {
 
   @Override
   public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
-<span class="fc" id="L22">    final Integer child_1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
-<span class="fc" id="L23">    final Integer child_2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L22">    final Integer child1 = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L23">    final Integer child2 = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
 
-<span class="fc" id="L25">    return (Integer) (child_1 ^ child_2);</span>
+<span class="fc" id="L25">    return (Integer) (child1 ^ child2);</span>
   }
 
 }

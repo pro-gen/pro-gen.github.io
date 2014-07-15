@@ -4,20 +4,22 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * Clase encargada de establecer las dependencias que existen entre dos plugins, ordenándolos
- * de menor a mayor, o lo que es lo mismo, de menos dependencias a más.
+ * Clase encargada de establecer las dependencias que existen entre dos plugins,
+ * ordenándolos de menor a mayor, o lo que es lo mismo, de menos dependencias a
+ * más.
+ * 
  * @author jirsis
  * @since 2.0
- *
+ * 
  */
-<span class="nc" id="L13">public class PluginsDepences implements Comparator&lt;Plugin&gt;, Serializable {</span>
+<span class="nc" id="L15">public class PluginsDepences implements Comparator&lt;Plugin&gt;, Serializable {</span>
 
-	/** Para serialización */
-	private static final long serialVersionUID = -636476408340119205L;
+  /** Para serialización */
+  private static final long serialVersionUID = -636476408340119205L;
 
-	public int compare(Plugin plugin1, Plugin plugin2) {
-<span class="nc" id="L19">		return plugin1.getPriority()-plugin2.getPriority();</span>
-	}
+  public int compare(Plugin plugin1, Plugin plugin2) {
+<span class="nc" id="L21">    return plugin1.getPriority() - plugin2.getPriority();</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
