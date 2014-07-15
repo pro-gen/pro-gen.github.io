@@ -88,10 +88,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>112</td></tr>
+<td>110</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>109</td></tr>
+<td>111</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    System.out.printf(STRING_FORMAT, hline);
@@ -131,11 +131,11 @@
     line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
@@ -144,10 +144,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>181</td></tr>
+<td>179</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>353</td></tr>
+<td>351</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
@@ -172,10 +172,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>178</td></tr>
+<td>180</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>350</td></tr>
+<td>352</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
@@ -200,10 +200,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>421</td></tr>
+<td>419</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>418</td></tr>
+<td>420</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    System.out.printf(STRING_NEW_LINE_FORMAT, line.toString());
@@ -226,11 +226,11 @@
     line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
@@ -239,10 +239,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>452</td></tr>
+<td>450</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>449</td></tr>
+<td>451</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);
@@ -361,20 +361,20 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>146</td></tr>
+<td>144</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>438</td></tr>
+<td>436</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));
     }
@@ -394,20 +394,20 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>143</td></tr>
+<td>145</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>435</td></tr>
+<td>437</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RBP_LITERAL + i, padding), CENTER_SEP));
     }
@@ -427,10 +427,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>410</td></tr>
+<td>408</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>407</td></tr>
+<td>409</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s   %s&quot;, Formatter.center(SPACE_SYMBOL, padding + secondColumnWidth), CENTER_SEP));
@@ -450,20 +450,20 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>146</td></tr>
+<td>144</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>435</td></tr>
+<td>437</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
@@ -472,20 +472,20 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>438</td></tr>
+<td>436</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>143</td></tr>
+<td>145</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
     padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + EXTRA_PADDING;
     for (int i = 0; i &lt; totalRPB; i++) {
       line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
@@ -494,10 +494,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>323</td></tr>
+<td>321</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>320</td></tr>
+<td>322</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
@@ -516,10 +516,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>180</td></tr>
+<td>178</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>177</td></tr>
+<td>179</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
@@ -538,10 +538,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>352</td></tr>
+<td>350</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>349</td></tr>
+<td>351</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
@@ -560,10 +560,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>382</td></tr>
+<td>380</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>379</td></tr>
+<td>381</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
@@ -582,10 +582,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>279</td></tr>
+<td>277</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>276</td></tr>
+<td>278</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    final StringBuilder line = new StringBuilder(LEFT_SEP);
@@ -593,7 +593,7 @@
 
     line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;time&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
-    padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;
+    padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - EXTRA_PADDING;
     padding = padding / 2;
 
     line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;populationMean&quot;), padding), CENTER_SEP));
@@ -604,16 +604,16 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>190</td></tr>
+<td>188</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>362</td></tr>
+<td>360</td></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>187</td></tr>
+<td>189</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>359</td></tr>
+<td>361</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
@@ -628,10 +628,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>392</td></tr>
+<td>390</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>389</td></tr>
+<td>391</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
@@ -646,10 +646,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>181</td></tr>
+<td>179</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>350</td></tr>
+<td>352</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
@@ -667,10 +667,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>353</td></tr>
+<td>351</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>178</td></tr>
+<td>180</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(BEST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));
@@ -688,10 +688,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>217</td></tr>
+<td>215</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>214</td></tr>
+<td>216</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    System.out.println(bestTail.toString());
@@ -719,7 +719,7 @@
    */
   private void printTimeEvaluation() {
     final StringBuilder line = new StringBuilder(LEFT_SEP);
-    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;
+    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - EXTRA_PADDING;
     padding = padding / 2;
     final Plugin evaluation = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(EVALUATION_LITERAL);
     String ceilData;
@@ -783,10 +783,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>173</td></tr>
+<td>171</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>345</td></tr>
+<td>343</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>  private void printBestData() {
@@ -804,10 +804,10 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>170</td></tr>
+<td>172</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>342</td></tr>
+<td>344</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>  private void printBestData() {

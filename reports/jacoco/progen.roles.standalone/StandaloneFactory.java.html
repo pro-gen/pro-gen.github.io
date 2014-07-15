@@ -59,17 +59,17 @@ import progen.roles.Worker;
     try {
 <span class="nc" id="L60">      final Role executionRole = Role.valueOf(element.toUpperCase(Locale.getDefault()));</span>
 <span class="nc bnc" id="L61" title="All 4 branches missed.">      switch (executionRole) {</span>
-      case CLIENT:
-<span class="nc" id="L63">        exec = this.makeClient();</span>
-<span class="nc" id="L64">        break;</span>
-      case DISPATCHER:
-<span class="nc" id="L66">        exec = this.makeDispatcher();</span>
-<span class="nc" id="L67">        break;</span>
-      case WORKER:
-<span class="nc" id="L69">        exec = this.makeWorker();</span>
-<span class="nc" id="L70">        break;</span>
-      default:
-<span class="pc" id="L72">        throw new UnknownRoleException(executionRole.name());</span>
+        case CLIENT:
+<span class="nc" id="L63">          exec = this.makeClient();</span>
+<span class="nc" id="L64">          break;</span>
+        case DISPATCHER:
+<span class="nc" id="L66">          exec = this.makeDispatcher();</span>
+<span class="nc" id="L67">          break;</span>
+        case WORKER:
+<span class="nc" id="L69">          exec = this.makeWorker();</span>
+<span class="nc" id="L70">          break;</span>
+        default:
+<span class="pc" id="L72">          throw new UnknownRoleException(executionRole.name());</span>
       }
 <span class="fc" id="L74">    } catch (IllegalArgumentException e) {</span>
 <span class="fc" id="L75">      throw new UnknownRoleException(element);</span>

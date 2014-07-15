@@ -15,6 +15,8 @@ import progen.kernel.population.Individual;
  */
 public class IndividualMeanPlugin implements Plugin {
 
+  private static final String DASH_DEPTH_LITERAL = &quot;-depth&quot;;
+  private static final String DASH_NODES_LITERAL = &quot;-nodes&quot;;
   private static final String ADF_LITERAL = &quot;ADF&quot;;
   private static final String RPB_LITERAL = &quot;RPB&quot;;
   /** Valor medio del rawFitness./ */
@@ -27,77 +29,77 @@ public class IndividualMeanPlugin implements Plugin {
   /**
    * Constructor por defecto de la clase.
    */
-<span class="nc" id="L30">  public IndividualMeanPlugin() {</span>
-<span class="nc" id="L31">    raw = new Mean();</span>
-<span class="nc" id="L32">    adjusted = new Mean();</span>
-<span class="nc" id="L33">    trees = new HashMap&lt;String, Mean&gt;();</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">    for (int i = 0; i &lt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.total.RPB&quot;)); i++) {</span>
-<span class="nc" id="L35">      trees.put(RPB_LITERAL + i + &quot;-nodes&quot;, new Mean());</span>
-<span class="nc" id="L36">      trees.put(RPB_LITERAL + i + &quot;-depth&quot;, new Mean());</span>
+<span class="nc" id="L32">  public IndividualMeanPlugin() {</span>
+<span class="nc" id="L33">    raw = new Mean();</span>
+<span class="nc" id="L34">    adjusted = new Mean();</span>
+<span class="nc" id="L35">    trees = new HashMap&lt;String, Mean&gt;();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">    for (int i = 0; i &lt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.total.RPB&quot;)); i++) {</span>
+<span class="nc" id="L37">      trees.put(RPB_LITERAL + i + DASH_NODES_LITERAL, new Mean());</span>
+<span class="nc" id="L38">      trees.put(RPB_LITERAL + i + DASH_DEPTH_LITERAL, new Mean());</span>
     }
-<span class="nc bnc" id="L38" title="All 2 branches missed.">    for (int i = 0; i &lt; ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0); i++) {</span>
-<span class="nc" id="L39">      trees.put(ADF_LITERAL + i + &quot;-nodes&quot;, new Mean());</span>
-<span class="nc" id="L40">      trees.put(ADF_LITERAL + i + &quot;-depth&quot;, new Mean());</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    for (int i = 0; i &lt; ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0); i++) {</span>
+<span class="nc" id="L41">      trees.put(ADF_LITERAL + i + DASH_NODES_LITERAL, new Mean());</span>
+<span class="nc" id="L42">      trees.put(ADF_LITERAL + i + DASH_DEPTH_LITERAL, new Mean());</span>
     }
-<span class="nc" id="L42">  }</span>
+<span class="nc" id="L44">  }</span>
 
   @Override
   public void addValue(Comparable&lt;?&gt; value) {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">    if (!(value instanceof Individual)) {</span>
-<span class="nc" id="L47">      throw new ClassCastException(value.toString());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">    if (!(value instanceof Individual)) {</span>
+<span class="nc" id="L49">      throw new ClassCastException(value.toString());</span>
     }
 
-<span class="nc" id="L50">    final Individual individual = (Individual) value;</span>
-<span class="nc" id="L51">    raw.addValue(individual.getRawFitness());</span>
-<span class="nc" id="L52">    adjusted.addValue(individual.getAdjustedFitness());</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
-<span class="nc" id="L54">      trees.get(RPB_LITERAL + i + &quot;-nodes&quot;).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes());</span>
-<span class="nc" id="L55">      trees.get(RPB_LITERAL + i + &quot;-depth&quot;).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth());</span>
+<span class="nc" id="L52">    final Individual individual = (Individual) value;</span>
+<span class="nc" id="L53">    raw.addValue(individual.getRawFitness());</span>
+<span class="nc" id="L54">    adjusted.addValue(individual.getAdjustedFitness());</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
+<span class="nc" id="L56">      trees.get(RPB_LITERAL + i + DASH_NODES_LITERAL).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes());</span>
+<span class="nc" id="L57">      trees.get(RPB_LITERAL + i + DASH_DEPTH_LITERAL).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth());</span>
     }
-<span class="nc bnc" id="L57" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
-<span class="nc" id="L58">      trees.get(ADF_LITERAL + i + &quot;-nodes&quot;).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes());</span>
-<span class="nc" id="L59">      trees.get(ADF_LITERAL + i + &quot;-depth&quot;).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth());</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
+<span class="nc" id="L60">      trees.get(ADF_LITERAL + i + DASH_NODES_LITERAL).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes());</span>
+<span class="nc" id="L61">      trees.get(ADF_LITERAL + i + DASH_DEPTH_LITERAL).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth());</span>
     }
-<span class="nc" id="L61">  }</span>
+<span class="nc" id="L63">  }</span>
 
   public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
     // do nothing
-<span class="nc" id="L65">  }</span>
+<span class="nc" id="L67">  }</span>
 
   public String getName() {
-<span class="nc" id="L68">    return &quot;individualMean&quot;;</span>
+<span class="nc" id="L70">    return &quot;individualMean&quot;;</span>
   }
 
   public Plugin getPlugin(String name) {
     Plugin plugin;
-<span class="nc bnc" id="L73" title="All 2 branches missed.">    if (name.compareTo(getName()) == 0) {</span>
-<span class="nc" id="L74">      plugin = this;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    if (name.compareTo(getName()) == 0) {</span>
+<span class="nc" id="L76">      plugin = this;</span>
     } else {
-<span class="nc" id="L76">      plugin = new NullPlugin();</span>
+<span class="nc" id="L78">      plugin = new NullPlugin();</span>
     }
-<span class="nc" id="L78">    return plugin;</span>
+<span class="nc" id="L80">    return plugin;</span>
 
   }
 
   public int getPriority() {
-<span class="nc" id="L83">    return 0;</span>
+<span class="nc" id="L85">    return 0;</span>
   }
 
   public Object getValue() {
-<span class="nc" id="L87">    final HashMap&lt;String, Mean&gt; value = new HashMap&lt;String, Mean&gt;();</span>
-<span class="nc" id="L88">    value.putAll(trees);</span>
-<span class="nc" id="L89">    value.put(&quot;raw&quot;, raw);</span>
-<span class="nc" id="L90">    value.put(&quot;adjusted&quot;, adjusted);</span>
-<span class="nc" id="L91">    return value;</span>
+<span class="nc" id="L89">    final HashMap&lt;String, Mean&gt; value = new HashMap&lt;String, Mean&gt;();</span>
+<span class="nc" id="L90">    value.putAll(trees);</span>
+<span class="nc" id="L91">    value.put(&quot;raw&quot;, raw);</span>
+<span class="nc" id="L92">    value.put(&quot;adjusted&quot;, adjusted);</span>
+<span class="nc" id="L93">    return value;</span>
   }
 
   public void initPlugin(String propertyFamily) {
     // do nothing
-<span class="nc" id="L96">  }</span>
+<span class="nc" id="L98">  }</span>
 
   public void initialValue() {
     // do nothing
-<span class="nc" id="L100">  }</span>
+<span class="nc" id="L102">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
