@@ -42,7 +42,7 @@ public class TimePlugin implements MacroPlugin {
 
   @Override
   public HashMap&lt;String, Object&gt; getValue() {
-<span class="nc" id="L45">    HashMap&lt;String, Object&gt; values = new HashMap&lt;String, Object&gt;();</span>
+<span class="nc" id="L45">    final HashMap&lt;String, Object&gt; values = new HashMap&lt;String, Object&gt;();</span>
 <span class="nc bnc" id="L46" title="All 2 branches missed.">    for (Plugin plugin : plugins) {</span>
 <span class="nc" id="L47">      values.put(plugin.getName(), plugin.getValue());</span>
 <span class="nc" id="L48">    }</span>
@@ -72,63 +72,59 @@ public class TimePlugin implements MacroPlugin {
 
   @Override
   public void initPlugin(String propertyFamily) {
-<span class="nc" id="L75">    String pluginsName[] = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Mean, Total&quot;).trim().split(&quot;,[ ]*&quot;);</span>
+<span class="nc" id="L75">    final String pluginsName[] = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Mean, Total&quot;).trim().split(&quot;,[ ]*&quot;);</span>
     Plugin plugin;
 <span class="nc bnc" id="L77" title="All 2 branches missed.">    for (int i = 0; i &lt; pluginsName.length; i++) {</span>
       try {
 <span class="nc" id="L79">        plugin = (Plugin) Class.forName(&quot;progen.output.plugins.&quot; + pluginsName[i]).newInstance();</span>
 <span class="nc" id="L80">        this.addPlugin(plugins, plugin);</span>
-<span class="nc" id="L81">      } catch (InstantiationException e) {</span>
+<span class="nc" id="L81">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
 <span class="nc" id="L82">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="nc" id="L83">      } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L84">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="nc" id="L85">      } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L86">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="nc" id="L87">      }</span>
+<span class="nc" id="L83">      }</span>
     }
-<span class="nc" id="L89">  }</span>
+<span class="nc" id="L85">  }</span>
 
   @Override
   public Plugin getPlugin(String name) {
-<span class="nc" id="L93">    Plugin plugin = null;</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">    if (getName().compareTo(name) == 0) {</span>
-<span class="nc" id="L95">      plugin = this;</span>
+<span class="nc" id="L89">    Plugin plugin = null;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">    if (getName().compareTo(name) == 0) {</span>
+<span class="nc" id="L91">      plugin = this;</span>
     } else {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">      for (Plugin pluginFound : plugins) {</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (pluginFound.getName().compareTo(name) == 0) {</span>
-<span class="nc" id="L99">          plugin = pluginFound;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">      for (Plugin pluginFound : plugins) {</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (pluginFound.getName().compareTo(name) == 0) {</span>
+<span class="nc" id="L95">          plugin = pluginFound;</span>
         }
-<span class="nc" id="L101">      }</span>
+<span class="nc" id="L97">      }</span>
     }
-<span class="nc bnc" id="L103" title="All 2 branches missed.">    if (plugin == null) {</span>
-<span class="nc" id="L104">      plugin = new NullPlugin();</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">    if (plugin == null) {</span>
+<span class="nc" id="L100">      plugin = new NullPlugin();</span>
     }
 
-<span class="nc" id="L107">    return plugin;</span>
+<span class="nc" id="L103">    return plugin;</span>
   }
 
   @Override
   public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
     // do nothing
-<span class="nc" id="L113">  }</span>
+<span class="nc" id="L109">  }</span>
 
   @Override
   public void addPlugin(List&lt;Plugin&gt; pluginsCollection, Plugin plugin) {
-<span class="nc" id="L117">    Plugin alreadyDefined = null;</span>
-<span class="nc bnc" id="L118" title="All 2 branches missed.">    for (Plugin pluginDefined : plugins) {</span>
-<span class="nc bnc" id="L119" title="All 2 branches missed.">      if (pluginDefined.getName().compareTo(plugin.getName()) == 0) {</span>
-<span class="nc" id="L120">        alreadyDefined = pluginDefined;</span>
+<span class="nc" id="L113">    Plugin alreadyDefined = null;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">    for (Plugin pluginDefined : plugins) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">      if (pluginDefined.getName().compareTo(plugin.getName()) == 0) {</span>
+<span class="nc" id="L116">        alreadyDefined = pluginDefined;</span>
       }
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L118">    }</span>
 
-<span class="nc bnc" id="L124" title="All 2 branches missed.">    if (alreadyDefined == null) {</span>
-<span class="nc" id="L125">      plugins.add(plugin);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">    if (alreadyDefined == null) {</span>
+<span class="nc" id="L121">      plugins.add(plugin);</span>
     }
-<span class="nc" id="L127">  }</span>
+<span class="nc" id="L123">  }</span>
 
   @Override
   public List&lt;Plugin&gt; getPlugins() {
-<span class="nc" id="L131">    return plugins;</span>
+<span class="nc" id="L127">    return plugins;</span>
   }
 
 }

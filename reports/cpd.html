@@ -88,6 +88,62 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
+<td>112</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>109</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    System.out.printf(STRING_FORMAT, hline);
+  }
+
+  /**
+   * Imprime el grueso de la tabla.
+   */
+  private void printBody() {
+    final Individual bestTotal = (Individual) (historical.getDataCollectorExperiment(EXPERIMENT_INDIVIDUAL_DATA_LITERAL).getPlugin(BEST_LITERAL).getValue());
+    final Individual bestGeneration = (Individual) (historical.getCurrentDataCollector(EXPERIMENT_INDIVIDUAL_DATA_LITERAL).getPlugin(BEST_LITERAL).getValue());
+
+    printIndividual();
+    printTime();
+    if (bestTotal.equals(bestGeneration)) {
+      printBest();
+    }
+  }
+
+  /**
+   * Imprime la tabla del mejor individuo.
+   */
+  private void printBest() {
+    printBestHeaderTable();
+    printBestSubHeaderTable();
+    printBestData();
+    printBestTail();
+  }
+
+  /**
+   * Imprime la cabecera de la tabla del mejor individuo.
+   */
+  private void printBestHeaderTable() {
+    final StringBuilder line = new StringBuilder(LEFT_SEP);
+    int padding;
+
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
 <td>181</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardConsole.java</td>
@@ -116,13 +172,13 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>162</td></tr>
+<td>178</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>334</td></tr>
+<td>350</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
-<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;individual&quot;), secondColumnWidth), CENTER_SEP));
+<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
 
     ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());
     line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
@@ -130,14 +186,99 @@
     line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
 
     for (int i = 0; i &lt; totalRPB; i++) {
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;RPB&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
     }
     for (int i = 0; i &lt; totalADF; i++) {
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(&quot;ADF&quot; + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
     }
     getWriter().printf(&quot;%s%n%s&quot;, line.toString(), hline);</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>421</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>418</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    System.out.printf(STRING_NEW_LINE_FORMAT, line.toString());
+
+  }
+
+  /**
+   * Imprime la cabecera de la tabla de individuos.
+   */
+  private void printIndividualHeaderTable() {
+    // Print head table
+    final StringBuilder line = new StringBuilder(LEFT_SEP);
+    int padding;
+    firstColumnWidth = WIDTH_COLUMN + CENTER_SEP.length();
+
+    secondColumnWidth = Math.max(WIDTH_COLUMN, getLiterals().getString(GENERATION_MEAN_LITERAL).length());
+    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(BEST_RUN_LITERAL).length());
+    secondColumnWidth = Math.max(secondColumnWidth, getLiterals().getString(WORST_RUN_LITERAL).length());
+
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), firstColumnWidth + secondColumnWidth), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>452</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>449</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    System.out.printf(&quot;%s%n%s&quot;, line.toString(), hline);
+  }
+
+  /**
+   * Imprime los resumenes de las tablas.
+   */
+  private void printTail() {
+    // do nothing
+  }
+
+  /**
+   * Devuelve la l&#xed;nea m&#xe1;s larga que contendr&#xe1; una tabla.
+   * 
+   * @return La l&#xed;nea m&#xe1;s larga.
+   */
+  private String getMaxLine() {
+    final StringBuilder line = new StringBuilder(LEFT_SEP);
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(GENERATION_MEAN_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+
+    int totalTrees = 0;
+    totalTrees += totalRPB;
+    totalTrees += totalADF;
+
+    for (int i = 0; i &lt; totalTrees; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    }
+    return line.toString();
+
+  }
+}</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>File</th>
@@ -253,25 +394,25 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>127</td></tr>
+<td>143</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>419</td></tr>
+<td>435</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
 
-    padding = Formatter.center(getLiterals().getString(&quot;raw&quot;), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(&quot;adjusted&quot;), WIDTH_COLUMN).length() + 3;
-    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(&quot;fitness&quot;), padding), CENTER_SEP));
+    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
 
-    padding = Formatter.center(getLiterals().getString(&quot;nodes&quot;), WIDTH_COLUMN).length();
-    padding += Formatter.center(getLiterals().getString(&quot;depth&quot;), WIDTH_COLUMN).length() + 3;
+    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
     for (int i = 0; i &lt; totalRPB; i++) {
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;RBP&quot; + i, padding), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RBP_LITERAL + i, padding), CENTER_SEP));
     }
     for (int i = 0; i &lt; totalADF; i++) {
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(&quot;ADF&quot; + i, padding), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(ADF_LITERAL + i, padding), CENTER_SEP));
     }
     getWriter().printf(&quot;%s%n%s&quot;, line.toString(), hline);
   }
@@ -286,10 +427,165 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
+<td>410</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>407</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(&quot;%s   %s&quot;, Formatter.center(SPACE_SYMBOL, padding + secondColumnWidth), CENTER_SEP));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    }
+    for (int i = 0; i &lt; totalADF; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN), CENTER_SEP));
+    }</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>146</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>435</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;newBestIndividual&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>438</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>143</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), firstColumnWidth + secondColumnWidth), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(RAW_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(ADJUSTED_LITERAL), WIDTH_COLUMN).length() + 3;
+    line.append(String.format(&quot;%s%s&quot;, Formatter.center(getLiterals().getString(FITNESS_LITERAL), padding), CENTER_SEP));
+
+    padding = Formatter.center(getLiterals().getString(NODES_LITERAL), WIDTH_COLUMN).length();
+    padding += Formatter.center(getLiterals().getString(DEPTH_LITERAL), WIDTH_COLUMN).length() + 3;
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(RPB_LITEARL + i, padding), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>323</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>320</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(GENERATION_MEAN_LITERAL), secondColumnWidth), CENTER_SEP));
+
+    ceilData = String.format(&quot;%.3G&quot;, mean.get(RAW_LITERAL).getValue());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+    ceilData = String.format(&quot;%.5f&quot;, mean.get(ADJUSTED_LITERAL).getValue());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(mean.get(RPB_LITERAL + i + &quot;-nodes&quot;).getValue().toString(), WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>180</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>177</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
+
+    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>352</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>349</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(BEST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));
+
+    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>382</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>379</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(WORST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));
+
+    ceilData = String.format(&quot;%.3G&quot;, worst.getRawFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+    ceilData = String.format(&quot;%.5f&quot;, worst.getAdjustedFitness());
+    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
+
+    for (int i = 0; i &lt; totalRPB; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
 <td>279</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>260</td></tr>
+<td>276</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    final StringBuilder line = new StringBuilder(LEFT_SEP);
@@ -307,28 +603,43 @@
 <th>File</th>
 <th>Line</th></tr>
 <tr class="b">
-<td>progen/output/plugins/StatisticalPlugin.java</td>
-<td>90</td></tr>
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>190</td></tr>
 <tr class="a">
-<td>progen/output/plugins/TimePlugin.java</td>
-<td>75</td></tr>
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>362</td></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>187</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>359</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
-<pre>    String pluginsName[] = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Best, Worst, Mean, Median&quot;).trim().split(&quot;,[ ]*&quot;);
-    Plugin plugin;
-    for (int i = 0; i &lt; pluginsName.length; i++) {
-      try {
-        plugin = (Plugin) Class.forName(&quot;progen.output.plugins.&quot; + pluginsName[i]).newInstance();
-        this.addPlugin(plugins, plugin);
-      } catch (InstantiationException e) {
-        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);
-      } catch (IllegalAccessException e) {
-        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);
-      } catch (ClassNotFoundException e) {
-        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);
-      }
+<pre>      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
     }
-  }</pre></div></td></tr></table>
+    for (int i = 0; i &lt; totalADF; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+    }</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>392</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>389</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+    }
+    for (int i = 0; i &lt; totalADF; i++) {
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));
+    }</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>File</th>
@@ -337,14 +648,8 @@
 <td>progen/output/outputers/StandardConsole.java</td>
 <td>181</td></tr>
 <tr class="a">
-<td>progen/output/outputers/StandardConsole.java</td>
-<td>353</td></tr>
-<tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>162</td></tr>
-<tr class="a">
-<td>progen/output/outputers/StandardFile.java</td>
-<td>334</td></tr>
+<td>350</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));
@@ -362,21 +667,64 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardConsole.java</td>
-<td>383</td></tr>
+<td>353</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>364</td></tr>
+<td>178</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
-<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(WORST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));
+<pre>    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(BEST_RUN_LITERAL), secondColumnWidth), CENTER_SEP));
 
-    ceilData = String.format(&quot;%.3G&quot;, worst.getRawFitness());
+    ceilData = String.format(&quot;%.3f&quot;, best.getRawFitness());
     line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
-    ceilData = String.format(&quot;%.5f&quot;, worst.getAdjustedFitness());
+    ceilData = String.format(&quot;%.5f&quot;, best.getAdjustedFitness());
     line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));
 
     for (int i = 0; i &lt; totalRPB; i++) {
-      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>progen/output/outputers/StandardConsole.java</td>
+<td>217</td></tr>
+<tr class="a">
+<td>progen/output/outputers/StandardFile.java</td>
+<td>214</td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>    System.out.println(bestTail.toString());
+  }
+
+  /**
+   * Imprime la tabla de tiempos.
+   */
+  private void printTime() {
+    printTimeHeaderTable();
+    printTimeData();
+
+  }
+
+  /**
+   * Imprime los datos de la tabla de tiempos.
+   */
+  private void printTimeData() {
+    printTimeBreeding();
+    printTimeEvaluation();
+  }
+
+  /**
+   * Imprime los tiempos de evaluaci&#xf3;n de individuos.
+   */
+  private void printTimeEvaluation() {
+    final StringBuilder line = new StringBuilder(LEFT_SEP);
+    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;
+    padding = padding / 2;
+    final Plugin evaluation = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(EVALUATION_LITERAL);
+    String ceilData;
+
+    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, firstColumnWidth)));</pre></div></td></tr></table>
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>File</th>
@@ -456,21 +804,21 @@
 <th>Line</th></tr>
 <tr class="b">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>154</td></tr>
+<td>170</td></tr>
 <tr class="a">
 <td>progen/output/outputers/StandardFile.java</td>
-<td>326</td></tr>
+<td>342</td></tr>
 <tr class="b"><td colspan='2'>
 <div>
 <pre>  private void printBestData() {
     StringBuilder line;
     String ceilData;
-    Individual best = (Individual) (experimentData.getPlugin(&quot;best&quot;).getValue());
+    final Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());
 
-    int padding = Formatter.center(getLiterals().getString(&quot;individual&quot;), WIDTH_COLUMN).length();
+    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();
     line = new StringBuilder(LEFT_SEP);
-    line.append(String.format(&quot;%s&quot;, Formatter.center(&quot; &quot;, padding + CENTER_SEP.length())));
-    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;individual&quot;), secondColumnWidth), CENTER_SEP));</pre></div></td></tr></table></div>
+    line.append(String.format(&quot;%s&quot;, Formatter.center(BLANK_SPACE_SYMBOL, padding + CENTER_SEP.length())));
+    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(INDIVIDUAL_LITERAL), secondColumnWidth), CENTER_SEP));</pre></div></td></tr></table></div>
       </div>
     </div>
     <div class="clear">

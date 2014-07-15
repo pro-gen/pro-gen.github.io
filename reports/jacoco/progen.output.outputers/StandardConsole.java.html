@@ -201,7 +201,7 @@ public class StandardConsole extends ConsoleOutput {
    */
   private void printBestTail() {
 <span class="nc" id="L203">    final StringBuilder bestTail = new StringBuilder();</span>
-<span class="nc" id="L204">    Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());</span>
+<span class="nc" id="L204">    final Individual best = (Individual) (experimentData.getPlugin(BEST_LITERAL).getValue());</span>
 <span class="nc bnc" id="L205" title="All 2 branches missed.">    for (int i = 0; i &lt; best.getTotalRPB(); i++) {</span>
 <span class="nc" id="L206">      bestTail.append(String.format(&quot;%s%d:%n&quot;, RPB_LITERAL, i));</span>
 <span class="nc" id="L207">      bestTail.append(Formatter.tree(best.getTrees().get(RPB_LITERAL + i)));</span>
@@ -241,7 +241,7 @@ public class StandardConsole extends ConsoleOutput {
 <span class="nc" id="L241">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
 <span class="nc" id="L242">    int padding = hline.length() - (firstColumnWidth + secondColumnWidth) - 2 * CENTER_SEP.length() - 3;</span>
 <span class="nc" id="L243">    padding = padding / 2;</span>
-<span class="nc" id="L244">    Plugin evaluation = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(EVALUATION_LITERAL);</span>
+<span class="nc" id="L244">    final Plugin evaluation = historical.getCurrentDataCollector(POPULATION_TIME_DATA_LITERAL).getPlugin(EVALUATION_LITERAL);</span>
     String ceilData;
 
 <span class="nc" id="L247">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, firstColumnWidth)));</span>
@@ -318,7 +318,7 @@ public class StandardConsole extends ConsoleOutput {
 <span class="nc" id="L318">    final DataCollector populationData = historical.getCurrentDataCollector(POPULATION_DATA_LITERAL);</span>
 <span class="nc" id="L319">    final Map&lt;String, Mean&gt; mean = (Map&lt;String, Mean&gt;) (populationData.getPlugin(INDIVIDUAL_MEAN_LITERAL).getValue());</span>
 
-<span class="nc" id="L321">    int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
+<span class="nc" id="L321">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
 <span class="nc" id="L322">    line = new StringBuilder(LEFT_SEP);</span>
 <span class="nc" id="L323">    line.append(String.format(STRING_FORMAT, Formatter.center(SPACE_SYMBOL, padding + CENTER_SEP.length())));</span>
 <span class="nc" id="L324">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(GENERATION_MEAN_LITERAL), secondColumnWidth), CENTER_SEP));</span>

@@ -20,7 +20,7 @@ public class WorstIndividualFile extends FileOutput {
 
   public WorstIndividualFile() {
 <span class="nc" id="L22">    super(ProGenContext.getMandatoryProperty(&quot;progen.output.experiment&quot;) + File.pathSeparator + &quot;bestIndividual.txt&quot;, false);</span>
-<span class="nc" id="L23">    HistoricalData historical = HistoricalData.makeInstance();</span>
+<span class="nc" id="L23">    final HistoricalData historical = HistoricalData.makeInstance();</span>
 <span class="nc" id="L24">    data = historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;);</span>
 <span class="nc" id="L25">    finish = false;</span>
 <span class="nc" id="L26">  }</span>
@@ -28,23 +28,20 @@ public class WorstIndividualFile extends FileOutput {
   @Override
   public void print() {
 <span class="nc bnc" id="L30" title="All 2 branches missed.">    if (finish) {</span>
-<span class="nc" id="L31">      Plugin plugin = data.getPlugin(&quot;worst&quot;);</span>
-
-<span class="nc" id="L33">      Individual individual = (Individual) plugin.getValue();</span>
-
-<span class="nc bnc" id="L35" title="All 2 branches missed.">      for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
-<span class="nc" id="L36">        super.getWriter().println(Formatter.tree(individual.getTrees().get(&quot;ADF&quot; + i)));</span>
+<span class="nc" id="L31">      final Plugin plugin = data.getPlugin(&quot;worst&quot;);</span>
+<span class="nc" id="L32">      final Individual individual = (Individual) plugin.getValue();</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">      for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
+<span class="nc" id="L34">        super.getWriter().println(Formatter.tree(individual.getTrees().get(&quot;ADF&quot; + i)));</span>
       }
-
-<span class="nc bnc" id="L39" title="All 2 branches missed.">      for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
-<span class="nc" id="L40">        super.getWriter().println(Formatter.tree(individual.getTrees().get(&quot;RPB&quot; + i)));</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">      for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
+<span class="nc" id="L37">        super.getWriter().println(Formatter.tree(individual.getTrees().get(&quot;RPB&quot; + i)));</span>
       }
     }
-<span class="nc" id="L43">  }</span>
+<span class="nc" id="L40">  }</span>
 
   public void activateFinishOutput() {
-<span class="nc" id="L46">    finish = true;</span>
-<span class="nc" id="L47">  }</span>
+<span class="nc" id="L43">    finish = true;</span>
+<span class="nc" id="L44">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

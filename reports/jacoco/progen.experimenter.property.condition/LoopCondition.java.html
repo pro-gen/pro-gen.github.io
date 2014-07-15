@@ -11,12 +11,13 @@ import progen.kernel.error.Error;
  */
 <span class="fc" id="L12">public abstract class LoopCondition {</span>
 
-  private static final int ID_ERROR = 30;
   /**
    * Tolerancia para la cual se considerará que se cumple la condición de
    * parada.
    */
-  protected final static double TOLERANCE = 0.0000000001;
+  protected static final double TOLERANCE = 0.0000000001;
+
+  private static final int ID_ERROR = 30;
 
   /**
    * Comprueba si el valor actual sigue cumpliendo la condición o no.
@@ -48,19 +49,19 @@ import progen.kernel.error.Error;
    *           , en caso de el incremento no esté definido correctamente.
    */
   public static LoopCondition makeInstance(double start, double end, double increment) {
-<span class="fc" id="L51">    LoopCondition condition = null;</span>
+<span class="fc" id="L52">    LoopCondition condition = null;</span>
 
-<span class="fc bfc" id="L53" title="All 2 branches covered.">    if (increment == 0) {</span>
-<span class="fc" id="L54">      throw new IllegalArgumentException(Error.get(ID_ERROR));</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    if (increment == 0) {</span>
+<span class="fc" id="L55">      throw new IllegalArgumentException(Error.get(ID_ERROR));</span>
     }
 
-<span class="fc bfc" id="L57" title="All 2 branches covered.">    if (start &lt; end) {</span>
-<span class="fc" id="L58">      condition = new LessEqualThanLoopCondition(increment);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">    if (start &lt; end) {</span>
+<span class="fc" id="L59">      condition = new LessEqualThanLoopCondition(increment);</span>
     } else {
-<span class="fc" id="L60">      condition = new GratherEqualThanLoopCondition(increment);</span>
+<span class="fc" id="L61">      condition = new GratherEqualThanLoopCondition(increment);</span>
     }
 
-<span class="fc" id="L63">    return condition;</span>
+<span class="fc" id="L64">    return condition;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

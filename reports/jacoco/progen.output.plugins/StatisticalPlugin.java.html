@@ -42,7 +42,7 @@ public class StatisticalPlugin implements MacroPlugin {
    * @return La colección de valores de los plugins que contiene.
    */
   public HashMap&lt;String, Object&gt; getValue() {
-<span class="nc" id="L45">    HashMap&lt;String, Object&gt; values = new HashMap&lt;String, Object&gt;();</span>
+<span class="nc" id="L45">    final HashMap&lt;String, Object&gt; values = new HashMap&lt;String, Object&gt;();</span>
 <span class="nc bnc" id="L46" title="All 2 branches missed.">    for (Plugin plugin : plugins) {</span>
 <span class="nc" id="L47">      values.put(plugin.getName(), plugin.getValue());</span>
 <span class="nc" id="L48">    }</span>
@@ -87,47 +87,43 @@ public class StatisticalPlugin implements MacroPlugin {
   }
 
   public void initPlugin(String propertyFamily) {
-<span class="fc" id="L90">    String pluginsName[] = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Best, Worst, Mean, Median&quot;).trim().split(&quot;,[ ]*&quot;);</span>
+<span class="fc" id="L90">    final String [] pluginsName = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Best, Worst, Mean, Median&quot;).trim().split(&quot;,[ ]*&quot;);</span>
     Plugin plugin;
 <span class="fc bfc" id="L92" title="All 2 branches covered.">    for (int i = 0; i &lt; pluginsName.length; i++) {</span>
       try {
 <span class="fc" id="L94">        plugin = (Plugin) Class.forName(&quot;progen.output.plugins.&quot; + pluginsName[i]).newInstance();</span>
 <span class="fc" id="L95">        this.addPlugin(plugins, plugin);</span>
-<span class="nc" id="L96">      } catch (InstantiationException e) {</span>
+<span class="nc" id="L96">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
 <span class="nc" id="L97">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="nc" id="L98">      } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L99">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="nc" id="L100">      } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L101">        throw new UnknownPluginException(getName() + &quot;: &quot; + pluginsName[i]);</span>
-<span class="fc" id="L102">      }</span>
+<span class="fc" id="L98">      }</span>
     }
-<span class="fc" id="L104">  }</span>
+<span class="fc" id="L100">  }</span>
 
   public Plugin getPlugin(String name) {
-<span class="fc" id="L107">    Plugin plugin = null;</span>
-<span class="fc bfc" id="L108" title="All 2 branches covered.">    if (getName().compareTo(name) == 0) {</span>
-<span class="fc" id="L109">      plugin = this;</span>
+<span class="fc" id="L103">    Plugin plugin = null;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">    if (getName().compareTo(name) == 0) {</span>
+<span class="fc" id="L105">      plugin = this;</span>
     } else {
-<span class="fc bfc" id="L111" title="All 2 branches covered.">      for (Plugin pluginFound : plugins) {</span>
-<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (pluginFound.getName().compareTo(name) == 0) {</span>
-<span class="fc" id="L113">          plugin = pluginFound;</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">      for (Plugin pluginFound : plugins) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (pluginFound.getName().compareTo(name) == 0) {</span>
+<span class="fc" id="L109">          plugin = pluginFound;</span>
         }
-<span class="fc" id="L115">      }</span>
+<span class="fc" id="L111">      }</span>
     }
-<span class="pc bpc" id="L117" title="1 of 2 branches missed.">    if (plugin == null) {</span>
-<span class="nc" id="L118">      plugin = new NullPlugin();</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">    if (plugin == null) {</span>
+<span class="nc" id="L114">      plugin = new NullPlugin();</span>
     }
 
-<span class="fc" id="L121">    return plugin;</span>
+<span class="fc" id="L117">    return plugin;</span>
   }
 
   public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
     // do nothing
 
-<span class="nc" id="L127">  }</span>
+<span class="nc" id="L123">  }</span>
 
   public List&lt;Plugin&gt; getPlugins() {
-<span class="nc" id="L130">    return plugins;</span>
+<span class="nc" id="L126">    return plugins;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

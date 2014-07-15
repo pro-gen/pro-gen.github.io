@@ -9,7 +9,7 @@ import progen.kernel.tree.Tree;
  * @author jirsis
  * @since 2.0
  */
-public class Formatter {
+public final class Formatter {
 
 <span class="nc" id="L14">  private Formatter() {</span>
 
@@ -56,7 +56,7 @@ public class Formatter {
    * @return La cadena justificada en el espacio disponible.
    */
   public static String left(String text, int length) {
-<span class="fc" id="L59">    StringBuilder alignLeft = new StringBuilder(text);</span>
+<span class="fc" id="L59">    final StringBuilder alignLeft = new StringBuilder(text);</span>
 <span class="fc bfc" id="L60" title="All 2 branches covered.">    if (length &gt; text.length()) {</span>
 <span class="fc" id="L61">      alignLeft.append(String.format(&quot;%&quot; + (length - text.length()) + &quot;s&quot;, &quot; &quot;));</span>
     }
@@ -74,7 +74,7 @@ public class Formatter {
    * @return La cadena justificada en el espacio disponible.
    */
   public static String right(String text, int length) {
-<span class="fc" id="L77">    StringBuilder alignRight = new StringBuilder();</span>
+<span class="fc" id="L77">    final StringBuilder alignRight = new StringBuilder();</span>
 <span class="fc bfc" id="L78" title="All 2 branches covered.">    if (length &gt; text.length()) {</span>
 <span class="fc" id="L79">      alignRight.append(String.format(&quot;%&quot; + (length - text.length()) + &quot;s&quot;, &quot; &quot;));</span>
     }
@@ -93,7 +93,7 @@ public class Formatter {
    */
   public static String tree(Tree tree) {
 <span class="nc" id="L95">    final StringBuilder line = new StringBuilder();</span>
-<span class="nc" id="L96">    String[] tokens = tree.toString().trim().split(&quot; &quot;);</span>
+<span class="nc" id="L96">    final String[] tokens = tree.toString().trim().split(&quot; &quot;);</span>
     boolean function;
 <span class="nc" id="L98">    int indent = 1;</span>
 <span class="nc bnc" id="L99" title="All 2 branches missed.">    for (String token : tokens) {</span>
@@ -133,7 +133,7 @@ public class Formatter {
    */
   private static String indentation(int indent) {
 <span class="nc" id="L135">    int currentIndent = indent;</span>
-<span class="nc" id="L136">    StringBuilder indentation = new StringBuilder();</span>
+<span class="nc" id="L136">    final StringBuilder indentation = new StringBuilder();</span>
 <span class="nc" id="L137">    indentation.append(String.format(&quot;%n&quot;));</span>
 <span class="nc bnc" id="L138" title="All 2 branches missed.">    while ((currentIndent--) &gt; 0) {</span>
 <span class="nc" id="L139">      indentation.append(&quot;\t&quot;);</span>
