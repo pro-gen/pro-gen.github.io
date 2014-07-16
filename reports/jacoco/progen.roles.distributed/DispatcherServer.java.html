@@ -18,13 +18,12 @@ import progen.roles.Worker;
 import progen.userprogram.UserProgram;
 
 public class DispatcherServer extends UnicastRemoteObject implements DispatcherRemote {
+  public static final int UNASIGNED_TASKS = -10;
 
   private static final int DEFAULT_DISPATCHER_SERVER_URL_LENGTH = 32;
 
   private static final int ID_INFO = 3;
 
-  public static final int UNASIGNED_TASKS = -10;
-  
   private static final String SLASH_SYMBOL = &quot;/&quot;;
 
   private static final String COLON_SYMBOL = &quot;:&quot;;
@@ -44,97 +43,97 @@ public class DispatcherServer extends UnicastRemoteObject implements DispatcherR
   private Registry registry;
 
   protected DispatcherServer() throws RemoteException {
-<span class="fc" id="L47">    super();</span>
-<span class="fc" id="L48">    port = ProGenContext.getOptionalProperty(PROGEN_ROLE_DISPATCHER_PORT_PROPERTY, Registry.REGISTRY_PORT);</span>
-<span class="fc" id="L49">    bindAddress = getDefaultBindAddress();</span>
-<span class="fc" id="L50">    bindAddress = ProGenContext.getOptionalProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY, bindAddress);</span>
-<span class="fc" id="L51">    ProGenContext.setProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY, bindAddress);</span>
-<span class="fc" id="L52">  }</span>
+<span class="fc" id="L46">    super();</span>
+<span class="fc" id="L47">    port = ProGenContext.getOptionalProperty(PROGEN_ROLE_DISPATCHER_PORT_PROPERTY, Registry.REGISTRY_PORT);</span>
+<span class="fc" id="L48">    bindAddress = getDefaultBindAddress();</span>
+<span class="fc" id="L49">    bindAddress = ProGenContext.getOptionalProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY, bindAddress);</span>
+<span class="fc" id="L50">    ProGenContext.setProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY, bindAddress);</span>
+<span class="fc" id="L51">  }</span>
 
   private String getDefaultBindAddress() {
-<span class="fc" id="L55">    String address = &quot;127.0.0.1&quot;;</span>
+<span class="fc" id="L54">    String address = &quot;127.0.0.1&quot;;</span>
     try {
-<span class="fc" id="L57">      final InetAddress addr = InetAddress.getLocalHost();</span>
-<span class="fc" id="L58">      address = addr.getHostName();</span>
-<span class="nc" id="L59">    } catch (UnknownHostException e) {</span>
+<span class="fc" id="L56">      final InetAddress addr = InetAddress.getLocalHost();</span>
+<span class="fc" id="L57">      address = addr.getHostName();</span>
+<span class="nc" id="L58">    } catch (UnknownHostException e) {</span>
       // do nothing
-<span class="fc" id="L61">    }</span>
-<span class="fc" id="L62">    return address;</span>
+<span class="fc" id="L60">    }</span>
+<span class="fc" id="L61">    return address;</span>
   }
 
   @Override
   public void asignTask(List&lt;Task&gt; tasks, UserProgram userProgram) throws RemoteException {
     // TODO Auto-generated method stub
 
-<span class="nc" id="L69">  }</span>
+<span class="nc" id="L68">  }</span>
 
   @Override
   public List&lt;Task&gt; getResults() throws RemoteException {
     // TODO Auto-generated method stub
-<span class="nc" id="L74">    return null;</span>
+<span class="nc" id="L73">    return null;</span>
   }
 
   @Override
   public int totalTasksDone() throws RemoteException {
-<span class="nc" id="L79">    System.err.println(&quot;DispatcherServer: no total tasks done&quot;);</span>
-<span class="nc" id="L80">    return UNASIGNED_TASKS;</span>
+<span class="nc" id="L78">    System.err.println(&quot;DispatcherServer: no total tasks done&quot;);</span>
+<span class="nc" id="L79">    return UNASIGNED_TASKS;</span>
   }
 
   @Override
   public void stopTask() throws RemoteException {
     try {
-<span class="nc" id="L86">      registry.unbind(DispatcherDistributed.DISPATCHER_NAME);</span>
-<span class="nc" id="L87">      UnicastRemoteObject.unexportObject(registry, true);</span>
-<span class="nc" id="L88">    } catch (AccessException e) {</span>
-<span class="nc" id="L89">      throw new ProGenDistributedException(e.getMessage());</span>
-<span class="nc" id="L90">    } catch (RemoteException e) {</span>
-<span class="nc" id="L91">      e.printStackTrace();</span>
-<span class="nc" id="L92">    } catch (NotBoundException e) {</span>
-<span class="nc" id="L93">      e.printStackTrace();</span>
-<span class="nc" id="L94">    }</span>
-<span class="nc" id="L95">  }</span>
+<span class="nc" id="L85">      registry.unbind(DispatcherDistributed.DISPATCHER_NAME);</span>
+<span class="nc" id="L86">      UnicastRemoteObject.unexportObject(registry, true);</span>
+<span class="nc" id="L87">    } catch (AccessException e) {</span>
+<span class="nc" id="L88">      throw new ProGenDistributedException(e.getMessage());</span>
+<span class="nc" id="L89">    } catch (RemoteException e) {</span>
+<span class="nc" id="L90">      e.printStackTrace();</span>
+<span class="nc" id="L91">    } catch (NotBoundException e) {</span>
+<span class="nc" id="L92">      e.printStackTrace();</span>
+<span class="nc" id="L93">    }</span>
+<span class="nc" id="L94">  }</span>
 
   @Override
   public void addWorker(Worker worker) throws RemoteException {
     // TODO Auto-generated method stub
 
-<span class="nc" id="L101">  }</span>
+<span class="nc" id="L100">  }</span>
 
   @Override
   public void start() throws RemoteException {
-<span class="nc" id="L105">    defineDispatcherName();</span>
+<span class="nc" id="L104">    defineDispatcherName();</span>
     try {
-<span class="nc" id="L107">      System.getProperties().setProperty(&quot;java.rmi.server.hostname&quot;, bindAddress);</span>
-<span class="nc" id="L108">      registry = LocateRegistry.createRegistry(port);</span>
-<span class="nc" id="L109">      registry.bind(ProGenContext.getMandatoryProperty(PROGEN_DISPATCHER_NAME_PROPERTY), this);</span>
+<span class="nc" id="L106">      System.getProperties().setProperty(&quot;java.rmi.server.hostname&quot;, bindAddress);</span>
+<span class="nc" id="L107">      registry = LocateRegistry.createRegistry(port);</span>
+<span class="nc" id="L108">      registry.bind(ProGenContext.getMandatoryProperty(PROGEN_DISPATCHER_NAME_PROPERTY), this);</span>
 
-<span class="nc bnc" id="L111" title="All 2 branches missed.">      for (String remoteService : registry.list()) {</span>
-<span class="nc" id="L112">        Info.show(ID_INFO, bindAddress + COLON_SYMBOL + port + SLASH_SYMBOL + remoteService);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">      for (String remoteService : registry.list()) {</span>
+<span class="nc" id="L111">        Info.show(ID_INFO, bindAddress + COLON_SYMBOL + port + SLASH_SYMBOL + remoteService);</span>
       }
 
-<span class="nc" id="L115">    } catch (RemoteException | AlreadyBoundException e) {</span>
-<span class="nc" id="L116">      throw new ProGenDistributedException(e.getLocalizedMessage());</span>
-<span class="nc" id="L117">    }</span>
+<span class="nc" id="L114">    } catch (RemoteException | AlreadyBoundException e) {</span>
+<span class="nc" id="L115">      throw new ProGenDistributedException(e.getLocalizedMessage());</span>
+<span class="nc" id="L116">    }</span>
 
-<span class="nc" id="L119">  }</span>
+<span class="nc" id="L118">  }</span>
 
   private void defineDispatcherName() {
-<span class="nc" id="L122">    String defaultName = DispatcherDistributed.DISPATCHER_NAME;</span>
-<span class="nc" id="L123">    defaultName = ProGenContext.getOptionalProperty(&quot;progen.role.dispatcher.name&quot;, defaultName);</span>
-<span class="nc" id="L124">    ProGenContext.setProperty(PROGEN_DISPATCHER_NAME_PROPERTY, defaultName);</span>
+<span class="nc" id="L121">    String defaultName = DispatcherDistributed.DISPATCHER_NAME;</span>
+<span class="nc" id="L122">    defaultName = ProGenContext.getOptionalProperty(&quot;progen.role.dispatcher.name&quot;, defaultName);</span>
+<span class="nc" id="L123">    ProGenContext.setProperty(PROGEN_DISPATCHER_NAME_PROPERTY, defaultName);</span>
 
-<span class="nc" id="L126">  }</span>
+<span class="nc" id="L125">  }</span>
 
   @Override
   public String toString() {
-<span class="nc" id="L130">    final StringBuilder dispatcherServer = new StringBuilder(DEFAULT_DISPATCHER_SERVER_URL_LENGTH);</span>
-<span class="nc" id="L131">    dispatcherServer.append(&quot;rmi://&quot;);</span>
-<span class="nc" id="L132">    dispatcherServer.append(ProGenContext.getMandatoryProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY));</span>
-<span class="nc" id="L133">    dispatcherServer.append(COLON_SYMBOL);</span>
-<span class="nc" id="L134">    dispatcherServer.append(ProGenContext.getMandatoryProperty(PROGEN_ROLE_DISPATCHER_PORT_PROPERTY));</span>
-<span class="nc" id="L135">    dispatcherServer.append(SLASH_SYMBOL);</span>
-<span class="nc" id="L136">    dispatcherServer.append(DispatcherDistributed.DISPATCHER_NAME);</span>
-<span class="nc" id="L137">    return dispatcherServer.toString();</span>
+<span class="nc" id="L129">    final StringBuilder dispatcherServer = new StringBuilder(DEFAULT_DISPATCHER_SERVER_URL_LENGTH);</span>
+<span class="nc" id="L130">    dispatcherServer.append(&quot;rmi://&quot;);</span>
+<span class="nc" id="L131">    dispatcherServer.append(ProGenContext.getMandatoryProperty(PROGEN_ROLE_DISPATCHER_BIND_ADDRESS_PROPERTY));</span>
+<span class="nc" id="L132">    dispatcherServer.append(COLON_SYMBOL);</span>
+<span class="nc" id="L133">    dispatcherServer.append(ProGenContext.getMandatoryProperty(PROGEN_ROLE_DISPATCHER_PORT_PROPERTY));</span>
+<span class="nc" id="L134">    dispatcherServer.append(SLASH_SYMBOL);</span>
+<span class="nc" id="L135">    dispatcherServer.append(DispatcherDistributed.DISPATCHER_NAME);</span>
+<span class="nc" id="L136">    return dispatcherServer.toString();</span>
   }
 
 }
