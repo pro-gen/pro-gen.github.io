@@ -17,7 +17,7 @@ import progen.output.plugins.Plugin;
  * @since 2.0
  * 
  */
-//CHECKSTYLE.OFF: MultipleStringLiterals MagicNumber
+@SuppressWarnings(&quot;checkstyle:multiplestringliterals&quot;)
 public class StandardFile extends FileOutput {
 
   private static final int EXTRA_PADDING = 3;
@@ -275,7 +275,7 @@ public class StandardFile extends FileOutput {
    * Imprime la cabecera de la tabla de tiempos.
    */
   private void printTimeHeaderTable() {
-<span class="nc" id="L278">    StringBuilder line = new StringBuilder(LEFT_SEP);</span>
+<span class="nc" id="L278">    final StringBuilder line = new StringBuilder(LEFT_SEP);</span>
     int padding;
 
 <span class="nc" id="L281">    line.append(String.format(&quot;%s%s&quot;, Formatter.left(getLiterals().getString(&quot;time&quot;), firstColumnWidth + secondColumnWidth), CENTER_SEP));</span>
@@ -314,7 +314,7 @@ public class StandardFile extends FileOutput {
   private void printIndividualGenerationMeanData() {
     StringBuilder line;
     String ceilData;
-<span class="nc" id="L317">    DataCollector populationData = historical.getCurrentDataCollector(POPULATION_DATA_LITERAL);</span>
+<span class="nc" id="L317">    final DataCollector populationData = historical.getCurrentDataCollector(POPULATION_DATA_LITERAL);</span>
 <span class="nc" id="L318">    final Map&lt;String, Mean&gt; mean = (Map&lt;String, Mean&gt;) (populationData.getPlugin(&quot;individualMean&quot;).getValue());</span>
 
 <span class="nc" id="L320">    final int padding = Formatter.center(getLiterals().getString(INDIVIDUAL_LITERAL), WIDTH_COLUMN).length();</span>
@@ -482,5 +482,4 @@ public class StandardFile extends FileOutput {
 
   }
 }
-//CHECKSTYLE.ON
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

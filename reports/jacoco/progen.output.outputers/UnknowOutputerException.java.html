@@ -12,6 +12,7 @@ import progen.kernel.error.Error;
  */
 public class UnknowOutputerException extends RuntimeException {
 
+  private static final int ID_ERROR = 25;
   /** Para serialización */
   private static final long serialVersionUID = -2127111332478170624L;
 
@@ -23,8 +24,8 @@ public class UnknowOutputerException extends RuntimeException {
    *          Mensaje descriptivo de la causa de la excepción.
    */
   public UnknowOutputerException(String message) {
-<span class="nc" id="L26">    super(Error.get(25) + &quot;(&quot; + message + &quot;)&quot;);</span>
-<span class="nc" id="L27">  }</span>
+<span class="nc" id="L27">    super(Error.get(ID_ERROR) + &quot;(&quot; + message + &quot;)&quot;);</span>
+<span class="nc" id="L28">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

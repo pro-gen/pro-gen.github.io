@@ -72,7 +72,7 @@ public class TimePlugin implements MacroPlugin {
 
   @Override
   public void initPlugin(String propertyFamily) {
-<span class="nc" id="L75">    final String pluginsName[] = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Mean, Total&quot;).trim().split(&quot;,[ ]*&quot;);</span>
+<span class="nc" id="L75">    final String [] pluginsName = ProGenContext.getOptionalProperty(propertyFamily + &quot;.&quot; + getName() + &quot;.enable&quot;, &quot;Mean, Total&quot;).trim().split(&quot;,[ ]*&quot;);</span>
     Plugin plugin;
 <span class="nc bnc" id="L77" title="All 2 branches missed.">    for (int i = 0; i &lt; pluginsName.length; i++) {</span>
       try {
