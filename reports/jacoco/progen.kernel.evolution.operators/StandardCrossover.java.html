@@ -47,16 +47,16 @@ import progen.kernel.tree.Tree;
 <span class="fc" id="L47">      boolean validCross = false;</span>
 <span class="fc" id="L48">      int tries = 0;</span>
 <span class="fc" id="L49">      boolean giveUp = false;</span>
-<span class="fc bfc" id="L50" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
+<span class="pc bpc" id="L50" title="1 of 4 branches missed.">      while (!validCross &amp;&amp; !giveUp) {</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (crossTree(treeA, treeB)) {</span>
 <span class="fc" id="L52">          validCross = checkTrees(treeA, treeB);</span>
         }
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
-<span class="fc" id="L55">          giveUp = true;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (++tries &gt; 50) {</span>
+<span class="nc" id="L55">          giveUp = true;</span>
         }
       }
 
-<span class="fc bfc" id="L59" title="All 2 branches covered.">      if (validCross) {</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">      if (validCross) {</span>
 <span class="fc" id="L60">        individualsCrossover.add(mother);</span>
 <span class="fc" id="L61">        individualsCrossover.add(father);</span>
       }
@@ -87,7 +87,7 @@ import progen.kernel.tree.Tree;
 <span class="fc" id="L87">    boolean treesCrossed = false;</span>
 
 <span class="fc" id="L89">    crossNodes = selectNodes(treeA, treeB);</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">    if (crossNodes.size() &gt; 0) {</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">    if (crossNodes.size() &gt; 0) {</span>
 <span class="fc" id="L91">      crossNode1 = crossNodes.get(0);</span>
 <span class="fc" id="L92">      crossNode2 = crossNodes.get(1);</span>
       // guardamos los padres de los nodos de corte
@@ -173,7 +173,7 @@ import progen.kernel.tree.Tree;
 
   private boolean checkTreeSize(Tree t) {
 <span class="fc" id="L175">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
-<span class="fc bfc" id="L176" title="All 2 branches covered.">    return t.getRoot().getTotalNodes() &lt;= maxNodes;</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">    return t.getRoot().getTotalNodes() &lt;= maxNodes;</span>
   }
 
 }
