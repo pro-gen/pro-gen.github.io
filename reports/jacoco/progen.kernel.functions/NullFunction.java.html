@@ -3,8 +3,8 @@
  */
 package progen.kernel.functions;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
@@ -35,7 +35,7 @@ public class NullFunction extends Terminal {
 <span class="fc" id="L35">  }</span>
 
   @Override
-  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, Map&lt;String, Object&gt; returnAddr) {
 <span class="fc" id="L39">    return null;</span>
   }
 

@@ -39,17 +39,9 @@ public class GrammarNonTerminalSymbol implements GrammarSymbol, Serializable {
   public String toString() {
 <span class="fc" id="L40">    return getSymbol();</span>
   }
-
-  public boolean equals(Object other) {
-<span class="fc" id="L44">    boolean equals = false;</span>
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">    if (other instanceof GrammarNonTerminalSymbol) {</span>
-<span class="fc" id="L46">      equals = equals((GrammarNonTerminalSymbol) other);</span>
-    }
-<span class="fc" id="L48">    return equals;</span>
-  }
-
+  
   public int hashCode() {
-<span class="nc" id="L52">    return symbol.hashCode();</span>
+<span class="nc" id="L44">    return symbol.hashCode();</span>
   }
 
   /**
@@ -60,23 +52,32 @@ public class GrammarNonTerminalSymbol implements GrammarSymbol, Serializable {
    * @return &lt;code&gt;true&lt;/code&gt; los dos símbolos se representan de la misma
    *         forma.
    */
+  @Override
+  public boolean equals(Object object){
+<span class="fc" id="L57">    boolean isEquals = false;</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">    if (object instanceof GrammarNonTerminalSymbol){</span>
+<span class="fc" id="L59">      isEquals = equals((GrammarNonTerminalSymbol)object);</span>
+    }
+<span class="fc" id="L61">    return isEquals;</span>
+  }
+  
   public boolean equals(GrammarNonTerminalSymbol other) {
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">    return this.compareTo(other) == 0;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">    return this.compareTo(other) == 0;</span>
   }
 
   @Override
   public int compareTo(GrammarSymbol other) {
-<span class="fc" id="L69">    return symbol.compareTo(other.getSymbol());</span>
+<span class="fc" id="L70">    return symbol.compareTo(other.getSymbol());</span>
   }
   
 
   @Override
   public String getSymbol() {
-<span class="fc" id="L75">    return symbol;</span>
+<span class="fc" id="L76">    return symbol;</span>
   }
 
   public String getValue() {
-<span class="fc" id="L79">    return value;</span>
+<span class="fc" id="L80">    return value;</span>
   }
   
 }
