@@ -3,29 +3,92 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PMD Report</title>
 <style type="text/css">
-        body { margin-left: 2%; margin-right: 2%; font:normal verdana,arial,helvetica; color:#000000; }
-        table.details tr th { font-weight: bold; text-align:left; background:#a6caf0; }
-        table.details tr td { background:#eeeee0; }
-        table.summary tr th { font-weight: bold; text-align:left; background:#a6caf0; }
-        table.summary tr td { background:#eeeee0; text-align:center;}
-        table.summary td.filename { background:#eeeee0; text-align:left;}
-        .p1 { background:#FF9999; }
-        .p2 { background:#FFCC66; }
-        .p3 { background:#FFFF99; }
-        .p4 { background:#99FF99; }
-        .p5 { background:#9999FF; }
+        body, td, select, input, li{
+          font-family: Verdana, Helvetica, Arial, sans-serif;
+          font-size: 13px;
+        }
+        h1 {
+          border: 1px solid #999;
+          color: #900;
+          background-color: #ddd;
+          font-weight:900;
+          font-size: xx-large;
+        }
+        h2 {
+          border: 1px solid #999;
+          color: #900;
+          background-color: #ddd;
+          font-weight:900;
+          font-size: x-large;
+        }
+        h3 {
+          padding: 4px 4px 4px 6px;
+          border: 1px solid #aaa;
+          color: #900;
+          background-color: #eee;
+          font-weight: normal;
+          font-size: large;
+        }
+        h4 {
+          padding: 4px 4px 4px 6px;
+          border: 1px solid #bbb;
+          color: #900;
+          background-color: #fff;
+          font-weight: normal;
+          font-size: large;
+        }
+        h5 {
+          padding: 4px 4px 4px 6px;
+          color: #900;
+          font-size: normal;
+        }
+        p {
+          line-height: 1.3em;
+          font-size: small;
+        }
+        table.bodyTable th {
+          color: white;
+          background-color: #bbb;
+          text-align: left;
+          font-weight: bold;
+        }
+        table.bodyTable td {
+          text-align: center;
+        }
+        table.bodyTable td.desc {
+          text-align: left;
+        }
+        table.bodyTable th, table.bodyTable td {
+          padding: 2px 4px 2px 4px;
+          font-size: 13;
+        }
+        table.bodyTable tr.a {
+          background-color: #ddd;
+        }
+        table.bodyTable tr.b {
+          background-color: #eee;
+        }
+        .p1 { background:#FF9999; padding: 2px 4px 2px 4px; }
+        .p2 { background:#FFCC66; padding: 2px 4px 2px 4px; }
+        .p3 { background:#FFFF99; padding: 2px 4px 2px 4px; }
+        .p4 { background:#99FF99; padding: 2px 4px 2px 4px; }
+        .p5 { background:#9999FF; padding: 2px 4px 2px 4px; }
 
     </style>
 </head>
 <body>
-<H1>PMD Report</H1>
+<div class="section">
+<h1>PMD Results</h1>
+<p>The following document contains the results of <a href="http://pmd.sourceforge.net">PMD <b>5.0.5</b></a> on 2014-07-24T16:55:51.447.</p>
+</div>
 <hr>
+<div class="section">
 <h2>Summary</h2>
-<table border="0" class="summary">
-<tr>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Files</th><th>Total</th><th>Blocker</th><th>Critical</th><th>Mayor</th><th>minor</th><th>info</th>
 </tr>
-<tr>
+<tr class="b">
 <td>64</td><td>211</td><td>
 <div class="p1">0</div>
 </td><td>
@@ -39,14 +102,16 @@
 </td>
 </tr>
 </table>
+</div>
 <hr>
+<div class="section">
 <h2>Files</h2>
-<table border="0" class="summary">
-<tr>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Files</th><th>Violations</th><th>Blocker</th><th>Critical</th><th>Mayor</th><th>minor</th><th>info</th>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.StandardConsole">progen.output.outputers.StandardConsole</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.outputers.StandardConsole">progen.output.outputers.StandardConsole</a></td><td>
 <div>18</div>
 </td><td>
 <div class="p1">0</div>
@@ -60,8 +125,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.StandardFile">progen.output.outputers.StandardFile</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.outputers.StandardFile">progen.output.outputers.StandardFile</a></td><td>
 <div>18</div>
 </td><td>
 <div class="p1">0</div>
@@ -75,8 +140,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.population.Individual">progen.kernel.population.Individual</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.population.Individual">progen.kernel.population.Individual</a></td><td>
 <div>11</div>
 </td><td>
 <div class="p1">0</div>
@@ -90,8 +155,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.context.ProGenContext">progen.context.ProGenContext</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.context.ProGenContext">progen.context.ProGenContext</a></td><td>
 <div>9</div>
 </td><td>
 <div class="p1">0</div>
@@ -105,8 +170,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.Function">progen.kernel.functions.Function</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.functions.Function">progen.kernel.functions.Function</a></td><td>
 <div>9</div>
 </td><td>
 <div class="p1">0</div>
@@ -120,8 +185,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</a></td><td>
 <div>9</div>
 </td><td>
 <div class="p1">0</div>
@@ -135,8 +200,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.Experimenter">progen.experimenter.Experimenter</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.experimenter.Experimenter">progen.experimenter.Experimenter</a></td><td>
 <div>7</div>
 </td><td>
 <div class="p1">0</div>
@@ -150,8 +215,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.population.Population">progen.kernel.population.Population</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.population.Population">progen.kernel.population.Population</a></td><td>
 <div>7</div>
 </td><td>
 <div class="p1">0</div>
@@ -165,8 +230,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.GenneticFactory">progen.kernel.evolution.GenneticFactory</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.evolution.GenneticFactory">progen.kernel.evolution.GenneticFactory</a></td><td>
 <div>5</div>
 </td><td>
 <div class="p1">0</div>
@@ -180,8 +245,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.operators.StandardCrossover">progen.kernel.evolution.operators.StandardCrossover</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.evolution.operators.StandardCrossover">progen.kernel.evolution.operators.StandardCrossover</a></td><td>
 <div>5</div>
 </td><td>
 <div class="p1">0</div>
@@ -195,8 +260,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.validations.InaccesibleProductions">progen.kernel.grammar.validations.InaccesibleProductions</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.grammar.validations.InaccesibleProductions">progen.kernel.grammar.validations.InaccesibleProductions</a></td><td>
 <div>5</div>
 </td><td>
 <div class="p1">0</div>
@@ -210,8 +275,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.tree.Node">progen.kernel.tree.Node</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.tree.Node">progen.kernel.tree.Node</a></td><td>
 <div>5</div>
 </td><td>
 <div class="p1">0</div>
@@ -225,8 +290,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.distributed.DistributedFactory">progen.roles.distributed.DistributedFactory</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.roles.distributed.DistributedFactory">progen.roles.distributed.DistributedFactory</a></td><td>
 <div>5</div>
 </td><td>
 <div class="p1">0</div>
@@ -240,8 +305,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.property.LoopProperty">progen.experimenter.property.LoopProperty</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.experimenter.property.LoopProperty">progen.experimenter.property.LoopProperty</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -255,8 +320,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.HistoricalData">progen.output.HistoricalData</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.HistoricalData">progen.output.HistoricalData</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -270,8 +335,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.ProGenFactory">progen.roles.ProGenFactory</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.roles.ProGenFactory">progen.roles.ProGenFactory</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -285,8 +350,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.distributed.ClientDistributed">progen.roles.distributed.ClientDistributed</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.roles.distributed.ClientDistributed">progen.roles.distributed.ClientDistributed</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -300,8 +365,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.distributed.DispatcherServer">progen.roles.distributed.DispatcherServer</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.roles.distributed.DispatcherServer">progen.roles.distributed.DispatcherServer</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -315,8 +380,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.userprogram.UserProgram">progen.userprogram.UserProgram</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.userprogram.UserProgram">progen.userprogram.UserProgram</a></td><td>
 <div>4</div>
 </td><td>
 <div class="p1">0</div>
@@ -330,8 +395,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.MultipleExperimenter">progen.experimenter.MultipleExperimenter</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.experimenter.MultipleExperimenter">progen.experimenter.MultipleExperimenter</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -345,8 +410,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.error.Info">progen.kernel.error.Info</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.error.Info">progen.kernel.error.Info</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -360,8 +425,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.selector.Selector">progen.kernel.evolution.selector.Selector</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.evolution.selector.Selector">progen.kernel.evolution.selector.Selector</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -375,8 +440,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.BitMult">progen.kernel.functions.BitMult</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.functions.BitMult">progen.kernel.functions.BitMult</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -390,8 +455,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.validations.SuperfluousProductions">progen.kernel.grammar.validations.SuperfluousProductions</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.grammar.validations.SuperfluousProductions">progen.kernel.grammar.validations.SuperfluousProductions</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -405,8 +470,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.Formatter">progen.output.outputers.Formatter</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.outputers.Formatter">progen.output.outputers.Formatter</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -420,8 +485,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.OutputStore">progen.output.outputers.OutputStore</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.outputers.OutputStore">progen.output.outputers.OutputStore</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -435,8 +500,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.standalone.StandaloneFactory">progen.roles.standalone.StandaloneFactory</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.roles.standalone.StandaloneFactory">progen.roles.standalone.StandaloneFactory</a></td><td>
 <div>3</div>
 </td><td>
 <div class="p1">0</div>
@@ -450,8 +515,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.error.Warning">progen.kernel.error.Warning</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.error.Warning">progen.kernel.error.Warning</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -465,8 +530,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.selector.Tournament">progen.kernel.evolution.selector.Tournament</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.evolution.selector.Tournament">progen.kernel.evolution.selector.Tournament</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -480,8 +545,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.Bit32ERC">progen.kernel.functions.Bit32ERC</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.functions.Bit32ERC">progen.kernel.functions.Bit32ERC</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -495,8 +560,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.ERC01">progen.kernel.functions.ERC01</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.functions.ERC01">progen.kernel.functions.ERC01</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -510,8 +575,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.NonTerminal">progen.kernel.functions.NonTerminal</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.functions.NonTerminal">progen.kernel.functions.NonTerminal</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -525,8 +590,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.hypergp.HGPGrammar">progen.kernel.hypergp.HGPGrammar</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.hypergp.HGPGrammar">progen.kernel.hypergp.HGPGrammar</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -540,8 +605,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.tree.Full">progen.kernel.tree.Full</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.tree.Full">progen.kernel.tree.Full</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -555,8 +620,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.tree.Grow">progen.kernel.tree.Grow</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.tree.Grow">progen.kernel.tree.Grow</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -570,8 +635,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.tree.Tree">progen.kernel.tree.Tree</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.tree.Tree">progen.kernel.tree.Tree</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -585,8 +650,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.dataCollectors.DataCollector">progen.output.dataCollectors.DataCollector</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.dataCollectors.DataCollector">progen.output.dataCollectors.DataCollector</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -600,8 +665,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.FileOutput">progen.output.outputers.FileOutput</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.outputers.FileOutput">progen.output.outputers.FileOutput</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -615,8 +680,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.plugins.StatisticalPlugin">progen.output.plugins.StatisticalPlugin</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.plugins.StatisticalPlugin">progen.output.plugins.StatisticalPlugin</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -630,8 +695,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.distributed.DispatcherDistributed">progen.roles.distributed.DispatcherDistributed</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.roles.distributed.DispatcherDistributed">progen.roles.distributed.DispatcherDistributed</a></td><td>
 <div>2</div>
 </td><td>
 <div class="p1">0</div>
@@ -645,8 +710,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.ProGen">progen.ProGen</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.ProGen">progen.ProGen</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -660,8 +725,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.property.EnumerationProperty">progen.experimenter.property.EnumerationProperty</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.experimenter.property.EnumerationProperty">progen.experimenter.property.EnumerationProperty</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -675,8 +740,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.property.condition.GratherEqualThanLoopCondition">progen.experimenter.property.condition.GratherEqualThanLoopCondition</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.experimenter.property.condition.GratherEqualThanLoopCondition">progen.experimenter.property.condition.GratherEqualThanLoopCondition</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -690,8 +755,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.experimenter.property.condition.LessEqualThanLoopCondition">progen.experimenter.property.condition.LessEqualThanLoopCondition</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.experimenter.property.condition.LessEqualThanLoopCondition">progen.experimenter.property.condition.LessEqualThanLoopCondition</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -705,8 +770,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.operators.OnePointCrossover">progen.kernel.evolution.operators.OnePointCrossover</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.evolution.operators.OnePointCrossover">progen.kernel.evolution.operators.OnePointCrossover</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -720,8 +785,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.operators.PointMutation">progen.kernel.evolution.operators.PointMutation</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.evolution.operators.PointMutation">progen.kernel.evolution.operators.PointMutation</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -735,8 +800,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.evolution.selector.Roulette">progen.kernel.evolution.selector.Roulette</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.evolution.selector.Roulette">progen.kernel.evolution.selector.Roulette</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -750,8 +815,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.ARG">progen.kernel.functions.ARG</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.functions.ARG">progen.kernel.functions.ARG</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -765,8 +830,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.DoubleDiv">progen.kernel.functions.DoubleDiv</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.functions.DoubleDiv">progen.kernel.functions.DoubleDiv</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -780,8 +845,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.ERC">progen.kernel.functions.ERC</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.functions.ERC">progen.kernel.functions.ERC</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -795,8 +860,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.functions.IntDiv">progen.kernel.functions.IntDiv</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.functions.IntDiv">progen.kernel.functions.IntDiv</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -810,8 +875,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.GrammarNonTerminalSymbol">progen.kernel.grammar.GrammarNonTerminalSymbol</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.grammar.GrammarNonTerminalSymbol">progen.kernel.grammar.GrammarNonTerminalSymbol</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -825,8 +890,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.GrammarTerminalSymbol">progen.kernel.grammar.GrammarTerminalSymbol</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.grammar.GrammarTerminalSymbol">progen.kernel.grammar.GrammarTerminalSymbol</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -840,8 +905,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.grammar.Production">progen.kernel.grammar.Production</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.kernel.grammar.Production">progen.kernel.grammar.Production</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -855,8 +920,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.kernel.tree.HalfAndHalf">progen.kernel.tree.HalfAndHalf</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.kernel.tree.HalfAndHalf">progen.kernel.tree.HalfAndHalf</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -870,8 +935,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.dataCollectors.UnknownDataCollectorException">progen.output.dataCollectors.UnknownDataCollectorException</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.dataCollectors.UnknownDataCollectorException">progen.output.dataCollectors.UnknownDataCollectorException</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -885,8 +950,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.dataCollectors.package-info">progen.output.dataCollectors.package-info</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.dataCollectors.package-info">progen.output.dataCollectors.package-info</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -900,8 +965,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.outputers.BestIndividualFile">progen.output.outputers.BestIndividualFile</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.outputers.BestIndividualFile">progen.output.outputers.BestIndividualFile</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -915,8 +980,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.plugins.Mean">progen.output.plugins.Mean</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.plugins.Mean">progen.output.plugins.Mean</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -930,8 +995,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.plugins.Median">progen.output.plugins.Median</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.output.plugins.Median">progen.output.plugins.Median</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -945,8 +1010,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.output.plugins.TimePlugin">progen.output.plugins.TimePlugin</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.output.plugins.TimePlugin">progen.output.plugins.TimePlugin</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -960,8 +1025,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.distributed.ProGenDistributedException">progen.roles.distributed.ProGenDistributedException</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.roles.distributed.ProGenDistributedException">progen.roles.distributed.ProGenDistributedException</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -975,8 +1040,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.standalone.ClientLocal">progen.roles.standalone.ClientLocal</a></td><td>
+<tr class="b">
+<td class="desc"><a href="#progen.roles.standalone.ClientLocal">progen.roles.standalone.ClientLocal</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -990,8 +1055,8 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr>
-<td class="filename"><a href="#progen.roles.standalone.DispatcherLocal">progen.roles.standalone.DispatcherLocal</a></td><td>
+<tr class="a">
+<td class="desc"><a href="#progen.roles.standalone.DispatcherLocal">progen.roles.standalone.DispatcherLocal</a></td><td>
 <div>1</div>
 </td><td>
 <div class="p1">0</div>
@@ -1006,1933 +1071,1935 @@
 </td>
 </tr>
 </table>
+</div>
 <hr>
+<div class="section">
 <h2>Details</h2>
-<H3 id="progen.output.outputers.StandardConsole">progen.output.outputers.StandardConsole</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.StandardConsole">progen.output.outputers.StandardConsole</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">107</td><td style="padding: 3px" align="left" width="100%">
+</td><td>107</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">172</td><td style="padding: 3px" align="left" width="100%">
+</td><td>172</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">188</td><td style="padding: 3px" align="left" width="100%">
+</td><td>188</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">189</td><td style="padding: 3px" align="left" width="100%">
+</td><td>189</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">192</td><td style="padding: 3px" align="left" width="100%">
+</td><td>192</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">193</td><td style="padding: 3px" align="left" width="100%">
+</td><td>193</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">314</td><td style="padding: 3px" align="left" width="100%">
+</td><td>314</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">344</td><td style="padding: 3px" align="left" width="100%">
+</td><td>344</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">360</td><td style="padding: 3px" align="left" width="100%">
+</td><td>360</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">361</td><td style="padding: 3px" align="left" width="100%">
+</td><td>361</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">364</td><td style="padding: 3px" align="left" width="100%">
+</td><td>364</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">365</td><td style="padding: 3px" align="left" width="100%">
+</td><td>365</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">374</td><td style="padding: 3px" align="left" width="100%">
+</td><td>374</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">390</td><td style="padding: 3px" align="left" width="100%">
+</td><td>390</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">391</td><td style="padding: 3px" align="left" width="100%">
+</td><td>391</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">394</td><td style="padding: 3px" align="left" width="100%">
+</td><td>394</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">395</td><td style="padding: 3px" align="left" width="100%">
+</td><td>395</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">427</td><td style="padding: 3px" align="left" width="100%">
+</td><td>427</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.outputers.StandardFile">progen.output.outputers.StandardFile</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.StandardFile">progen.output.outputers.StandardFile</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">107</td><td style="padding: 3px" align="left" width="100%">
+</td><td>107</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">172</td><td style="padding: 3px" align="left" width="100%">
+</td><td>172</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">188</td><td style="padding: 3px" align="left" width="100%">
+</td><td>188</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">189</td><td style="padding: 3px" align="left" width="100%">
+</td><td>189</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">192</td><td style="padding: 3px" align="left" width="100%">
+</td><td>192</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">193</td><td style="padding: 3px" align="left" width="100%">
+</td><td>193</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">314</td><td style="padding: 3px" align="left" width="100%">
+</td><td>314</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">344</td><td style="padding: 3px" align="left" width="100%">
+</td><td>344</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">360</td><td style="padding: 3px" align="left" width="100%">
+</td><td>360</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">361</td><td style="padding: 3px" align="left" width="100%">
+</td><td>361</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">364</td><td style="padding: 3px" align="left" width="100%">
+</td><td>364</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">365</td><td style="padding: 3px" align="left" width="100%">
+</td><td>365</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">374</td><td style="padding: 3px" align="left" width="100%">
+</td><td>374</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">390</td><td style="padding: 3px" align="left" width="100%">
+</td><td>390</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">391</td><td style="padding: 3px" align="left" width="100%">
+</td><td>391</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">394</td><td style="padding: 3px" align="left" width="100%">
+</td><td>394</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">395</td><td style="padding: 3px" align="left" width="100%">
+</td><td>395</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">427</td><td style="padding: 3px" align="left" width="100%">
+</td><td>427</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.population.Individual">progen.kernel.population.Individual</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.population.Individual">progen.kernel.population.Individual</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">40</td><td style="padding: 3px" align="left" width="100%">
+</td><td>40</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">47</td><td style="padding: 3px" align="left" width="100%">
+</td><td>47</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">53</td><td style="padding: 3px" align="left" width="100%">
+</td><td>53</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">83</td><td style="padding: 3px" align="left" width="100%">
+</td><td>83</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">100</td><td style="padding: 3px" align="left" width="100%">
+</td><td>100</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">106</td><td style="padding: 3px" align="left" width="100%">
+</td><td>106</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">162</td><td style="padding: 3px" align="left" width="100%">
+</td><td>162</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">171</td><td style="padding: 3px" align="left" width="100%">
+</td><td>171</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">234</td><td style="padding: 3px" align="left" width="100%">
+</td><td>234</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">388</td><td style="padding: 3px" align="left" width="100%">
+</td><td>388</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p2">2</div>
-</td><td style="padding: 3px" align="right">367</td><td style="padding: 3px" align="left" width="100%">
+</td><td>367</td><td class="desc" width="100%">
 The method name and parameter number are suspiciously close to equals(Object)
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.context.ProGenContext">progen.context.ProGenContext</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.context.ProGenContext">progen.context.ProGenContext</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">70</td><td style="padding: 3px" align="left" width="100%">
+</td><td>70</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">83</td><td style="padding: 3px" align="left" width="100%">
+</td><td>83</td><td class="desc" width="100%">
 Avoid catching NullPointerException; consider removing the cause of the NPE.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">84</td><td style="padding: 3px" align="left" width="100%">
+</td><td>84</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">86</td><td style="padding: 3px" align="left" width="100%">
+</td><td>86</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">379</td><td style="padding: 3px" align="left" width="100%">
+</td><td>379</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">399</td><td style="padding: 3px" align="left" width="100%">
+</td><td>399</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">410</td><td style="padding: 3px" align="left" width="100%">
+</td><td>410</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">412</td><td style="padding: 3px" align="left" width="100%">
+</td><td>412</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">584</td><td style="padding: 3px" align="left" width="100%">
+</td><td>584</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.Function">progen.kernel.functions.Function</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.Function">progen.kernel.functions.Function</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">52</td><td style="padding: 3px" align="left" width="100%">
+</td><td>52</td><td class="desc" width="100%">
 System.arraycopy is more efficient
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">66</td><td style="padding: 3px" align="left" width="100%">
+</td><td>66</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">122</td><td style="padding: 3px" align="left" width="100%">
+</td><td>122</td><td class="desc" width="100%">
 Avoid variables with short names like o
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">134</td><td style="padding: 3px" align="left" width="100%">
+</td><td>134</td><td class="desc" width="100%">
 Avoid variables with short names like f
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">159</td><td style="padding: 3px" align="left" width="100%">
+</td><td>159</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">179</td><td style="padding: 3px" align="left" width="100%">
+</td><td>179</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">179</td><td style="padding: 3px" align="left" width="100%">
+</td><td>179</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">197</td><td style="padding: 3px" align="left" width="100%">
+</td><td>197</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">224</td><td style="padding: 3px" align="left" width="100%">
+</td><td>224</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">168</td><td style="padding: 3px" align="left" width="100%">
+</td><td>168</td><td class="desc" width="100%">
 These nested if statements could be combined
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">294</td><td style="padding: 3px" align="left" width="100%">
+</td><td>294</td><td class="desc" width="100%">
 These nested if statements could be combined
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">93</td><td style="padding: 3px" align="left" width="100%">
+</td><td>93</td><td class="desc" width="100%">
 Overridable method 'validate' called during object construction
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">95</td><td style="padding: 3px" align="left" width="100%">
+</td><td>95</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">156</td><td style="padding: 3px" align="left" width="100%">
+</td><td>156</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">166</td><td style="padding: 3px" align="left" width="100%">
+</td><td>166</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">236</td><td style="padding: 3px" align="left" width="100%">
+</td><td>236</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">252</td><td style="padding: 3px" align="left" width="100%">
+</td><td>252</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">272</td><td style="padding: 3px" align="left" width="100%">
+</td><td>272</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.Experimenter">progen.experimenter.Experimenter</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.Experimenter">progen.experimenter.Experimenter</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">35</td><td style="padding: 3px" align="left" width="100%">
+</td><td>35</td><td class="desc" width="100%">
 Overridable method 'generateOutputDir' called during object construction
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">76</td><td style="padding: 3px" align="left" width="100%">
+</td><td>76</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">89</td><td style="padding: 3px" align="left" width="100%">
+</td><td>89</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">91</td><td style="padding: 3px" align="left" width="100%">
+</td><td>91</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">101</td><td style="padding: 3px" align="left" width="100%">
+</td><td>101</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">127</td><td style="padding: 3px" align="left" width="100%">
+</td><td>127</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">150</td><td style="padding: 3px" align="left" width="100%">
+</td><td>150</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.population.Population">progen.kernel.population.Population</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.population.Population">progen.kernel.population.Population</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">28</td><td style="padding: 3px" align="left" width="100%">
+</td><td>28</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">46</td><td style="padding: 3px" align="left" width="100%">
+</td><td>46</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">77</td><td style="padding: 3px" align="left" width="100%">
+</td><td>77</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">110</td><td style="padding: 3px" align="left" width="100%">
+</td><td>110</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">112</td><td style="padding: 3px" align="left" width="100%">
+</td><td>112</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">136</td><td style="padding: 3px" align="left" width="100%">
+</td><td>136</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">157</td><td style="padding: 3px" align="left" width="100%">
+</td><td>157</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.GenneticFactory">progen.kernel.evolution.GenneticFactory</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.GenneticFactory">progen.kernel.evolution.GenneticFactory</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">46</td><td style="padding: 3px" align="left" width="100%">
+</td><td>46</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">60</td><td style="padding: 3px" align="left" width="100%">
+</td><td>60</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">75</td><td style="padding: 3px" align="left" width="100%">
+</td><td>75</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">85</td><td style="padding: 3px" align="left" width="100%">
+</td><td>85</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">87</td><td style="padding: 3px" align="left" width="100%">
+</td><td>87</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.operators.StandardCrossover">progen.kernel.evolution.operators.StandardCrossover</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.operators.StandardCrossover">progen.kernel.evolution.operators.StandardCrossover</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">33</td><td style="padding: 3px" align="left" width="100%">
+</td><td>33</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">36</td><td style="padding: 3px" align="left" width="100%">
+</td><td>36</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">79</td><td style="padding: 3px" align="left" width="100%">
+</td><td>79</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">144</td><td style="padding: 3px" align="left" width="100%">
+</td><td>144</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">174</td><td style="padding: 3px" align="left" width="100%">
+</td><td>174</td><td class="desc" width="100%">
 Avoid variables with short names like t
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.validations.InaccesibleProductions">progen.kernel.grammar.validations.InaccesibleProductions</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.validations.InaccesibleProductions">progen.kernel.grammar.validations.InaccesibleProductions</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">19</td><td style="padding: 3px" align="left" width="100%">
+</td><td>19</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">51</td><td style="padding: 3px" align="left" width="100%">
+</td><td>51</td><td class="desc" width="100%">
 Avoid unused method parameters such as 'axiom'.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">51</td><td style="padding: 3px" align="left" width="100%">
+</td><td>51</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">52</td><td style="padding: 3px" align="left" width="100%">
+</td><td>52</td><td class="desc" width="100%">
 Avoid variables with short names like ok
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">65</td><td style="padding: 3px" align="left" width="100%">
+</td><td>65</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.tree.Node">progen.kernel.tree.Node</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.tree.Node">progen.kernel.tree.Node</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">244</td><td style="padding: 3px" align="left" width="100%">
+</td><td>244</td><td class="desc" width="100%">
 Avoid variables with short names like n
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">291</td><td style="padding: 3px" align="left" width="100%">
+</td><td>291</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">293</td><td style="padding: 3px" align="left" width="100%">
+</td><td>293</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">309</td><td style="padding: 3px" align="left" width="100%">
+</td><td>309</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">378</td><td style="padding: 3px" align="left" width="100%">
+</td><td>378</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.distributed.DistributedFactory">progen.roles.distributed.DistributedFactory</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.distributed.DistributedFactory">progen.roles.distributed.DistributedFactory</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">40</td><td style="padding: 3px" align="left" width="100%">
+</td><td>40</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">59</td><td style="padding: 3px" align="left" width="100%">
+</td><td>59</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">70</td><td style="padding: 3px" align="left" width="100%">
+</td><td>70</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">72</td><td style="padding: 3px" align="left" width="100%">
+</td><td>72</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">74</td><td style="padding: 3px" align="left" width="100%">
+</td><td>74</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.property.LoopProperty">progen.experimenter.property.LoopProperty</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.property.LoopProperty">progen.experimenter.property.LoopProperty</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">75</td><td style="padding: 3px" align="left" width="100%">
+</td><td>75</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">77</td><td style="padding: 3px" align="left" width="100%">
+</td><td>77</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">88</td><td style="padding: 3px" align="left" width="100%">
+</td><td>88</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">90</td><td style="padding: 3px" align="left" width="100%">
+</td><td>90</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.HistoricalData">progen.output.HistoricalData</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.HistoricalData">progen.output.HistoricalData</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">29</td><td style="padding: 3px" align="left" width="100%">
+</td><td>29</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">69</td><td style="padding: 3px" align="left" width="100%">
+</td><td>69</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">98</td><td style="padding: 3px" align="left" width="100%">
+</td><td>98</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">134</td><td style="padding: 3px" align="left" width="100%">
+</td><td>134</td><td class="desc" width="100%">
 Do not add empty strings
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.ProGenFactory">progen.roles.ProGenFactory</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.ProGenFactory">progen.roles.ProGenFactory</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">69</td><td style="padding: 3px" align="left" width="100%">
+</td><td>69</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">71</td><td style="padding: 3px" align="left" width="100%">
+</td><td>71</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">73</td><td style="padding: 3px" align="left" width="100%">
+</td><td>73</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">84</td><td style="padding: 3px" align="left" width="100%">
+</td><td>84</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.distributed.ClientDistributed">progen.roles.distributed.ClientDistributed</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.distributed.ClientDistributed">progen.roles.distributed.ClientDistributed</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">26</td><td style="padding: 3px" align="left" width="100%">
+</td><td>26</td><td class="desc" width="100%">
 Overriding method merely calls super
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">37</td><td style="padding: 3px" align="left" width="100%">
+</td><td>37</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">39</td><td style="padding: 3px" align="left" width="100%">
+</td><td>39</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">41</td><td style="padding: 3px" align="left" width="100%">
+</td><td>41</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.distributed.DispatcherServer">progen.roles.distributed.DispatcherServer</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.distributed.DispatcherServer">progen.roles.distributed.DispatcherServer</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">88</td><td style="padding: 3px" align="left" width="100%">
+</td><td>88</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">90</td><td style="padding: 3px" align="left" width="100%">
+</td><td>90</td><td class="desc" width="100%">
 Avoid printStackTrace(); use a logger call instead.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">92</td><td style="padding: 3px" align="left" width="100%">
+</td><td>92</td><td class="desc" width="100%">
 Avoid printStackTrace(); use a logger call instead.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">115</td><td style="padding: 3px" align="left" width="100%">
+</td><td>115</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.userprogram.UserProgram">progen.userprogram.UserProgram</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.userprogram.UserProgram">progen.userprogram.UserProgram</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">26</td><td style="padding: 3px" align="left" width="100%">
+</td><td>26</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">38</td><td style="padding: 3px" align="left" width="100%">
+</td><td>38</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">40</td><td style="padding: 3px" align="left" width="100%">
+</td><td>40</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">42</td><td style="padding: 3px" align="left" width="100%">
+</td><td>42</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.MultipleExperimenter">progen.experimenter.MultipleExperimenter</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.MultipleExperimenter">progen.experimenter.MultipleExperimenter</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">79</td><td style="padding: 3px" align="left" width="100%">
+</td><td>79</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">92</td><td style="padding: 3px" align="left" width="100%">
+</td><td>92</td><td class="desc" width="100%">
 Avoid variables with short names like i
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">169</td><td style="padding: 3px" align="left" width="100%">
+</td><td>169</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.error.Info">progen.kernel.error.Info</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.error.Info">progen.kernel.error.Info</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">35</td><td style="padding: 3px" align="left" width="100%">
+</td><td>35</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">46</td><td style="padding: 3px" align="left" width="100%">
+</td><td>46</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">50</td><td style="padding: 3px" align="left" width="100%">
+</td><td>50</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.selector.Selector">progen.kernel.evolution.selector.Selector</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.selector.Selector">progen.kernel.evolution.selector.Selector</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">35</td><td style="padding: 3px" align="left" width="100%">
+</td><td>35</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">37</td><td style="padding: 3px" align="left" width="100%">
+</td><td>37</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">39</td><td style="padding: 3px" align="left" width="100%">
+</td><td>39</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.BitMult">progen.kernel.functions.BitMult</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.BitMult">progen.kernel.functions.BitMult</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">26</td><td style="padding: 3px" align="left" width="100%">
+</td><td>26</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">27</td><td style="padding: 3px" align="left" width="100%">
+</td><td>27</td><td class="desc" width="100%">
 Avoid variables with short names like x
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">28</td><td style="padding: 3px" align="left" width="100%">
+</td><td>28</td><td class="desc" width="100%">
 Avoid variables with short names like y
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.validations.SuperfluousProductions">progen.kernel.grammar.validations.SuperfluousProductions</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.validations.SuperfluousProductions">progen.kernel.grammar.validations.SuperfluousProductions</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">19</td><td style="padding: 3px" align="left" width="100%">
+</td><td>19</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">53</td><td style="padding: 3px" align="left" width="100%">
+</td><td>53</td><td class="desc" width="100%">
 Avoid unused method parameters such as 'symbol'.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">55</td><td style="padding: 3px" align="left" width="100%">
+</td><td>55</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.outputers.Formatter">progen.output.outputers.Formatter</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.Formatter">progen.output.outputers.Formatter</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">95</td><td style="padding: 3px" align="left" width="100%">
+</td><td>95</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">118</td><td style="padding: 3px" align="left" width="100%">
+</td><td>118</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">121</td><td style="padding: 3px" align="left" width="100%">
+</td><td>121</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.outputers.OutputStore">progen.output.outputers.OutputStore</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.OutputStore">progen.output.outputers.OutputStore</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">66</td><td style="padding: 3px" align="left" width="100%">
+</td><td>66</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">68</td><td style="padding: 3px" align="left" width="100%">
+</td><td>68</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">70</td><td style="padding: 3px" align="left" width="100%">
+</td><td>70</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.standalone.StandaloneFactory">progen.roles.standalone.StandaloneFactory</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.standalone.StandaloneFactory">progen.roles.standalone.StandaloneFactory</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">50</td><td style="padding: 3px" align="left" width="100%">
+</td><td>50</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">56</td><td style="padding: 3px" align="left" width="100%">
+</td><td>56</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">75</td><td style="padding: 3px" align="left" width="100%">
+</td><td>75</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.error.Warning">progen.kernel.error.Warning</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.error.Warning">progen.kernel.error.Warning</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">33</td><td style="padding: 3px" align="left" width="100%">
+</td><td>33</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">44</td><td style="padding: 3px" align="left" width="100%">
+</td><td>44</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.selector.Tournament">progen.kernel.evolution.selector.Tournament</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.selector.Tournament">progen.kernel.evolution.selector.Tournament</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">31</td><td style="padding: 3px" align="left" width="100%">
+</td><td>31</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">75</td><td style="padding: 3px" align="left" width="100%">
+</td><td>75</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.Bit32ERC">progen.kernel.functions.Bit32ERC</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.Bit32ERC">progen.kernel.functions.Bit32ERC</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">35</td><td style="padding: 3px" align="left" width="100%">
+</td><td>35</td><td class="desc" width="100%">
 clone() method should be implemented only if implementing Cloneable interface
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">37</td><td style="padding: 3px" align="left" width="100%">
+</td><td>37</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.ERC01">progen.kernel.functions.ERC01</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.ERC01">progen.kernel.functions.ERC01</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">30</td><td style="padding: 3px" align="left" width="100%">
+</td><td>30</td><td class="desc" width="100%">
 clone() method should be implemented only if implementing Cloneable interface
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">32</td><td style="padding: 3px" align="left" width="100%">
+</td><td>32</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.NonTerminal">progen.kernel.functions.NonTerminal</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.NonTerminal">progen.kernel.functions.NonTerminal</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">20</td><td style="padding: 3px" align="left" width="100%">
+</td><td>20</td><td class="desc" width="100%">
 Overriding method merely calls super
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">29</td><td style="padding: 3px" align="left" width="100%">
+</td><td>29</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.hypergp.HGPGrammar">progen.kernel.hypergp.HGPGrammar</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.hypergp.HGPGrammar">progen.kernel.hypergp.HGPGrammar</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">63</td><td style="padding: 3px" align="left" width="100%">
+</td><td>63</td><td class="desc" width="100%">
 These nested if statements could be combined
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">47</td><td style="padding: 3px" align="left" width="100%">
+</td><td>47</td><td class="desc" width="100%">
 Avoid variables with short names like p
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.tree.Full">progen.kernel.tree.Full</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.tree.Full">progen.kernel.tree.Full</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">55</td><td style="padding: 3px" align="left" width="100%">
+</td><td>55</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">174</td><td style="padding: 3px" align="left" width="100%">
+</td><td>174</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.tree.Grow">progen.kernel.tree.Grow</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.tree.Grow">progen.kernel.tree.Grow</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">47</td><td style="padding: 3px" align="left" width="100%">
+</td><td>47</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">102</td><td style="padding: 3px" align="left" width="100%">
+</td><td>102</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.tree.Tree">progen.kernel.tree.Tree</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.tree.Tree">progen.kernel.tree.Tree</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">106</td><td style="padding: 3px" align="left" width="100%">
+</td><td>106</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">128</td><td style="padding: 3px" align="left" width="100%">
+</td><td>128</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.dataCollectors.DataCollector">progen.output.dataCollectors.DataCollector</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.dataCollectors.DataCollector">progen.output.dataCollectors.DataCollector</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">1</td><td style="padding: 3px" align="left" width="100%">
+</td><td>1</td><td class="desc" width="100%">
 Package name contains upper case characters
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">71</td><td style="padding: 3px" align="left" width="100%">
+</td><td>71</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.outputers.FileOutput">progen.output.outputers.FileOutput</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.FileOutput">progen.output.outputers.FileOutput</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">70</td><td style="padding: 3px" align="left" width="100%">
+</td><td>70</td><td class="desc" width="100%">
 Avoid printStackTrace(); use a logger call instead.
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">72</td><td style="padding: 3px" align="left" width="100%">
+</td><td>72</td><td class="desc" width="100%">
 Avoid printStackTrace(); use a logger call instead.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.plugins.StatisticalPlugin">progen.output.plugins.StatisticalPlugin</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.plugins.StatisticalPlugin">progen.output.plugins.StatisticalPlugin</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">44</td><td style="padding: 3px" align="left" width="100%">
+</td><td>44</td><td class="desc" width="100%">
 Avoid using implementation types like 'HashMap'; use the interface instead
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">97</td><td style="padding: 3px" align="left" width="100%">
+</td><td>97</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.distributed.DispatcherDistributed">progen.roles.distributed.DispatcherDistributed</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.distributed.DispatcherDistributed">progen.roles.distributed.DispatcherDistributed</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">34</td><td style="padding: 3px" align="left" width="100%">
+</td><td>34</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="a">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">60</td><td style="padding: 3px" align="left" width="100%">
+</td><td>60</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.ProGen">progen.ProGen</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.ProGen">progen.ProGen</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">55</td><td style="padding: 3px" align="left" width="100%">
+</td><td>55</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.property.EnumerationProperty">progen.experimenter.property.EnumerationProperty</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.property.EnumerationProperty">progen.experimenter.property.EnumerationProperty</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">73</td><td style="padding: 3px" align="left" width="100%">
+</td><td>73</td><td class="desc" width="100%">
 Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or append().
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.property.condition.GratherEqualThanLoopCondition">progen.experimenter.property.condition.GratherEqualThanLoopCondition</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.property.condition.GratherEqualThanLoopCondition">progen.experimenter.property.condition.GratherEqualThanLoopCondition</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">23</td><td style="padding: 3px" align="left" width="100%">
+</td><td>23</td><td class="desc" width="100%">
 It is a good practice to call super() in a constructor
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.experimenter.property.condition.LessEqualThanLoopCondition">progen.experimenter.property.condition.LessEqualThanLoopCondition</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.experimenter.property.condition.LessEqualThanLoopCondition">progen.experimenter.property.condition.LessEqualThanLoopCondition</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">23</td><td style="padding: 3px" align="left" width="100%">
+</td><td>23</td><td class="desc" width="100%">
 It is a good practice to call super() in a constructor
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.operators.OnePointCrossover">progen.kernel.evolution.operators.OnePointCrossover</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.operators.OnePointCrossover">progen.kernel.evolution.operators.OnePointCrossover</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">32</td><td style="padding: 3px" align="left" width="100%">
+</td><td>32</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.operators.PointMutation">progen.kernel.evolution.operators.PointMutation</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.operators.PointMutation">progen.kernel.evolution.operators.PointMutation</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">62</td><td style="padding: 3px" align="left" width="100%">
+</td><td>62</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.evolution.selector.Roulette">progen.kernel.evolution.selector.Roulette</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.evolution.selector.Roulette">progen.kernel.evolution.selector.Roulette</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">19</td><td style="padding: 3px" align="left" width="100%">
+</td><td>19</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.ARG">progen.kernel.functions.ARG</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.ARG">progen.kernel.functions.ARG</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">34</td><td style="padding: 3px" align="left" width="100%">
+</td><td>34</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.DoubleDiv">progen.kernel.functions.DoubleDiv</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.DoubleDiv">progen.kernel.functions.DoubleDiv</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">36</td><td style="padding: 3px" align="left" width="100%">
+</td><td>36</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.ERC">progen.kernel.functions.ERC</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.ERC">progen.kernel.functions.ERC</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">61</td><td style="padding: 3px" align="left" width="100%">
+</td><td>61</td><td class="desc" width="100%">
 clone() method should throw CloneNotSupportedException
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.functions.IntDiv">progen.kernel.functions.IntDiv</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.functions.IntDiv">progen.kernel.functions.IntDiv</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">36</td><td style="padding: 3px" align="left" width="100%">
+</td><td>36</td><td class="desc" width="100%">
 Avoid if (x != y) ..; else ..;
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.GrammarNonTerminalSymbol">progen.kernel.grammar.GrammarNonTerminalSymbol</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.GrammarNonTerminalSymbol">progen.kernel.grammar.GrammarNonTerminalSymbol</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p2">2</div>
-</td><td style="padding: 3px" align="right">63</td><td style="padding: 3px" align="left" width="100%">
+</td><td>63</td><td class="desc" width="100%">
 The method name and parameter number are suspiciously close to equals(Object)
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.GrammarTerminalSymbol">progen.kernel.grammar.GrammarTerminalSymbol</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.GrammarTerminalSymbol">progen.kernel.grammar.GrammarTerminalSymbol</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p2">2</div>
-</td><td style="padding: 3px" align="right">34</td><td style="padding: 3px" align="left" width="100%">
+</td><td>34</td><td class="desc" width="100%">
 The method name and parameter number are suspiciously close to equals(Object)
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.grammar.Production">progen.kernel.grammar.Production</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.grammar.Production">progen.kernel.grammar.Production</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p2">2</div>
-</td><td style="padding: 3px" align="right">190</td><td style="padding: 3px" align="left" width="100%">
+</td><td>190</td><td class="desc" width="100%">
 The method name and parameter number are suspiciously close to equals(Object)
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.kernel.tree.HalfAndHalf">progen.kernel.tree.HalfAndHalf</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.kernel.tree.HalfAndHalf">progen.kernel.tree.HalfAndHalf</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">31</td><td style="padding: 3px" align="left" width="100%">
+</td><td>31</td><td class="desc" width="100%">
 Perhaps 'percentGrow' could be replaced by a local variable.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.dataCollectors.UnknownDataCollectorException">progen.output.dataCollectors.UnknownDataCollectorException</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.dataCollectors.UnknownDataCollectorException">progen.output.dataCollectors.UnknownDataCollectorException</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">1</td><td style="padding: 3px" align="left" width="100%">
+</td><td>1</td><td class="desc" width="100%">
 Package name contains upper case characters
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.dataCollectors.package-info">progen.output.dataCollectors.package-info</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.dataCollectors.package-info">progen.output.dataCollectors.package-info</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">9</td><td style="padding: 3px" align="left" width="100%">
+</td><td>9</td><td class="desc" width="100%">
 Package name contains upper case characters
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.outputers.BestIndividualFile">progen.output.outputers.BestIndividualFile</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.outputers.BestIndividualFile">progen.output.outputers.BestIndividualFile</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">25</td><td style="padding: 3px" align="left" width="100%">
+</td><td>25</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.plugins.Mean">progen.output.plugins.Mean</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.plugins.Mean">progen.output.plugins.Mean</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">25</td><td style="padding: 3px" align="left" width="100%">
+</td><td>25</td><td class="desc" width="100%">
 Overridable method 'initialValue' called during object construction
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.plugins.Median">progen.output.plugins.Median</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.plugins.Median">progen.output.plugins.Median</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">24</td><td style="padding: 3px" align="left" width="100%">
+</td><td>24</td><td class="desc" width="100%">
 Overridable method 'initialValue' called during object construction
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.output.plugins.TimePlugin">progen.output.plugins.TimePlugin</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.output.plugins.TimePlugin">progen.output.plugins.TimePlugin</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">82</td><td style="padding: 3px" align="left" width="100%">
+</td><td>82</td><td class="desc" width="100%">
 New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.distributed.ProGenDistributedException">progen.roles.distributed.ProGenDistributedException</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.distributed.ProGenDistributedException">progen.roles.distributed.ProGenDistributedException</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">21</td><td style="padding: 3px" align="left" width="100%">
+</td><td>21</td><td class="desc" width="100%">
 Avoid variables with short names like id
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.standalone.ClientLocal">progen.roles.standalone.ClientLocal</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.standalone.ClientLocal">progen.roles.standalone.ClientLocal</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p3">3</div>
-</td><td style="padding: 3px" align="right">68</td><td style="padding: 3px" align="left" width="100%">
+</td><td>68</td><td class="desc" width="100%">
 Avoid really long methods.
 </td>
 </tr>
 </table>
 <br>
-<H3 id="progen.roles.standalone.DispatcherLocal">progen.roles.standalone.DispatcherLocal</H3>
-<table border="0" width="100%" class="details">
-<tr>
+<h3 id="progen.roles.standalone.DispatcherLocal">progen.roles.standalone.DispatcherLocal</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
 <th>Priority</th><th>Begin Line</th><th align="left">Description</th>
 </tr>
-<tr>
-<td style="padding: 3px" align="center">
+<tr class="b">
+<td>
 <div class="p4">4</div>
-</td><td style="padding: 3px" align="right">22</td><td style="padding: 3px" align="left" width="100%">
+</td><td>22</td><td class="desc" width="100%">
 Perhaps 'factory' could be replaced by a local variable.
 </td>
 </tr>
 </table>
 <br>
-<p>Generated by <a href="http://pmd.sourceforge.net">PMD <b>5.0.5</b></a> on 2014-07-23T21:09:21.259.</p>
+</div>
 </body>
 </html>
