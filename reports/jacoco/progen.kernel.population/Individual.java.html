@@ -341,7 +341,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
   public boolean equals(Object other) {
 <span class="fc" id="L342">    boolean equals = false;</span>
 <span class="pc bpc" id="L343" title="1 of 2 branches missed.">    if (other instanceof Individual) {</span>
-<span class="fc" id="L344">      equals = this.equals((Individual) other);</span>
+<span class="fc" id="L344">      equals = this.equalsIndividual((Individual) other);</span>
     } else {
 <span class="nc" id="L346">      equals = false;</span>
     }
@@ -361,7 +361,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    *          Individuo con el que comparar
    * @return &lt;code&gt;true&lt;/code&gt; si los dos individuos son iguales.
    */
-  public boolean equals(Individual other) {
+  private boolean equalsIndividual(Individual other) {
 <span class="fc" id="L365">    boolean isEquals = true;</span>
 <span class="pc bpc" id="L366" title="1 of 2 branches missed.">    if (other == null) {</span>
 <span class="nc" id="L367">      isEquals = false;</span>

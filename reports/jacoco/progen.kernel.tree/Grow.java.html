@@ -44,10 +44,10 @@ public class Grow implements InitializeTreeMethod {
 <span class="fc" id="L44">    maxAttempts = ProGenContext.getOptionalProperty(&quot;progen.max-attempts&quot;, DEFAULT_MAX_ATTEMPTS);</span>
 <span class="fc" id="L45">    final String[] intervalDepth = ProGenContext.getMandatoryProperty(&quot;progen.population.init-depth-interval&quot;).split(&quot;,&quot;);</span>
 <span class="fc" id="L46">    minDepth = Integer.parseInt(intervalDepth[0]);</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">    if (intervalDepth.length != 2) {</span>
-<span class="fc" id="L48">      maxDepth = minDepth;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    if (intervalDepth.length == 2) {</span>
+<span class="fc" id="L48">      maxDepth = Integer.parseInt(intervalDepth[1]);</span>
     } else {
-<span class="fc" id="L50">      maxDepth = Integer.parseInt(intervalDepth[1]);</span>
+<span class="fc" id="L50">      maxDepth = minDepth;</span>
     }
 <span class="fc" id="L52">  }</span>
 

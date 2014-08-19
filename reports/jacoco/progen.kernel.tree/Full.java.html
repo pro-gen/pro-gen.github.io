@@ -52,10 +52,10 @@ public class Full implements InitializeTreeMethod {
 <span class="fc" id="L52">    maxAttempts = ProGenContext.getOptionalProperty(&quot;progen.max-attempts&quot;, DEFAULT_MAX_ATTEMPTS);</span>
 <span class="fc" id="L53">    final String [] intervalDepth = ProGenContext.getMandatoryProperty(&quot;progen.population.init-depth-interval&quot;).split(&quot;,&quot;);</span>
 <span class="fc" id="L54">    minDepth = Integer.parseInt(intervalDepth[0]);</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">    if (intervalDepth.length != 2) {</span>
-<span class="fc" id="L56">      maxDepth = minDepth;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">    if (intervalDepth.length == 2) {</span>
+<span class="fc" id="L56">      maxDepth = Integer.parseInt(intervalDepth[1]);</span>
     } else {
-<span class="fc" id="L58">      maxDepth = Integer.parseInt(intervalDepth[1]);</span>
+<span class="fc" id="L58">      maxDepth = minDepth;</span>
     }
 <span class="fc" id="L60">  }</span>
   

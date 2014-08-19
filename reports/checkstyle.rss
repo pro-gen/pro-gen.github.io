@@ -28,7 +28,7 @@ under the License.
       <title>File: 201,
              Errors: 0,
              Warnings: 7,
-             Infos: 1
+             Infos: 3
       </title>
             <link>http://pro-gen.github.io/checkstyle.html</link>
       <description>
@@ -49,7 +49,7 @@ under the License.
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.GrammarTerminalSymbol.java">progen/kernel/grammar/GrammarTerminalSymbol.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.NonTerminal.java">progen/kernel/functions/NonTerminal.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.BitXor.java">progen/kernel/functions/BitXor.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.BitXor.java">progen/kernel/functions/BitXor.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.NonTerminal.java">progen/kernel/functions/NonTerminal.java</a>
                 </td>
                 <td>
                   0
@@ -214,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.OutputFilenameFilter.java">progen/experimenter/OutputFilenameFilter.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.HistoricalData.java">progen/output/HistoricalData.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +228,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.HistoricalData.java">progen/output/HistoricalData.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.OutputFilenameFilter.java">progen/experimenter/OutputFilenameFilter.java</a>
                 </td>
                 <td>
                   0
@@ -298,7 +298,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.UndefinedGenneticOperatorException.java">progen/kernel/evolution/UndefinedGenneticOperatorException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.dataCollectors.UnknownDataCollectorException.java">progen/output/dataCollectors/UnknownDataCollectorException.java</a>
                 </td>
                 <td>
                   0
@@ -312,7 +312,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.dataCollectors.UnknownDataCollectorException.java">progen/output/dataCollectors/UnknownDataCollectorException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.UndefinedGenneticOperatorException.java">progen/kernel/evolution/UndefinedGenneticOperatorException.java</a>
                 </td>
                 <td>
                   0
@@ -382,7 +382,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.ARG.java">progen/kernel/functions/ARG.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.And.java">progen/kernel/functions/And.java</a>
                 </td>
                 <td>
                   0
@@ -396,7 +396,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.And.java">progen/kernel/functions/And.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.ARG.java">progen/kernel/functions/ARG.java</a>
                 </td>
                 <td>
                   0
@@ -886,20 +886,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.property.Property.java">progen/experimenter/property/Property.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.context.DuplicatedPropertyException.java">progen/context/DuplicatedPropertyException.java</a>
                 </td>
                 <td>
@@ -914,7 +900,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.DuplicatedFunctionException.java">progen/kernel/grammar/DuplicatedFunctionException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.property.Property.java">progen/experimenter/property/Property.java</a>
                 </td>
                 <td>
                   0
@@ -935,6 +921,20 @@ under the License.
                 </td>
                 <td>
                   1
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.DuplicatedFunctionException.java">progen/kernel/grammar/DuplicatedFunctionException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
                 <td>
                   0
@@ -984,7 +984,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.roles.distributed.DispatcherDistributed.java">progen/roles/distributed/DispatcherDistributed.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.False.java">progen/kernel/functions/False.java</a>
                 </td>
                 <td>
                   0
@@ -998,7 +998,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.False.java">progen/kernel/functions/False.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.roles.distributed.DispatcherDistributed.java">progen/roles/distributed/DispatcherDistributed.java</a>
                 </td>
                 <td>
                   0
@@ -1138,7 +1138,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.outputers.OutputStore.java">progen/output/outputers/OutputStore.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.UndefinedFunctionSetException.java">progen/kernel/grammar/UndefinedFunctionSetException.java</a>
                 </td>
                 <td>
                   0
@@ -1152,7 +1152,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.UndefinedFunctionSetException.java">progen/kernel/grammar/UndefinedFunctionSetException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.outputers.OutputStore.java">progen/output/outputers/OutputStore.java</a>
                 </td>
                 <td>
                   0
@@ -1572,7 +1572,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.BadConfigurationGenneticOperatorsException.java">progen/kernel/evolution/BadConfigurationGenneticOperatorsException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.Or.java">progen/kernel/functions/Or.java</a>
                 </td>
                 <td>
                   0
@@ -1586,7 +1586,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.Or.java">progen/kernel/functions/Or.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.BadConfigurationGenneticOperatorsException.java">progen/kernel/evolution/BadConfigurationGenneticOperatorsException.java</a>
                 </td>
                 <td>
                   0
@@ -1908,20 +1908,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.package-info.java">progen/experimenter/package-info.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.MacroPlugin.java">progen/output/plugins/MacroPlugin.java</a>
                 </td>
                 <td>
@@ -1936,7 +1922,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.selector.Selector.java">progen/kernel/evolution/selector/Selector.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.experimenter.package-info.java">progen/experimenter/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -1951,6 +1937,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.Elitism.java">progen/kernel/evolution/Elitism.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.selector.Selector.java">progen/kernel/evolution/selector/Selector.java</a>
                 </td>
                 <td>
                   0
@@ -2051,7 +2051,7 @@ under the License.
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.GrammarNonTerminalSymbol.java">progen/kernel/grammar/GrammarNonTerminalSymbol.java</a>
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -2160,7 +2160,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.Mean.java">progen/output/plugins/Mean.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.DoubleDiv.java">progen/kernel/functions/DoubleDiv.java</a>
                 </td>
                 <td>
                   0
@@ -2174,7 +2174,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.DoubleDiv.java">progen/kernel/functions/DoubleDiv.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.Mean.java">progen/output/plugins/Mean.java</a>
                 </td>
                 <td>
                   0
@@ -2202,7 +2202,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.roles.distributed.ClientDistributed.java">progen/roles/distributed/ClientDistributed.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.AndInconditional.java">progen/kernel/functions/AndInconditional.java</a>
                 </td>
                 <td>
                   0
@@ -2216,7 +2216,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.AndInconditional.java">progen/kernel/functions/AndInconditional.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.roles.distributed.ClientDistributed.java">progen/roles/distributed/ClientDistributed.java</a>
                 </td>
                 <td>
                   0
@@ -2244,7 +2244,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.GenneticOperatorException.java">progen/kernel/evolution/GenneticOperatorException.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.hypergp.WildCard.java">progen/kernel/hypergp/WildCard.java</a>
                 </td>
                 <td>
                   0
@@ -2258,7 +2258,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.hypergp.WildCard.java">progen/kernel/hypergp/WildCard.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.GenneticOperatorException.java">progen/kernel/evolution/GenneticOperatorException.java</a>
                 </td>
                 <td>
                   0
@@ -2398,7 +2398,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.DoubleMinus.java">progen/kernel/functions/DoubleMinus.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.population.Individual.java">progen/kernel/population/Individual.java</a>
                 </td>
                 <td>
                   0
@@ -2412,7 +2412,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.population.Individual.java">progen/kernel/population/Individual.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.DoubleMinus.java">progen/kernel/functions/DoubleMinus.java</a>
                 </td>
                 <td>
                   0
@@ -2692,7 +2692,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.package-info.java">progen/kernel/grammar/package-info.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.tree.Node.java">progen/kernel/tree/Node.java</a>
                 </td>
                 <td>
                   0
@@ -2706,7 +2706,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.tree.Node.java">progen/kernel/tree/Node.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.package-info.java">progen/kernel/grammar/package-info.java</a>
                 </td>
                 <td>
                   0
@@ -2776,7 +2776,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.operators.OnePointCrossover.java">progen/kernel/evolution/operators/OnePointCrossover.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.Median.java">progen/output/plugins/Median.java</a>
                 </td>
                 <td>
                   0
@@ -2790,7 +2790,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.Median.java">progen/output/plugins/Median.java</a>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.operators.OnePointCrossover.java">progen/kernel/evolution/operators/OnePointCrossover.java</a>
                 </td>
                 <td>
                   0

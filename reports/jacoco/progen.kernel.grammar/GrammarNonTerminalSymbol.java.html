@@ -56,28 +56,24 @@ public class GrammarNonTerminalSymbol implements GrammarSymbol, Serializable {
   public boolean equals(Object object){
 <span class="fc" id="L57">    boolean isEquals = false;</span>
 <span class="pc bpc" id="L58" title="1 of 2 branches missed.">    if (object instanceof GrammarNonTerminalSymbol){</span>
-<span class="fc" id="L59">      isEquals = equals((GrammarNonTerminalSymbol)object);</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">      isEquals = (this.compareTo((GrammarNonTerminalSymbol) object) == 0);</span>
     }
 <span class="fc" id="L61">    return isEquals;</span>
-  }
-  
-  public boolean equals(GrammarNonTerminalSymbol other) {
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">    return this.compareTo(other) == 0;</span>
   }
 
   @Override
   public int compareTo(GrammarSymbol other) {
-<span class="fc" id="L70">    return symbol.compareTo(other.getSymbol());</span>
+<span class="fc" id="L66">    return symbol.compareTo(other.getSymbol());</span>
   }
   
 
   @Override
   public String getSymbol() {
-<span class="fc" id="L76">    return symbol;</span>
+<span class="fc" id="L72">    return symbol;</span>
   }
 
   public String getValue() {
-<span class="fc" id="L80">    return value;</span>
+<span class="fc" id="L76">    return value;</span>
   }
   
 }

@@ -23,56 +23,39 @@ public class GrammarTerminalSymbol implements GrammarSymbol, Serializable {
 <span class="fc" id="L23">    return function;</span>
   }
 
+  @Override
   public String toString() {
-<span class="fc" id="L27">    return function.toString();</span>
+<span class="fc" id="L28">    return function.toString();</span>
   }
 
   public int compareTo(GrammarTerminalSymbol symbol) {
-<span class="fc" id="L31">    return function.compareTo(symbol.getFunction());</span>
+<span class="fc" id="L32">    return function.compareTo(symbol.getFunction());</span>
   }
-
-  public boolean equals(GrammarTerminalSymbol symbol) {
-<span class="fc bfc" id="L35" title="All 2 branches covered.">    return this.compareTo(symbol) == 0;</span>
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  public boolean equals(Object other) {
-<span class="nc" id="L44">    boolean equals = false;</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">    if (other instanceof GrammarTerminalSymbol) {</span>
-<span class="nc" id="L46">      equals = equals((GrammarTerminalSymbol) other);</span>
-    }
-<span class="nc" id="L48">    return equals;</span>
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see java.lang.Object#hashCode()
-   */
-  public int hashCode() {
-<span class="nc" id="L57">    return function.hashCode();</span>
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see progen.kernel.grammar.GrammarSymbol#compareTo(progen.kernel.grammar.
-   * GrammarSymbol)
-   */
+  
   public int compareTo(GrammarSymbol other) {
-<span class="nc" id="L67">    return compareTo((GrammarTerminalSymbol) other);</span>
+<span class="nc" id="L36">    return compareTo((GrammarTerminalSymbol) other);</span>
   }
+
+  @Override
+  public boolean equals(Object other) {
+<span class="fc" id="L41">    boolean equals = false;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (other instanceof GrammarTerminalSymbol) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">      equals = (this.compareTo((GrammarTerminalSymbol)other) == 0);</span>
+    }
+<span class="fc" id="L45">    return equals;</span>
+  }
+
+  public int hashCode() {
+<span class="nc" id="L49">    return function.hashCode();</span>
+  }
+
 
   public String getSymbol() {
-<span class="nc" id="L71">    return function.getSymbol();</span>
+<span class="nc" id="L54">    return function.getSymbol();</span>
   }
 
   public Object getValue() {
-<span class="nc" id="L75">    return null;</span>
+<span class="nc" id="L58">    return null;</span>
   }
 
 }
