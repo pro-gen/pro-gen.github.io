@@ -72,7 +72,7 @@ ProGen,progen.kernel.grammar,GrammarNotValidException,0,10,0,0,0,4,0,2,0,2
 ProGen,progen.kernel.grammar,FunctionNotFoundException,0,16,0,0,0,2,0,1,0,1
 ProGen,progen.context,DuplicatedPropertyException,0,23,0,0,0,4,0,2,0,2
 ProGen,progen.context,UninitializedContextException,0,6,0,0,0,2,0,1,0,1
-ProGen,progen.context,ProGenContext,177,562,19,41,37,152,14,49,2,31
+ProGen,progen.context,ProGenContext,154,607,13,43,33,167,12,57,3,38
 ProGen,progen.context,UnknownPropertyException,0,16,0,0,0,2,0,1,0,1
 ProGen,progen.context,MissingContextFileException,0,23,0,0,0,4,0,2,0,2
 ProGen,progen.context,UndefinedMandatoryPropertyException,0,17,0,0,0,2,0,1,0,1
@@ -121,13 +121,13 @@ ProGen,progen.kernel.functions,ERC,3,14,0,0,1,5,1,2,1,2
 ProGen,progen.kernel.functions,ShiftSignedRight,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,IntPlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,BitXor,0,30,0,0,0,5,0,2,0,2
-ProGen,progen.kernel.functions,DoublePlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleY,0,5,0,0,0,2,0,1,0,1
+ProGen,progen.kernel.functions,DoublePlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleLessEqualsThan,0,34,0,2,0,5,0,3,0,2
 ProGen,progen.kernel.functions,BitMult,0,56,0,4,0,11,0,4,0,2
+ProGen,progen.kernel.functions,DoubleX,0,5,0,0,0,2,0,1,0,1
 ProGen,progen.kernel.functions,IntDiv,0,40,0,2,0,8,0,3,0,2
 ProGen,progen.kernel.functions,IntGratherEqualsThan,0,33,0,2,0,5,0,3,0,2
-ProGen,progen.kernel.functions,DoubleX,0,5,0,0,0,2,0,1,0,1
 ProGen,progen.kernel.functions,IntMinus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleEquals,0,40,0,2,0,5,0,3,0,2
 ProGen,progen.kernel.functions,NonTerminal,27,5,6,0,8,2,5,1,2,1
@@ -140,7 +140,7 @@ ProGen,progen.roles.standalone,WorkerLocal,17,3,0,0,7,1,5,1,5,1
 ProGen,progen.roles.standalone,StandaloneFactory,46,52,4,0,14,15,4,5,1,5
 ProGen,progen.roles.standalone,ClientLocal,243,0,14,0,62,0,16,0,9,0
 ProGen,progen.kernel.error,Info,40,0,0,0,9,0,5,0,5,0
-ProGen,progen.kernel.error,Error,0,81,1,5,0,23,1,7,0,5
+ProGen,progen.kernel.error,Error,17,64,1,5,5,18,1,7,0,5
 ProGen,progen.kernel.error,Warning,45,0,0,0,8,0,4,0,4,0
 ProGen,progen.kernel.hypergp,WildCard,25,0,0,0,8,0,3,0,3,0
 ProGen,progen.kernel.hypergp,HGPGrammar,100,0,10,0,20,0,8,0,3,0

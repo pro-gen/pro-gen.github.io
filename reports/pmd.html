@@ -79,7 +79,7 @@
 <body>
 <div class="section">
 <h1>PMD Results</h1>
-<p>The following document contains the results of <a href="http://pmd.sourceforge.net">PMD <b>5.0.5</b></a> on 2014-08-19T17:18:24.449.</p>
+<p>The following document contains the results of <a href="http://pmd.sourceforge.net">PMD <b>5.0.5</b></a> on 2014-08-19T19:53:06.963.</p>
 </div>
 <hr>
 <div class="section">
@@ -89,12 +89,12 @@
 <th>Files</th><th>Total</th><th>Blocker</th><th>Critical</th><th>Mayor</th><th>minor</th><th>info</th>
 </tr>
 <tr class="b">
-<td>61</td><td>158</td><td>
+<td>61</td><td>155</td><td>
 <div class="p1">0</div>
 </td><td>
 <div class="p2">0</div>
 </td><td>
-<div class="p3">151</div>
+<div class="p3">148</div>
 </td><td>
 <div class="p4">7</div>
 </td><td>
@@ -111,21 +111,6 @@
 <th>Files</th><th>Violations</th><th>Blocker</th><th>Critical</th><th>Mayor</th><th>minor</th><th>info</th>
 </tr>
 <tr class="b">
-<td class="desc" width="100%"><a href="#progen.context.ProGenContext">progen.context.ProGenContext</a></td><td>
-<div>9</div>
-</td><td>
-<div class="p1">0</div>
-</td><td>
-<div class="p2">0</div>
-</td><td>
-<div class="p3">9</div>
-</td><td>
-<div class="p4">0</div>
-</td><td>
-<div class="p5">0</div>
-</td>
-</tr>
-<tr class="a">
 <td class="desc" width="100%"><a href="#progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</a></td><td>
 <div>8</div>
 </td><td>
@@ -140,7 +125,7 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr class="b">
+<tr class="a">
 <td class="desc" width="100%"><a href="#progen.experimenter.Experimenter">progen.experimenter.Experimenter</a></td><td>
 <div>7</div>
 </td><td>
@@ -155,7 +140,7 @@
 <div class="p5">0</div>
 </td>
 </tr>
-<tr class="a">
+<tr class="b">
 <td class="desc" width="100%"><a href="#progen.kernel.population.Population">progen.kernel.population.Population</a></td><td>
 <div>7</div>
 </td><td>
@@ -164,6 +149,21 @@
 <div class="p2">0</div>
 </td><td>
 <div class="p3">7</div>
+</td><td>
+<div class="p4">0</div>
+</td><td>
+<div class="p5">0</div>
+</td>
+</tr>
+<tr class="a">
+<td class="desc" width="100%"><a href="#progen.context.ProGenContext">progen.context.ProGenContext</a></td><td>
+<div>6</div>
+</td><td>
+<div class="p1">0</div>
+</td><td>
+<div class="p2">0</div>
+</td><td>
+<div class="p3">6</div>
 </td><td>
 <div class="p4">0</div>
 </td><td>
@@ -1030,76 +1030,6 @@
 <hr>
 <div class="section">
 <h2>Details</h2>
-<h3 id="progen.context.ProGenContext">progen.context.ProGenContext</h3>
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>Priority</th><th>Begin Line</th><th align="left">Description</th>
-</tr>
-<tr class="b">
-<td>
-<div class="p3">3</div>
-</td><td>70</td><td class="desc" width="100%">
-Avoid really long methods.
-</td>
-</tr>
-<tr class="a">
-<td>
-<div class="p3">3</div>
-</td><td>83</td><td class="desc" width="100%">
-Avoid catching NullPointerException; consider removing the cause of the NPE.
-</td>
-</tr>
-<tr class="b">
-<td>
-<div class="p3">3</div>
-</td><td>84</td><td class="desc" width="100%">
-New exception is thrown in catch block, original stack trace may be lost
-</td>
-</tr>
-<tr class="a">
-<td>
-<div class="p3">3</div>
-</td><td>86</td><td class="desc" width="100%">
-New exception is thrown in catch block, original stack trace may be lost
-</td>
-</tr>
-<tr class="b">
-<td>
-<div class="p3">3</div>
-</td><td>379</td><td class="desc" width="100%">
-Avoid really long methods.
-</td>
-</tr>
-<tr class="a">
-<td>
-<div class="p3">3</div>
-</td><td>399</td><td class="desc" width="100%">
-New exception is thrown in catch block, original stack trace may be lost
-</td>
-</tr>
-<tr class="b">
-<td>
-<div class="p3">3</div>
-</td><td>410</td><td class="desc" width="100%">
-New exception is thrown in catch block, original stack trace may be lost
-</td>
-</tr>
-<tr class="a">
-<td>
-<div class="p3">3</div>
-</td><td>412</td><td class="desc" width="100%">
-New exception is thrown in catch block, original stack trace may be lost
-</td>
-</tr>
-<tr class="b">
-<td>
-<div class="p3">3</div>
-</td><td>584</td><td class="desc" width="100%">
-Avoid really long methods.
-</td>
-</tr>
-</table>
-<br>
 <h3 id="progen.kernel.grammar.Grammar">progen.kernel.grammar.Grammar</h3>
 <table border="0" class="bodyTable">
 <tr class="a">
@@ -1271,6 +1201,55 @@ Avoid concatenating nonliterals in a StringBuffer/StringBuilder constructor or a
 <div class="p3">3</div>
 </td><td>157</td><td class="desc" width="100%">
 Avoid variables with short names like id
+</td>
+</tr>
+</table>
+<br>
+<h3 id="progen.context.ProGenContext">progen.context.ProGenContext</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Priority</th><th>Begin Line</th><th align="left">Description</th>
+</tr>
+<tr class="b">
+<td>
+<div class="p3">3</div>
+</td><td>76</td><td class="desc" width="100%">
+Avoid catching NullPointerException; consider removing the cause of the NPE.
+</td>
+</tr>
+<tr class="a">
+<td>
+<div class="p3">3</div>
+</td><td>77</td><td class="desc" width="100%">
+New exception is thrown in catch block, original stack trace may be lost
+</td>
+</tr>
+<tr class="b">
+<td>
+<div class="p3">3</div>
+</td><td>79</td><td class="desc" width="100%">
+New exception is thrown in catch block, original stack trace may be lost
+</td>
+</tr>
+<tr class="a">
+<td>
+<div class="p3">3</div>
+</td><td>414</td><td class="desc" width="100%">
+New exception is thrown in catch block, original stack trace may be lost
+</td>
+</tr>
+<tr class="b">
+<td>
+<div class="p3">3</div>
+</td><td>424</td><td class="desc" width="100%">
+New exception is thrown in catch block, original stack trace may be lost
+</td>
+</tr>
+<tr class="a">
+<td>
+<div class="p3">3</div>
+</td><td>426</td><td class="desc" width="100%">
+New exception is thrown in catch block, original stack trace may be lost
 </td>
 </tr>
 </table>
