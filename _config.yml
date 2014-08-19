@@ -1,1 +1,1 @@
-include: reports/jacoco/.resources 
+include: reports/jacoco/.resources/ 
