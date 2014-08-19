@@ -104,7 +104,7 @@ public class StandardFile extends FileOutput {
    * Imprime la cabecera de la tabla de resultados.
    */
   private void printHeader(int maxGenerations) {
-<span class="nc" id="L107">    final String generation = getLiterals().getString(&quot;generation&quot;) + Formatter.right(historical.getCurrentGeneration() + &quot;&quot;, maxGenerations);</span>
+<span class="nc" id="L107">    final String generation = getLiterals().getString(&quot;generation&quot;) + Formatter.right(historical.getCurrentGeneration(), maxGenerations);</span>
 <span class="nc" id="L108">    getWriter().printf(&quot;%n%n%s&quot;, hline);</span>
 <span class="nc" id="L109">    getWriter().printf(&quot;%s%s%s%n&quot;, LEFT_SEP, Formatter.center(generation, getMaxLine().length() - LEFT_SEP.length() - RIGHT_SEP.length()), RIGHT_SEP);</span>
 
@@ -185,12 +185,12 @@ public class StandardFile extends FileOutput {
 <span class="nc" id="L185">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
 <span class="nc bnc" id="L187" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L188">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L189">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L188">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L189">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc bnc" id="L191" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L192">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L193">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L192">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L193">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc" id="L195">    getWriter().printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
 <span class="nc" id="L196">  }</span>
@@ -357,12 +357,12 @@ public class StandardFile extends FileOutput {
 <span class="nc" id="L357">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
 <span class="nc bnc" id="L359" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L360">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L361">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L360">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L361">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc bnc" id="L363" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L364">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L365">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L364">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L365">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(best.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc" id="L367">    getWriter().println(line.toString());</span>
 
@@ -387,12 +387,12 @@ public class StandardFile extends FileOutput {
 <span class="nc" id="L387">    line.append(String.format(&quot;%s%s&quot;, Formatter.right(ceilData, WIDTH_COLUMN), CENTER_SEP));</span>
 
 <span class="nc bnc" id="L389" title="All 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L390">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L391">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L390">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RBP_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L391">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(RBP_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc bnc" id="L393" title="All 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
-<span class="nc" id="L394">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
-<span class="nc" id="L395">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth() + &quot;&quot;, WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L394">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes(), WIDTH_COLUMN), CENTER_SEP));</span>
+<span class="nc" id="L395">      line.append(String.format(&quot;%s%s&quot;, Formatter.center(worst.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth(), WIDTH_COLUMN), CENTER_SEP));</span>
     }
 <span class="nc" id="L397">    getWriter().printf(&quot;%s%n%s&quot;, line.toString(), hline);</span>
 

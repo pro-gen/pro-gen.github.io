@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tree.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.tree</a> &gt; <span class="el_source">Tree.java</span></div><h1>Tree.java</h1><pre class="source lang-java linenums">package progen.kernel.tree;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 
 import progen.context.ProGenContext;
 import progen.context.UnknownPropertyException;
@@ -103,7 +103,7 @@ public class Tree implements Cloneable, Serializable {
    *          Dirección de retorno de las llamadas a ADFs.
    * @return &lt;code&gt;Object&lt;/code&gt; con el valor de la ejecución del programa.
    */
-  public Object evaluate(UserProgram userProgram, HashMap&lt;String, Object&gt; returnAddr) {
+  public Object evaluate(UserProgram userProgram, Map&lt;String, Object&gt; returnAddr) {
 <span class="nc" id="L107">    return root.evaluate(userProgram, returnAddr);</span>
   }
 

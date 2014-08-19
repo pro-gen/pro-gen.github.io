@@ -131,13 +131,13 @@ public class Production implements Serializable {
    */
   public boolean isSymbolGenerated(GrammarNonTerminalSymbol symbol) {
 <span class="nc" id="L133">    boolean generate = false;</span>
-<span class="nc" id="L134">    int i = 0;</span>
+<span class="nc" id="L134">    int currentArgument = 0;</span>
 
-<span class="nc bnc" id="L136" title="All 4 branches missed.">    while (i &lt; args.length &amp;&amp; !generate) {</span>
-<span class="nc bnc" id="L137" title="All 2 branches missed.">      if (args[i].compareTo(symbol) == 0) {</span>
+<span class="nc bnc" id="L136" title="All 4 branches missed.">    while (currentArgument &lt; args.length &amp;&amp; !generate) {</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">      if (args[currentArgument].compareTo(symbol) == 0) {</span>
 <span class="nc" id="L138">        generate = true;</span>
       }
-<span class="nc" id="L140">      i++;</span>
+<span class="nc" id="L140">      currentArgument++;</span>
     }
 
 <span class="nc" id="L143">    return generate;</span>
@@ -164,21 +164,18 @@ public class Production implements Serializable {
    * @return &lt;code&gt;true&lt;/code&gt; si son iguales, &lt;code&gt;false&lt;/code&gt; en caso
    *         contrario.
    */
+  @Override
   public boolean equals(Object other) {
-<span class="fc" id="L168">    boolean equals = false;</span>
-<span class="pc bpc" id="L169" title="1 of 2 branches missed.">    if (other instanceof Production) {</span>
-<span class="fc" id="L170">      equals = equals((Production) other);</span>
+<span class="fc" id="L169">    boolean equals = false;</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">    if (other instanceof Production) {</span>
+<span class="fc" id="L171">      equals = equals((Production) other);</span>
     }
-<span class="fc" id="L172">    return equals;</span>
+<span class="fc" id="L173">    return equals;</span>
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see java.lang.Object#hashCode()
-   */
+  @Override
   public int hashCode() {
-<span class="nc" id="L181">    return toString().hashCode();</span>
+<span class="nc" id="L178">    return toString().hashCode();</span>
   }
 
   /**
@@ -192,18 +189,18 @@ public class Production implements Serializable {
    */
   public boolean equals(Production other) {
     boolean equal;
-<span class="fc" id="L195">    equal = this.left.equals(other.left);</span>
-<span class="fc" id="L196">    equal &amp;= this.function.equals(other.function);</span>
+<span class="fc" id="L192">    equal = this.left.equals(other.left);</span>
+<span class="fc" id="L193">    equal &amp;= this.function.equals(other.function);</span>
 
-<span class="fc bfc" id="L198" title="All 2 branches covered.">    equal &amp;= this.args.length == other.args.length;</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">    equal &amp;= this.args.length == other.args.length;</span>
 
-<span class="fc bfc" id="L200" title="All 2 branches covered.">    if (equal) {</span>
-<span class="pc bpc" id="L201" title="1 of 4 branches missed.">      for (int i = 0; equal &amp;&amp; i &lt; this.args.length; i++) {</span>
-<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        equal &amp;= this.args[i].compareTo(other.args[i]) == 0;</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (equal) {</span>
+<span class="pc bpc" id="L198" title="1 of 4 branches missed.">      for (int i = 0; equal &amp;&amp; i &lt; this.args.length; i++) {</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        equal &amp;= this.args[i].compareTo(other.args[i]) == 0;</span>
       }
     }
 
-<span class="fc" id="L206">    return equal;</span>
+<span class="fc" id="L203">    return equal;</span>
   }
 
   /**
@@ -219,12 +216,12 @@ public class Production implements Serializable {
    * @return la &lt;code&gt;Production&lt;/code&gt; actualizada.
    */
   public Production updateFunction(GrammarTerminalSymbol newSymbol) {
-<span class="nc" id="L222">    Production production = this;</span>
-<span class="nc bnc" id="L223" title="All 2 branches missed.">    if (function.compareTo(newSymbol) == 0) {</span>
-<span class="nc" id="L224">      production = new Production(left, newSymbol, args);</span>
+<span class="nc" id="L219">    Production production = this;</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">    if (function.compareTo(newSymbol) == 0) {</span>
+<span class="nc" id="L221">      production = new Production(left, newSymbol, args);</span>
     }
 
-<span class="nc" id="L227">    return production;</span>
+<span class="nc" id="L224">    return production;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
