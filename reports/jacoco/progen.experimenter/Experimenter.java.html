@@ -124,18 +124,18 @@ public abstract class Experimenter {
    */
   public boolean deleteDirectory(File path) {
 <span class="nc" id="L126">    boolean deleted = true;</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">    if (!path.exists()) {</span>
-<span class="nc" id="L128">      deleted = false;</span>
-    } else {
-<span class="nc bnc" id="L130" title="All 2 branches missed.">      for (File file : path.listFiles()) {</span>
-<span class="nc bnc" id="L131" title="All 2 branches missed.">        if (file.isDirectory()) {</span>
-<span class="nc" id="L132">          deleteDirectory(file);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">    if (path.exists()) {</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">      for (File file : path.listFiles()) {</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (file.isDirectory()) {</span>
+<span class="nc" id="L130">          deleteDirectory(file);</span>
         } else {
-<span class="nc" id="L134">          deleted = file.delete();</span>
+<span class="nc" id="L132">          deleted = file.delete();</span>
         }
       }
-<span class="nc bnc" id="L137" title="All 4 branches missed.">      deleted = path.delete() &amp;&amp; deleted;</span>
-    }
+<span class="nc bnc" id="L135" title="All 4 branches missed.">      deleted = path.delete() &amp;&amp; deleted;</span>
+    }else{
+<span class="nc" id="L137">      deleted = false;</span>
+    } 
 <span class="nc" id="L139">    return deleted;</span>
   }
 
@@ -147,26 +147,28 @@ public abstract class Experimenter {
    * @return &lt;code&gt;true&lt;/code&gt; si se pudieron crear todas las carpetas
    *         necesarias y &lt;code&gt;false&lt;/code&gt; en caso contrario.
    */
-  protected boolean generateOutputDir() {
-<span class="nc" id="L151">    boolean createDir = false;</span>
-<span class="nc" id="L152">    final StringBuilder defaultPath = new StringBuilder(100);</span>
-
-<span class="nc" id="L154">    defaultPath.append(&quot;outputs&quot;);</span>
-<span class="nc" id="L155">    defaultPath.append(File.separator);</span>
-<span class="nc" id="L156">    defaultPath.append(ProGenContext.getMandatoryProperty(&quot;progen.experiment.name&quot;));</span>
-
-<span class="nc" id="L158">    final String outputDir = ProGenContext.getOptionalProperty(PROGEN_OUTPUT_DIR_PROPERTY, defaultPath.toString());</span>
-
-<span class="nc" id="L160">    final File dir = new File(outputDir);</span>
-<span class="nc" id="L161">    ProGenContext.setProperty(PROGEN_OUTPUT_DIR_PROPERTY, dir.getAbsolutePath() + File.separator);</span>
-
-<span class="nc bnc" id="L163" title="All 2 branches missed.">    if (dir.exists()) {</span>
-<span class="nc" id="L164">      deleteDirectory(dir);</span>
+  private boolean generateOutputDir() {
+<span class="nc" id="L151">    final StringBuilder defaultPath = generateDefaultPath();</span>
+<span class="nc" id="L152">    final File dir = generateOutputDir(defaultPath);</span>
+<span class="nc" id="L153">    ProGenContext.setProperty(PROGEN_OUTPUT_DIR_PROPERTY, dir.getAbsolutePath() + File.separator);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">    if (dir.exists()) {</span>
+<span class="nc" id="L155">      deleteDirectory(dir);</span>
     }
-    // creacion de la carpeta &quot;home&quot; de todos los ficheros de salida
-<span class="nc" id="L167">    createDir = dir.mkdirs();</span>
+<span class="nc" id="L157">    return dir.mkdirs();</span>
+  }
 
-<span class="nc" id="L169">    return createDir;</span>
+  private File generateOutputDir(final StringBuilder defaultPath) {
+<span class="nc" id="L161">    final String outputDir = ProGenContext.getOptionalProperty(PROGEN_OUTPUT_DIR_PROPERTY, defaultPath.toString());</span>
+<span class="nc" id="L162">    final File dir = new File(outputDir);</span>
+<span class="nc" id="L163">    return dir;</span>
+  }
+
+  private StringBuilder generateDefaultPath() {
+<span class="nc" id="L167">    final StringBuilder defaultPath = new StringBuilder(100);</span>
+<span class="nc" id="L168">    defaultPath.append(&quot;outputs&quot;);</span>
+<span class="nc" id="L169">    defaultPath.append(File.separator);</span>
+<span class="nc" id="L170">    defaultPath.append(ProGenContext.getMandatoryProperty(&quot;progen.experiment.name&quot;));</span>
+<span class="nc" id="L171">    return defaultPath;</span>
   }
 
   /**
@@ -177,18 +179,18 @@ public abstract class Experimenter {
    */
   @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;, justification = &quot;I don't really care makeDirs result&quot;)
   public final void generateOutputs() {
-<span class="nc" id="L180">    String experimentDir = defineExperimentDir();</span>
+<span class="nc" id="L182">    String experimentDir = defineExperimentDir();</span>
 
-<span class="nc bnc" id="L182" title="All 2 branches missed.">    if (!experimentDir.endsWith(File.separator)) {</span>
-<span class="nc" id="L183">      experimentDir += File.separator;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">    if (!experimentDir.endsWith(File.separator)) {</span>
+<span class="nc" id="L185">      experimentDir += File.separator;</span>
     }
 
-<span class="nc" id="L186">    ProGenContext.setProperty(&quot;progen.output.experiment&quot;, experimentDir);</span>
-<span class="nc" id="L187">    final File dir = new File(ProGenContext.getMandatoryProperty(PROGEN_OUTPUT_DIR_PROPERTY) + experimentDir);</span>
-<span class="nc" id="L188">    dir.mkdir();</span>
-<span class="nc" id="L189">    generateResults();</span>
+<span class="nc" id="L188">    ProGenContext.setProperty(&quot;progen.output.experiment&quot;, experimentDir);</span>
+<span class="nc" id="L189">    final File dir = new File(ProGenContext.getMandatoryProperty(PROGEN_OUTPUT_DIR_PROPERTY) + experimentDir);</span>
+<span class="nc" id="L190">    dir.mkdir();</span>
+<span class="nc" id="L191">    generateResults();</span>
 
-<span class="nc" id="L191">  }</span>
+<span class="nc" id="L193">  }</span>
 
   /**
    * Comprueba si se dan las condiciones para dar por acabado el experimento.

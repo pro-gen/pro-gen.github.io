@@ -87,14 +87,8 @@ public class Grammar implements Serializable {
 
 <span class="pc bpc" id="L88" title="1 of 2 branches missed.">    if (idTree.startsWith(&quot;ADF&quot;)) {</span>
 <span class="nc" id="L89">      generateADFProductions(idTree);</span>
-    }
-
-    try {
-<span class="fc" id="L93">      validate();</span>
-<span class="nc" id="L94">    } catch (GrammarNotValidException e) {</span>
-<span class="nc" id="L95">      throw new ProGenException(e.getMessage());</span>
-<span class="fc" id="L96">    }</span>
-<span class="fc" id="L97">  }</span>
+    }   
+<span class="fc" id="L91">  }</span>
 
   /**
    * Devuelve el function-set que definió esta gramática.
@@ -102,7 +96,7 @@ public class Grammar implements Serializable {
    * @return El function-set que definió esta gramática.
    */
   public String getFunctionSetId() {
-<span class="nc" id="L105">    return functionSetId;</span>
+<span class="nc" id="L99">    return functionSetId;</span>
   }
 
   /**
@@ -112,7 +106,7 @@ public class Grammar implements Serializable {
    * @return El axioma de la gramática.
    */
   public GrammarNonTerminalSymbol getAxiom() {
-<span class="fc" id="L115">    return axiom;</span>
+<span class="fc" id="L109">    return axiom;</span>
   }
 
   /**
@@ -122,7 +116,7 @@ public class Grammar implements Serializable {
    * @see progen.kernel.grammar.Production
    */
   public List&lt;Production&gt; getProductions() {
-<span class="fc" id="L125">    return productions;</span>
+<span class="fc" id="L119">    return productions;</span>
   }
 
   /**
@@ -135,10 +129,10 @@ public class Grammar implements Serializable {
    *         símbolo.
    */
   public List&lt;Production&gt; getProductions(GrammarSymbol symbol) {
-<span class="nc bnc" id="L138" title="All 2 branches missed.">    if (symbol instanceof GrammarNonTerminalSymbol) {</span>
-<span class="nc" id="L139">      return getProductions((GrammarNonTerminalSymbol) symbol);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">    if (symbol instanceof GrammarNonTerminalSymbol) {</span>
+<span class="nc" id="L133">      return getProductions((GrammarNonTerminalSymbol) symbol);</span>
     } else {
-<span class="nc" id="L141">      throw new ClassCastException(symbol.toString());</span>
+<span class="nc" id="L135">      throw new ClassCastException(symbol.toString());</span>
     }
   }
 
@@ -152,25 +146,31 @@ public class Grammar implements Serializable {
    *         símbolo.
    */
   public List&lt;Production&gt; getProductions(GrammarNonTerminalSymbol left) {
-<span class="fc" id="L155">    final List&lt;Production&gt; prods = new ArrayList&lt;Production&gt;();</span>
-<span class="fc bfc" id="L156" title="All 2 branches covered.">    for (Production production : productions) {</span>
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">      if (production.getLeft().compareTo(left) == 0) {</span>
-<span class="fc" id="L158">        prods.add(production);</span>
+<span class="fc" id="L149">    final List&lt;Production&gt; prods = new ArrayList&lt;Production&gt;();</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">    for (Production production : productions) {</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">      if (productionGenerateNonTerminal(production, left)) {</span>
+<span class="fc" id="L152">        prods.add(production);</span>
       }
-<span class="fc" id="L160">    }</span>
-<span class="fc" id="L161">    return prods;</span>
+<span class="fc" id="L154">    }</span>
+<span class="fc" id="L155">    return prods;</span>
   }
 
   public List&lt;Production&gt; getProductionsCompatibleWithFunction(GrammarNonTerminalSymbol nonTerminal, GrammarTerminalSymbol terminal) {
-<span class="nc" id="L165">    final List&lt;Production&gt; prods = new ArrayList&lt;Production&gt;();</span>
-<span class="nc bnc" id="L166" title="All 2 branches missed.">    for (Production p : productions) {</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">      if (p.getLeft().compareTo(nonTerminal) == 0) {</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (terminal.getFunction().isCompatibleWith(p.getFunction().getFunction())) {</span>
-<span class="nc" id="L169">          prods.add(p);</span>
-        }
+<span class="nc" id="L159">    final List&lt;Production&gt; prods = new ArrayList&lt;Production&gt;();</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">    for (Production production : productions) {</span>
+<span class="nc bnc" id="L161" title="All 4 branches missed.">      if (productionGenerateNonTerminal(production, nonTerminal) &amp;&amp; functionIsCompatible(terminal, production)) {</span>
+<span class="nc" id="L162">          prods.add(production);</span>
       }
-<span class="nc" id="L172">    }</span>
-<span class="nc" id="L173">    return prods;</span>
+<span class="nc" id="L164">    }</span>
+<span class="nc" id="L165">    return prods;</span>
+  }
+
+  private boolean functionIsCompatible(GrammarTerminalSymbol terminal, Production production) {
+<span class="nc" id="L169">    return terminal.getFunction().isCompatibleWith(production.getFunction().getFunction());</span>
+  }
+
+  private boolean productionGenerateNonTerminal(Production production, GrammarNonTerminalSymbol nonTerminal) {
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">    return production.getLeft().compareTo(nonTerminal) == 0;</span>
   }
 
   /**
@@ -269,7 +269,7 @@ public class Grammar implements Serializable {
   public String toString() {
 <span class="nc" id="L270">    final StringBuffer grammar = new StringBuffer();</span>
 <span class="nc bnc" id="L271" title="All 2 branches missed.">    for (Production production : productions) {</span>
-<span class="nc" id="L272">      grammar.append(production.toString() + &quot;\n&quot;);</span>
+<span class="nc" id="L272">      grammar.append(production.toString()).append(&quot;\n&quot;);</span>
 <span class="nc" id="L273">    }</span>
 <span class="nc" id="L274">    return grammar.toString();</span>
   }
@@ -365,8 +365,13 @@ public class Grammar implements Serializable {
 <span class="nc" id="L365">      grammar = new HGPGrammar(idTree);</span>
     } else {
 <span class="fc" id="L367">      grammar = new Grammar(idTree);</span>
+      try {
+<span class="fc" id="L369">        grammar.validate();</span>
+<span class="nc" id="L370">      } catch (GrammarNotValidException e) {</span>
+<span class="nc" id="L371">        throw new ProGenException(e.getMessage());</span>
+<span class="fc" id="L372">      }</span>
     }
-<span class="fc" id="L369">    return grammar;</span>
+<span class="fc" id="L374">    return grammar;</span>
   }
 
 }
