@@ -6,8 +6,10 @@ import java.util.Map;
 
 import progen.context.ProGenContext;
 import progen.kernel.grammar.FunctionNotFoundException;
+import progen.kernel.grammar.UndefinedFunctionSetException;
 import progen.kernel.tree.Node;
 import progen.userprogram.UserProgram;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Clase abstracta que define los métodos necesarios para acceder a las
@@ -40,17 +42,17 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * @param symbol
    *          Símbolo que identificará la función.
    */
-<span class="fc" id="L43">  public Function(String signature, String symbol) {</span>
+<span class="fc" id="L45">  public Function(String signature, String symbol) {</span>
     String [] args;
-<span class="fc" id="L45">    this.symbol = symbol;</span>
+<span class="fc" id="L47">    this.symbol = symbol;</span>
 
-<span class="fc" id="L47">    args = signature.split(&quot;\\$\\$&quot;);</span>
-<span class="fc" id="L48">    returnType = args[0];</span>
+<span class="fc" id="L49">    args = signature.split(&quot;\\$\\$&quot;);</span>
+<span class="fc" id="L50">    returnType = args[0];</span>
 
-<span class="fc" id="L50">    arity = args.length - 1;</span>
-<span class="fc" id="L51">    argsType = new Object[arity];</span>
-<span class="fc" id="L52">    System.arraycopy(args, 1, argsType, 0, arity);</span>
-<span class="fc" id="L53">  }</span>
+<span class="fc" id="L52">    arity = args.length - 1;</span>
+<span class="fc" id="L53">    argsType = new Object[arity];</span>
+<span class="fc" id="L54">    System.arraycopy(args, 1, argsType, 0, arity);</span>
+<span class="fc" id="L55">  }</span>
 
   /**
    * Devuelve la signatura de la función
@@ -58,13 +60,13 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * @return la signatura completa de la función.
    */
   public final String getSignature() {
-<span class="fc" id="L61">    final StringBuffer signature = new StringBuffer();</span>
-<span class="fc" id="L62">    signature.append(returnType);</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">    for (int i = 0; i &lt; argsType.length; i++) {</span>
-<span class="fc" id="L64">      signature.append(&quot;$$&quot;);</span>
-<span class="fc" id="L65">      signature.append(argsType[i]);</span>
+<span class="fc" id="L63">    final StringBuffer signature = new StringBuffer();</span>
+<span class="fc" id="L64">    signature.append(returnType);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">    for (int i = 0; i &lt; argsType.length; i++) {</span>
+<span class="fc" id="L66">      signature.append(&quot;$$&quot;);</span>
+<span class="fc" id="L67">      signature.append(argsType[i]);</span>
     }
-<span class="fc" id="L67">    return signature.toString();</span>
+<span class="fc" id="L69">    return signature.toString();</span>
   }
 
   /**
@@ -73,7 +75,7 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * @return la aridad de la función.
    */
   public final int getArity() {
-<span class="fc" id="L76">    return arity;</span>
+<span class="fc" id="L78">    return arity;</span>
   }
 
   /**
@@ -82,7 +84,7 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * @return el símbolo de la función.
    */
   public final String getSymbol() {
-<span class="fc" id="L85">    return symbol;</span>
+<span class="fc" id="L87">    return symbol;</span>
   }
 
   /**
@@ -92,8 +94,8 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    *          El nuevo identificador de la función.
    */
   public final void setSymbol(String symbol) {
-<span class="fc" id="L95">    this.symbol = symbol;</span>
-<span class="fc" id="L96">  }</span>
+<span class="fc" id="L97">    this.symbol = symbol;</span>
+<span class="fc" id="L98">  }</span>
 
   /**
    * Devuelve el tipo de retorno de la función.
@@ -101,11 +103,11 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * @return el tipo de retorno de la función.
    */
   public final Object getReturnType() {
-<span class="fc" id="L104">    return returnType;</span>
+<span class="fc" id="L106">    return returnType;</span>
   }
 
   public String toString() {
-<span class="fc" id="L108">    return symbol;</span>
+<span class="fc" id="L110">    return symbol;</span>
   }
 
   /**
@@ -113,25 +115,25 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    * 
    * @return el tipo de los argumentos de la función.
    */
-  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;EI_EXPOSE_REP&quot;, justification = &quot;Its is a getter method&quot;)
+  @SuppressFBWarnings(value = &quot;EI_EXPOSE_REP&quot;, justification = &quot;Its is a getter method&quot;)
   public Object[] getArgsType() {
-<span class="fc" id="L118">    return argsType;</span>
+<span class="fc" id="L120">    return argsType;</span>
   }
 
   public boolean equals(Object object) {
-<span class="fc" id="L122">    boolean equals = false;</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">    if (object instanceof Function) {</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">      equals = this.compareTo((Function) object) == 0;</span>
+<span class="fc" id="L124">    boolean equals = false;</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">    if (object instanceof Function) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">      equals = this.compareTo((Function) object) == 0;</span>
     }
-<span class="fc" id="L126">    return equals;</span>
+<span class="fc" id="L128">    return equals;</span>
   }
 
   public int hashCode() {
-<span class="fc" id="L130">    return symbol.hashCode();</span>
+<span class="fc" id="L132">    return symbol.hashCode();</span>
   }
 
   public int compareTo(Function f) {
-<span class="fc" id="L134">    return symbol.compareTo(f.getSymbol());</span>
+<span class="fc" id="L136">    return symbol.compareTo(f.getSymbol());</span>
   }
 
   /**
@@ -152,33 +154,33 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
   public static final Function load(String functionName){
     Function function;
 
-<span class="fc" id="L155">    final String classPathProGen = &quot;progen.kernel.functions.&quot;;</span>
-<span class="fc" id="L156">    final String classPathUser = ProGenContext.getOptionalProperty(&quot;progen.user.home&quot;, classPathProGen);</span>
+<span class="fc" id="L157">    final String classPathProGen = &quot;progen.kernel.functions.&quot;;</span>
+<span class="fc" id="L158">    final String classPathUser = ProGenContext.getOptionalProperty(&quot;progen.user.home&quot;, classPathProGen);</span>
 
-<span class="fc bfc" id="L158" title="All 2 branches covered.">    if (!functionName.startsWith(&quot;ADF&quot;)) {</span>
-<span class="fc" id="L159">      function = loadReagularFunction(functionName, classPathProGen, classPathUser);</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">    if (!functionName.startsWith(&quot;ADF&quot;)) {</span>
+<span class="fc" id="L161">      function = loadReagularFunction(functionName, classPathProGen, classPathUser);</span>
     } else {
-<span class="fc" id="L161">      function = loadFunctionADF(functionName);</span>
+<span class="fc" id="L163">      function = loadFunctionADF(functionName);</span>
     }
-<span class="fc" id="L163">    return function;</span>
+<span class="fc" id="L165">    return function;</span>
   }
 
   private static Function loadFunctionADF(String functionName) {
-<span class="fc" id="L167">    return new ADF(functionName);</span>
+<span class="fc" id="L169">    return new ADF(functionName);</span>
   }
 
   private static Function loadReagularFunction(String functionName, String classPathProGen, String classPathUser) {
     Function function;
     try {
-<span class="fc" id="L173">      function = (Function) Class.forName(classPathUser + functionName).newInstance();</span>
-<span class="fc" id="L174">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
+<span class="fc" id="L175">      function = (Function) Class.forName(classPathUser + functionName).newInstance();</span>
+<span class="fc" id="L176">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
       try {
-<span class="nc" id="L176">        function = (Function) Class.forName(classPathProGen + functionName).newInstance();</span>
-<span class="fc" id="L177">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {</span>
-<span class="fc" id="L178">        throw new FunctionNotFoundException(functionName);</span>
-<span class="nc" id="L179">      }</span>
-<span class="fc" id="L180">    }</span>
-<span class="fc" id="L181">    return function;</span>
+<span class="nc" id="L178">        function = (Function) Class.forName(classPathProGen + functionName).newInstance();</span>
+<span class="fc" id="L179">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {</span>
+<span class="fc" id="L180">        throw new FunctionNotFoundException(functionName);</span>
+<span class="nc" id="L181">      }</span>
+<span class="fc" id="L182">    }</span>
+<span class="fc" id="L183">    return function;</span>
   }
 
   /**
@@ -191,20 +193,20 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    *         es.
    */
   public boolean isCompatibleWith(Function function) {
-<span class="fc" id="L194">    boolean isCompatible = true;</span>
+<span class="fc" id="L196">    boolean isCompatible = true;</span>
     // si las aridades son distintas, no pueden ser compatibles
-<span class="fc bfc" id="L196" title="All 2 branches covered.">    if (this.arity != function.arity) {</span>
-<span class="fc" id="L197">      isCompatible = false;</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">    if (this.arity != function.arity) {</span>
+<span class="fc" id="L199">      isCompatible = false;</span>
     } else {
-<span class="fc bfc" id="L199" title="All 2 branches covered.">      for (int i = 0; i &lt; arity; i++) {</span>
-<span class="fc" id="L200">        isCompatible &amp;= argsType[i].equals(function.argsType[i]);</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">      for (int i = 0; i &lt; arity; i++) {</span>
+<span class="fc" id="L202">        isCompatible &amp;= argsType[i].equals(function.argsType[i]);</span>
       }
     }
 
     // comprobacion del valor de retorno
-<span class="fc" id="L205">    isCompatible &amp;= returnType.equals(function.returnType);</span>
+<span class="fc" id="L207">    isCompatible &amp;= returnType.equals(function.returnType);</span>
 
-<span class="fc" id="L207">    return isCompatible;</span>
+<span class="fc" id="L209">    return isCompatible;</span>
   }
 
   /**

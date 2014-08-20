@@ -10,6 +10,7 @@ import progen.kernel.population.Individual;
 import progen.kernel.population.Population;
 import progen.kernel.tree.Node;
 import progen.kernel.tree.Tree;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Implementación del operador genético de cruce estándar. El funcionamiento de
@@ -27,42 +28,42 @@ import progen.kernel.tree.Tree;
  * @author jirsis
  * @since 1.0
  */
-<span class="fc" id="L30">public class StandardCrossover extends GenneticOperator {</span>
+<span class="fc" id="L31">public class StandardCrossover extends GenneticOperator {</span>
 
   @Override
   public List&lt;Individual&gt; evolve(Population population) {
-<span class="fc" id="L34">    final List&lt;Individual&gt; individuals = getSelector().select(population, 2);</span>
-<span class="fc" id="L35">    final List&lt;Individual&gt; individualsCrossover = new ArrayList&lt;Individual&gt;();</span>
-<span class="pc bpc" id="L36" title="1 of 2 branches missed.">    if (individuals.size() != 2) {</span>
-<span class="nc" id="L37">      throw new SelectorSizeIncorrectValueException(2, individuals.size());</span>
+<span class="fc" id="L35">    final List&lt;Individual&gt; individuals = getSelector().select(population, 2);</span>
+<span class="fc" id="L36">    final List&lt;Individual&gt; individualsCrossover = new ArrayList&lt;Individual&gt;();</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">    if (individuals.size() != 2) {</span>
+<span class="nc" id="L38">      throw new SelectorSizeIncorrectValueException(2, individuals.size());</span>
     } else {
-<span class="fc" id="L39">      final Individual mother = individuals.get(0);</span>
-<span class="fc" id="L40">      final Individual father = individuals.get(1);</span>
-<span class="fc" id="L41">      final Object[] treesSet = (Object[]) mother.getTrees().keySet().toArray();</span>
-<span class="fc" id="L42">      final String key = (String) treesSet[(int) (Math.random() * treesSet.length)];</span>
-<span class="fc" id="L43">      final Tree treeA = mother.getTrees().get(key);</span>
-<span class="fc" id="L44">      final Tree treeB = father.getTrees().get(key);</span>
+<span class="fc" id="L40">      final Individual mother = individuals.get(0);</span>
+<span class="fc" id="L41">      final Individual father = individuals.get(1);</span>
+<span class="fc" id="L42">      final Object[] treesSet = (Object[]) mother.getTrees().keySet().toArray();</span>
+<span class="fc" id="L43">      final String key = (String) treesSet[(int) (Math.random() * treesSet.length)];</span>
+<span class="fc" id="L44">      final Tree treeA = mother.getTrees().get(key);</span>
+<span class="fc" id="L45">      final Tree treeB = father.getTrees().get(key);</span>
 
       // A ver que te parece así:
-<span class="fc" id="L47">      boolean validCross = false;</span>
-<span class="fc" id="L48">      int tries = 0;</span>
-<span class="fc" id="L49">      boolean giveUp = false;</span>
-<span class="fc bfc" id="L50" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
-<span class="fc" id="L52">          validCross = checkTrees(treeA, treeB);</span>
+<span class="fc" id="L48">      boolean validCross = false;</span>
+<span class="fc" id="L49">      int tries = 0;</span>
+<span class="fc" id="L50">      boolean giveUp = false;</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
+<span class="fc" id="L53">          validCross = checkTrees(treeA, treeB);</span>
         }
-<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
-<span class="fc" id="L55">          giveUp = true;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
+<span class="fc" id="L56">          giveUp = true;</span>
         }
       }
 
-<span class="fc bfc" id="L59" title="All 2 branches covered.">      if (validCross) {</span>
-<span class="fc" id="L60">        individualsCrossover.add(mother);</span>
-<span class="fc" id="L61">        individualsCrossover.add(father);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">      if (validCross) {</span>
+<span class="fc" id="L61">        individualsCrossover.add(mother);</span>
+<span class="fc" id="L62">        individualsCrossover.add(father);</span>
       }
 
     }
-<span class="fc" id="L65">    return individualsCrossover;</span>
+<span class="fc" id="L66">    return individualsCrossover;</span>
   }
 
   /**
@@ -84,28 +85,28 @@ import progen.kernel.tree.Tree;
     Node crossNode2;
     Node parent1;
     Node parent2;
-<span class="fc" id="L87">    boolean treesCrossed = false;</span>
+<span class="fc" id="L88">    boolean treesCrossed = false;</span>
 
-<span class="fc" id="L89">    crossNodes = selectNodes(treeA, treeB);</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">    if (crossNodes.size() &gt; 0) {</span>
-<span class="fc" id="L91">      crossNode1 = crossNodes.get(0);</span>
-<span class="fc" id="L92">      crossNode2 = crossNodes.get(1);</span>
+<span class="fc" id="L90">    crossNodes = selectNodes(treeA, treeB);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">    if (crossNodes.size() &gt; 0) {</span>
+<span class="fc" id="L92">      crossNode1 = crossNodes.get(0);</span>
+<span class="fc" id="L93">      crossNode2 = crossNodes.get(1);</span>
       // guardamos los padres de los nodos de corte
-<span class="fc" id="L94">      parent1 = crossNode1.getParent();</span>
-<span class="fc" id="L95">      parent2 = crossNode2.getParent();</span>
+<span class="fc" id="L95">      parent1 = crossNode1.getParent();</span>
+<span class="fc" id="L96">      parent2 = crossNode2.getParent();</span>
 
       // guardamos la rama en la que estaban los nodos de corte
-<span class="fc" id="L98">      branchPos1 = getBranch(crossNode1);</span>
-<span class="fc" id="L99">      branchPos2 = getBranch(crossNode2);</span>
+<span class="fc" id="L99">      branchPos1 = getBranch(crossNode1);</span>
+<span class="fc" id="L100">      branchPos2 = getBranch(crossNode2);</span>
       // se separan los nodos seleccionados del arbol del que formaban parte
-<span class="fc" id="L101">      crossNode1 = crossNode1.branch();</span>
-<span class="fc" id="L102">      crossNode2 = crossNode2.branch();</span>
+<span class="fc" id="L102">      crossNode1 = crossNode1.branch();</span>
+<span class="fc" id="L103">      crossNode2 = crossNode2.branch();</span>
       // se asigna a cada padre, el nodo seleccionado del arbol opuesto
-<span class="fc" id="L104">      parent1.setBranch(crossNode2, branchPos1);</span>
-<span class="fc" id="L105">      parent2.setBranch(crossNode1, branchPos2);</span>
-<span class="fc" id="L106">      treesCrossed = true;</span>
+<span class="fc" id="L105">      parent1.setBranch(crossNode2, branchPos1);</span>
+<span class="fc" id="L106">      parent2.setBranch(crossNode1, branchPos2);</span>
+<span class="fc" id="L107">      treesCrossed = true;</span>
     }
-<span class="fc" id="L108">    return treesCrossed;</span>
+<span class="fc" id="L109">    return treesCrossed;</span>
   }
 
   /**
@@ -118,13 +119,13 @@ import progen.kernel.tree.Tree;
    * @return La posición entre los distintos nodos hermano.
    */
   private int getBranch(Node node) {
-<span class="fc" id="L121">    int branchPos = 0;</span>
-<span class="fc bfc" id="L122" title="All 2 branches covered.">    for (int i = 0; i &lt; node.getParent().getBranches().size(); i++) {</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">      if (node.getParent().getBranches().get(i) == node) {</span>
-<span class="fc" id="L124">        branchPos = i;</span>
+<span class="fc" id="L122">    int branchPos = 0;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">    for (int i = 0; i &lt; node.getParent().getBranches().size(); i++) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">      if (node.getParent().getBranches().get(i) == node) {</span>
+<span class="fc" id="L125">        branchPos = i;</span>
       }
     }
-<span class="fc" id="L127">    return branchPos;</span>
+<span class="fc" id="L128">    return branchPos;</span>
   }
 
   /**
@@ -142,38 +143,38 @@ import progen.kernel.tree.Tree;
    *         operador de cruce.
    */
   protected List&lt;Node&gt; selectNodes(Tree treeA, Tree treeB) {
-<span class="nc" id="L145">    final List&lt;Node&gt; nodes = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L146">    final List&lt;Node&gt; nodes = new ArrayList&lt;Node&gt;();</span>
     Node crossNode1;
     Node crossNode2;
     Function function1;
     Function function2;
     // se buscan los nodos de corte, sin tener en cuenta el nodo raiz
-<span class="nc" id="L151">    crossNode1 = treeA.getNode(1 + (int) (Math.random() * treeA.getRoot().getTotalNodes() - 1));</span>
-<span class="nc" id="L152">    crossNode2 = treeB.getNode(1 + (int) (Math.random() * treeB.getRoot().getTotalNodes() - 1));</span>
+<span class="nc" id="L152">    crossNode1 = treeA.getNode(1 + (int) (Math.random() * treeA.getRoot().getTotalNodes() - 1));</span>
+<span class="nc" id="L153">    crossNode2 = treeB.getNode(1 + (int) (Math.random() * treeB.getRoot().getTotalNodes() - 1));</span>
     // se recuperan las funciones de cada nodo
-<span class="nc" id="L154">    function1 = crossNode1.getFunction().getFunction();</span>
-<span class="nc" id="L155">    function2 = crossNode2.getFunction().getFunction();</span>
+<span class="nc" id="L155">    function1 = crossNode1.getFunction().getFunction();</span>
+<span class="nc" id="L156">    function2 = crossNode2.getFunction().getFunction();</span>
     // si la funcion no devuelve el mismo tipo, se busca otro nodo que si
     // que lo cumpla
-<span class="nc bnc" id="L158" title="All 2 branches missed.">    while (!function1.getReturnType().equals(function2.getReturnType())) {</span>
-<span class="nc" id="L159">      crossNode2 = treeB.getNode(1 + (int) (Math.random() * treeB.getRoot().getTotalNodes() - 1));</span>
-<span class="nc" id="L160">      function2 = crossNode2.getFunction().getFunction();</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">    while (!function1.getReturnType().equals(function2.getReturnType())) {</span>
+<span class="nc" id="L160">      crossNode2 = treeB.getNode(1 + (int) (Math.random() * treeB.getRoot().getTotalNodes() - 1));</span>
+<span class="nc" id="L161">      function2 = crossNode2.getFunction().getFunction();</span>
     }
 
-<span class="nc" id="L163">    nodes.add(crossNode1);</span>
-<span class="nc" id="L164">    nodes.add(crossNode2);</span>
+<span class="nc" id="L164">    nodes.add(crossNode1);</span>
+<span class="nc" id="L165">    nodes.add(crossNode2);</span>
 
-<span class="nc" id="L166">    return nodes;</span>
+<span class="nc" id="L167">    return nodes;</span>
   }
 
-  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;NS_DANGEROUS_NON_SHORT_CIRCUIT&quot;, justification = &quot;It's mandatory to evaluate both trees&quot;)
+  @SuppressFBWarnings(value = &quot;NS_DANGEROUS_NON_SHORT_CIRCUIT&quot;, justification = &quot;It's mandatory to evaluate both trees&quot;)
   private boolean checkTrees(Tree treeA, Tree treeB) {
-<span class="fc" id="L171">    return checkTreeSize(treeA) &amp; checkTreeSize(treeB);</span>
+<span class="fc" id="L172">    return checkTreeSize(treeA) &amp; checkTreeSize(treeB);</span>
   }
 
-  private boolean checkTreeSize(Tree t) {
-<span class="fc" id="L175">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
-<span class="pc bpc" id="L176" title="1 of 2 branches missed.">    return t.getRoot().getTotalNodes() &lt;= maxNodes;</span>
+  private boolean checkTreeSize(Tree tree) {
+<span class="fc" id="L176">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    return tree.getRoot().getTotalNodes() &lt;= maxNodes;</span>
   }
 
 }

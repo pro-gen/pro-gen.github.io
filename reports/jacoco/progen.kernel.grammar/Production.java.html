@@ -3,6 +3,7 @@
 import java.io.Serializable;
 
 import progen.kernel.functions.ERC;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Clase que representa las producciones de la gramática que generará todos los
@@ -59,30 +60,30 @@ public class Production implements Serializable {
    *          conjunto de no terminales, se contruyen nuevos no terminales para
    *          almecenar en esta instancia.
    */
-<span class="fc" id="L62">  public Production(GrammarNonTerminalSymbol left, GrammarTerminalSymbol function, GrammarNonTerminalSymbol [] args) {</span>
-<span class="fc" id="L63">    this.left = left;</span>
-<span class="fc" id="L64">    this.function = function;</span>
-<span class="fc" id="L65">    this.args = new GrammarNonTerminalSymbol[args.length];</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">    for (int i = 0; i &lt; args.length; i++) {</span>
-<span class="fc" id="L67">      this.args[i] = args[i];</span>
+<span class="fc" id="L63">  public Production(GrammarNonTerminalSymbol left, GrammarTerminalSymbol function, GrammarNonTerminalSymbol [] args) {</span>
+<span class="fc" id="L64">    this.left = left;</span>
+<span class="fc" id="L65">    this.function = function;</span>
+<span class="fc" id="L66">    this.args = new GrammarNonTerminalSymbol[args.length];</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">    for (int i = 0; i &lt; args.length; i++) {</span>
+<span class="fc" id="L68">      this.args[i] = args[i];</span>
     }
-<span class="fc" id="L69">  }</span>
+<span class="fc" id="L70">  }</span>
 
   /**
    * Representación en forma de &lt;code&gt;String&lt;/code&gt; de la producción. Esta
    * representación es de la forma &lt;code&gt; A -&gt; b C &lt;/code&gt;
    */
   public String toString() {
-<span class="nc" id="L76">    final StringBuffer production = new StringBuffer();</span>
-<span class="nc" id="L77">    production.append(left.toString());</span>
-<span class="nc" id="L78">    production.append(&quot; -&gt; &quot;);</span>
-<span class="nc" id="L79">    production.append(function.toString());</span>
-<span class="nc" id="L80">    production.append(SPACE_SYMBOL);</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">    for (int i = 0; i &lt; args.length; i++) {</span>
-<span class="nc" id="L82">      production.append(args[i].toString() + SPACE_SYMBOL);</span>
+<span class="nc" id="L77">    final StringBuffer production = new StringBuffer();</span>
+<span class="nc" id="L78">    production.append(left.toString());</span>
+<span class="nc" id="L79">    production.append(&quot; -&gt; &quot;);</span>
+<span class="nc" id="L80">    production.append(function.toString());</span>
+<span class="nc" id="L81">    production.append(SPACE_SYMBOL);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">    for (int i = 0; i &lt; args.length; i++) {</span>
+<span class="nc" id="L83">      production.append(args[i].toString() + SPACE_SYMBOL);</span>
     }
 
-<span class="nc" id="L85">    return production.toString().trim();</span>
+<span class="nc" id="L86">    return production.toString().trim();</span>
   }
 
   /**
@@ -91,7 +92,7 @@ public class Production implements Serializable {
    * @return La parte izquierda de esta &lt;code&gt; Production &lt;/code&gt;
    */
   public GrammarNonTerminalSymbol getLeft() {
-<span class="fc" id="L94">    return left;</span>
+<span class="fc" id="L95">    return left;</span>
   }
 
   /**
@@ -99,9 +100,9 @@ public class Production implements Serializable {
    * 
    * @return Los argumentos de la función de esta &lt;code&gt;Production&lt;/code&gt;
    */
-  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;EI_EXPOSE_REP&quot;, justification = &quot;Its is a getter method&quot;)
+  @SuppressFBWarnings(value = &quot;EI_EXPOSE_REP&quot;, justification = &quot;Its is a getter method&quot;)
   public GrammarNonTerminalSymbol[] getArgs() {
-<span class="fc" id="L104">    return args;</span>
+<span class="fc" id="L105">    return args;</span>
   }
 
   /**
@@ -111,13 +112,13 @@ public class Production implements Serializable {
    */
   public GrammarTerminalSymbol getFunction() {
     GrammarTerminalSymbol functionObtained;
-<span class="pc bpc" id="L114" title="1 of 2 branches missed.">    if (this.function.getFunction() instanceof ERC) {</span>
-<span class="nc" id="L115">      final ERC erc = (ERC) this.function.getFunction();</span>
-<span class="nc" id="L116">      functionObtained = new GrammarTerminalSymbol(erc.clone());</span>
-<span class="nc" id="L117">    } else {</span>
-<span class="fc" id="L118">      functionObtained= this.function;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">    if (this.function.getFunction() instanceof ERC) {</span>
+<span class="nc" id="L116">      final ERC erc = (ERC) this.function.getFunction();</span>
+<span class="nc" id="L117">      functionObtained = new GrammarTerminalSymbol(erc.clone());</span>
+<span class="nc" id="L118">    } else {</span>
+<span class="fc" id="L119">      functionObtained= this.function;</span>
     }
-<span class="fc" id="L120">    return functionObtained;</span>
+<span class="fc" id="L121">    return functionObtained;</span>
   }
 
   /**
@@ -130,17 +131,17 @@ public class Production implements Serializable {
    *         lo es.
    */
   public boolean isSymbolGenerated(GrammarNonTerminalSymbol symbol) {
-<span class="nc" id="L133">    boolean generate = false;</span>
-<span class="nc" id="L134">    int currentArgument = 0;</span>
+<span class="nc" id="L134">    boolean generate = false;</span>
+<span class="nc" id="L135">    int currentArgument = 0;</span>
 
-<span class="nc bnc" id="L136" title="All 4 branches missed.">    while (currentArgument &lt; args.length &amp;&amp; !generate) {</span>
-<span class="nc bnc" id="L137" title="All 2 branches missed.">      if (args[currentArgument].compareTo(symbol) == 0) {</span>
-<span class="nc" id="L138">        generate = true;</span>
+<span class="nc bnc" id="L137" title="All 4 branches missed.">    while (currentArgument &lt; args.length &amp;&amp; !generate) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">      if (args[currentArgument].compareTo(symbol) == 0) {</span>
+<span class="nc" id="L139">        generate = true;</span>
       }
-<span class="nc" id="L140">      currentArgument++;</span>
+<span class="nc" id="L141">      currentArgument++;</span>
     }
 
-<span class="nc" id="L143">    return generate;</span>
+<span class="nc" id="L144">    return generate;</span>
   }
 
   /**
@@ -153,7 +154,7 @@ public class Production implements Serializable {
    *         lo es.
    */
   public boolean isSymbolGenerated(GrammarTerminalSymbol symbol) {
-<span class="nc bnc" id="L156" title="All 2 branches missed.">    return function.getFunction().getSymbol().compareTo(symbol.getFunction().getSymbol()) == 0;</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">    return function.getFunction().getSymbol().compareTo(symbol.getFunction().getSymbol()) == 0;</span>
   }
 
   /**
@@ -166,16 +167,16 @@ public class Production implements Serializable {
    */
   @Override
   public boolean equals(Object other) {
-<span class="fc" id="L169">    boolean equals = false;</span>
-<span class="pc bpc" id="L170" title="1 of 2 branches missed.">    if (other instanceof Production) {</span>
-<span class="fc" id="L171">      equals = equalsProduction((Production) other);</span>
+<span class="fc" id="L170">    boolean equals = false;</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">    if (other instanceof Production) {</span>
+<span class="fc" id="L172">      equals = equalsProduction((Production) other);</span>
     }
-<span class="fc" id="L173">    return equals;</span>
+<span class="fc" id="L174">    return equals;</span>
   }
 
   @Override
   public int hashCode() {
-<span class="nc" id="L178">    return toString().hashCode();</span>
+<span class="nc" id="L179">    return toString().hashCode();</span>
   }
 
   /**
@@ -189,18 +190,18 @@ public class Production implements Serializable {
    */
   private boolean equalsProduction(Production other) {
     boolean equal;
-<span class="fc" id="L192">    equal = this.left.equals(other.left);</span>
-<span class="fc" id="L193">    equal &amp;= this.function.equals(other.function);</span>
+<span class="fc" id="L193">    equal = this.left.equals(other.left);</span>
+<span class="fc" id="L194">    equal &amp;= this.function.equals(other.function);</span>
 
-<span class="fc bfc" id="L195" title="All 2 branches covered.">    equal &amp;= this.args.length == other.args.length;</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">    equal &amp;= this.args.length == other.args.length;</span>
 
-<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (equal) {</span>
-<span class="pc bpc" id="L198" title="1 of 4 branches missed.">      for (int i = 0; equal &amp;&amp; i &lt; this.args.length; i++) {</span>
-<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        equal &amp;= this.args[i].compareTo(other.args[i]) == 0;</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">    if (equal) {</span>
+<span class="pc bpc" id="L199" title="1 of 4 branches missed.">      for (int i = 0; equal &amp;&amp; i &lt; this.args.length; i++) {</span>
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">        equal &amp;= this.args[i].compareTo(other.args[i]) == 0;</span>
       }
     }
 
-<span class="fc" id="L203">    return equal;</span>
+<span class="fc" id="L204">    return equal;</span>
   }
 
   /**
@@ -216,12 +217,12 @@ public class Production implements Serializable {
    * @return la &lt;code&gt;Production&lt;/code&gt; actualizada.
    */
   public Production updateFunction(GrammarTerminalSymbol newSymbol) {
-<span class="nc" id="L219">    Production production = this;</span>
-<span class="nc bnc" id="L220" title="All 2 branches missed.">    if (function.compareTo(newSymbol) == 0) {</span>
-<span class="nc" id="L221">      production = new Production(left, newSymbol, args);</span>
+<span class="nc" id="L220">    Production production = this;</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">    if (function.compareTo(newSymbol) == 0) {</span>
+<span class="nc" id="L222">      production = new Production(left, newSymbol, args);</span>
     }
 
-<span class="nc" id="L224">    return production;</span>
+<span class="nc" id="L225">    return production;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

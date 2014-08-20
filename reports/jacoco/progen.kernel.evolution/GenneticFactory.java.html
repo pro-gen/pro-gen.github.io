@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import progen.context.ProGenContext;
 import progen.kernel.error.Warning;
@@ -27,11 +26,11 @@ public class GenneticFactory {
    * Constructor de la clase, encargado de instanciar todos los operadores
    * genéticos disponibles para la ejecución de este experimento.
    */
-<span class="nc" id="L30">  public GenneticFactory() {</span>
-<span class="nc" id="L31">    operators = new ArrayList&lt;GenneticOperator&gt;();</span>
-<span class="nc" id="L32">    checkProbability();</span>
-<span class="nc" id="L33">    loadOperators();</span>
-<span class="nc" id="L34">  }</span>
+<span class="nc" id="L29">  public GenneticFactory() {</span>
+<span class="nc" id="L30">    operators = new ArrayList&lt;GenneticOperator&gt;();</span>
+<span class="nc" id="L31">    checkProbability();</span>
+<span class="nc" id="L32">    loadOperators();</span>
+<span class="nc" id="L33">  }</span>
 
   /**
    * Comprueba, si la suma de probabilidades de todos los operadores de ese tipo
@@ -40,17 +39,17 @@ public class GenneticFactory {
    * @return &lt;code&gt;true&lt;/code&gt; si la suma es 100%
    */
   private boolean checkProbability() {
-<span class="nc" id="L43">    final int totalOperators = Integer.parseInt(ProGenContext.getMandatoryProperty(PROGEN_TOTAL_OPERATORS_PROPERTY));</span>
-<span class="nc" id="L44">    double probability = 0.0;</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">    for (int i = 0; i &lt; totalOperators; i++) {</span>
-<span class="nc" id="L46">      probability += ProGenContext.getOptionalPercent(PROGEN_GENNETIC_OPERATOR_PROPERTY + i + PROBABILITY_PROPERTY, (1 - probability) + &quot;&quot;);</span>
+<span class="nc" id="L42">    final int totalOperators = Integer.parseInt(ProGenContext.getMandatoryProperty(PROGEN_TOTAL_OPERATORS_PROPERTY));</span>
+<span class="nc" id="L43">    double probability = 0.0;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">    for (int i = 0; i &lt; totalOperators; i++) {</span>
+<span class="nc" id="L45">      probability += ProGenContext.getOptionalPercent(PROGEN_GENNETIC_OPERATOR_PROPERTY + i + PROBABILITY_PROPERTY, String.valueOf(1 - probability));</span>
     }
 
-<span class="nc bnc" id="L49" title="All 2 branches missed.">    if (probability != 1.0) {</span>
-<span class="nc" id="L50">      Warning.show(2);</span>
-<span class="nc" id="L51">      throw new BadConfigurationGenneticOperatorsException(probability);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">    if (probability != 1.0) {</span>
+<span class="nc" id="L49">      Warning.show(2);</span>
+<span class="nc" id="L50">      throw new BadConfigurationGenneticOperatorsException(probability);</span>
     }
-<span class="nc" id="L53">    return true;</span>
+<span class="nc" id="L52">    return true;</span>
   }
 
   /**
@@ -58,36 +57,40 @@ public class GenneticFactory {
    * disponibles en la ejecución.
    */
   private void loadOperators() {
-<span class="nc" id="L61">    final int totalOperators = Integer.parseInt(ProGenContext.getMandatoryProperty(PROGEN_TOTAL_OPERATORS_PROPERTY));</span>
+<span class="nc" id="L60">    final int totalOperators = Integer.parseInt(ProGenContext.getMandatoryProperty(PROGEN_TOTAL_OPERATORS_PROPERTY));</span>
+    GenneticOperator operator;
+    String selectorPropertyContext;
+<span class="nc" id="L63">    double probability = 0.0;</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    for (int idOperator = 0; idOperator &lt; totalOperators; idOperator++) {</span>
+<span class="nc" id="L66">      selectorPropertyContext = PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + &quot;.selector&quot;;</span>
+      try {
+<span class="nc" id="L68">        probability = ProGenContext.getOptionalPercent(PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + PROBABILITY_PROPERTY, String.valueOf(1 - probability));</span>
+<span class="nc" id="L69">        operator = configureOperator(idOperator, selectorPropertyContext, probability);</span>
+<span class="nc" id="L70">        operators.add(operator);</span>
+<span class="nc" id="L71">      } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L72">        throw new UndefinedGenneticOperatorException(e.getMessage());</span>
+<span class="nc" id="L73">      } catch (InstantiationException | IllegalAccessException e) {</span>
+<span class="nc" id="L74">        throw new GenneticOperatorException(e.getMessage());</span>
+<span class="nc" id="L75">      }</span>
+    }
+<span class="nc" id="L77">  }</span>
+
+  private GenneticOperator configureOperator(int idOperator, String selectorPropertyContext, double probability) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    GenneticOperator operator;
+<span class="nc" id="L81">    operator = makeOperatorInstance(idOperator);</span>
+<span class="nc" id="L82">    operator.setProbability(probability);</span>
+<span class="nc" id="L83">    operator.setSelector(ProGenContext.getMandatoryProperty(selectorPropertyContext), ProGenContext.getParameters(selectorPropertyContext));</span>
+<span class="nc" id="L84">    return operator;</span>
+  }
+
+  private GenneticOperator makeOperatorInstance(int idOperator) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
     GenneticOperator operator;
     String operatorClass;
-    String selectorPropertyContext;
-<span class="nc" id="L65">    double probability = 0.0;</span>
-    String selectorName;
-    Map&lt;String, String&gt; selectorParams;
-
-<span class="nc bnc" id="L69" title="All 2 branches missed.">    for (int idOperator = 0; idOperator &lt; totalOperators; idOperator++) {</span>
-<span class="nc" id="L70">      selectorPropertyContext = PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + &quot;.selector&quot;;</span>
-      try {
-<span class="nc" id="L72">        operatorClass = ProGenContext.getMandatoryProperty(PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + &quot;.class&quot;);</span>
-<span class="nc" id="L73">        operator = (GenneticOperator) Class.forName(&quot;progen.kernel.evolution.operators.&quot; + operatorClass).newInstance();</span>
-
-<span class="nc" id="L75">        probability = ProGenContext.getOptionalPercent(PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + PROBABILITY_PROPERTY, (1 - probability) + &quot;&quot;);</span>
-<span class="nc" id="L76">        operator.setProbability(probability);</span>
-
-<span class="nc" id="L78">        selectorName = ProGenContext.getMandatoryProperty(selectorPropertyContext);</span>
-<span class="nc" id="L79">        selectorParams = ProGenContext.getParameters(selectorPropertyContext);</span>
-
-<span class="nc" id="L81">        operator.setSelector(selectorName, selectorParams);</span>
-
-<span class="nc" id="L83">        operators.add(operator);</span>
-<span class="nc" id="L84">      } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L85">        throw new UndefinedGenneticOperatorException(e.getMessage());</span>
-<span class="nc" id="L86">      } catch (InstantiationException | IllegalAccessException e) {</span>
-<span class="nc" id="L87">        throw new GenneticOperatorException(e.getMessage());</span>
-<span class="nc" id="L88">      }</span>
-    }
-<span class="nc" id="L90">  }</span>
+<span class="nc" id="L90">    operatorClass = ProGenContext.getMandatoryProperty(PROGEN_GENNETIC_OPERATOR_PROPERTY + idOperator + &quot;.class&quot;);</span>
+<span class="nc" id="L91">    operator = (GenneticOperator) Class.forName(&quot;progen.kernel.evolution.operators.&quot; + operatorClass).newInstance();</span>
+<span class="nc" id="L92">    return operator;</span>
+  }
 
   /**
    * Devuelve un operador genético de la lista de los posibles.
@@ -95,13 +98,13 @@ public class GenneticFactory {
    * @return El operador a ejecutar.
    */
   public GenneticOperator getOperator() {
-<span class="nc" id="L98">    final double probability = Math.random();</span>
-<span class="nc" id="L99">    double actualProb = 0.0;</span>
-<span class="nc" id="L100">    int idOperator = 0;</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">    while (actualProb &lt;= probability) {</span>
-<span class="nc" id="L102">      actualProb += operators.get(idOperator++).getProbability();</span>
+<span class="nc" id="L101">    final double probability = Math.random();</span>
+<span class="nc" id="L102">    double actualProb = 0.0;</span>
+<span class="nc" id="L103">    int idOperator = 0;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">    while (actualProb &lt;= probability) {</span>
+<span class="nc" id="L105">      actualProb += operators.get(idOperator++).getProbability();</span>
     }
-<span class="nc" id="L104">    return operators.get(--idOperator);</span>
+<span class="nc" id="L107">    return operators.get(--idOperator);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

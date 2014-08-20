@@ -2,6 +2,8 @@
 
 import java.util.Random;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * ERC que define un valor aleatorio de 32 bits.
  * 
@@ -18,24 +20,24 @@ public class Bit32ERC extends ERC {
    * Constructor que especifica que este ERC será de tipo int
    */
   public Bit32ERC() {
-<span class="nc" id="L21">    super(&quot;int&quot;);</span>
-<span class="nc" id="L22">  }</span>
+<span class="nc" id="L23">    super(&quot;int&quot;);</span>
+<span class="nc" id="L24">  }</span>
 
   @Override
-  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;DMI_RANDOM_USED_ONLY_ONCE&quot;, justification = &quot;Original design ProGen v1.0&quot;)
+  @SuppressFBWarnings(value = &quot;DMI_RANDOM_USED_ONLY_ONCE&quot;, justification = &quot;Original design ProGen v1.0&quot;)
   protected Object defineERC() {
-<span class="nc" id="L27">    return Integer.valueOf(new Random().nextInt());</span>
+<span class="nc" id="L29">    return Integer.valueOf(new Random().nextInt());</span>
   }
 
   @Override
   protected String printERC() {
-<span class="nc" id="L32">    return &quot;0x&quot; + Integer.toHexString((Integer) getValue());</span>
+<span class="nc" id="L34">    return &quot;0x&quot; + Integer.toHexString((Integer) getValue());</span>
   }
 
   @Override
-  @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = &quot;CN_IDIOM_NO_SUPER_CALL&quot;, justification = &quot;super.clone() doesn't exists&quot;)
+  @SuppressFBWarnings(value = &quot;CN_IDIOM_NO_SUPER_CALL&quot;, justification = &quot;super.clone() doesn't exists&quot;)
   public ERC clone() {
-<span class="nc" id="L38">    return new Bit32ERC();</span>
+<span class="nc" id="L40">    return new Bit32ERC();</span>
   }
 
 }
