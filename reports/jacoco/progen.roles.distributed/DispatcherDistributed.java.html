@@ -31,7 +31,7 @@ public class DispatcherDistributed implements Dispatcher {
     try {
 <span class="nc" id="L32">      remote.start();</span>
 <span class="nc" id="L33">    } catch (RemoteException e) {</span>
-<span class="nc" id="L34">      throw new ProGenDistributedException();</span>
+<span class="nc" id="L34">      throw new ProGenDistributedException(e);</span>
 <span class="nc" id="L35">    }</span>
 <span class="nc" id="L36">  }</span>
 
@@ -57,7 +57,7 @@ public class DispatcherDistributed implements Dispatcher {
     try {
 <span class="nc" id="L58">      return remote.totalTasksDone();</span>
 <span class="nc" id="L59">    } catch (RemoteException e) {</span>
-<span class="nc" id="L60">      throw new ProGenDistributedException(remote.toString());</span>
+<span class="nc" id="L60">      throw new ProGenDistributedException(remote.toString(), e);</span>
     }
   }
 }

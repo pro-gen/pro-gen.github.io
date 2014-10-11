@@ -13,22 +13,26 @@ public class ProGenDistributedException extends RuntimeException {
   public ProGenDistributedException() {
 <span class="fc" id="L14">    super(Error.get(ID_ERROR));</span>
 <span class="fc" id="L15">  }</span>
+  
+  public ProGenDistributedException(Exception originalException) {
+<span class="nc" id="L18">    super(Error.get(ID_ERROR), originalException);</span>
+<span class="nc" id="L19">  }</span>
 
   public ProGenDistributedException(String msg) {
-<span class="fc" id="L18">    super(getMessage(ID_ERROR, msg));</span>
-<span class="fc" id="L19">  }</span>
+<span class="fc" id="L22">    super(getMessage(ID_ERROR, msg));</span>
+<span class="fc" id="L23">  }</span>
   
   public ProGenDistributedException(String msg, Exception originalException) {
-<span class="nc" id="L22">    super(getMessage(ID_ERROR, msg), originalException);</span>
-<span class="nc" id="L23">  }</span>
+<span class="nc" id="L26">    super(getMessage(ID_ERROR, msg), originalException);</span>
+<span class="nc" id="L27">  }</span>
 
   private static String getMessage(int idError, String msg) {
-<span class="fc" id="L26">    return Error.get(idError) + BLANK_SPACE_SYMBOL+SQUARE_LEFT_BRACKET_SYMBOL + msg + SQUARE_RIGHT_BRACKET_SYMBOL;</span>
+<span class="fc" id="L30">    return Error.get(idError) + BLANK_SPACE_SYMBOL+SQUARE_LEFT_BRACKET_SYMBOL + msg + SQUARE_RIGHT_BRACKET_SYMBOL;</span>
   }
 
   public ProGenDistributedException(int id, String msg) {
-<span class="fc" id="L30">    super(getMessage(id, msg));</span>
-<span class="fc" id="L31">  }</span>
+<span class="fc" id="L34">    super(getMessage(id, msg));</span>
+<span class="fc" id="L35">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

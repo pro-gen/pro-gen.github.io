@@ -31,7 +31,7 @@ import progen.kernel.grammar.Production;
 <span class="fc bfc" id="L31" title="All 2 branches covered.">      for (int i = 0; i &lt; symbolsToCheckBefore; i++) {</span>
 <span class="fc" id="L32">        symbol = symbolsToCheck.get(index);</span>
 
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (checkSymbol(symbol, symbolsChecked, gram.getProductions(symbol))) {</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (checkSymbol(symbolsChecked, gram.getProductions(symbol))) {</span>
 <span class="fc" id="L35">          symbolsChecked.add(symbol);</span>
 <span class="fc" id="L36">          symbolsToCheck.remove(symbol);</span>
         } else {
@@ -50,13 +50,13 @@ import progen.kernel.grammar.Production;
     }
 <span class="fc" id="L51">  }</span>
 
-  private boolean checkSymbol(GrammarNonTerminalSymbol symbol, List&lt;GrammarNonTerminalSymbol&gt; symbolsChecked, List&lt;Production&gt; productions) {
+  private boolean checkSymbol(List&lt;GrammarNonTerminalSymbol&gt; symbolsChecked, List&lt;Production&gt; productions) {
 <span class="fc" id="L54">    boolean isOK = true;</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">    for (Production p : productions) {</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">      if (p.getArgs().length == 0) {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">    for (Production production : productions) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">      if (production.getArgs().length == 0) {</span>
 <span class="fc" id="L57">        isOK = true;</span>
       } else {
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (GrammarNonTerminalSymbol arg : p.getArgs()) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (GrammarNonTerminalSymbol arg : production.getArgs()) {</span>
 <span class="pc bpc" id="L60" title="1 of 4 branches missed.">          isOK = isOK &amp;&amp; symbolsChecked.contains(arg);</span>
         }
       }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HistoricalData.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output</a> &gt; <span class="el_source">HistoricalData.java</span></div><h1>HistoricalData.java</h1><pre class="source lang-java linenums">package progen.output;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import progen.context.ProGenContext;
 import progen.output.dataCollectors.DataCollector;
@@ -26,7 +27,7 @@ public final class HistoricalData {
    * Colección de todos los recolectores de datos a lo largo de las
    * generaciónes.
    */
-  private HashMap&lt;String, DataCollector&gt; collectors;
+  private Map&lt;String, DataCollector&gt; collectors;
   /** Identifica la generación actual. */
   private int currentGeneration;
   /** Total de colectores disponibles en la ejecución. */
@@ -36,12 +37,12 @@ public final class HistoricalData {
    * Constructor genérico de la clase, en la que se inicializan los valores
    * iniciales.
    */
-<span class="nc" id="L39">  private HistoricalData() {</span>
-<span class="nc" id="L40">    collectors = new HashMap&lt;String, DataCollector&gt;();</span>
-<span class="nc" id="L41">    totalCollectors = ProGenContext.getOptionalProperty(&quot;progen.datacollector.total&quot;, 0);</span>
-<span class="nc" id="L42">    this.addCollectors(HistoricalData.EXPERIMENT);</span>
-<span class="nc" id="L43">    this.newExperiment();</span>
-<span class="nc" id="L44">  }</span>
+<span class="nc" id="L40">  private HistoricalData() {</span>
+<span class="nc" id="L41">    collectors = new HashMap&lt;String, DataCollector&gt;();</span>
+<span class="nc" id="L42">    totalCollectors = ProGenContext.getOptionalProperty(&quot;progen.datacollector.total&quot;, 0);</span>
+<span class="nc" id="L43">    this.addCollectors(HistoricalData.EXPERIMENT);</span>
+<span class="nc" id="L44">    this.newExperiment();</span>
+<span class="nc" id="L45">  }</span>
 
   /**
    * Forma de obtener la única instancia que existirá a lo largo de la ejecución
@@ -50,10 +51,10 @@ public final class HistoricalData {
    * @return Instancia de la clase.
    */
   public static synchronized HistoricalData makeInstance() {
-<span class="nc bnc" id="L53" title="All 2 branches missed.">    if (historical == null) {</span>
-<span class="nc" id="L54">      historical = new HistoricalData();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">    if (historical == null) {</span>
+<span class="nc" id="L55">      historical = new HistoricalData();</span>
     }
-<span class="nc" id="L56">    return historical;</span>
+<span class="nc" id="L57">    return historical;</span>
   }
 
   /**
@@ -66,7 +67,7 @@ public final class HistoricalData {
    *         no exista.
    */
   public DataCollector getCurrentDataCollector(String name) {
-<span class="nc" id="L69">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, currentGeneration));</span>
+<span class="nc" id="L70">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, currentGeneration));</span>
   }
 
   /**
@@ -77,11 +78,11 @@ public final class HistoricalData {
    * @return El Datacollector solicitado.
    */
   private DataCollector getDataCollector(String name) {
-<span class="nc" id="L80">    DataCollector dataCollector = collectors.get(name);</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">    if (dataCollector == null) {</span>
-<span class="nc" id="L82">      dataCollector = new DataCollector();</span>
+<span class="nc" id="L81">    DataCollector dataCollector = collectors.get(name);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">    if (dataCollector == null) {</span>
+<span class="nc" id="L83">      dataCollector = new DataCollector();</span>
     }
-<span class="nc" id="L84">    return dataCollector;</span>
+<span class="nc" id="L85">    return dataCollector;</span>
   }
 
   /**
@@ -95,7 +96,7 @@ public final class HistoricalData {
    * @return El colector deseado o &lt;code&gt;null&lt;/code&gt; en caso de que no exista.
    */
   public DataCollector getDataCollector(String name, int generation) {
-<span class="nc" id="L98">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, generation));</span>
+<span class="nc" id="L99">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, generation));</span>
   }
 
   /**
@@ -107,19 +108,19 @@ public final class HistoricalData {
    * @return El colector deseado o &lt;code&gt;null&lt;/code&gt; en caso de que no exista.
    */
   public DataCollector getDataCollectorExperiment(String name) {
-<span class="nc" id="L110">    return this.getDataCollector(name + HistoricalData.EXPERIMENT);</span>
+<span class="nc" id="L111">    return this.getDataCollector(name + HistoricalData.EXPERIMENT);</span>
   }
 
   /**
    * Actualiza el histórico para definir los colectores de la nueva generación.
    */
   public void newGeneration() {
-<span class="nc" id="L117">    final int maxGeneration = ProGenContext.getOptionalProperty(&quot;progen.max-generation&quot;, 0);</span>
-<span class="nc bnc" id="L118" title="All 2 branches missed.">    if (currentGeneration + 1 &lt; maxGeneration) {</span>
-<span class="nc" id="L119">      currentGeneration++;</span>
-<span class="nc" id="L120">      this.addCollectors(String.valueOf(currentGeneration));</span>
+<span class="nc" id="L118">    final int maxGeneration = ProGenContext.getOptionalProperty(&quot;progen.max-generation&quot;, 0);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">    if (currentGeneration + 1 &lt; maxGeneration) {</span>
+<span class="nc" id="L120">      currentGeneration++;</span>
+<span class="nc" id="L121">      this.addCollectors(String.valueOf(currentGeneration));</span>
     }
-<span class="nc" id="L122">  }</span>
+<span class="nc" id="L123">  }</span>
 
   /**
    * Añade la colección de DataCollectors disponibles al histórico, identifcados
@@ -129,11 +130,11 @@ public final class HistoricalData {
    *          Etiqueta que identificará al DataCollector correspondiente.
    */
   private void addCollectors(String tag) {
-<span class="nc bnc" id="L132" title="All 2 branches missed.">    for (int i = 0; i &lt; totalCollectors; i++) {</span>
-<span class="nc" id="L133">      final DataCollector collector = new DataCollector(&quot;progen.datacollector&quot; + i);</span>
-<span class="nc" id="L134">      collectors.put(String.format(&quot;%s%s&quot;, collector.getName(), tag), collector);</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">    for (int i = 0; i &lt; totalCollectors; i++) {</span>
+<span class="nc" id="L134">      final DataCollector collector = new DataCollector(&quot;progen.datacollector&quot; + i);</span>
+<span class="nc" id="L135">      collectors.put(String.format(&quot;%s%s&quot;, collector.getName(), tag), collector);</span>
     }
-<span class="nc" id="L136">  }</span>
+<span class="nc" id="L137">  }</span>
 
   /**
    * Devuelve el número de la generación que se está ejecutando en un momento
@@ -142,7 +143,7 @@ public final class HistoricalData {
    * @return La generación que está ejecutando.
    */
   public int getCurrentGeneration() {
-<span class="nc" id="L145">    return currentGeneration;</span>
+<span class="nc" id="L146">    return currentGeneration;</span>
   }
 
   /**
@@ -152,16 +153,16 @@ public final class HistoricalData {
   public void newExperiment() {
     // default value is negative because newGeneration() increase this value
     // and really start in 0
-<span class="nc" id="L155">    currentGeneration = -1;</span>
-<span class="nc" id="L156">    this.newGeneration();</span>
+<span class="nc" id="L156">    currentGeneration = -1;</span>
+<span class="nc" id="L157">    this.newGeneration();</span>
     DataCollector collector;
-<span class="nc bnc" id="L158" title="All 2 branches missed.">    for (String keyCollector : collectors.keySet()) {</span>
-<span class="nc" id="L159">      collector = collectors.get(keyCollector);</span>
-<span class="nc bnc" id="L160" title="All 2 branches missed.">      if (!collector.getName().endsWith(HistoricalData.EXPERIMENT)) {</span>
-<span class="nc" id="L161">        collectors.remove(collector.getName());</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">    for (String keyCollector : collectors.keySet()) {</span>
+<span class="nc" id="L160">      collector = collectors.get(keyCollector);</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">      if (!collector.getName().endsWith(HistoricalData.EXPERIMENT)) {</span>
+<span class="nc" id="L162">        collectors.remove(collector.getName());</span>
       }
-<span class="nc" id="L163">    }</span>
-<span class="nc" id="L164">  }</span>
+<span class="nc" id="L164">    }</span>
+<span class="nc" id="L165">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

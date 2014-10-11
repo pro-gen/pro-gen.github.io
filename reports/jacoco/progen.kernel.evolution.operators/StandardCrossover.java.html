@@ -174,7 +174,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
   private boolean checkTreeSize(Tree tree) {
 <span class="fc" id="L176">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
-<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    return tree.getRoot().getTotalNodes() &lt;= maxNodes;</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">    return tree.getRoot().getTotalNodes() &lt;= maxNodes;</span>
   }
 
 }

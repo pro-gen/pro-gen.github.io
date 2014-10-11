@@ -123,10 +123,10 @@ public final class Formatter {
 <span class="nc" id="L123">        line.deleteCharAt(line.length() - 1);</span>
       }
 <span class="nc bnc" id="L125" title="All 2 branches missed.">      if (function) {</span>
-<span class="nc" id="L126">        line.append(token + &quot; \t&quot;);</span>
+<span class="nc" id="L126">        line.append(token).append(&quot; \t&quot;);</span>
 <span class="nc" id="L127">        function = false;</span>
       } else {
-<span class="nc" id="L129">        line.append(token + &quot; &quot; + indentation(indent));</span>
+<span class="nc" id="L129">        line.append(token).append(&quot; &quot;).append(indentation(indent));</span>
       }
     }
 
