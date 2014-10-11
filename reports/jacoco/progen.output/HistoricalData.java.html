@@ -66,7 +66,7 @@ public final class HistoricalData {
    *         no exista.
    */
   public DataCollector getCurrentDataCollector(String name) {
-<span class="nc" id="L69">    return this.getDataCollector(name + &quot;&quot; + currentGeneration);</span>
+<span class="nc" id="L69">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, currentGeneration));</span>
   }
 
   /**
@@ -95,7 +95,7 @@ public final class HistoricalData {
    * @return El colector deseado o &lt;code&gt;null&lt;/code&gt; en caso de que no exista.
    */
   public DataCollector getDataCollector(String name, int generation) {
-<span class="nc" id="L98">    return this.getDataCollector(name + &quot;&quot; + generation);</span>
+<span class="nc" id="L98">    return this.getDataCollector(String.format(&quot;%s%d&quot;, name, generation));</span>
   }
 
   /**
@@ -131,7 +131,7 @@ public final class HistoricalData {
   private void addCollectors(String tag) {
 <span class="nc bnc" id="L132" title="All 2 branches missed.">    for (int i = 0; i &lt; totalCollectors; i++) {</span>
 <span class="nc" id="L133">      final DataCollector collector = new DataCollector(&quot;progen.datacollector&quot; + i);</span>
-<span class="nc" id="L134">      collectors.put(collector.getName() + &quot;&quot; + tag, collector);</span>
+<span class="nc" id="L134">      collectors.put(String.format(&quot;%s%s&quot;, collector.getName(), tag), collector);</span>
     }
 <span class="nc" id="L136">  }</span>
 

@@ -87,9 +87,9 @@ public abstract class Experimenter {
 <span class="nc" id="L87">      outputStream = new FileOutputStream(destinationFile);</span>
 <span class="nc" id="L88">      copyFile(inputStream, outputStream);</span>
 <span class="nc" id="L89">    } catch (FileNotFoundException e) {</span>
-<span class="nc" id="L90">      throw new ProGenException(Error.get(PROGEN_ID_ERROR) + SQUARE_RIGHT_BRACKET_SYMBOL + original + SQUARE_LEFT_BRACKET_SYMBOL);</span>
+<span class="nc" id="L90">      throw new ProGenException(Error.get(PROGEN_ID_ERROR) + SQUARE_RIGHT_BRACKET_SYMBOL + original + SQUARE_LEFT_BRACKET_SYMBOL, e);</span>
 <span class="nc" id="L91">    } catch (IOException e) {</span>
-<span class="nc" id="L92">      throw new ProGenException(e.getLocalizedMessage());</span>
+<span class="nc" id="L92">      throw new ProGenException(e.getLocalizedMessage(), e);</span>
     } finally {
 <span class="nc" id="L94">      try {</span>
 <span class="nc bnc" id="L95" title="All 4 branches missed.">        if (inputStream != null) {</span>
@@ -99,7 +99,7 @@ public abstract class Experimenter {
 <span class="nc" id="L99">          outputStream.close();</span>
         }
 <span class="nc" id="L101">      } catch (IOException e) {</span>
-<span class="nc" id="L102">        throw new ProGenException(e.getLocalizedMessage());</span>
+<span class="nc" id="L102">        throw new ProGenException(e.getLocalizedMessage(), e);</span>
 <span class="nc" id="L103">      }</span>
 
     }
@@ -134,9 +134,9 @@ public abstract class Experimenter {
         }
       }
 <span class="nc bnc" id="L136" title="All 4 branches missed.">      deleted = path.delete() &amp;&amp; deleted;</span>
-    }else{
+    } else {
 <span class="nc" id="L138">      deleted = false;</span>
-    } 
+    }
 <span class="nc" id="L140">    return deleted;</span>
   }
 

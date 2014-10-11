@@ -68,7 +68,7 @@ public class DataCollector {
 <span class="fc" id="L68">        plugin.initPlugin(proGenProperty);</span>
 <span class="fc" id="L69">        this.addPlugin(plugin);</span>
 <span class="nc" id="L70">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
-<span class="nc" id="L71">        throw new UnknownPluginException(e.getMessage());</span>
+<span class="nc" id="L71">        throw new UnknownPluginException(e.getMessage(), e);</span>
 <span class="fc" id="L72">      }</span>
     }
 

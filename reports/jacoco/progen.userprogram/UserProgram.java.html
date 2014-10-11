@@ -35,11 +35,11 @@ import progen.kernel.population.UnknownUserProgramException;
     try {
 <span class="nc" id="L36">      userProgram = (UserProgram) Class.forName(userPackage + userProgramClass).newInstance();</span>
 <span class="nc" id="L37">    } catch (InstantiationException e) {</span>
-<span class="nc" id="L38">      throw new ProGenException(e.getMessage());</span>
+<span class="nc" id="L38">      throw new ProGenException(e.getMessage(), e);</span>
 <span class="nc" id="L39">    } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L40">      throw new ProGenException(e.getMessage());</span>
+<span class="nc" id="L40">      throw new ProGenException(e.getMessage(), e);</span>
 <span class="nc" id="L41">    } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L42">      throw new UnknownUserProgramException(userPackage + userProgramClass);</span>
+<span class="nc" id="L42">      throw new UnknownUserProgramException(userPackage + userProgramClass, e);</span>
 <span class="nc" id="L43">    }</span>
 
 <span class="nc" id="L45">    return userProgram;</span>

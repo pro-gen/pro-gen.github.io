@@ -24,8 +24,14 @@ public class UnknownPluginException extends RuntimeException {
    *          Plugin que se intentó instanciar.
    */
   public UnknownPluginException(String msg) {
-<span class="nc" id="L27">    super(Error.get(ID_ERROR).trim() + &quot;(&quot; + msg + &quot;)&quot;);</span>
+<span class="nc" id="L27">    super(getMessage(msg));</span>
 <span class="nc" id="L28">  }</span>
+  public UnknownPluginException(String msg, Exception originalException) {
+<span class="nc" id="L30">    super(getMessage(msg), originalException);</span>
+<span class="nc" id="L31">  }</span>
+  private static String getMessage(String msg) {
+<span class="nc" id="L33">    return Error.get(ID_ERROR).trim() + &quot;(&quot; + msg + &quot;)&quot;;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

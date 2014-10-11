@@ -27,8 +27,8 @@ public class FunctionNotFoundException extends RuntimeException {
 <span class="fc" id="L27">  }</span>
   
   public FunctionNotFoundException(String message, Exception originalException){
-<span class="nc" id="L30">    super(getMessage(message), originalException);</span>
-<span class="nc" id="L31">  }</span>
+<span class="fc" id="L30">    super(getMessage(message), originalException);</span>
+<span class="fc" id="L31">  }</span>
 
   private static String getMessage(String message) {
 <span class="fc" id="L34">    return Error.get(ID_ERROR) + &quot; [&quot; + message + &quot;]&quot;;</span>

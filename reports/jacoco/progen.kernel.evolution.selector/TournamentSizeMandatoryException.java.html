@@ -8,7 +8,13 @@ public class TournamentSizeMandatoryException extends RuntimeException {
   private static final long serialVersionUID = 6841406532040966608L;
 
   public TournamentSizeMandatoryException() {
-<span class="fc" id="L11">    super(Error.get(ID_ERROR).trim());</span>
-<span class="fc" id="L12">  }</span>
+<span class="nc" id="L11">    super(getMessageException());</span>
+<span class="nc" id="L12">  }</span>
+  public TournamentSizeMandatoryException(Exception originalException) {
+<span class="fc" id="L14">    super(getMessageException(), originalException);</span>
+<span class="fc" id="L15">  }</span>
+  private static String getMessageException() {
+<span class="fc" id="L17">    return Error.get(ID_ERROR).trim();</span>
+  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

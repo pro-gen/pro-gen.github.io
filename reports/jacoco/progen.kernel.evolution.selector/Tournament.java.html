@@ -59,22 +59,17 @@ import progen.kernel.population.Population;
     }
 <span class="fc" id="L60">  }</span>
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see progen.kernel.evolution.selector.Selector#setParams(java.util.Map)
-   */
   @Override
   public void setParams(Map&lt;String, String&gt; params) {
     try {
-<span class="fc" id="L70">      size = Integer.parseInt(params.get(&quot;size&quot;));</span>
-<span class="fc bfc" id="L71" title="All 2 branches covered.">      if (size &gt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.population.size&quot;))) {</span>
-<span class="fc" id="L72">        throw new TournamentSizeException();</span>
+<span class="fc" id="L65">      size = Integer.parseInt(params.get(&quot;size&quot;));</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">      if (size &gt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.population.size&quot;))) {</span>
+<span class="fc" id="L67">        throw new TournamentSizeException();</span>
       }
-<span class="fc" id="L74">    } catch (java.lang.NumberFormatException e) {</span>
-<span class="fc" id="L75">      throw new TournamentSizeMandatoryException();</span>
-<span class="fc" id="L76">    }</span>
-<span class="fc" id="L77">  }</span>
+<span class="fc" id="L69">    } catch (java.lang.NumberFormatException e) {</span>
+<span class="fc" id="L70">      throw new TournamentSizeMandatoryException(e);</span>
+<span class="fc" id="L71">    }</span>
+<span class="fc" id="L72">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

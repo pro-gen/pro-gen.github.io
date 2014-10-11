@@ -89,23 +89,23 @@ public class MultipleExperimenter extends Experimenter {
 <span class="nc" id="L89">        currentExperimenter = 0;</span>
       } else {
         // incremento de las propiedades
-<span class="nc" id="L92">        int i = 0;</span>
-<span class="nc bnc" id="L93" title="All 4 branches missed.">        while (i &lt; properties.size() &amp;&amp; !actualizado) {</span>
-<span class="nc" id="L94">          nextProp = properties.get(i);</span>
+<span class="nc" id="L92">        int propertyIndex = 0;</span>
+<span class="nc bnc" id="L93" title="All 4 branches missed.">        while (propertyIndex &lt; properties.size() &amp;&amp; !actualizado) {</span>
+<span class="nc" id="L94">          nextProp = properties.get(propertyIndex);</span>
 <span class="nc bnc" id="L95" title="All 2 branches missed.">          if (nextProp.hasNext()) {</span>
 <span class="nc" id="L96">            nextProp.nextValue();</span>
 <span class="nc" id="L97">            actualizado = true;</span>
 <span class="nc" id="L98">            currentExperimenter++;</span>
           } else {
-<span class="nc" id="L100">            i++;</span>
+<span class="nc" id="L100">            propertyIndex++;</span>
           }
         }
 
         // si se actualizo algo, se resetean todas las propiedades
         // anteriores
 <span class="nc bnc" id="L106" title="All 2 branches missed.">        if (actualizado) {</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">          while (--i &gt;= 0) {</span>
-<span class="nc" id="L108">            properties.get(i).reset();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">          while (--propertyIndex &gt;= 0) {</span>
+<span class="nc" id="L108">            properties.get(propertyIndex).reset();</span>
           }
         }
       }
@@ -166,7 +166,7 @@ public class MultipleExperimenter extends Experimenter {
 <span class="nc" id="L166">      context.close();</span>
 <span class="nc" id="L167">      experimenter.generateResults();</span>
 <span class="nc" id="L168">    } catch (IOException e) {</span>
-<span class="nc" id="L169">      throw new ProGenException(e.getLocalizedMessage());</span>
+<span class="nc" id="L169">      throw new ProGenException(e.getLocalizedMessage(), e);</span>
 <span class="nc" id="L170">    }</span>
 <span class="nc" id="L171">  }</span>
 

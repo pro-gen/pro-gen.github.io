@@ -176,7 +176,7 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
       try {
 <span class="nc" id="L177">        function = (Function) Class.forName(classPathProGen + functionName).newInstance();</span>
 <span class="fc" id="L178">      } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {</span>
-<span class="fc" id="L179">        throw new FunctionNotFoundException(functionName);</span>
+<span class="fc" id="L179">        throw new FunctionNotFoundException(functionName, e1);</span>
 <span class="nc" id="L180">      }</span>
 <span class="fc" id="L181">    }</span>
 <span class="fc" id="L182">    return function;</span>

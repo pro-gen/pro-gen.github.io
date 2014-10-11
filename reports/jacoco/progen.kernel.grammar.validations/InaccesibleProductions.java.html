@@ -60,10 +60,10 @@ import progen.kernel.grammar.Production;
 <span class="fc" id="L60">    return checkedOk;</span>
   }
 
-  private boolean isGeneretatedBy(Production p, List&lt;Production&gt; productionsChecked) {
+  private boolean isGeneretatedBy(Production production, List&lt;Production&gt; productionsChecked) {
 <span class="nc" id="L64">    boolean isGenerated = false;</span>
 <span class="nc bnc" id="L65" title="All 2 branches missed.">    for (Production checked : productionsChecked) {</span>
-<span class="nc" id="L66">      isGenerated |= checked.isSymbolGenerated(p.getLeft());</span>
+<span class="nc" id="L66">      isGenerated |= checked.isSymbolGenerated(production.getLeft());</span>
 <span class="nc" id="L67">    }</span>
 <span class="nc" id="L68">    return isGenerated;</span>
   }

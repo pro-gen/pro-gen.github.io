@@ -62,33 +62,29 @@ public final class OutputStore {
 
 <span class="nc" id="L63">        outputers.add(output);</span>
       }
-<span class="nc" id="L65">    } catch (InstantiationException e) {</span>
-<span class="nc" id="L66">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L67">    } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L68">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L69">    } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L70">      throw new UnknowOutputerException(e.getMessage());</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L65">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
+<span class="nc" id="L66">      throw new UnknowOutputerException(e.getMessage(), e);</span>
+<span class="nc" id="L67">    }</span>
 
-<span class="nc" id="L73">  }</span>
+<span class="nc" id="L69">  }</span>
 
   /**
    * Ejecuta el método correspondiente de todas las salidas disponibles.
    */
   public void print() {
-<span class="nc bnc" id="L79" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
-<span class="nc" id="L80">      out.print();</span>
-<span class="nc" id="L81">    }</span>
-<span class="nc" id="L82">  }</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
+<span class="nc" id="L76">      out.print();</span>
+<span class="nc" id="L77">    }</span>
+<span class="nc" id="L78">  }</span>
 
   /**
    * Ejecuta el método correspondiente de cierre en todas las salidas
    * disponibles.
    */
   public void close() {
-<span class="nc bnc" id="L89" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
-<span class="nc" id="L90">      out.close();</span>
-<span class="nc" id="L91">    }</span>
-<span class="nc" id="L92">  }</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">    for (Outputer out : outputers) {</span>
+<span class="nc" id="L86">      out.close();</span>
+<span class="nc" id="L87">    }</span>
+<span class="nc" id="L88">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

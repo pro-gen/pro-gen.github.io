@@ -27,28 +27,28 @@ public final class Info {
    * Muetra por pantalla un aviso, al que es necesario proporcionarle el código
    * de información y el mensaje personalizado.
    * 
-   * @param id
+   * @param idInfo
    *          Identificador de la información
    * @param msg
    *          Mensaje personalizado
    */
-  public static void show(int id, String msg) {
-<span class="nc" id="L36">    System.out.println(get(id) + &quot; [&quot; + msg + &quot;]&quot;);</span>
+  public static void show(int idInfo, String msg) {
+<span class="nc" id="L36">    System.out.println(get(idInfo) + &quot; [&quot; + msg + &quot;]&quot;);</span>
 <span class="nc" id="L37">  }</span>
 
   /**
    * Muetra por pantalla un aviso, al que es necesario proporcionarle el código
    * de información.
    * 
-   * @param id
+   * @param idInfo
    *          Identificador de la información.
    */
-  public static void show(int id) {
-<span class="nc" id="L47">    System.out.println(get(id));</span>
+  public static void show(int idInfo) {
+<span class="nc" id="L47">    System.out.println(get(idInfo));</span>
 <span class="nc" id="L48">  }</span>
 
-  public static String get(int id) {
-<span class="nc" id="L51">    return literals.getString(INFO_LITERAL + id);</span>
+  public static String get(int idInfo) {
+<span class="nc" id="L51">    return literals.getString(INFO_LITERAL + idInfo);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

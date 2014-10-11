@@ -85,7 +85,7 @@ public class DispatcherServer extends UnicastRemoteObject implements DispatcherR
 <span class="nc" id="L85">      registry.unbind(DispatcherDistributed.DISPATCHER_NAME);</span>
 <span class="nc" id="L86">      UnicastRemoteObject.unexportObject(registry, true);</span>
 <span class="nc" id="L87">    } catch (AccessException e) {</span>
-<span class="nc" id="L88">      throw new ProGenDistributedException(e.getMessage());</span>
+<span class="nc" id="L88">      throw new ProGenDistributedException(e.getMessage(),e);</span>
 <span class="nc" id="L89">    } catch (RemoteException e) {</span>
 <span class="nc" id="L90">      e.printStackTrace();</span>
 <span class="nc" id="L91">    } catch (NotBoundException e) {</span>
@@ -112,7 +112,7 @@ public class DispatcherServer extends UnicastRemoteObject implements DispatcherR
       }
 
 <span class="nc" id="L114">    } catch (RemoteException | AlreadyBoundException e) {</span>
-<span class="nc" id="L115">      throw new ProGenDistributedException(e.getLocalizedMessage());</span>
+<span class="nc" id="L115">      throw new ProGenDistributedException(e.getLocalizedMessage(), e);</span>
 <span class="nc" id="L116">    }</span>
 
 <span class="nc" id="L118">  }</span>
