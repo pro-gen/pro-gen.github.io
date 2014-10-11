@@ -20,8 +20,16 @@ public class MalformedParameterException extends RuntimeException {
    * @param message
    */
   public MalformedParameterException(String message) {
-<span class="fc" id="L23">    super(Error.get(ID_ERROR).trim() + &quot; (&quot; + message + &quot;)&quot;);</span>
+<span class="fc" id="L23">    super(getMessage(message));</span>
 <span class="fc" id="L24">  }</span>
+  
+  public MalformedParameterException(String message, Exception originalException) {
+<span class="fc" id="L27">    super(getMessage(message), originalException);</span>
+<span class="fc" id="L28">  }</span>
+
+  private static String getMessage(String message) {
+<span class="fc" id="L31">    return Error.get(ID_ERROR).trim() + &quot; (&quot; + message + &quot;)&quot;;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -131,8 +131,8 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
 <span class="fc" id="L131">    return symbol.hashCode();</span>
   }
 
-  public int compareTo(Function f) {
-<span class="fc" id="L135">    return symbol.compareTo(f.getSymbol());</span>
+  public int compareTo(Function function) {
+<span class="fc" id="L135">    return symbol.compareTo(function.getSymbol());</span>
   }
 
   /**
@@ -156,10 +156,10 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
 <span class="fc" id="L156">    final String classPathProGen = &quot;progen.kernel.functions.&quot;;</span>
 <span class="fc" id="L157">    final String classPathUser = ProGenContext.getOptionalProperty(&quot;progen.user.home&quot;, classPathProGen);</span>
 
-<span class="fc bfc" id="L159" title="All 2 branches covered.">    if (!functionName.startsWith(&quot;ADF&quot;)) {</span>
-<span class="fc" id="L160">      function = loadReagularFunction(functionName, classPathProGen, classPathUser);</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">    if (functionName.startsWith(&quot;ADF&quot;)) {</span>
+<span class="fc" id="L160">      function = loadFunctionADF(functionName);</span>
     } else {
-<span class="fc" id="L162">      function = loadFunctionADF(functionName);</span>
+<span class="fc" id="L162">      function = loadReagularFunction(functionName, classPathProGen, classPathUser);</span>
     }
 <span class="fc" id="L164">    return function;</span>
   }
@@ -193,13 +193,13 @@ public abstract class Function implements Comparable&lt;Function&gt;, Serializab
    */
   public boolean isCompatibleWith(Function function) {
 <span class="fc" id="L195">    boolean isCompatible = true;</span>
-    // si las aridades son distintas, no pueden ser compatibles
-<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (this.arity != function.arity) {</span>
-<span class="fc" id="L198">      isCompatible = false;</span>
-    } else {
-<span class="fc bfc" id="L200" title="All 2 branches covered.">      for (int i = 0; i &lt; arity; i++) {</span>
-<span class="fc" id="L201">        isCompatible &amp;= argsType[i].equals(function.argsType[i]);</span>
+    // si las aridades no son distintas, no pueden ser compatibles
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (this.arity == function.arity) {</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">      for (int i = 0; i &lt; arity; i++) {</span>
+<span class="fc" id="L199">        isCompatible &amp;= argsType[i].equals(function.argsType[i]);</span>
       }
+    } else {
+<span class="fc" id="L202">      isCompatible = false;</span>
     }
 
     // comprobacion del valor de retorno

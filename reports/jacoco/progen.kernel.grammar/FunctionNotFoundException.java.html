@@ -23,8 +23,16 @@ public class FunctionNotFoundException extends RuntimeException {
    *          El mensaje de error concreto de la excepción.
    */
   public FunctionNotFoundException(String message) {
-<span class="fc" id="L26">    super(Error.get(ID_ERROR) + &quot; [&quot; + message + &quot;]&quot;);</span>
+<span class="fc" id="L26">    super(getMessage(message));</span>
 <span class="fc" id="L27">  }</span>
+  
+  public FunctionNotFoundException(String message, Exception originalException){
+<span class="nc" id="L30">    super(getMessage(message), originalException);</span>
+<span class="nc" id="L31">  }</span>
+
+  private static String getMessage(String message) {
+<span class="fc" id="L34">    return Error.get(ID_ERROR) + &quot; [&quot; + message + &quot;]&quot;;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

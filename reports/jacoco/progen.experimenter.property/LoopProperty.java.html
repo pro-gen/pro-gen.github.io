@@ -72,9 +72,9 @@ public class LoopProperty implements Property {
 <span class="fc" id="L72">      condition = LoopCondition.makeInstance(this.start, this.end, this.increment);</span>
 <span class="fc" id="L73">    } catch (NumberFormatException e) {</span>
 <span class="fc" id="L74">      final String msg = Error.get(ID_ERROR) + SPACE_SYMBOL + label + SPACE_SYMBOL + e.getLocalizedMessage();</span>
-<span class="fc" id="L75">      throw new IllegalArgumentException(msg);</span>
+<span class="fc" id="L75">      throw new IllegalArgumentException(msg, e);</span>
 <span class="nc" id="L76">    } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L77">      throw new IllegalArgumentException(label + &quot;: &quot; + e.getMessage());</span>
+<span class="nc" id="L77">      throw new IllegalArgumentException(label + &quot;: &quot; + e.getMessage(), e);</span>
 <span class="fc" id="L78">    }</span>
 <span class="fc" id="L79">  }</span>
 
@@ -85,9 +85,9 @@ public class LoopProperty implements Property {
 
   @Override
   public String getValue() {
-<span class="fc" id="L88">    String value = current + &quot;&quot;;</span>
+<span class="fc" id="L88">    String value = String.valueOf(current);</span>
 <span class="fc bfc" id="L89" title="All 2 branches covered.">    if (isPercent) {</span>
-<span class="fc" id="L90">      value = (current * HUNDRED_PERCENT) + &quot;&quot;;</span>
+<span class="fc" id="L90">      value = String.valueOf(current * HUNDRED_PERCENT);</span>
 <span class="fc" id="L91">      value += PERCENT_SYMBOL;</span>
     }
 <span class="fc" id="L93">    return value;</span>

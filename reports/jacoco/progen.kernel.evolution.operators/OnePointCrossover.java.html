@@ -43,10 +43,10 @@ import progen.kernel.tree.Tree;
 <span class="fc" id="L43">    comunA.remove(treeA.getRoot());</span>
 <span class="fc" id="L44">    comunB.remove(treeB.getRoot());</span>
 
-<span class="pc bpc" id="L46" title="3 of 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
-<span class="nc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
-<span class="nc" id="L48">      nodes.add(comunA.get(randomNode));</span>
-<span class="nc" id="L49">      nodes.add(comunB.get(randomNode));</span>
+<span class="pc bpc" id="L46" title="1 of 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
+<span class="fc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
+<span class="fc" id="L48">      nodes.add(comunA.get(randomNode));</span>
+<span class="fc" id="L49">      nodes.add(comunB.get(randomNode));</span>
     }
 <span class="fc" id="L51">    return nodes;</span>
   }

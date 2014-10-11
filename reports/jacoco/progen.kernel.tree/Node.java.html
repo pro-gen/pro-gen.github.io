@@ -238,14 +238,14 @@ public class Node implements Cloneable, Serializable {
    * Actualiza el número total de nodos que cuelgan de un nodo y de los nodos
    * que están por encima de él hasta llegar a la raíz.
    * 
-   * @param n
+   * @param totalNodes
    *          El número de nodos a actualizar.
    */
-  public void addTotalNodes(int n) {
+  public void addTotalNodes(int totalNodes) {
 <span class="fc bfc" id="L245" title="All 2 branches covered.">    if (parent != null) {</span>
-<span class="fc" id="L246">      parent.addTotalNodes(n);</span>
+<span class="fc" id="L246">      parent.addTotalNodes(totalNodes);</span>
     }
-<span class="fc" id="L248">    this.totalNodes += n;</span>
+<span class="fc" id="L248">    this.totalNodes += totalNodes;</span>
 <span class="fc" id="L249">  }</span>
 
   /**
@@ -288,9 +288,9 @@ public class Node implements Cloneable, Serializable {
 <span class="fc bfc" id="L288" title="All 2 branches covered.">    if (isLeaf()) {</span>
 <span class="fc" id="L289">      node.append(function);</span>
     } else {
-<span class="fc" id="L291">      node.append(&quot;(&quot; + function);</span>
+<span class="fc" id="L291">      node.append(&quot;(&quot;).append(function);</span>
 <span class="fc bfc" id="L292" title="All 2 branches covered.">      for (int i = 0; i &lt; branches.size(); i++) {</span>
-<span class="fc" id="L293">        node.append(&quot; &quot; + branches.get(i).toString());</span>
+<span class="fc" id="L293">        node.append(&quot; &quot;).append(branches.get(i).toString());</span>
       }
 <span class="fc" id="L295">      node.append(&quot; )&quot;);</span>
     }

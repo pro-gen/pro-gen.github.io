@@ -74,9 +74,9 @@ public final class ProGenContext {
       try {
 <span class="fc" id="L75">        execMakeInstance(file);</span>
 <span class="fc" id="L76">      } catch (NullPointerException e) {</span>
-<span class="fc" id="L77">        throw new MissingContextFileException(e.getMessage());</span>
+<span class="fc" id="L77">        throw new MissingContextFileException(e.getMessage(), e);</span>
 <span class="nc" id="L78">      } catch (IOException e) {</span>
-<span class="nc" id="L79">        throw new MissingContextFileException(e.getMessage());</span>
+<span class="nc" id="L79">        throw new MissingContextFileException(e.getMessage(), e);</span>
 <span class="fc" id="L80">      }</span>
     }
 <span class="fc" id="L82">    return proGenProps;</span>
@@ -411,7 +411,7 @@ public final class ProGenContext {
 <span class="fc" id="L411">        parameters.put(parameterKey, parameterValue);</span>
       }
 <span class="fc" id="L413">    } catch (ArrayIndexOutOfBoundsException e) {</span>
-<span class="fc" id="L414">      throw new MalformedParameterException(option + COMA_SYMBOL + parameterKey);</span>
+<span class="fc" id="L414">      throw new MalformedParameterException(option + COMA_SYMBOL + parameterKey, e);</span>
 <span class="fc" id="L415">    }</span>
 <span class="fc" id="L416">    return parameters;</span>
   }
@@ -421,9 +421,9 @@ public final class ProGenContext {
 <span class="fc" id="L421">      proGenProps.calculateProperties();</span>
 <span class="fc" id="L422">      proGenProps.loadOtherProperties();</span>
 <span class="nc" id="L423">    } catch (FileNotFoundException fnfe) {</span>
-<span class="nc" id="L424">      throw new MissingContextFileException(fnfe.getMessage());</span>
+<span class="nc" id="L424">      throw new MissingContextFileException(fnfe.getMessage(), fnfe);</span>
 <span class="nc" id="L425">    } catch (IOException ioe) {</span>
-<span class="nc" id="L426">      throw new MissingContextFileException(ioe.getMessage());</span>
+<span class="nc" id="L426">      throw new MissingContextFileException(ioe.getMessage(), ioe);</span>
 <span class="fc" id="L427">    }</span>
 
 <span class="fc" id="L429">  }</span>

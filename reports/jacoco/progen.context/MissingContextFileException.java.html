@@ -22,14 +22,22 @@ public class MissingContextFileException extends RuntimeException {
    *          El nombre del fichero que se intentó leer.
    */
   public MissingContextFileException(String message) {
-<span class="fc" id="L25">    super(Error.get(ID_ERROR).trim() + &quot;(&quot; + message + &quot;)&quot;);</span>
+<span class="fc" id="L25">    super(getMessage(message));</span>
 <span class="fc" id="L26">  }</span>
+
+  private static String getMessage(String message) {
+<span class="fc" id="L29">    return Error.get(ID_ERROR).trim() + &quot;(&quot; + message + &quot;)&quot;;</span>
+  }
 
   /**
    * Constructor genérico de la excepción.
    */
   public MissingContextFileException() {
-<span class="fc" id="L32">    super(Error.get(ID_ERROR).trim());</span>
-<span class="fc" id="L33">  }</span>
+<span class="fc" id="L36">    super(Error.get(ID_ERROR).trim());</span>
+<span class="fc" id="L37">  }</span>
+  
+  public MissingContextFileException(String message, Exception originalException){
+<span class="fc" id="L40">    super(getMessage(message), originalException);</span>
+<span class="fc" id="L41">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

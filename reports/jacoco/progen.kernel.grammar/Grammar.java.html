@@ -249,11 +249,11 @@ public class Grammar implements Serializable {
 <span class="fc" id="L249">      args = getGrammarNonTerminalSymbol(function.getArgsType());</span>
 <span class="fc" id="L250">      right = new GrammarTerminalSymbol(function);</span>
 <span class="fc" id="L251">      production = new Production(left, right, args);</span>
-<span class="pc bpc" id="L252" title="1 of 2 branches missed.">      if (!productions.contains(production)) {</span>
-<span class="fc" id="L253">        productions.add(production);</span>
-<span class="fc" id="L254">        grammarTerminalSymbols.add(right);</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">      if (productions.contains(production)) {</span>
+<span class="nc" id="L253">        loadedOK = false;</span>
       } else {
-<span class="nc" id="L256">        loadedOK = false;</span>
+<span class="fc" id="L255">        productions.add(production);</span>
+<span class="fc" id="L256">        grammarTerminalSymbols.add(right);</span>
       }
 
     }
@@ -290,20 +290,18 @@ public class Grammar implements Serializable {
 <span class="fc" id="L290">    boolean find = false;</span>
 <span class="fc" id="L291">    GrammarNonTerminalSymbol symbol = null;</span>
 <span class="fc bfc" id="L292" title="All 2 branches covered.">    for (GrammarNonTerminalSymbol symbolTemp : grammarNonTerminalSymbols) {</span>
-<span class="pc bpc" id="L293" title="1 of 2 branches missed.">      if (!find) {</span>
-<span class="pc bpc" id="L294" title="1 of 2 branches missed.">        if (symbolTemp.getValue().compareTo((String) returnValue) == 0) {</span>
-<span class="fc" id="L295">          find = true;</span>
-<span class="fc" id="L296">          symbol = symbolTemp;</span>
-        }
+<span class="pc bpc" id="L293" title="2 of 4 branches missed.">      if (!find &amp;&amp; symbolTemp.getValue().compareTo((String) returnValue) == 0) {</span>
+<span class="fc" id="L294">        find = true;</span>
+<span class="fc" id="L295">        symbol = symbolTemp;</span>
       }
-<span class="fc" id="L299">    }</span>
+<span class="fc" id="L297">    }</span>
 
-<span class="pc bpc" id="L301" title="1 of 2 branches missed.">    if (!find) {</span>
-<span class="nc" id="L302">      symbol = new GrammarNonTerminalSymbol(&quot;R&quot; + (grammarNonTerminalSymbols.size() - 1), (String) returnValue);</span>
-<span class="nc" id="L303">      grammarNonTerminalSymbols.add(symbol);</span>
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">    if (!find) {</span>
+<span class="nc" id="L300">      symbol = new GrammarNonTerminalSymbol(&quot;R&quot; + (grammarNonTerminalSymbols.size() - 1), (String) returnValue);</span>
+<span class="nc" id="L301">      grammarNonTerminalSymbols.add(symbol);</span>
     }
 
-<span class="fc" id="L306">    return symbol;</span>
+<span class="fc" id="L304">    return symbol;</span>
   }
 
   /**
@@ -318,11 +316,11 @@ public class Grammar implements Serializable {
    */
   private GrammarNonTerminalSymbol[] getGrammarNonTerminalSymbol(Object[] returnValue) {
     GrammarNonTerminalSymbol[] symbols;
-<span class="fc" id="L321">    symbols = new GrammarNonTerminalSymbol[returnValue.length];</span>
-<span class="fc bfc" id="L322" title="All 2 branches covered.">    for (int i = 0; i &lt; returnValue.length; i++) {</span>
-<span class="fc" id="L323">      symbols[i] = getGrammarNonTerminalSymbol(returnValue[i]);</span>
+<span class="fc" id="L319">    symbols = new GrammarNonTerminalSymbol[returnValue.length];</span>
+<span class="fc bfc" id="L320" title="All 2 branches covered.">    for (int i = 0; i &lt; returnValue.length; i++) {</span>
+<span class="fc" id="L321">      symbols[i] = getGrammarNonTerminalSymbol(returnValue[i]);</span>
     }
-<span class="fc" id="L325">    return symbols;</span>
+<span class="fc" id="L323">    return symbols;</span>
   }
 
   /**
@@ -337,19 +335,19 @@ public class Grammar implements Serializable {
     GrammarTerminalSymbol right;
     Function function;
     Production production;
-<span class="nc" id="L340">    final String[] args = ProGenContext.getMandatoryProperty(PROGEN_PROPERTY + idADF + &quot;.interface&quot;).split(&quot;\\$\\$&quot;);</span>
+<span class="nc" id="L338">    final String[] args = ProGenContext.getMandatoryProperty(PROGEN_PROPERTY + idADF + &quot;.interface&quot;).split(&quot;\\$\\$&quot;);</span>
 
-<span class="nc bnc" id="L342" title="All 2 branches missed.">    for (int i = 1; i &lt; args.length; i++) {</span>
-<span class="nc" id="L343">      function = new ARG(idADF, args[i], i - 1);</span>
-<span class="nc" id="L344">      left = getGrammarNonTerminalSymbol(function.getReturnType());</span>
-<span class="nc" id="L345">      right = new GrammarTerminalSymbol(function);</span>
-<span class="nc" id="L346">      production = new Production(left, right, getGrammarNonTerminalSymbol(function.getArgsType()));</span>
-<span class="nc bnc" id="L347" title="All 2 branches missed.">      if (!productions.contains(production)) {</span>
-<span class="nc" id="L348">        productions.add(production);</span>
-<span class="nc" id="L349">        grammarTerminalSymbols.add(right);</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">    for (int i = 1; i &lt; args.length; i++) {</span>
+<span class="nc" id="L341">      function = new ARG(idADF, args[i], i - 1);</span>
+<span class="nc" id="L342">      left = getGrammarNonTerminalSymbol(function.getReturnType());</span>
+<span class="nc" id="L343">      right = new GrammarTerminalSymbol(function);</span>
+<span class="nc" id="L344">      production = new Production(left, right, getGrammarNonTerminalSymbol(function.getArgsType()));</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">      if (!productions.contains(production)) {</span>
+<span class="nc" id="L346">        productions.add(production);</span>
+<span class="nc" id="L347">        grammarTerminalSymbols.add(right);</span>
       }
     }
-<span class="nc" id="L352">  }</span>
+<span class="nc" id="L350">  }</span>
 
   /**
    * Método estático que creará las instancias de la gramática que vendrá
@@ -360,18 +358,18 @@ public class Grammar implements Serializable {
    * @return gramática que generará el árbolo solicitado.
    */
   public static Grammar makeInstance(String idTree) {
-<span class="fc" id="L363">    Grammar grammar = null;</span>
-<span class="pc bpc" id="L364" title="1 of 2 branches missed.">    if (&quot;on&quot;.equals(ProGenContext.getOptionalProperty(&quot;progen.hgp&quot;, &quot;off&quot;))) {</span>
-<span class="nc" id="L365">      grammar = new HGPGrammar(idTree);</span>
+<span class="fc" id="L361">    Grammar grammar = null;</span>
+<span class="pc bpc" id="L362" title="1 of 2 branches missed.">    if (&quot;on&quot;.equals(ProGenContext.getOptionalProperty(&quot;progen.hgp&quot;, &quot;off&quot;))) {</span>
+<span class="nc" id="L363">      grammar = new HGPGrammar(idTree);</span>
     } else {
-<span class="fc" id="L367">      grammar = new Grammar(idTree);</span>
+<span class="fc" id="L365">      grammar = new Grammar(idTree);</span>
       try {
-<span class="fc" id="L369">        grammar.validate();</span>
-<span class="nc" id="L370">      } catch (GrammarNotValidException e) {</span>
-<span class="nc" id="L371">        throw new ProGenException(e.getMessage());</span>
-<span class="fc" id="L372">      }</span>
+<span class="fc" id="L367">        grammar.validate();</span>
+<span class="nc" id="L368">      } catch (GrammarNotValidException e) {</span>
+<span class="nc" id="L369">        throw new ProGenException(e.getMessage(), e);</span>
+<span class="fc" id="L370">      }</span>
     }
-<span class="fc" id="L374">    return grammar;</span>
+<span class="fc" id="L372">    return grammar;</span>
   }
 
 }
