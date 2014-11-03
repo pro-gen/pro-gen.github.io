@@ -26,8 +26,8 @@ public class ProGenDistributedException extends RuntimeException {
 <span class="nc" id="L26">    super(getMessage(ID_ERROR, msg), originalException);</span>
 <span class="nc" id="L27">  }</span>
 
-  public ProGenDistributedException(int id, String msg) {
-<span class="fc" id="L30">    super(getMessage(id, msg));</span>
+  public ProGenDistributedException(int idException, String msg) {
+<span class="fc" id="L30">    super(getMessage(idException, msg));</span>
 <span class="fc" id="L31">  }</span>
 
   private static String getMessage(int idError, String msg) {

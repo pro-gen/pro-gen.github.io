@@ -34,34 +34,34 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
   public List&lt;Individual&gt; evolve(Population population) {
 <span class="fc" id="L35">    final List&lt;Individual&gt; individuals = getSelector().select(population, 2);</span>
 <span class="fc" id="L36">    final List&lt;Individual&gt; individualsCrossover = new ArrayList&lt;Individual&gt;();</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">    if (individuals.size() != 2) {</span>
-<span class="nc" id="L38">      throw new SelectorSizeIncorrectValueException(2, individuals.size());</span>
-    } else {
-<span class="fc" id="L40">      final Individual mother = individuals.get(0);</span>
-<span class="fc" id="L41">      final Individual father = individuals.get(1);</span>
-<span class="fc" id="L42">      final Object[] treesSet = (Object[]) mother.getTrees().keySet().toArray();</span>
-<span class="fc" id="L43">      final String key = (String) treesSet[(int) (Math.random() * treesSet.length)];</span>
-<span class="fc" id="L44">      final Tree treeA = mother.getTrees().get(key);</span>
-<span class="fc" id="L45">      final Tree treeB = father.getTrees().get(key);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">    if (individuals.size() == 2) {</span>
+<span class="fc" id="L38">      final Individual mother = individuals.get(0);</span>
+<span class="fc" id="L39">      final Individual father = individuals.get(1);</span>
+<span class="fc" id="L40">      final Object[] treesSet = (Object[]) mother.getTrees().keySet().toArray();</span>
+<span class="fc" id="L41">      final String key = (String) treesSet[(int) (Math.random() * treesSet.length)];</span>
+<span class="fc" id="L42">      final Tree treeA = mother.getTrees().get(key);</span>
+<span class="fc" id="L43">      final Tree treeB = father.getTrees().get(key);</span>
 
       // A ver que te parece así:
-<span class="fc" id="L48">      boolean validCross = false;</span>
-<span class="fc" id="L49">      int tries = 0;</span>
-<span class="fc" id="L50">      boolean giveUp = false;</span>
-<span class="fc bfc" id="L51" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
-<span class="fc" id="L53">          validCross = checkTrees(treeA, treeB);</span>
+<span class="fc" id="L46">      boolean validCross = false;</span>
+<span class="fc" id="L47">      int tries = 0;</span>
+<span class="fc" id="L48">      boolean giveUp = false;</span>
+<span class="fc bfc" id="L49" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
+<span class="fc" id="L51">          validCross = checkTrees(treeA, treeB);</span>
         }
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
-<span class="fc" id="L56">          giveUp = true;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
+<span class="fc" id="L54">          giveUp = true;</span>
         }
       }
 
-<span class="fc bfc" id="L60" title="All 2 branches covered.">      if (validCross) {</span>
-<span class="fc" id="L61">        individualsCrossover.add(mother);</span>
-<span class="fc" id="L62">        individualsCrossover.add(father);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">      if (validCross) {</span>
+<span class="fc" id="L59">        individualsCrossover.add(mother);</span>
+<span class="fc" id="L60">        individualsCrossover.add(father);</span>
       }
 
+<span class="fc" id="L63">    }else{</span>
+<span class="nc" id="L64">      throw new SelectorSizeIncorrectValueException(2, individuals.size());</span>
     }
 <span class="fc" id="L66">    return individualsCrossover;</span>
   }
