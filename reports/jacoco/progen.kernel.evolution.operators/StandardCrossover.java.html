@@ -46,18 +46,18 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 <span class="fc" id="L46">      boolean validCross = false;</span>
 <span class="fc" id="L47">      int tries = 0;</span>
 <span class="fc" id="L48">      boolean giveUp = false;</span>
-<span class="fc bfc" id="L49" title="All 4 branches covered.">      while (!validCross &amp;&amp; !giveUp) {</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (crossTree(treeA, treeB)) {</span>
-<span class="fc" id="L51">          validCross = checkTrees(treeA, treeB);</span>
+<span class="pc bpc" id="L49" title="1 of 4 branches missed.">      while (!validCross &amp;&amp; !giveUp) {</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if (crossTree(treeA, treeB)) {</span>
+<span class="nc" id="L51">          validCross = checkTrees(treeA, treeB);</span>
         }
 <span class="fc bfc" id="L53" title="All 2 branches covered.">        if (++tries &gt; 50) {</span>
 <span class="fc" id="L54">          giveUp = true;</span>
         }
       }
 
-<span class="fc bfc" id="L58" title="All 2 branches covered.">      if (validCross) {</span>
-<span class="fc" id="L59">        individualsCrossover.add(mother);</span>
-<span class="fc" id="L60">        individualsCrossover.add(father);</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">      if (validCross) {</span>
+<span class="nc" id="L59">        individualsCrossover.add(mother);</span>
+<span class="nc" id="L60">        individualsCrossover.add(father);</span>
       }
 
 <span class="fc" id="L63">    }else{</span>
@@ -88,23 +88,23 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 <span class="fc" id="L88">    boolean treesCrossed = false;</span>
 
 <span class="fc" id="L90">    crossNodes = selectNodes(treeA, treeB);</span>
-<span class="fc bfc" id="L91" title="All 2 branches covered.">    if (crossNodes.size() &gt; 0) {</span>
-<span class="fc" id="L92">      crossNode1 = crossNodes.get(0);</span>
-<span class="fc" id="L93">      crossNode2 = crossNodes.get(1);</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    if (crossNodes.size() &gt; 0) {</span>
+<span class="nc" id="L92">      crossNode1 = crossNodes.get(0);</span>
+<span class="nc" id="L93">      crossNode2 = crossNodes.get(1);</span>
       // guardamos los padres de los nodos de corte
-<span class="fc" id="L95">      parent1 = crossNode1.getParent();</span>
-<span class="fc" id="L96">      parent2 = crossNode2.getParent();</span>
+<span class="nc" id="L95">      parent1 = crossNode1.getParent();</span>
+<span class="nc" id="L96">      parent2 = crossNode2.getParent();</span>
 
       // guardamos la rama en la que estaban los nodos de corte
-<span class="fc" id="L99">      branchPos1 = getBranch(crossNode1);</span>
-<span class="fc" id="L100">      branchPos2 = getBranch(crossNode2);</span>
+<span class="nc" id="L99">      branchPos1 = getBranch(crossNode1);</span>
+<span class="nc" id="L100">      branchPos2 = getBranch(crossNode2);</span>
       // se separan los nodos seleccionados del arbol del que formaban parte
-<span class="fc" id="L102">      crossNode1 = crossNode1.branch();</span>
-<span class="fc" id="L103">      crossNode2 = crossNode2.branch();</span>
+<span class="nc" id="L102">      crossNode1 = crossNode1.branch();</span>
+<span class="nc" id="L103">      crossNode2 = crossNode2.branch();</span>
       // se asigna a cada padre, el nodo seleccionado del arbol opuesto
-<span class="fc" id="L105">      parent1.setBranch(crossNode2, branchPos1);</span>
-<span class="fc" id="L106">      parent2.setBranch(crossNode1, branchPos2);</span>
-<span class="fc" id="L107">      treesCrossed = true;</span>
+<span class="nc" id="L105">      parent1.setBranch(crossNode2, branchPos1);</span>
+<span class="nc" id="L106">      parent2.setBranch(crossNode1, branchPos2);</span>
+<span class="nc" id="L107">      treesCrossed = true;</span>
     }
 <span class="fc" id="L109">    return treesCrossed;</span>
   }
@@ -119,13 +119,13 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
    * @return La posición entre los distintos nodos hermano.
    */
   private int getBranch(Node node) {
-<span class="fc" id="L122">    int branchPos = 0;</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">    for (int i = 0; i &lt; node.getParent().getBranches().size(); i++) {</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">      if (node.getParent().getBranches().get(i) == node) {</span>
-<span class="fc" id="L125">        branchPos = i;</span>
+<span class="nc" id="L122">    int branchPos = 0;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">    for (int i = 0; i &lt; node.getParent().getBranches().size(); i++) {</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">      if (node.getParent().getBranches().get(i) == node) {</span>
+<span class="nc" id="L125">        branchPos = i;</span>
       }
     }
-<span class="fc" id="L128">    return branchPos;</span>
+<span class="nc" id="L128">    return branchPos;</span>
   }
 
   /**
@@ -169,12 +169,12 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
   @SuppressFBWarnings(value = &quot;NS_DANGEROUS_NON_SHORT_CIRCUIT&quot;, justification = &quot;It's mandatory to evaluate both trees&quot;)
   private boolean checkTrees(Tree treeA, Tree treeB) {
-<span class="fc" id="L172">    return checkTreeSize(treeA) &amp; checkTreeSize(treeB);</span>
+<span class="nc" id="L172">    return checkTreeSize(treeA) &amp; checkTreeSize(treeB);</span>
   }
 
   private boolean checkTreeSize(Tree tree) {
-<span class="fc" id="L176">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
-<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    return tree.getRoot().getTotalNodes() &lt;= maxNodes;</span>
+<span class="nc" id="L176">    final int maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes&quot;, Integer.MAX_VALUE);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">    return tree.getRoot().getTotalNodes() &lt;= maxNodes;</span>
   }
 
 }
