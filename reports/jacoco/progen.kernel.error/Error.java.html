@@ -61,7 +61,7 @@ public final class Error {
 <span class="fc" id="L61">        final Locale locale = new Locale(defaultLanguage);</span>
 <span class="fc" id="L62">        Locale.setDefault(locale);</span>
 <span class="fc" id="L63">        error.literals = ResourceBundle.getBundle(PROGEN_KERNEL_ERROR_STRINGS_BUNDLE, locale);</span>
-<span class="fc" id="L64">      } catch (UninitializedContextException e) {</span>
+<span class="nc" id="L64">      } catch (UninitializedContextException e) {</span>
         // do nothing, because the error has a default language
 <span class="fc" id="L66">      }</span>
     }
