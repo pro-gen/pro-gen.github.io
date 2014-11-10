@@ -28,8 +28,8 @@ public class UnknownUserProgramException extends RuntimeException {
 <span class="fc" id="L28">  }</span>
   
   public UnknownUserProgramException(String msg, Exception originalException) {
-<span class="nc" id="L31">    super(getMessage(msg), originalException);</span>
-<span class="nc" id="L32">  }</span>
+<span class="fc" id="L31">    super(getMessage(msg), originalException);</span>
+<span class="fc" id="L32">  }</span>
 
   private static String getMessage(String msg) {
 <span class="fc" id="L35">    return Error.get(ID_ERROR) + &quot; (&quot; + msg + &quot;)&quot;;</span>

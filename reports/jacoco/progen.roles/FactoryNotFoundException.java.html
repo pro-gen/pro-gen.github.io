@@ -29,8 +29,8 @@ public class FactoryNotFoundException extends RuntimeException {
 <span class="fc" id="L29">    super(getMessage(msg));</span>
 <span class="fc" id="L30">  }</span>
   public FactoryNotFoundException(String msg, Exception originalException) {
-<span class="nc" id="L32">    super(getMessage(msg), originalException);</span>
-<span class="nc" id="L33">  }</span>
+<span class="fc" id="L32">    super(getMessage(msg), originalException);</span>
+<span class="fc" id="L33">  }</span>
   private static String getMessage(String msg) {
 <span class="fc" id="L35">    return Error.get(ID_ERROR) + &quot; [&quot; + msg + &quot;]&quot;;</span>
   }
