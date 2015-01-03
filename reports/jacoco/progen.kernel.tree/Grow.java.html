@@ -101,48 +101,52 @@ public class Grow implements InitializeTreeMethod {
    */
   private boolean generate(Grammar grammar, Node node, List&lt;Production&gt; stack) {
 <span class="fc" id="L103">    boolean generated = false;</span>
-    List&lt;Production&gt; branchStack;
-    Node branch;
 
-<span class="fc bfc" id="L107" title="All 2 branches covered.">    if (node.getDepth() &gt; maxDepth) {</span>
-<span class="fc" id="L108">      generated = false;</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">    if (node.getDepth() &gt; maxDepth) {</span>
+<span class="fc" id="L106">      generated = false;</span>
     } else {
-<span class="fc bfc" id="L110" title="All 4 branches covered.">      while (!generated &amp;&amp; stack.size() &gt; 0) {</span>
-<span class="fc" id="L111">        generated = true;</span>
-        // se define el nodo con en funcion de la produccion elegida
-<span class="fc" id="L113">        node.setProduction(stack.remove(0));</span>
-        // si el nodo es una hoja y esta a una profundidad menor
-        // es necesario limpiarlo y pasar a la siguiente producción
-        // para probar otra opción.
-<span class="fc bfc" id="L117" title="All 4 branches covered.">        if (node.isLeaf() &amp;&amp; node.getDepth() &lt; minDepth) {</span>
-<span class="fc" id="L118">          generated = false;</span>
-<span class="fc bfc" id="L119" title="All 2 branches covered.">        } else if (maxNodeExceded(node)) {</span>
-          // si se sobrepasa el número máximo de nodos, es necesario
-          // probar con
-          // otra opción.
-<span class="fc" id="L123">          generated = false;</span>
-        } else {
-          // se definen los hijos de este nodo
-<span class="fc" id="L126">          final int initialBranch = (int) (Math.random() * node.getBranches().size());</span>
-<span class="fc bfc" id="L127" title="All 4 branches covered.">          for (int i = 0; generated &amp;&amp; i &lt; node.getBranches().size(); i++) {</span>
-<span class="fc" id="L128">            branch = node.getBranches().get((i + initialBranch) % node.getBranches().size());</span>
-            // for(Node branch: node.getBranches()){
-<span class="fc" id="L130">            branchStack = grammar.getRandomProductions(branch.getSymbol());</span>
-<span class="fc" id="L131">            generated &amp;= generate(grammar, branch, branchStack);</span>
-          }
-        }
-        /*
-         * si alguno de los hijos no se pudo generar, se limpia el actual, para
-         * continuar con la siguiente producción.
-         */
-<span class="fc bfc" id="L138" title="All 2 branches covered.">        if (!generated) {</span>
-<span class="fc" id="L139">          node.clearNode();</span>
-        }
+<span class="fc bfc" id="L108" title="All 4 branches covered.">      while (!generated &amp;&amp; stack.size() &gt; 0) {</span>
+<span class="fc" id="L109">        generated = true;</span>
+<span class="fc" id="L110">        node.setProduction(stack.remove(0));</span>
+<span class="fc" id="L111">        generated = generateChildren(grammar, node);</span>
+<span class="fc" id="L112">        tryNextNode(node, generated);</span>
 
       }
     }
 
-<span class="fc" id="L145">    return generated;</span>
+<span class="fc" id="L117">    return generated;</span>
+  }
+
+  private boolean generateChildren(Grammar grammar, Node node) {
+    boolean generated;
+<span class="fc bfc" id="L122" title="All 4 branches covered.">    if (node.isLeaf() &amp;&amp; node.getDepth() &lt; minDepth) {</span>
+<span class="fc" id="L123">      generated = false;</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">    } else if (maxNodeExceded(node)) {</span>
+<span class="fc" id="L125">      generated = false;</span>
+    } else {
+<span class="fc" id="L127">      generated = generateChildrenOfNode(grammar, node);</span>
+    }
+<span class="fc" id="L129">    return generated;</span>
+  }
+
+  private void tryNextNode(Node node, boolean generated) {
+<span class="fc bfc" id="L133" title="All 2 branches covered.">    if (!generated) {</span>
+<span class="fc" id="L134">      node.clearNode();</span>
+    }
+<span class="fc" id="L136">  }</span>
+
+  private boolean generateChildrenOfNode(Grammar grammar, Node node) {
+<span class="fc" id="L139">    boolean generated = true;</span>
+    List&lt;Production&gt; branchStack;
+    Node branch;
+<span class="fc" id="L142">    final int initialBranch = (int) (Math.random() * node.getBranches().size());</span>
+<span class="fc bfc" id="L143" title="All 4 branches covered.">    for (int i = 0; generated &amp;&amp; i &lt; node.getBranches().size(); i++) {</span>
+<span class="fc" id="L144">      branch = node.getBranches().get((i + initialBranch) % node.getBranches().size());</span>
+      // for(Node branch: node.getBranches()){
+<span class="fc" id="L146">      branchStack = grammar.getRandomProductions(branch.getSymbol());</span>
+<span class="fc" id="L147">      generated &amp;= generate(grammar, branch, branchStack);</span>
+    }
+<span class="fc" id="L149">    return generated;</span>
   }
 
   /**
@@ -156,26 +160,26 @@ public class Grow implements InitializeTreeMethod {
    *         &lt;code&gt;false&lt;/code&gt; en caso contrario.
    */
   private boolean maxNodeExceded(Node node) {
-<span class="fc" id="L159">    Node iterator = node;</span>
-<span class="fc bfc" id="L160" title="All 2 branches covered.">    while (!iterator.isRoot()) {</span>
-<span class="fc" id="L161">      iterator= iterator.getParent();</span>
+<span class="fc" id="L163">    Node iterator = node;</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">    while (!iterator.isRoot()) {</span>
+<span class="fc" id="L165">      iterator= iterator.getParent();</span>
     }
-<span class="fc bfc" id="L163" title="All 2 branches covered.">    return iterator.getTotalNodes() &gt; maxNodes;</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">    return iterator.getTotalNodes() &gt; maxNodes;</span>
   }
 
   @Override
   public void updateMaximunDepth() {
-<span class="nc" id="L168">    maxDepth = ProGenContext.getOptionalProperty(&quot;progen.population.max-depth.updated&quot;, maxDepth);</span>
-<span class="nc" id="L169">  }</span>
+<span class="nc" id="L172">    maxDepth = ProGenContext.getOptionalProperty(&quot;progen.population.max-depth.updated&quot;, maxDepth);</span>
+<span class="nc" id="L173">  }</span>
 
   @Override
   public void updateMaximunNodes() {
-<span class="nc" id="L173">    maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes.updated&quot;, maxNodes);</span>
-<span class="nc" id="L174">  }</span>
+<span class="nc" id="L177">    maxNodes = ProGenContext.getOptionalProperty(&quot;progen.population.max-nodes.updated&quot;, maxNodes);</span>
+<span class="nc" id="L178">  }</span>
 
   @Override
   public void updateMinimunDepth() {
-<span class="nc" id="L178">    minDepth = ProGenContext.getOptionalProperty(&quot;progen.population.min-depth.updated&quot;, minDepth);</span>
-<span class="nc" id="L179">  }</span>
+<span class="nc" id="L182">    minDepth = ProGenContext.getOptionalProperty(&quot;progen.population.min-depth.updated&quot;, minDepth);</span>
+<span class="nc" id="L183">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

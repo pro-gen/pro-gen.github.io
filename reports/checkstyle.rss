@@ -23,12 +23,12 @@ under the License.
     <link>http://pro-gen.github.io</link>
     <description>ProGen - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2014</copyright>
+    <copyright>&#169;2015</copyright>
     <item>
       <title>File: 201,
              Errors: 0,
-             Warnings: 6,
-             Infos: 1
+             Warnings: 0,
+             Infos: 0
       </title>
             <link>http://pro-gen.github.io/checkstyle.html</link>
       <description>
@@ -192,7 +192,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -413,10 +413,10 @@ under the License.
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.evolution.operators.StandardCrossover.java">progen/kernel/evolution/operators/StandardCrossover.java</a>
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -724,7 +724,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -878,7 +878,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -934,7 +934,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0
@@ -2838,7 +2838,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
                   0

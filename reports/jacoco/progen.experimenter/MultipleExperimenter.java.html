@@ -78,72 +78,84 @@ public class MultipleExperimenter extends Experimenter {
   @Override
   public void updateValues() {
 <span class="nc" id="L80">    boolean actualizado = false;</span>
-    Property nextProp;
-<span class="nc bnc" id="L82" title="All 2 branches missed.">    if (!isDone()) {</span>
-<span class="nc" id="L83">      defined = false;</span>
-<span class="nc bnc" id="L84" title="All 2 branches missed.">      if (nextRepetition) {</span>
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (Property property : properties) {</span>
-<span class="nc" id="L86">          property.reset();</span>
-<span class="nc" id="L87">        }</span>
-<span class="nc" id="L88">        nextRepetition = false;</span>
-<span class="nc" id="L89">        currentExperimenter = 0;</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">    if (!isDone()) {</span>
+<span class="nc" id="L82">      defined = false;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">      if (nextRepetition) {</span>
+<span class="nc" id="L84">        resetAllProperties();</span>
+<span class="nc" id="L85">        nextRepetition = false;</span>
+<span class="nc" id="L86">        currentExperimenter = 0;</span>
       } else {
         // incremento de las propiedades
-<span class="nc" id="L92">        int propertyIndex = 0;</span>
-<span class="nc bnc" id="L93" title="All 4 branches missed.">        while (propertyIndex &lt; properties.size() &amp;&amp; !actualizado) {</span>
-<span class="nc" id="L94">          nextProp = properties.get(propertyIndex);</span>
-<span class="nc bnc" id="L95" title="All 2 branches missed.">          if (nextProp.hasNext()) {</span>
-<span class="nc" id="L96">            nextProp.nextValue();</span>
-<span class="nc" id="L97">            actualizado = true;</span>
-<span class="nc" id="L98">            currentExperimenter++;</span>
+<span class="nc" id="L89">        int propertyIndex = 0;</span>
+        Property nextProp;
+<span class="nc bnc" id="L91" title="All 4 branches missed.">        while (propertyIndex &lt; properties.size() &amp;&amp; !actualizado) {</span>
+<span class="nc" id="L92">          nextProp = properties.get(propertyIndex);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">          if (nextProp.hasNext()) {</span>
+<span class="nc" id="L94">            actualizado = incrementPropertyValue(nextProp);</span>
           } else {
-<span class="nc" id="L100">            propertyIndex++;</span>
+<span class="nc" id="L96">            propertyIndex++;</span>
           }
         }
-
-        // si se actualizo algo, se resetean todas las propiedades
-        // anteriores
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (actualizado) {</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">          while (--propertyIndex &gt;= 0) {</span>
-<span class="nc" id="L108">            properties.get(propertyIndex).reset();</span>
-          }
-        }
+<span class="nc" id="L99">        resetPreviousProperties(actualizado, propertyIndex);</span>
       }
     }
-<span class="nc" id="L113">  }</span>
+<span class="nc" id="L102">  }</span>
+
+  private void resetPreviousProperties(boolean actualizado, int lastPropertyIndex) {
+<span class="nc" id="L105">    int currentProperty=lastPropertyIndex;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">    if (actualizado) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">      while (--currentProperty&gt;= 0) {</span>
+<span class="nc" id="L108">        properties.get(currentProperty).reset();</span>
+      }
+    }
+<span class="nc" id="L111">  }</span>
+
+  private boolean incrementPropertyValue(Property nextProp) {
+    boolean actualizado;
+<span class="nc" id="L115">    nextProp.nextValue();</span>
+<span class="nc" id="L116">    actualizado = true;</span>
+<span class="nc" id="L117">    currentExperimenter++;</span>
+<span class="nc" id="L118">    return actualizado;</span>
+  }
+
+  private void resetAllProperties() {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    for (Property property : properties) {</span>
+<span class="nc" id="L123">      property.reset();</span>
+<span class="nc" id="L124">    }</span>
+<span class="nc" id="L125">  }</span>
 
   @Override
   public boolean isDone() {
-<span class="nc" id="L117">    boolean done = true;</span>
-<span class="nc bnc" id="L118" title="All 2 branches missed.">    if (nextRepetition) {</span>
-<span class="nc" id="L119">      currentRepetition++;</span>
-<span class="nc" id="L120">      done = false;</span>
+<span class="nc" id="L129">    boolean done = true;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">    if (nextRepetition) {</span>
+<span class="nc" id="L131">      currentRepetition++;</span>
+<span class="nc" id="L132">      done = false;</span>
     } else {
-<span class="nc bnc" id="L122" title="All 2 branches missed.">      for (Property property : properties) {</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">        done &amp;= !property.hasNext();</span>
-<span class="nc" id="L124">      }</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">      for (Property property : properties) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        done &amp;= !property.hasNext();</span>
+<span class="nc" id="L136">      }</span>
 
-<span class="nc bnc" id="L126" title="All 4 branches missed.">      if (done &amp;&amp; (currentRepetition + 1) &lt; totalRepetitions) {</span>
-<span class="nc" id="L127">        done = false;</span>
-<span class="nc" id="L128">        nextRepetition = true;</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">      if (done &amp;&amp; (currentRepetition + 1) &lt; totalRepetitions) {</span>
+<span class="nc" id="L139">        done = false;</span>
+<span class="nc" id="L140">        nextRepetition = true;</span>
       }
     }
-<span class="nc bnc" id="L131" title="All 4 branches missed.">    return done &amp;&amp; defined;</span>
+<span class="nc bnc" id="L143" title="All 4 branches missed.">    return done &amp;&amp; defined;</span>
   }
 
   @Override
   public void defineValues() {
-<span class="nc" id="L136">    defined = true;</span>
+<span class="nc" id="L148">    defined = true;</span>
     // actualizacion de las variables
-<span class="nc bnc" id="L138" title="All 2 branches missed.">    for (Property property : properties) {</span>
-<span class="nc" id="L139">      ProGenContext.setProperty(property.getLabel(), property.getValue());</span>
-<span class="nc" id="L140">    }</span>
-<span class="nc" id="L141">  }</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">    for (Property property : properties) {</span>
+<span class="nc" id="L151">      ProGenContext.setProperty(property.getLabel(), property.getValue());</span>
+<span class="nc" id="L152">    }</span>
+<span class="nc" id="L153">  }</span>
 
   @Override
   public void generateResults() {
-<span class="nc" id="L145">    dumpResults();</span>
-<span class="nc" id="L146">  }</span>
+<span class="nc" id="L157">    dumpResults();</span>
+<span class="nc" id="L158">  }</span>
 
   /**
    * Genera la carpeta de volcado de un experimento y copia en ella, tanto el
@@ -153,22 +165,22 @@ public class MultipleExperimenter extends Experimenter {
   private void dumpResults() {
     PrintWriter context;
     // se recupera el path de la carpeta de resultados del experimento
-<span class="nc" id="L156">    final File experimentDir = new File(ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;) + ProGenContext.getMandatoryProperty(&quot;progen.output.experiment&quot;));</span>
+<span class="nc" id="L168">    final File experimentDir = new File(ProGenContext.getMandatoryProperty(&quot;progen.output.dir&quot;) + ProGenContext.getMandatoryProperty(&quot;progen.output.experiment&quot;));</span>
     try {
       // creamos el fichero del contexto actual
-<span class="nc" id="L159">      final File file = new File(experimentDir.getAbsolutePath() + File.separator + &quot;current context.txt&quot;);</span>
-<span class="nc" id="L160">      context = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), &quot;UTF-8&quot;));</span>
-<span class="nc bnc" id="L161" title="All 2 branches missed.">      for (Property property : properties) {</span>
-<span class="nc" id="L162">        context.print(property.getLabel());</span>
-<span class="nc" id="L163">        context.print(&quot;=&quot;);</span>
-<span class="nc" id="L164">        context.println(property.getValue());</span>
-<span class="nc" id="L165">      }</span>
-<span class="nc" id="L166">      context.close();</span>
-<span class="nc" id="L167">      experimenter.generateResults();</span>
-<span class="nc" id="L168">    } catch (IOException e) {</span>
-<span class="nc" id="L169">      throw new ProGenException(e.getLocalizedMessage(), e);</span>
-<span class="nc" id="L170">    }</span>
-<span class="nc" id="L171">  }</span>
+<span class="nc" id="L171">      final File file = new File(experimentDir.getAbsolutePath() + File.separator + &quot;current context.txt&quot;);</span>
+<span class="nc" id="L172">      context = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), &quot;UTF-8&quot;));</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">      for (Property property : properties) {</span>
+<span class="nc" id="L174">        context.print(property.getLabel());</span>
+<span class="nc" id="L175">        context.print(&quot;=&quot;);</span>
+<span class="nc" id="L176">        context.println(property.getValue());</span>
+<span class="nc" id="L177">      }</span>
+<span class="nc" id="L178">      context.close();</span>
+<span class="nc" id="L179">      experimenter.generateResults();</span>
+<span class="nc" id="L180">    } catch (IOException e) {</span>
+<span class="nc" id="L181">      throw new ProGenException(e.getLocalizedMessage(), e);</span>
+<span class="nc" id="L182">    }</span>
+<span class="nc" id="L183">  }</span>
 
   /**
    * Devuelve la repetición actual.
@@ -176,11 +188,11 @@ public class MultipleExperimenter extends Experimenter {
    * @return la repetición actual.
    */
   public int getCurrentRepetition() {
-<span class="nc" id="L179">    int repetition = currentRepetition;</span>
-<span class="nc bnc" id="L180" title="All 2 branches missed.">    if (nextRepetition) {</span>
-<span class="nc" id="L181">      repetition = currentRepetition - 1;</span>
+<span class="nc" id="L191">    int repetition = currentRepetition;</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">    if (nextRepetition) {</span>
+<span class="nc" id="L193">      repetition = currentRepetition - 1;</span>
     }
-<span class="nc" id="L183">    return repetition;</span>
+<span class="nc" id="L195">    return repetition;</span>
   }
 
   /**
@@ -189,28 +201,28 @@ public class MultipleExperimenter extends Experimenter {
    * @return el experimenter actual.
    */
   public int getCurrentExperimenter() {
-<span class="nc" id="L192">    return currentExperimenter;</span>
+<span class="nc" id="L204">    return currentExperimenter;</span>
   }
 
   @Override
   public String defineExperimentDir() {
-<span class="nc" id="L197">    final StringBuilder experimenterDir = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
-<span class="nc" id="L198">    experimenterDir.append(&quot;exp-&quot;);</span>
-<span class="nc" id="L199">    experimenterDir.append(currentRepetition);</span>
-<span class="nc" id="L200">    experimenterDir.append(&quot;-&quot;);</span>
-<span class="nc" id="L201">    experimenterDir.append(currentExperimenter);</span>
-<span class="nc" id="L202">    return experimenterDir.toString();</span>
+<span class="nc" id="L209">    final StringBuilder experimenterDir = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
+<span class="nc" id="L210">    experimenterDir.append(&quot;exp-&quot;);</span>
+<span class="nc" id="L211">    experimenterDir.append(currentRepetition);</span>
+<span class="nc" id="L212">    experimenterDir.append(&quot;-&quot;);</span>
+<span class="nc" id="L213">    experimenterDir.append(currentExperimenter);</span>
+<span class="nc" id="L214">    return experimenterDir.toString();</span>
   }
 
   @Override
   public String finishMessage() {
-<span class="nc" id="L207">    final StringBuilder finishMessage = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
-<span class="nc" id="L208">    finishMessage.append(&quot;---- &quot;);</span>
-<span class="nc" id="L209">    finishMessage.append(Info.get(2));</span>
-<span class="nc" id="L210">    finishMessage.append(&quot; &quot;);</span>
-<span class="nc" id="L211">    finishMessage.append(currentExperimenter);</span>
-<span class="nc" id="L212">    finishMessage.append(&quot; -----&quot;);</span>
-<span class="nc" id="L213">    return finishMessage.toString();</span>
+<span class="nc" id="L219">    final StringBuilder finishMessage = new StringBuilder(DEFAULT_STRINGBUILDER_SIZE);</span>
+<span class="nc" id="L220">    finishMessage.append(&quot;---- &quot;);</span>
+<span class="nc" id="L221">    finishMessage.append(Info.get(2));</span>
+<span class="nc" id="L222">    finishMessage.append(&quot; &quot;);</span>
+<span class="nc" id="L223">    finishMessage.append(currentExperimenter);</span>
+<span class="nc" id="L224">    finishMessage.append(&quot; -----&quot;);</span>
+<span class="nc" id="L225">    return finishMessage.toString();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
