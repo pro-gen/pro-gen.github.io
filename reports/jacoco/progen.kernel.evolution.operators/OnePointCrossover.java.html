@@ -19,7 +19,7 @@ import progen.kernel.tree.Tree;
  * @author jirsis
  * @since 2.0
  */
-<span class="fc" id="L22">public class OnePointCrossover extends StandardCrossover {</span>
+<span class="nc" id="L22">public class OnePointCrossover extends StandardCrossover {</span>
 
   /**
    * En este caso, la selección de nodos se realiza de acuerdo al comportamiento
@@ -30,25 +30,25 @@ import progen.kernel.tree.Tree;
    */
   @Override
   protected List&lt;Node&gt; selectNodes(Tree treeA, Tree treeB) {
-<span class="fc" id="L33">    final List&lt;Node&gt; nodes = new ArrayList&lt;Node&gt;();</span>
-<span class="fc" id="L34">    final List&lt;Node&gt; stackA = new ArrayList&lt;Node&gt;();</span>
-<span class="fc" id="L35">    final List&lt;Node&gt; stackB = new ArrayList&lt;Node&gt;();</span>
-<span class="fc" id="L36">    final List&lt;Node&gt; comunA = new ArrayList&lt;Node&gt;();</span>
-<span class="fc" id="L37">    final List&lt;Node&gt; comunB = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L33">    final List&lt;Node&gt; nodes = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L34">    final List&lt;Node&gt; stackA = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L35">    final List&lt;Node&gt; stackB = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L36">    final List&lt;Node&gt; comunA = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L37">    final List&lt;Node&gt; comunB = new ArrayList&lt;Node&gt;();</span>
 
-<span class="fc" id="L39">    selectComun(treeA.getRoot(), treeB.getRoot(), stackA, stackB, comunA, comunB);</span>
+<span class="nc" id="L39">    selectComun(treeA.getRoot(), treeB.getRoot(), stackA, stackB, comunA, comunB);</span>
 
     // se eliminan las raices dado que es el único nodo que aún siendo
     // común, no se puede utilizar para cruzar.
-<span class="fc" id="L43">    comunA.remove(treeA.getRoot());</span>
-<span class="fc" id="L44">    comunB.remove(treeB.getRoot());</span>
+<span class="nc" id="L43">    comunA.remove(treeA.getRoot());</span>
+<span class="nc" id="L44">    comunB.remove(treeB.getRoot());</span>
 
-<span class="pc bpc" id="L46" title="1 of 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
-<span class="fc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
-<span class="fc" id="L48">      nodes.add(comunA.get(randomNode));</span>
-<span class="fc" id="L49">      nodes.add(comunB.get(randomNode));</span>
+<span class="nc bnc" id="L46" title="All 4 branches missed.">    if (comunA.size() &gt; 0 &amp;&amp; comunB.size() &gt; 0) {</span>
+<span class="nc" id="L47">      final int randomNode = (int) (Math.random() * comunA.size());</span>
+<span class="nc" id="L48">      nodes.add(comunA.get(randomNode));</span>
+<span class="nc" id="L49">      nodes.add(comunB.get(randomNode));</span>
     }
-<span class="fc" id="L51">    return nodes;</span>
+<span class="nc" id="L51">    return nodes;</span>
   }
 
   /**
@@ -72,19 +72,19 @@ import progen.kernel.tree.Tree;
    *          Conjunto de nodos que forman la parte común al árbol B.
    */
   private void selectComun(Node nodeA, Node nodeB, List&lt;Node&gt; stackA, List&lt;Node&gt; stackB, List&lt;Node&gt; comunA, List&lt;Node&gt; comunB) {
-<span class="pc bpc" id="L75" title="1 of 4 branches missed.">    if (nodeA.getFunction().getFunction().getReturnType().equals(nodeB.getFunction().getFunction().getReturnType()) &amp;&amp; nodeA.getFunction().getFunction().getSymbol().equals(nodeB.getFunction().getFunction().getSymbol())) {</span>
-<span class="fc" id="L76">      stackA.addAll(nodeA.getBranches());</span>
-<span class="fc" id="L77">      stackB.addAll(nodeB.getBranches());</span>
-<span class="fc" id="L78">      comunA.add(nodeA);</span>
-<span class="fc" id="L79">      comunB.add(nodeB);</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">    if (nodeA.getFunction().getFunction().getReturnType().equals(nodeB.getFunction().getFunction().getReturnType()) &amp;&amp; nodeA.getFunction().getFunction().getSymbol().equals(nodeB.getFunction().getFunction().getSymbol())) {</span>
+<span class="nc" id="L76">      stackA.addAll(nodeA.getBranches());</span>
+<span class="nc" id="L77">      stackB.addAll(nodeB.getBranches());</span>
+<span class="nc" id="L78">      comunA.add(nodeA);</span>
+<span class="nc" id="L79">      comunB.add(nodeB);</span>
     } else {
-<span class="fc" id="L81">      stackA.removeAll(nodeA.getBranches());</span>
-<span class="fc" id="L82">      stackB.removeAll(nodeB.getBranches());</span>
+<span class="nc" id="L81">      stackA.removeAll(nodeA.getBranches());</span>
+<span class="nc" id="L82">      stackB.removeAll(nodeB.getBranches());</span>
     }
 
-<span class="pc bpc" id="L85" title="1 of 4 branches missed.">    if (stackA.size() &gt; 0 &amp;&amp; stackB.size() &gt; 0) {</span>
-<span class="fc" id="L86">      selectComun(stackA.remove(0), stackB.remove(0), stackA, stackB, comunA, comunB);</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">    if (stackA.size() &gt; 0 &amp;&amp; stackB.size() &gt; 0) {</span>
+<span class="nc" id="L86">      selectComun(stackA.remove(0), stackB.remove(0), stackA, stackB, comunA, comunB);</span>
     }
-<span class="fc" id="L88">  }</span>
+<span class="nc" id="L88">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

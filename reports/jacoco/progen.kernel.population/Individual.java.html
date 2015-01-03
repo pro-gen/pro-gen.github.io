@@ -107,10 +107,10 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
 <span class="fc" id="L107">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, String.valueOf(totalRPB));</span>
 <span class="fc" id="L108">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
 
-<span class="fc bfc" id="L110" title="All 2 branches covered.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="fc" id="L111">      tree = new Tree();</span>
-<span class="fc" id="L112">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
-<span class="fc" id="L113">      trees.put(RPB_PROPERTY + i, tree);</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="nc" id="L111">      tree = new Tree();</span>
+<span class="nc" id="L112">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
+<span class="nc" id="L113">      trees.put(RPB_PROPERTY + i, tree);</span>
     }
 
 <span class="pc bpc" id="L116" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
@@ -141,9 +141,9 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
 <span class="fc" id="L141">    this.grammars = individual.grammars;</span>
 <span class="fc" id="L142">    this.updated = individual.updated;</span>
 <span class="fc" id="L143">    this.trees = new HashMap&lt;String, Tree&gt;();</span>
-<span class="fc bfc" id="L144" title="All 2 branches covered.">    for (String key : individual.trees.keySet()) {</span>
-<span class="fc" id="L145">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
-<span class="fc" id="L146">    }</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">    for (String key : individual.trees.keySet()) {</span>
+<span class="nc" id="L145">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
+<span class="nc" id="L146">    }</span>
 <span class="fc" id="L147">    this.variables = new HashMap&lt;String, Object&gt;();</span>
 <span class="pc bpc" id="L148" title="1 of 2 branches missed.">    for (String key : individual.variables.keySet()) {</span>
 <span class="nc" id="L149">      this.variables.put(key, individual.variables.get(key));</span>
@@ -157,7 +157,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return Los árboles que contiene el individuo.
    */
   public Map&lt;String, Tree&gt; getTrees() {
-<span class="fc" id="L160">    return trees;</span>
+<span class="nc" id="L160">    return trees;</span>
   }
 
   /**
@@ -177,23 +177,23 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    */
   @Override
   public String toString() {
-<span class="fc" id="L180">    final StringBuilder individual = new StringBuilder();</span>
+<span class="nc" id="L180">    final StringBuilder individual = new StringBuilder();</span>
 
-<span class="pc bpc" id="L182" title="3 of 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">    if (this.printabeIndividual != null &amp;&amp; this.printabeIndividual.length() &gt; 0) {</span>
 <span class="nc" id="L183">      individual.append(printabeIndividual);</span>
     } else {
-<span class="fc" id="L185">      int RPB = 0;</span>
-<span class="fc" id="L186">      int adf = 0;</span>
-<span class="fc bfc" id="L187" title="All 2 branches covered.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
-<span class="fc" id="L188">        individual.append(RETURN_SYMBOL+ RPB_PROPERTY + RPB + COLON_SPACE_SYMBOL + trees.get(RPB_PROPERTY + RPB));</span>
-<span class="fc" id="L189">        RPB++;</span>
+<span class="nc" id="L185">      int RPB = 0;</span>
+<span class="nc" id="L186">      int adf = 0;</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">      while (trees.get(RPB_PROPERTY + RPB) != null) {</span>
+<span class="nc" id="L188">        individual.append(RETURN_SYMBOL+ RPB_PROPERTY + RPB + COLON_SPACE_SYMBOL + trees.get(RPB_PROPERTY + RPB));</span>
+<span class="nc" id="L189">        RPB++;</span>
       }
-<span class="pc bpc" id="L191" title="1 of 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">      while (trees.get(ADF_PROPERTY + adf) != null) {</span>
 <span class="nc" id="L192">        individual.append(RETURN_SYMBOL+ADF_PROPERTY + adf + COLON_SPACE_SYMBOL + trees.get(ADF_PROPERTY + adf));</span>
 <span class="nc" id="L193">        adf++;</span>
       }
     }
-<span class="fc" id="L196">    return individual.toString();</span>
+<span class="nc" id="L196">    return individual.toString();</span>
   }
 
   /**

@@ -98,19 +98,19 @@ public class Population {
   private void loadGrammar(String type, int total) {
     Grammar grammarLoaded;
     String functionSet;
-<span class="fc bfc" id="L101" title="All 2 branches covered.">    for (int i = 0; i &lt; total; i++) {</span>
-<span class="fc" id="L102">      grammarLoaded = null;</span>
-<span class="fc" id="L103">      functionSet = ProGenContext.getMandatoryProperty(&quot;progen.&quot; + type + i + &quot;.functionSet&quot;);</span>
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">      for (Grammar grammar : grammars.values()) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">    for (int i = 0; i &lt; total; i++) {</span>
+<span class="nc" id="L102">      grammarLoaded = null;</span>
+<span class="nc" id="L103">      functionSet = ProGenContext.getMandatoryProperty(&quot;progen.&quot; + type + i + &quot;.functionSet&quot;);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">      for (Grammar grammar : grammars.values()) {</span>
 <span class="nc bnc" id="L105" title="All 2 branches missed.">        if (grammar.getFunctionSetId().equals(functionSet)) {</span>
 <span class="nc" id="L106">          grammarLoaded = grammar;</span>
         }
 <span class="nc" id="L108">      }</span>
 
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">      if (grammarLoaded == null) {</span>
-<span class="fc" id="L111">        grammarLoaded = Grammar.makeInstance(type + i);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">      if (grammarLoaded == null) {</span>
+<span class="nc" id="L111">        grammarLoaded = Grammar.makeInstance(type + i);</span>
       }
-<span class="fc" id="L113">      grammars.put(type + i, grammarLoaded);</span>
+<span class="nc" id="L113">      grammars.put(type + i, grammarLoaded);</span>
     }
 <span class="fc" id="L115">  }</span>
 
