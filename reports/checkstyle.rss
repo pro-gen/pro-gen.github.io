@@ -25,10 +25,10 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2015</copyright>
     <item>
-      <title>File: 201,
+      <title>File: 203,
              Errors: 0,
-             Warnings: 0,
-             Infos: 0
+             Warnings: 31,
+             Infos: 328
       </title>
             <link>http://pro-gen.github.io/checkstyle.html</link>
       <description>
@@ -592,6 +592,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.outputers.literals_es_ES.properties">progen/output/outputers/literals_es_ES.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.output.plugins.PluginsDepences.java">progen/output/plugins/PluginsDepences.java</a>
                 </td>
                 <td>
@@ -819,10 +833,10 @@ under the License.
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.output.outputers.StandardFile.java">progen/output/outputers/StandardFile.java</a>
                 </td>
                 <td>
-                  0
+                  325
                 </td>
                 <td>
-                  0
+                  30
                 </td>
                 <td>
                   0
@@ -1670,6 +1684,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="http://pro-gen.github.io/checkstyle.html#progen.output.outputers.literals.properties">progen/output/outputers/literals.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.functions.IntM.java">progen/kernel/functions/IntM.java</a>
                 </td>
                 <td>
@@ -2121,10 +2149,10 @@ under the License.
                   <a href="http://pro-gen.github.io/checkstyle.html#progen.kernel.grammar.validations.SuperfluousProductions.java">progen/kernel/grammar/validations/SuperfluousProductions.java</a>
                 </td>
                 <td>
-                  0
+                  3
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

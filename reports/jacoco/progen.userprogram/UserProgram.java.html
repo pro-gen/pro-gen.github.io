@@ -17,32 +17,30 @@ import progen.kernel.population.UnknownUserProgramException;
  */
 <span class="nc" id="L18">public abstract class UserProgram {</span>
 
-  /**
-   * Inicializa el atributo &lt;code&gt; userProgram &lt;/code&gt;. Crea una nueva instancia
-   * a partir de la propiedad definida como &lt;i&gt;&quot;progen.experiment.file&quot;&lt;/i&gt;
-   * 
-   * @return Una instancia de &lt;code&gt;userProgram&lt;/code&gt;
-   */
   public static UserProgram getUserProgram() {
-<span class="nc" id="L27">    UserProgram userProgram = null;</span>
-<span class="nc" id="L28">    final String userPackage = ProGenContext.getMandatoryProperty(&quot;progen.user.home&quot;);</span>
-    String userProgramClass;
-<span class="nc" id="L30">    final String [] path = userPackage.split(&quot;\\.&quot;);</span>
+<span class="nc" id="L21">    final String userPackage = ProGenContext.getMandatoryProperty(&quot;progen.user.home&quot;);</span>
+<span class="nc" id="L22">    final String[] path = userPackage.split(&quot;\\.&quot;);</span>
+<span class="nc" id="L23">    final String userProgramClass = getPathCapitalize(path);</span>
+<span class="nc" id="L24">    return makeUserProgram(userPackage, userProgramClass);</span>
+  }
 
-<span class="nc" id="L32">    userProgramClass = path[path.length - 1].substring(0, 1).toUpperCase(Locale.getDefault());</span>
-<span class="nc" id="L33">    userProgramClass += path[path.length - 1].substring(1);</span>
-
+  private static UserProgram makeUserProgram(final String userPackage, final String userProgramClass) {
+<span class="nc" id="L28">    UserProgram userProgram = null;</span>
     try {
-<span class="nc" id="L36">      userProgram = (UserProgram) Class.forName(userPackage + userProgramClass).newInstance();</span>
-<span class="nc" id="L37">    } catch (InstantiationException e) {</span>
-<span class="nc" id="L38">      throw new ProGenException(e.getMessage(), e);</span>
-<span class="nc" id="L39">    } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L40">      throw new ProGenException(e.getMessage(), e);</span>
-<span class="nc" id="L41">    } catch (ClassNotFoundException e) {</span>
-<span class="nc" id="L42">      throw new UnknownUserProgramException(userPackage + userProgramClass, e);</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L30">      userProgram = (UserProgram) Class.forName(userPackage + userProgramClass).newInstance();</span>
+<span class="nc" id="L31">    } catch (InstantiationException | IllegalAccessException e) {</span>
+<span class="nc" id="L32">      throw new ProGenException(e.getMessage(), e);</span>
+<span class="nc" id="L33">    } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L34">      throw new UnknownUserProgramException(userPackage + userProgramClass, e);</span>
+<span class="nc" id="L35">    }</span>
+<span class="nc" id="L36">    return userProgram;</span>
+  }
 
-<span class="nc" id="L45">    return userProgram;</span>
+  private static String getPathCapitalize(final String[] path) {
+    String userProgramClass;
+<span class="nc" id="L41">    userProgramClass = path[path.length - 1].substring(0, 1).toUpperCase(Locale.getDefault());</span>
+<span class="nc" id="L42">    userProgramClass += path[path.length - 1].substring(1);</span>
+<span class="nc" id="L43">    return userProgramClass;</span>
   }
 
   /**
@@ -52,7 +50,7 @@ import progen.kernel.population.UnknownUserProgramException;
    */
   public void initialize() {
     //
-<span class="nc" id="L55">  }</span>
+<span class="nc" id="L53">  }</span>
 
   /**
    * Método de finalización del UserProgram concreto de cada usuario que será
@@ -64,7 +62,7 @@ import progen.kernel.population.UnknownUserProgramException;
    * @return Devuelve la representación modificada del mejor individuo.
    */
   public String postProcess(Individual best) {
-<span class="nc" id="L67">    return &quot;&quot;;</span>
+<span class="nc" id="L65">    return &quot;&quot;;</span>
   }
 
   /**
