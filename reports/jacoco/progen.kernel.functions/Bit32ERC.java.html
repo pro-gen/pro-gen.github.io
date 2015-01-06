@@ -31,13 +31,14 @@ public class Bit32ERC extends ERC {
 
   @Override
   protected String printERC() {
-<span class="fc" id="L34">    return &quot;0x&quot; + Integer.toHexString((Integer) getValue());</span>
+<span class="fc" id="L34">    final String value = Integer.toHexString((Integer) getValue());</span>
+<span class="fc" id="L35">    return String.format(&quot;0x%8s&quot;, value).replace(&quot; &quot;, &quot;0&quot;);</span>
   }
 
   @Override
   @SuppressFBWarnings(value = &quot;CN_IDIOM_NO_SUPER_CALL&quot;, justification = &quot;super.clone() doesn't exists&quot;)
   public ERC clone() {
-<span class="fc" id="L40">    return new Bit32ERC();</span>
+<span class="fc" id="L41">    return new Bit32ERC();</span>
   }
 
 }

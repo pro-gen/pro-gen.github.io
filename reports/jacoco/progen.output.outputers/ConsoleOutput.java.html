@@ -19,22 +19,22 @@ public abstract class ConsoleOutput implements Outputer {
   /**
    * Constructor por defecto. Se inicializa la variable de literales.
    */
-<span class="nc" id="L22">  public ConsoleOutput() {</span>
-<span class="nc" id="L23">    literals = ResourceBundle.getBundle(&quot;progen.output.outputers.literals&quot;, Locale.getDefault());</span>
-<span class="nc" id="L24">  }</span>
+<span class="fc" id="L22">  public ConsoleOutput() {</span>
+<span class="fc" id="L23">    literals = ResourceBundle.getBundle(&quot;progen.output.outputers.literals&quot;, Locale.getDefault());</span>
+<span class="fc" id="L24">  }</span>
 
   @Override
   public void close() {
     // do nothing
-<span class="nc" id="L29">  }</span>
+<span class="fc" id="L29">  }</span>
 
   @Override
   public void init() {
     // do nothing
-<span class="nc" id="L34">  }</span>
+<span class="fc" id="L34">  }</span>
 
   public ResourceBundle getLiterals() {
-<span class="nc" id="L37">    return literals;</span>
+<span class="fc" id="L37">    return literals;</span>
   }
 
 }
