@@ -69,7 +69,7 @@ public class Grammar implements Serializable {
    *          recibir algo del estilo &quot;RPBx&quot; o &quot;ADFx&quot;, donde x es un entero
    *          &amp;gt;= 0.
    */
-<span class="fc" id="L72">  protected Grammar(String idTree) {</span>
+<span class="fc" id="L72">  public Grammar(String idTree) {</span>
     String returnValue;
 
 <span class="fc" id="L75">    functionSetId = ProGenContext.getMandatoryProperty(PROGEN_PROPERTY + idTree + &quot;.functionSet&quot;);</span>
@@ -148,7 +148,7 @@ public class Grammar implements Serializable {
   public List&lt;Production&gt; getProductions(GrammarNonTerminalSymbol left) {
 <span class="fc" id="L149">    final List&lt;Production&gt; prods = new ArrayList&lt;Production&gt;();</span>
 <span class="fc bfc" id="L150" title="All 2 branches covered.">    for (Production production : productions) {</span>
-<span class="pc bpc" id="L151" title="1 of 2 branches missed.">      if (productionGenerateNonTerminal(production, left)) {</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">      if (productionGenerateNonTerminal(production, left)) {</span>
 <span class="fc" id="L152">        prods.add(production);</span>
       }
 <span class="fc" id="L154">    }</span>
@@ -170,7 +170,7 @@ public class Grammar implements Serializable {
   }
 
   private boolean productionGenerateNonTerminal(Production production, GrammarNonTerminalSymbol nonTerminal) {
-<span class="pc bpc" id="L173" title="1 of 2 branches missed.">    return production.getLeft().compareTo(nonTerminal) == 0;</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">    return production.getLeft().compareTo(nonTerminal) == 0;</span>
   }
 
   /**
@@ -290,15 +290,15 @@ public class Grammar implements Serializable {
 <span class="fc" id="L290">    boolean find = false;</span>
 <span class="fc" id="L291">    GrammarNonTerminalSymbol symbol = null;</span>
 <span class="fc bfc" id="L292" title="All 2 branches covered.">    for (GrammarNonTerminalSymbol symbolTemp : grammarNonTerminalSymbols) {</span>
-<span class="pc bpc" id="L293" title="2 of 4 branches missed.">      if (!find &amp;&amp; symbolTemp.getValue().compareTo((String) returnValue) == 0) {</span>
+<span class="fc bfc" id="L293" title="All 4 branches covered.">      if (!find &amp;&amp; symbolTemp.getValue().compareTo((String) returnValue) == 0) {</span>
 <span class="fc" id="L294">        find = true;</span>
 <span class="fc" id="L295">        symbol = symbolTemp;</span>
       }
 <span class="fc" id="L297">    }</span>
 
-<span class="pc bpc" id="L299" title="1 of 2 branches missed.">    if (!find) {</span>
-<span class="nc" id="L300">      symbol = new GrammarNonTerminalSymbol(&quot;R&quot; + (grammarNonTerminalSymbols.size() - 1), (String) returnValue);</span>
-<span class="nc" id="L301">      grammarNonTerminalSymbols.add(symbol);</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">    if (!find) {</span>
+<span class="fc" id="L300">      symbol = new GrammarNonTerminalSymbol(&quot;R&quot; + (grammarNonTerminalSymbols.size() - 1), (String) returnValue);</span>
+<span class="fc" id="L301">      grammarNonTerminalSymbols.add(symbol);</span>
     }
 
 <span class="fc" id="L304">    return symbol;</span>

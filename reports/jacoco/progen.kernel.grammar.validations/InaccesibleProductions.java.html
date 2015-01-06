@@ -13,59 +13,57 @@ import progen.kernel.grammar.Production;
  */
 <span class="fc" id="L14">public class InaccesibleProductions implements Validation {</span>
 
-  private static final int ID_ERROR = 34;
-
   public void validate(Grammar gram) {
-<span class="fc" id="L19">    boolean grammarOK = false;</span>
-<span class="fc" id="L20">    final List&lt;Production&gt; productionsToCheck = new ArrayList&lt;Production&gt;(gram.getProductions());</span>
-<span class="fc" id="L21">    final List&lt;Production&gt; productionsChecked = gram.getProductions(gram.getAxiom());</span>
+<span class="fc" id="L17">    boolean grammarOK = false;</span>
+<span class="fc" id="L18">    final List&lt;Production&gt; productionsToCheck = new ArrayList&lt;Production&gt;(gram.getProductions());</span>
+<span class="fc" id="L19">    final List&lt;Production&gt; productionsChecked = gram.getProductions(gram.getAxiom());</span>
     Production toCheck;
     int index;
-<span class="fc" id="L24">    int productionsToCheckBefore = productionsToCheck.size();</span>
-<span class="fc" id="L25">    int productionsToCheckAfter = 0;</span>
+<span class="fc" id="L22">    int productionsToCheckBefore = productionsToCheck.size();</span>
+<span class="fc" id="L23">    int productionsToCheckAfter = 0;</span>
 
-<span class="fc bfc" id="L27" title="All 2 branches covered.">    while (productionsToCheckBefore != productionsToCheckAfter) {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">    while (productionsToCheckBefore != productionsToCheckAfter) {</span>
 
-<span class="fc" id="L29">      index = 0;</span>
-<span class="fc" id="L30">      productionsToCheckBefore = productionsToCheck.size();</span>
-<span class="fc bfc" id="L31" title="All 2 branches covered.">      for (int i = 0; i &lt; productionsToCheckBefore; i++) {</span>
-<span class="fc" id="L32">        toCheck = productionsToCheck.get(index);</span>
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (!checkProduction(toCheck, productionsChecked, productionsToCheck)) {</span>
-<span class="nc" id="L34">          index++;</span>
+<span class="fc" id="L27">      index = 0;</span>
+<span class="fc" id="L28">      productionsToCheckBefore = productionsToCheck.size();</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">      for (int i = 0; i &lt; productionsToCheckBefore; i++) {</span>
+<span class="fc" id="L30">        toCheck = productionsToCheck.get(index);</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (!checkProduction(toCheck, productionsChecked, productionsToCheck)) {</span>
+<span class="nc" id="L32">          index++;</span>
         }
 
       }
-<span class="fc" id="L38">      productionsToCheckAfter = productionsToCheck.size();</span>
+<span class="fc" id="L36">      productionsToCheckAfter = productionsToCheck.size();</span>
     }
 
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">    if (productionsToCheck.size() == 0) {</span>
-<span class="fc" id="L42">      grammarOK = true;</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    if (productionsToCheck.size() == 0) {</span>
+<span class="fc" id="L40">      grammarOK = true;</span>
     }
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">    if (!grammarOK) {</span>
-<span class="nc" id="L45">      throw new GrammarNotValidException(ID_ERROR);</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (!grammarOK) {</span>
+<span class="nc" id="L43">      throw new GrammarNotValidException(GrammarNotValidExceptionEnum.INACCESIBLE_PRODUCTIONS_ERROR);</span>
     }
-<span class="fc" id="L47">  }</span>
+<span class="fc" id="L45">  }</span>
 
   private boolean checkProduction(Production production, List&lt;Production&gt; productionsChecked, List&lt;Production&gt; productionsToCheck) {
-<span class="fc" id="L50">    boolean checkedOk = false;</span>
+<span class="fc" id="L48">    boolean checkedOk = false;</span>
 
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">    if (productionsChecked.contains(production)) {</span>
-<span class="fc" id="L53">      checkedOk = true;</span>
-<span class="fc" id="L54">      productionsToCheck.remove(production);</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">    } else if (isGeneretatedBy(production, productionsChecked)) {</span>
-<span class="nc" id="L56">      productionsChecked.add(production);</span>
-<span class="nc" id="L57">      productionsToCheck.remove(production);</span>
-<span class="nc" id="L58">      checkedOk = true;</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">    if (productionsChecked.contains(production)) {</span>
+<span class="fc" id="L51">      checkedOk = true;</span>
+<span class="fc" id="L52">      productionsToCheck.remove(production);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">    } else if (isGeneretatedBy(production, productionsChecked)) {</span>
+<span class="nc" id="L54">      productionsChecked.add(production);</span>
+<span class="nc" id="L55">      productionsToCheck.remove(production);</span>
+<span class="nc" id="L56">      checkedOk = true;</span>
     }
-<span class="fc" id="L60">    return checkedOk;</span>
+<span class="fc" id="L58">    return checkedOk;</span>
   }
 
   private boolean isGeneretatedBy(Production production, List&lt;Production&gt; productionsChecked) {
-<span class="nc" id="L64">    boolean isGenerated = false;</span>
-<span class="nc bnc" id="L65" title="All 2 branches missed.">    for (Production checked : productionsChecked) {</span>
-<span class="nc" id="L66">      isGenerated |= checked.isSymbolGenerated(production.getLeft());</span>
-<span class="nc" id="L67">    }</span>
-<span class="nc" id="L68">    return isGenerated;</span>
+<span class="nc" id="L62">    boolean isGenerated = false;</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">    for (Production checked : productionsChecked) {</span>
+<span class="nc" id="L64">      isGenerated |= checked.isSymbolGenerated(production.getLeft());</span>
+<span class="nc" id="L65">    }</span>
+<span class="nc" id="L66">    return isGenerated;</span>
   }
 
 }

@@ -57,13 +57,13 @@ public final class Error {
 <span class="fc bfc" id="L57" title="All 2 branches covered.">    if (error == null) {</span>
 <span class="fc" id="L58">      error = new Error();</span>
       try {
-<span class="nc" id="L60">        final String defaultLanguage = ProGenContext.getOptionalProperty(&quot;progen.language&quot;, DEFAULT_LANGUAGE);</span>
-<span class="nc" id="L61">        final Locale locale = new Locale(defaultLanguage);</span>
-<span class="nc" id="L62">        Locale.setDefault(locale);</span>
-<span class="nc" id="L63">        error.literals = ResourceBundle.getBundle(PROGEN_KERNEL_ERROR_STRINGS_BUNDLE, locale);</span>
+<span class="fc" id="L60">        final String defaultLanguage = ProGenContext.getOptionalProperty(&quot;progen.language&quot;, DEFAULT_LANGUAGE);</span>
+<span class="fc" id="L61">        final Locale locale = new Locale(defaultLanguage);</span>
+<span class="fc" id="L62">        Locale.setDefault(locale);</span>
+<span class="fc" id="L63">        error.literals = ResourceBundle.getBundle(PROGEN_KERNEL_ERROR_STRINGS_BUNDLE, locale);</span>
 <span class="fc" id="L64">      } catch (UninitializedContextException e) {</span>
         // do nothing, because the error has a default language
-<span class="nc" id="L66">      }</span>
+<span class="fc" id="L66">      }</span>
     }
 <span class="fc" id="L68">  }</span>
 
