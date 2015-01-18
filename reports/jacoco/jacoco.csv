@@ -19,8 +19,8 @@ ProGen,progen.kernel.population,Population,123,114,13,3,22,30,11,8,4,7
 ProGen,progen.roles.distributed,ClientDistributed,80,0,0,0,21,0,3,0,3,0
 ProGen,progen.roles.distributed,DispatcherDistributed,47,8,0,0,19,3,7,1,7,1
 ProGen,progen.roles.distributed,ProGenDistributedException,0,46,0,0,0,11,0,6,0,6
-ProGen,progen.roles.distributed,WorkerDistributed,23,3,0,0,10,1,5,1,5,1
 ProGen,progen.roles.distributed,DispatcherServer,145,32,2,0,38,11,9,2,8,2
+ProGen,progen.roles.distributed,WorkerDistributed,23,3,0,0,10,1,5,1,5,1
 ProGen,progen.roles.distributed,DistributedFactory.new Object() {...},3,23,0,0,0,1,0,1,0,1
 ProGen,progen.roles.distributed,DistributedFactory,33,79,2,2,8,25,3,6,1,5
 ProGen,progen.userprogram,UserProgram,89,0,0,0,18,0,6,0,6,0
@@ -30,7 +30,7 @@ ProGen,progen.experimenter,OutputFilenameFilter,7,0,0,0,2,0,2,0,2,0
 ProGen,progen.experimenter,ExperimenterFactory,24,0,2,0,8,0,3,0,2,0
 ProGen,progen.experimenter,Experimenter,363,0,28,0,77,0,26,0,12,0
 ProGen,progen.output.outputers,BestIndividualFile,114,0,4,0,21,0,6,0,4,0
-ProGen,progen.output.outputers,StandardConsole,2247,0,32,0,222,0,44,0,28,0
+ProGen,progen.output.outputers,StandardConsole,82,2171,4,28,6,220,4,42,0,30
 ProGen,progen.output.outputers,UnknowOutputerException,0,25,0,0,0,5,0,3,0,3
 ProGen,progen.output.outputers,WorstIndividualFile,90,0,6,0,15,0,6,0,3,0
 ProGen,progen.output.outputers,OutputStore,97,0,8,0,23,0,9,0,5,0
@@ -128,13 +128,13 @@ ProGen,progen.kernel.functions,ERC,0,17,0,0,0,6,0,3,0,3
 ProGen,progen.kernel.functions,ShiftSignedRight,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,IntPlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,BitXor,0,30,0,0,0,5,0,2,0,2
-ProGen,progen.kernel.functions,DoublePlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleY,0,5,0,0,0,2,0,1,0,1
+ProGen,progen.kernel.functions,DoublePlus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleLessEqualsThan,0,34,0,2,0,5,0,3,0,2
 ProGen,progen.kernel.functions,BitMult,0,56,0,4,0,11,0,4,0,2
 ProGen,progen.kernel.functions,IntDiv,0,40,0,2,0,8,0,3,0,2
-ProGen,progen.kernel.functions,DoubleX,0,5,0,0,0,2,0,1,0,1
 ProGen,progen.kernel.functions,IntGratherEqualsThan,0,33,0,2,0,5,0,3,0,2
+ProGen,progen.kernel.functions,DoubleX,0,5,0,0,0,2,0,1,0,1
 ProGen,progen.kernel.functions,IntMinus,0,30,0,0,0,5,0,2,0,2
 ProGen,progen.kernel.functions,DoubleEquals,0,40,0,2,0,5,0,3,0,2
 ProGen,progen.kernel.functions,NonTerminal,49,5,6,0,8,2,5,1,2,1
