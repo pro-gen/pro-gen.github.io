@@ -46,8 +46,8 @@ import progen.roles.Worker;
 <span class="fc" id="L46">    final String roleName = &quot;progen.roles.standalone.&quot; + clazz;</span>
     try {
 <span class="fc" id="L48">      role = Class.forName(roleName).newInstance();</span>
-<span class="fc" id="L49">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
-<span class="fc" id="L50">      throw new UnknownRoleImplementationException(roleName, e);</span>
+<span class="nc" id="L49">    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {</span>
+<span class="nc" id="L50">      throw new UnknownRoleImplementationException(roleName, e);</span>
 <span class="fc" id="L51">    }</span>
 <span class="fc" id="L52">    return role;</span>
   }
