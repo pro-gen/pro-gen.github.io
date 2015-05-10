@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="5.2.1" timestamp="2015-02-08T20:02:00.715">
+<pmd version="5.2.1" timestamp="2015-05-10T18:26:03.275">
 <file name="/home/travis/build/pro-gen/progen/progen/src/main/java/progen/context/ProGenContext.java">
 <violation beginline="51" endline="51" begincolumn="16" endcolumn="35" rule="AvoidCatchingNPE" ruleset="Strict Exceptions" package="progen.context" class="ProGenContext" method="makeInstance" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.2.1/pmd-java/rules/java/strictexception.html#AvoidCatchingNPE" priority="3">
 Avoid catching NullPointerException; consider removing the cause of the NPE.
@@ -16,7 +16,7 @@ Avoid really long methods.
 </violation>
 </file>
 <file name="/home/travis/build/pro-gen/progen/progen/src/main/java/progen/kernel/evolution/operators/StandardCrossover.java">
-<violation beginline="86" endline="118" begincolumn="11" endcolumn="3" rule="ExcessiveMethodLength" ruleset="Code Size" package="progen.kernel.evolution.operators" class="StandardCrossover" method="crossTree" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.2.1/pmd-java/rules/java/codesize.html#ExcessiveMethodLength" priority="3">
+<violation beginline="86" endline="117" begincolumn="11" endcolumn="3" rule="ExcessiveMethodLength" ruleset="Code Size" package="progen.kernel.evolution.operators" class="StandardCrossover" method="crossTree" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.2.1/pmd-java/rules/java/codesize.html#ExcessiveMethodLength" priority="3">
 Avoid really long methods.
 </violation>
 </file>
