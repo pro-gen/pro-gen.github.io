@@ -107,10 +107,10 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
 <span class="fc" id="L107">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, String.valueOf(totalRPB));</span>
 <span class="fc" id="L108">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
 
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc" id="L111">      tree = new Tree();</span>
-<span class="nc" id="L112">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
-<span class="nc" id="L113">      trees.put(RPB_PROPERTY + i, tree);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">    for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="fc" id="L111">      tree = new Tree();</span>
+<span class="fc" id="L112">      tree.generate(grammars.get(RPB_PROPERTY + i));</span>
+<span class="fc" id="L113">      trees.put(RPB_PROPERTY + i, tree);</span>
     }
 
 <span class="pc bpc" id="L116" title="1 of 2 branches missed.">    for (int i = 0; i &lt; totalADF; i++) {</span>
@@ -141,9 +141,9 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
 <span class="fc" id="L141">    this.grammars = individual.grammars;</span>
 <span class="fc" id="L142">    this.updated = individual.updated;</span>
 <span class="fc" id="L143">    this.trees = new HashMap&lt;String, Tree&gt;();</span>
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">    for (String key : individual.trees.keySet()) {</span>
-<span class="nc" id="L145">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
-<span class="nc" id="L146">    }</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">    for (String key : individual.trees.keySet()) {</span>
+<span class="fc" id="L145">      this.trees.put(key, new Tree(individual.trees.get(key)));</span>
+<span class="fc" id="L146">    }</span>
 <span class="fc" id="L147">    this.variables = new HashMap&lt;String, Object&gt;();</span>
 <span class="pc bpc" id="L148" title="1 of 2 branches missed.">    for (String key : individual.variables.keySet()) {</span>
 <span class="nc" id="L149">      this.variables.put(key, individual.variables.get(key));</span>
@@ -157,7 +157,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return Los árboles que contiene el individuo.
    */
   public Map&lt;String, Tree&gt; getTrees() {
-<span class="nc" id="L160">    return trees;</span>
+<span class="fc" id="L160">    return trees;</span>
   }
 
   /**
@@ -311,7 +311,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    * @return el valor del &lt;i&gt;adjustedFitness&lt;/i&gt;
    */
   public double getAdjustedFitness() {
-<span class="fc" id="L314">    return 1 / (1 + rawFitness);</span>
+<span class="nc" id="L314">    return 1 / (1 + rawFitness);</span>
   }
 
   @Override
@@ -334,7 +334,7 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
    */
   @Override
   public int compareTo(Individual other) {
-<span class="fc" id="L337">    return Double.compare(this.rawFitness, other.rawFitness);</span>
+<span class="nc" id="L337">    return Double.compare(this.rawFitness, other.rawFitness);</span>
   }
 
   @Override
@@ -366,8 +366,8 @@ public class Individual implements Task, Comparable&lt;Individual&gt;, Cloneable
 <span class="pc bpc" id="L366" title="1 of 2 branches missed.">    if (other == null) {</span>
 <span class="nc" id="L367">      isEquals = false;</span>
     } else {
-<span class="pc bpc" id="L369" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalRPB; i++) {</span>
-<span class="nc bnc" id="L370" title="All 4 branches missed.">        isEquals = isEquals &amp;&amp; trees.get(RPB_PROPERTY + i).toString().compareTo(other.getTrees().get(RPB_PROPERTY + i).toString()) == 0;</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">      for (int i = 0; i &lt; totalRPB; i++) {</span>
+<span class="pc bpc" id="L370" title="2 of 4 branches missed.">        isEquals = isEquals &amp;&amp; trees.get(RPB_PROPERTY + i).toString().compareTo(other.getTrees().get(RPB_PROPERTY + i).toString()) == 0;</span>
       }
 <span class="pc bpc" id="L372" title="1 of 2 branches missed.">      for (int i = 0; i &lt; totalADF; i++) {</span>
 <span class="nc bnc" id="L373" title="All 4 branches missed.">        isEquals = isEquals &amp;&amp; trees.get(ADF_PROPERTY + i).toString().compareTo(other.getTrees().get(ADF_PROPERTY + i).toString()) == 0;</span>

@@ -18,11 +18,11 @@ import progen.kernel.population.Population;
 
   @Override
   public List&lt;Individual&gt; select(Population pop, int howMany) {
-<span class="nc" id="L21">    final List&lt;Individual&gt; individuals = new ArrayList&lt;Individual&gt;();</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">    for (int i = 0; i &lt; howMany; i++) {</span>
-<span class="nc" id="L23">      individuals.add(pop.getIndividual((int) (Math.random() * pop.getIndividuals().size())).clone());</span>
+<span class="fc" id="L21">    final List&lt;Individual&gt; individuals = new ArrayList&lt;Individual&gt;();</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">    for (int i = 0; i &lt; howMany; i++) {</span>
+<span class="fc" id="L23">      individuals.add(pop.getIndividual((int) (Math.random() * pop.getIndividuals().size())).clone());</span>
     }
-<span class="nc" id="L25">    return individuals;</span>
+<span class="fc" id="L25">    return individuals;</span>
   }
 
 }

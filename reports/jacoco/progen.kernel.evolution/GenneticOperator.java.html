@@ -25,10 +25,10 @@ public abstract class GenneticOperator {
   /**
    * Constructor genérico de la clase.
    */
-<span class="nc" id="L28">  public GenneticOperator() {</span>
-<span class="nc" id="L29">    probability = 0;</span>
-<span class="nc" id="L30">    selector = new NullSelector();</span>
-<span class="nc" id="L31">  }</span>
+<span class="fc" id="L28">  public GenneticOperator() {</span>
+<span class="fc" id="L29">    probability = 0;</span>
+<span class="fc" id="L30">    selector = new NullSelector();</span>
+<span class="fc" id="L31">  }</span>
 
   /**
    * Devuelve la probabilidad de uso del operador genético.
@@ -36,7 +36,7 @@ public abstract class GenneticOperator {
    * @return la probabilidad de uso.
    */
   public final double getProbability() {
-<span class="nc" id="L39">    return probability;</span>
+<span class="fc" id="L39">    return probability;</span>
   }
 
   /**
@@ -59,11 +59,11 @@ public abstract class GenneticOperator {
    *          Parámetros de configuración del selector.
    */
   public final void setSelector(String name, Map&lt;String, String&gt; params) {
-<span class="nc" id="L62">    selector = Selector.makeSelector(name, params);</span>
-<span class="nc" id="L63">  }</span>
+<span class="fc" id="L62">    selector = Selector.makeSelector(name, params);</span>
+<span class="fc" id="L63">  }</span>
   
   public Selector getSelector() {
-<span class="nc" id="L66">    return selector;</span>
+<span class="fc" id="L66">    return selector;</span>
   }
 
   /**

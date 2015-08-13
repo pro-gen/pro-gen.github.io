@@ -42,15 +42,15 @@ public class Population {
    * &lt;code&gt;progen.population.size&lt;/code&gt;
    * 
    */
-<span class="fc" id="L45">  public Population() {</span>
-<span class="fc" id="L46">    final int populationSize = ProGenContext.getOptionalProperty(PROGEN_POPULATION_SIZE_PROPERTY, 100);</span>
-<span class="fc" id="L47">    ProGenContext.setProperty(PROGEN_POPULATION_SIZE_PROPERTY, String.valueOf(populationSize));</span>
-<span class="fc" id="L48">    final Population pop = new Population(populationSize);</span>
-<span class="fc" id="L49">    this.grammars = pop.grammars;</span>
-<span class="fc" id="L50">    this.individuals = pop.individuals;</span>
-<span class="fc" id="L51">    this.totalADF = pop.totalADF;</span>
-<span class="fc" id="L52">    this.totalRPB = pop.totalRPB;</span>
-<span class="fc" id="L53">  }</span>
+<span class="nc" id="L45">  public Population() {</span>
+<span class="nc" id="L46">    final int populationSize = ProGenContext.getOptionalProperty(PROGEN_POPULATION_SIZE_PROPERTY, 100);</span>
+<span class="nc" id="L47">    ProGenContext.setProperty(PROGEN_POPULATION_SIZE_PROPERTY, String.valueOf(populationSize));</span>
+<span class="nc" id="L48">    final Population pop = new Population(populationSize);</span>
+<span class="nc" id="L49">    this.grammars = pop.grammars;</span>
+<span class="nc" id="L50">    this.individuals = pop.individuals;</span>
+<span class="nc" id="L51">    this.totalADF = pop.totalADF;</span>
+<span class="nc" id="L52">    this.totalRPB = pop.totalRPB;</span>
+<span class="nc" id="L53">  }</span>
 
   /**
    * Constructor de la clase que crea una población del tamaño especificado en
@@ -59,29 +59,29 @@ public class Population {
    * @param populationSize
    *          Tamaño de la población a crear.
    */
-<span class="fc" id="L62">  public Population(int populationSize) {</span>
-<span class="fc" id="L63">    grammars = new HashMap&lt;String, Grammar&gt;();</span>
-<span class="fc" id="L64">    totalRPB = 0;</span>
-<span class="fc" id="L65">    totalADF = 0;</span>
-<span class="fc" id="L66">    this.loadGrammars();</span>
+<span class="nc" id="L62">  public Population(int populationSize) {</span>
+<span class="nc" id="L63">    grammars = new HashMap&lt;String, Grammar&gt;();</span>
+<span class="nc" id="L64">    totalRPB = 0;</span>
+<span class="nc" id="L65">    totalADF = 0;</span>
+<span class="nc" id="L66">    this.loadGrammars();</span>
 
-<span class="fc" id="L68">    individuals = new ArrayList&lt;Individual&gt;();</span>
-<span class="fc" id="L69">    initIndividuals(populationSize);</span>
-<span class="fc" id="L70">  }</span>
+<span class="nc" id="L68">    individuals = new ArrayList&lt;Individual&gt;();</span>
+<span class="nc" id="L69">    initIndividuals(populationSize);</span>
+<span class="nc" id="L70">  }</span>
 
   /**
    * Crea las estructuras de las gramáticas que se utilizarán para crear todos
    * los árboles de los individuos.
    */
   private void loadGrammars() {
-<span class="fc" id="L77">    totalRPB = ProGenContext.getOptionalProperty(PROGEN_TOTAL_RPB_PROPERTY, 1);</span>
-<span class="fc" id="L78">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, String.valueOf(totalRPB));</span>
-<span class="fc" id="L79">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
+<span class="nc" id="L77">    totalRPB = ProGenContext.getOptionalProperty(PROGEN_TOTAL_RPB_PROPERTY, 1);</span>
+<span class="nc" id="L78">    ProGenContext.setProperty(PROGEN_TOTAL_RPB_PROPERTY, String.valueOf(totalRPB));</span>
+<span class="nc" id="L79">    totalADF = ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0);</span>
 
-<span class="fc" id="L81">    loadGrammar(&quot;RPB&quot;, totalRPB);</span>
-<span class="fc" id="L82">    loadGrammar(&quot;ADF&quot;, totalADF);</span>
+<span class="nc" id="L81">    loadGrammar(&quot;RPB&quot;, totalRPB);</span>
+<span class="nc" id="L82">    loadGrammar(&quot;ADF&quot;, totalADF);</span>
 
-<span class="fc" id="L84">  }</span>
+<span class="nc" id="L84">  }</span>
 
   /**
    * Crea todas las gramáticas de un tipo determinado, RPB o ADF. Cargará en
@@ -98,7 +98,7 @@ public class Population {
   private void loadGrammar(String type, int total) {
     Grammar grammarLoaded;
     String functionSet;
-<span class="pc bpc" id="L101" title="1 of 2 branches missed.">    for (int i = 0; i &lt; total; i++) {</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">    for (int i = 0; i &lt; total; i++) {</span>
 <span class="nc" id="L102">      grammarLoaded = null;</span>
 <span class="nc" id="L103">      functionSet = ProGenContext.getMandatoryProperty(&quot;progen.&quot; + type + i + &quot;.functionSet&quot;);</span>
 <span class="nc bnc" id="L104" title="All 2 branches missed.">      for (Grammar grammar : grammars.values()) {</span>
@@ -112,7 +112,7 @@ public class Population {
       }
 <span class="nc" id="L113">      grammars.put(type + i, grammarLoaded);</span>
     }
-<span class="fc" id="L115">  }</span>
+<span class="nc" id="L115">  }</span>
 
   /**
    * Inicialización del conjunto de individuos, indicando el tamaño de la
@@ -122,10 +122,10 @@ public class Population {
    *          El tamaño de la población.
    */
   private void initIndividuals(int populationSize) {
-<span class="fc bfc" id="L125" title="All 2 branches covered.">    for (int i = 0; i &lt; populationSize; i++) {</span>
-<span class="fc" id="L126">      individuals.add(new Individual(grammars));</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">    for (int i = 0; i &lt; populationSize; i++) {</span>
+<span class="nc" id="L126">      individuals.add(new Individual(grammars));</span>
     }
-<span class="fc" id="L128">  }</span>
+<span class="nc" id="L128">  }</span>
 
   /**
    * Representación de la población en forma de String. Se consigue una
@@ -145,7 +145,7 @@ public class Population {
    * @return los individuos.
    */
   public List&lt;Individual&gt; getIndividuals() {
-<span class="fc" id="L148">    return individuals;</span>
+<span class="nc" id="L148">    return individuals;</span>
   }
 
   /**
@@ -156,7 +156,7 @@ public class Population {
    * @return El individuo deseado.
    */
   public Individual getIndividual(int individualId) {
-<span class="fc" id="L159">    return individuals.get(individualId);</span>
+<span class="nc" id="L159">    return individuals.get(individualId);</span>
   }
 
   /**

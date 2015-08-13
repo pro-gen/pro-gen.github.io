@@ -8,10 +8,9 @@ import progen.kernel.error.Error;
  * 
  */
 public class SelectorSizeIncorrectValueException extends RuntimeException {
+  private static final long serialVersionUID = 7989167828358778207L;
 
   private static final int ID_ERROR = 26;
-  /** Para serialización. */
-  private static final long serialVersionUID = 7989167828358778207L;
 
   /**
    * Constructor de la excepción en la que se recibe por parámetro el tamaño del
@@ -23,7 +22,7 @@ public class SelectorSizeIncorrectValueException extends RuntimeException {
    *          Valor actual.
    */
   public SelectorSizeIncorrectValueException(int expected, int provided) {
-<span class="fc" id="L26">    super(Error.get(ID_ERROR) + &quot;(&quot; + provided + &quot;!=&quot; + expected + &quot;)&quot;);</span>
-<span class="fc" id="L27">  }</span>
+<span class="fc" id="L25">    super(Error.get(ID_ERROR) + &quot;(&quot; + provided + &quot;!=&quot; + expected + &quot;)&quot;);</span>
+<span class="fc" id="L26">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
