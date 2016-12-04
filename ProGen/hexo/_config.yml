@@ -71,6 +71,6 @@ theme: hiker
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/jirsis/hexo.git
-  branch: gh-pages
-  message: Updated website
+  repo: https://github.com/pro-gen/pro-gen.github.io.git
+  branch: master
+  message: Updated website hexo
