@@ -29,7 +29,7 @@ avatar:
 # eg. home_background_image: [css/images/home-bg.jpg, css/images/sample.jpg]
 home_background_image:
   enable: true
-  url: [css/images/adn.jpg, css/images/medicine-163707_1280.jpg, css/images/pose.jpg]
+  url: [css/images/adn.jpg, css/images/medicine-163707_1280.jpg]
 
 home_logo_image:
   enable: false
