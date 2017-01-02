@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IndividualMeanPlugin.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output.plugins</a> &gt; <span class="el_source">IndividualMeanPlugin.java</span></div><h1>IndividualMeanPlugin.java</h1><pre class="source lang-java linenums">package progen.output.plugins;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import progen.context.ProGenContext;
+import progen.kernel.population.Individual;
+
+/**
+ * Clase que representa los valores medios de un individuo.
+ * 
+ * @author jirsis
+ * @since 2.0
+ */
+public class IndividualMeanPlugin implements Plugin {
+
+  private static final String DASH_DEPTH_LITERAL = &quot;-depth&quot;;
+  private static final String DASH_NODES_LITERAL = &quot;-nodes&quot;;
+  private static final String ADF_LITERAL = &quot;ADF&quot;;
+  private static final String RPB_LITERAL = &quot;RPB&quot;;
+  /** Valor medio del rawFitness./ */
+  private Mean raw;
+  /** Valor medio del adjustedFitness. */
+  private Mean adjusted;
+  /** Valores medios de todos los árboles que componen un individuo. */
+  private Map&lt;String, Mean&gt; trees;
+
+  /**
+   * Constructor por defecto de la clase.
+   */
+<span class="nc" id="L32">  public IndividualMeanPlugin() {</span>
+<span class="nc" id="L33">    raw = new Mean();</span>
+<span class="nc" id="L34">    adjusted = new Mean();</span>
+<span class="nc" id="L35">    trees = new HashMap&lt;String, Mean&gt;();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">    for (int i = 0; i &lt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.total.RPB&quot;)); i++) {</span>
+<span class="nc" id="L37">      trees.put(RPB_LITERAL + i + DASH_NODES_LITERAL, new Mean());</span>
+<span class="nc" id="L38">      trees.put(RPB_LITERAL + i + DASH_DEPTH_LITERAL, new Mean());</span>
+    }
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    for (int i = 0; i &lt; ProGenContext.getOptionalProperty(&quot;progen.total.ADF&quot;, 0); i++) {</span>
+<span class="nc" id="L41">      trees.put(ADF_LITERAL + i + DASH_NODES_LITERAL, new Mean());</span>
+<span class="nc" id="L42">      trees.put(ADF_LITERAL + i + DASH_DEPTH_LITERAL, new Mean());</span>
+    }
+<span class="nc" id="L44">  }</span>
+
+  @Override
+  public void addValue(Comparable&lt;?&gt; value) {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">    if (!(value instanceof Individual)) {</span>
+<span class="nc" id="L49">      throw new ClassCastException(value.toString());</span>
+    }
+
+<span class="nc" id="L52">    final Individual individual = (Individual) value;</span>
+<span class="nc" id="L53">    raw.addValue(individual.getRawFitness());</span>
+<span class="nc" id="L54">    adjusted.addValue(individual.getAdjustedFitness());</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
+<span class="nc" id="L56">      trees.get(RPB_LITERAL + i + DASH_NODES_LITERAL).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getTotalNodes());</span>
+<span class="nc" id="L57">      trees.get(RPB_LITERAL + i + DASH_DEPTH_LITERAL).addValue(individual.getTrees().get(RPB_LITERAL + i).getRoot().getMaximunDepth());</span>
+    }
+<span class="nc bnc" id="L59" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
+<span class="nc" id="L60">      trees.get(ADF_LITERAL + i + DASH_NODES_LITERAL).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getTotalNodes());</span>
+<span class="nc" id="L61">      trees.get(ADF_LITERAL + i + DASH_DEPTH_LITERAL).addValue(individual.getTrees().get(ADF_LITERAL + i).getRoot().getMaximunDepth());</span>
+    }
+<span class="nc" id="L63">  }</span>
+
+  public void checkDependeces(List&lt;Plugin&gt; pluginCollection) {
+    // do nothing
+<span class="nc" id="L67">  }</span>
+
+  public String getName() {
+<span class="nc" id="L70">    return &quot;individualMean&quot;;</span>
+  }
+
+  public Plugin getPlugin(String name) {
+    Plugin plugin;
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    if (name.compareTo(getName()) == 0) {</span>
+<span class="nc" id="L76">      plugin = this;</span>
+    } else {
+<span class="nc" id="L78">      plugin = new NullPlugin();</span>
+    }
+<span class="nc" id="L80">    return plugin;</span>
+
+  }
+
+  public int getPriority() {
+<span class="nc" id="L85">    return 0;</span>
+  }
+
+  public Object getValue() {
+<span class="nc" id="L89">    final HashMap&lt;String, Mean&gt; value = new HashMap&lt;String, Mean&gt;();</span>
+<span class="nc" id="L90">    value.putAll(trees);</span>
+<span class="nc" id="L91">    value.put(&quot;raw&quot;, raw);</span>
+<span class="nc" id="L92">    value.put(&quot;adjusted&quot;, adjusted);</span>
+<span class="nc" id="L93">    return value;</span>
+  }
+
+  public void initPlugin(String propertyFamily) {
+    // do nothing
+<span class="nc" id="L98">  }</span>
+
+  public void initialValue() {
+    // do nothing
+<span class="nc" id="L102">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

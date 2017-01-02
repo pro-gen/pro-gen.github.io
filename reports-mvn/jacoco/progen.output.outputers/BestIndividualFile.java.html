@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BestIndividualFile.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.output.outputers</a> &gt; <span class="el_source">BestIndividualFile.java</span></div><h1>BestIndividualFile.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package progen.output.outputers;
+
+import progen.kernel.population.Individual;
+import progen.output.HistoricalData;
+import progen.output.datacollectors.DataCollector;
+import progen.output.plugins.Plugin;
+
+/**
+ * @author jirsis
+ * @since 2.0
+ */
+public class BestIndividualFile extends FileOutput {
+
+  private static final String END_OF_LINE_SYMBOL = &quot;)\n&quot;;
+  private static final String WHITE_SPACE_SYMBOL = &quot; &quot;;
+
+  public BestIndividualFile() {
+<span class="nc" id="L21">    super(&quot;bestIndividual.txt&quot;, false);</span>
+<span class="nc" id="L22">  }</span>
+
+  @Override
+  public void print() {
+<span class="nc" id="L26">    this.init();</span>
+<span class="nc" id="L27">    final HistoricalData historical = HistoricalData.makeInstance();</span>
+    DataCollector data;
+
+<span class="nc" id="L30">    data = historical.getCurrentDataCollector(&quot;ExperimentIndividualData&quot;);</span>
+<span class="nc" id="L31">    final Plugin plugin = data.getPlugin(&quot;best&quot;);</span>
+
+<span class="nc" id="L33">    final Individual individual = (Individual) plugin.getValue();</span>
+
+<span class="nc" id="L35">    printADF(individual);</span>
+<span class="nc" id="L36">    printRPB(individual);</span>
+<span class="nc" id="L37">    this.close();</span>
+<span class="nc" id="L38">  }</span>
+
+  private void printRPB(final Individual individual) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalRPB(); i++) {</span>
+<span class="nc" id="L42">      getWriter().println(&quot;(defun RPB&quot; + i + WHITE_SPACE_SYMBOL);</span>
+<span class="nc" id="L43">      getWriter().println(Formatter.tree(individual.getTrees().get(&quot;RPB&quot; + i)));</span>
+<span class="nc" id="L44">      getWriter().println(END_OF_LINE_SYMBOL);</span>
+    }
+<span class="nc" id="L46">  }</span>
+
+  private void printADF(final Individual individual) {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    for (int i = 0; i &lt; individual.getTotalADF(); i++) {</span>
+<span class="nc" id="L50">      getWriter().println(&quot;(defun ADF&quot; + i + WHITE_SPACE_SYMBOL);</span>
+<span class="nc" id="L51">      getWriter().println(Formatter.tree(individual.getTrees().get(&quot;ADF&quot; + i)));</span>
+<span class="nc" id="L52">      getWriter().println(END_OF_LINE_SYMBOL);</span>
+    }
+<span class="nc" id="L54">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

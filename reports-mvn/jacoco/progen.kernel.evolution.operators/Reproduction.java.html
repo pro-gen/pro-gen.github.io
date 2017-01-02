@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reproduction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.evolution.operators</a> &gt; <span class="el_source">Reproduction.java</span></div><h1>Reproduction.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package progen.kernel.evolution.operators;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import progen.kernel.evolution.GenneticOperator;
+import progen.kernel.population.Individual;
+import progen.kernel.population.Population;
+
+/**
+ * Clase que implementa el operador genético de Reproducción. Lo que realiza
+ * este operador es seleccionar un individuo a través del selector que se haya
+ * escogido y se devuelve tal cual.
+ * 
+ * @author jirsis
+ * @since 2.0
+ * 
+ */
+<span class="nc" id="L22">public class Reproduction extends GenneticOperator {</span>
+
+  @Override
+  public List&lt;Individual&gt; evolve(Population population) {
+<span class="nc" id="L26">    final List&lt;Individual&gt; individuals = getSelector().select(population, 1);</span>
+<span class="nc" id="L27">    final List&lt;Individual&gt; individualsMutate = new ArrayList&lt;Individual&gt;();</span>
+
+<span class="nc" id="L29">    individualsMutate.add(individuals.get(0));</span>
+
+<span class="nc" id="L31">    return individualsMutate;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

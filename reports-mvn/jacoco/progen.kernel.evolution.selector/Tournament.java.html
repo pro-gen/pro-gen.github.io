@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tournament.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.evolution.selector</a> &gt; <span class="el_source">Tournament.java</span></div><h1>Tournament.java</h1><pre class="source lang-java linenums">package progen.kernel.evolution.selector;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import progen.context.ProGenContext;
+import progen.kernel.population.Individual;
+import progen.kernel.population.Population;
+
+/**
+ * Implementación de la forma de seleccionar individuos como torneo. Esta forma
+ * de seleccionar individuos de la población consiste en elegir de forma
+ * aleatoria una muestra de tantos individuos como esté definido en el tamaño
+ * del selector y luego, se devolverá ese conjunto ordenado en función del valor
+ * del adjustedFitness de cada uno de ellos; quedando en las primeras posiciones
+ * aquellos individuos que tenga este valor mayor.
+ * 
+ * @author jirsis
+ * @since 1.0
+ * 
+ */
+<span class="nc" id="L25">public class Tournament extends Selector {</span>
+
+  /** Tamaño del torneo */
+  private int size;
+
+  @Override
+  public List&lt;Individual&gt; select(Population pop, int howMany) {
+<span class="nc" id="L32">    final List&lt;Individual&gt; selection = new ArrayList&lt;Individual&gt;();</span>
+<span class="nc" id="L33">    final List&lt;Individual&gt; selectedIndividuals = new ArrayList&lt;Individual&gt;();</span>
+<span class="nc" id="L34">    final List&lt;Integer&gt; indexes = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L35">    final Random prng = new Random();</span>
+
+<span class="nc" id="L37">    generateIndexes(pop, indexes);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">    for (int i = 0; i &lt; howMany; i++) {</span>
+<span class="nc" id="L39">      selection.clear();</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">      for (int j = 0; j &lt; size; j++) {</span>
+<span class="nc" id="L42">        final int position = prng.nextInt(indexes.size());</span>
+<span class="nc" id="L43">        final int index = indexes.get(position);</span>
+<span class="nc" id="L44">        selection.add(pop.getIndividual(index).clone());</span>
+<span class="nc" id="L45">        indexes.remove(position);</span>
+      }
+
+<span class="nc" id="L48">      Collections.sort(selection);</span>
+
+<span class="nc" id="L50">      selectedIndividuals.add(selection.get(0));</span>
+    }
+
+<span class="nc" id="L53">    return selectedIndividuals;</span>
+  }
+
+  private void generateIndexes(Population pop, List&lt;Integer&gt; indexes) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">    for (int i = 0; i &lt; pop.getIndividuals().size(); i++) {</span>
+<span class="nc" id="L58">      indexes.add(i);</span>
+    }
+<span class="nc" id="L60">  }</span>
+
+  @Override
+  public void setParams(Map&lt;String, String&gt; params) {
+    try {
+<span class="nc" id="L65">      size = Integer.parseInt(params.get(&quot;size&quot;));</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">      if (size &gt; Integer.parseInt(ProGenContext.getMandatoryProperty(&quot;progen.population.size&quot;))) {</span>
+<span class="nc" id="L67">        throw new TournamentSizeException();</span>
+      }
+<span class="nc" id="L69">    } catch (java.lang.NumberFormatException e) {</span>
+<span class="nc" id="L70">      throw new TournamentSizeMandatoryException(e);</span>
+<span class="nc" id="L71">    }</span>
+<span class="nc" id="L72">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

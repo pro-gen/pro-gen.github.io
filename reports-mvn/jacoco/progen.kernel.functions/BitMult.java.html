@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BitMult.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.functions</a> &gt; <span class="el_source">BitMult.java</span></div><h1>BitMult.java</h1><pre class="source lang-java linenums">package progen.kernel.functions;
+
+import java.util.List;
+import java.util.Map;
+
+import progen.kernel.tree.Node;
+import progen.userprogram.UserProgram;
+
+/**
+ * @author Alberto Vegas Estrada
+ * @version 1.0
+ */
+public class BitMult extends NonTerminal {
+
+  private static final int NUMBER_OF_BITS = 32;
+  private static final long serialVersionUID = -7114934864153434702L;
+
+  /**
+   * Default constructor.
+   */
+  public BitMult() {
+<span class="fc" id="L22">    super(&quot;int$$int$$int&quot;, &quot;*&quot;);</span>
+<span class="fc" id="L23">  }</span>
+
+  @Override
+  public Object evaluate(List&lt;Node&gt; arguments, UserProgram userProgram, Map&lt;String, Object&gt; returnAddr) {
+<span class="fc" id="L27">    final int firstOperator = (Integer) arguments.get(0).evaluate(userProgram, returnAddr);</span>
+<span class="fc" id="L28">    final int secondOperator = (Integer) arguments.get(1).evaluate(userProgram, returnAddr);</span>
+
+<span class="fc" id="L30">    Integer result = 0;</span>
+
+<span class="fc bfc" id="L32" title="All 2 branches covered.">    for (int i = 0; i &lt; NUMBER_OF_BITS; i++) {</span>
+      // Generate a mask with a 1 in position i
+<span class="fc" id="L34">      final int mask = 1 &lt;&lt; i;</span>
+      // Make X AND mask. Then count the number of bits set to 1 in the result.
+      // There
+      // will be one or zero bits set to 1. If there is one, that means that
+      // there is
+      // a 1 in position x_i, or a 0 otherwise.
+<span class="fc" id="L40">      final int count = Integer.bitCount(mask &amp; firstOperator);</span>
+      // If there were a 1 in x_i, then add to result the value 2^i * Y (or
+      // which is the same Y &lt;&lt; i)
+<span class="fc bfc" id="L43" title="All 2 branches covered.">      if (count &gt; 0) {</span>
+<span class="fc" id="L44">        result += secondOperator &lt;&lt; i;</span>
+      }
+    }
+
+<span class="fc" id="L48">    return (Integer) result;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

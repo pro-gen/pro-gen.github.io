@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UndefinedGenneticOperatorException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProGen</a> &gt; <a href="index.source.html" class="el_package">progen.kernel.evolution</a> &gt; <span class="el_source">UndefinedGenneticOperatorException.java</span></div><h1>UndefinedGenneticOperatorException.java</h1><pre class="source lang-java linenums">package progen.kernel.evolution;
+
+import progen.kernel.error.Error;
+
+/**
+ * Excepción que se lanzará en el momento en el que se intente crear un operador
+ * genético que no exista.
+ * 
+ * @author jirsis
+ * @since 2.0
+ */
+public class UndefinedGenneticOperatorException extends RuntimeException {
+
+  private static final int ID_ERROR = 10;
+  private static final long serialVersionUID = 7881104979746238388L;
+
+  /**
+   * Contructor genérico de la excepción que recibe por parámetro el nombre del
+   * operador que no se encontró.
+   * 
+   * @param message
+   *          Nombre del operador que se intentó instanciar.
+   */
+  public UndefinedGenneticOperatorException(String message) {
+<span class="fc" id="L25">    super(getMessage(message));</span>
+<span class="fc" id="L26">  }</span>
+  public UndefinedGenneticOperatorException(String message, Exception originalException) {
+<span class="nc" id="L28">    super(getMessage(message), originalException);</span>
+<span class="nc" id="L29">  }</span>
+  private static String getMessage(String message) {
+<span class="fc" id="L31">    return Error.get(ID_ERROR).trim() + &quot; (&quot; + message + &quot;)&quot;;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
