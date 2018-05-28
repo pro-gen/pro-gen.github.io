@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="5.2.1" timestamp="2018-03-28T20:35:31.685">
+<pmd version="5.2.1" timestamp="2018-05-28T20:38:03.106">
 <file name="/home/travis/build/pro-gen/progen/progen/src/main/java/progen/context/ProGenContext.java">
 <violation beginline="51" endline="51" begincolumn="16" endcolumn="35" rule="AvoidCatchingNPE" ruleset="Strict Exceptions" package="progen.context" class="ProGenContext" method="makeInstance" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.2.1/pmd-java/rules/java/strictexception.html#AvoidCatchingNPE" priority="3">
 Avoid catching NullPointerException; consider removing the cause of the NPE.
